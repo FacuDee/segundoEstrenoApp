@@ -5,6 +5,11 @@ Link a carpeta de drive con la documentación:
 https://drive.google.com/drive/folders/1RyvozNMGtN-Vp32IwOnOkx_btwdP2gL-
 ```
 
+Presentación del proyecto:
+```bash
+https://gamma.app/docs/Segundo-Estreno-gt28i25c38ine3n?mode=doc
+```
+
 ## 📝 Descripción
 Sistema para gestión de usuarios de compra y venta de ropa usada:
 - Frontend en HTML5, CSS3 y JavaScript
