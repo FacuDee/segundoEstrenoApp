@@ -1,0 +1,17 @@
+/* Colours */
+:root {
+  --color-primary: #93CE8C;
+  --color-secondary: #FBC2B5;
+  --color-accent: #885A89;
+  --color-dark: #638d5e;
+  --color-light: #f5f5f5;
+  --color-text: #333;
+  --font-main: "Roboto", sans-serif;
+}
+
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
