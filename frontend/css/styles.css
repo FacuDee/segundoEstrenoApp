@@ -60,7 +60,7 @@ body {
 
 /* Header superior */
 .header-top {
-  background: var(--color-dark);
+  background: linear-gradient(135deg, var(--color-dark), var(--color-darker));
   padding: 1rem 0;
   color: var(--color-lighter);
 }
@@ -267,6 +267,11 @@ body {
 }
 
 @media (max-width: 480px) {  
+  .header-top-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .account-actions {
     font-size: 0.8rem;
   }
