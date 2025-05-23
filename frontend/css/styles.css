@@ -209,6 +209,103 @@ body {
   z-index: 101;
 }
 
+/* ===== Modals login y register ===== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  z-index: 900;
+  transition: opacity var(--transition-normal);
+}
+
+.modal {
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(45deg, var(--color-primary), var(--color-light));
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+  width: 90%;
+  max-width: 400px;
+  font-family: var(--font-main);
+  color: var(--color-text);
+  transition: all var(--transition-normal);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content h2 {
+  font-size: large;
+  color: var(--color-darker);
+  margin-bottom: 2rem;
+}
+
+.close {
+  font-size: 1.2rem;
+  font-weight: bold;
+  align-self: flex-end;
+  cursor: pointer;
+  color: var(--color-darker);
+  transition: color var(--transition-fast);
+}
+
+.close:hover {
+  color: var(--color-dark);
+}
+
+.modal input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--color-primary-dark);
+  border-radius: 8px;
+  background-color: var(--color-lighter);
+  font-family: var(--font-main);
+  color: var(--color-text);
+  transition: border-color var(--transition-fast);
+}
+
+.modal input:focus {
+  outline: none;
+  border-color: var(--color-primary-dark);
+}
+
+.modal button {
+  width: 100%;
+  margin: 1rem auto;
+  display: block;
+  padding: 0.75rem;
+  background-color: var(--color-dark);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font-main);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.modal button:hover {
+  background-color: var(--color-darker);
+  transform: scale(1.01);
+}
+
+.hidden {
+  display: none;
+}
+
 /* ===== Media Queries ===== */
 @media (max-width: 992px) {
   .header-top-content {
