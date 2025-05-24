@@ -72,4 +72,18 @@ function initModals() {
 
   overlay?.addEventListener("click", closeModal);
   closeButtons.forEach((btn) => btn.addEventListener("click", closeModal));
+
+  document.getElementById("linkToRegister")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById("loginModal")?.classList.add("hidden");
+    document.getElementById("registerModal")?.classList.remove("hidden");
+    document.getElementById("overlay")?.classList.remove("hidden");
+  });
+
+  document.getElementById("linkToLogin")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById("registerModal")?.classList.add("hidden");
+    document.getElementById("loginModal")?.classList.remove("hidden");
+    document.getElementById("overlay")?.classList.remove("hidden");
+  });
 }

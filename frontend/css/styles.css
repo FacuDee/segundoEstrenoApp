@@ -10,15 +10,15 @@
   --color-lighter: #ffffff;
   --color-text: #333;
   --color-text-light: #555;
-  
+
   /* Tipografía */
   --font-main: "Montserrat", sans-serif;
   --font-logo: "Poppins", sans-serif;
-  
+
   /* Sombras */
-  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
-  --shadow-md: 0 4px 8px rgba(0,0,0,0.15);
-  
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+
   /* Transiciones */
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
@@ -152,7 +152,7 @@ body {
 .nav {
   min-height: 50px;
   background: var(--color-lighter);
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .nav-links {
@@ -177,7 +177,7 @@ body {
 }
 
 .nav-links a::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -8px;
   left: 0;
@@ -228,7 +228,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: linear-gradient(45deg, var(--color-primary), var(--color-light));
+  background: linear-gradient(45deg, var(--color-primary), rgb(188, 247, 182));
   padding: 2rem;
   border-radius: 12px;
   box-shadow: var(--shadow-md);
@@ -251,10 +251,13 @@ body {
   margin-bottom: 2rem;
 }
 
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+}
+
 .close {
-  font-size: 1.2rem;
   font-weight: bold;
-  align-self: flex-end;
   cursor: pointer;
   color: var(--color-darker);
   transition: color var(--transition-fast);
@@ -262,6 +265,11 @@ body {
 
 .close:hover {
   color: var(--color-dark);
+}
+
+.question {
+  font-size: small;
+  text-align: left;
 }
 
 .modal input {
@@ -294,7 +302,8 @@ body {
   border-radius: 8px;
   cursor: pointer;
   font-family: var(--font-main);
-  transition: background-color var(--transition-fast), transform var(--transition-fast);
+  transition: background-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .modal button:hover {
@@ -312,7 +321,7 @@ body {
     flex-wrap: wrap;
     gap: 1rem;
   }
-  
+
   .search-bar {
     order: 3;
     min-width: 100%;
@@ -324,7 +333,7 @@ body {
   .nav {
     position: relative;
   }
-  
+
   .menu-toggle {
     display: block; /* Solo visible en móvil */
     position: absolute;
@@ -332,7 +341,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
   }
-  
+
   .nav-links {
     display: none;
     position: fixed;
@@ -347,23 +356,23 @@ body {
     box-shadow: var(--shadow-md);
     z-index: 100;
   }
-  
+
   .nav-links.active {
     display: flex;
   }
-  
+
   .nav-links a {
     padding: 0.5rem 1rem;
     width: 100%;
     text-align: center;
   }
-  
+
   .cart-icon {
     margin-top: 1rem;
   }
 }
 
-@media (max-width: 480px) {  
+@media (max-width: 480px) {
   .header-top-content {
     flex-direction: column;
     align-items: center;
