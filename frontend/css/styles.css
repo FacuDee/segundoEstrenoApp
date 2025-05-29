@@ -382,3 +382,130 @@ body {
     font-size: 0.8rem;
   }
 }
+
+
+
+.main-container {
+    background-color:#93ce8c;
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos horizontalmente */
+    gap: 10px; /* Espacio entre los bloques */
+    flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
+}
+
+.seller-info, .payment-info {
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%; /* Cada sección ocupa aproximadamente 1/3 del ancho total */
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.seller-info h2, .payment-info h2{
+  color:#885a89;
+}
+
+
+.payment-info img{
+  margin: 30px;
+
+}
+
+/*preguntas de comprar y vender*/
+.faq-title {
+  color:#000000;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.faq-content {
+  color: #ccc;
+    display: none;
+    background-color: #885a89;
+    padding: 10px;
+    border-left: 5px solid #93ce8c;
+    margin: 5px 0;
+    max-width: 400px;  /* Limita el ancho */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column; /* En pantallas pequeñas, los bloques se apilan */
+        align-items: center;
+    }
+
+    .seller-info, .payment-info {
+        width: 90%; /* Se vuelven más anchos para mejor legibilidad */
+    }
+}
+
+
+/* Footer */
+footer {
+    background: #885a89;
+    padding: 60px 0 30px 0;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+/* Contenedor flexible */
+.contenedor-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Ajustes para dispositivos pequeños */
+@media (max-width: 768px) {
+    .contenedor-footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Elementos del footer */
+.content-foo h4 {
+    color:#ccc;
+    border-bottom: 3px solid #93ce8c;
+    padding-bottom: 5px;
+    margin-top: -10px; 
+    margin-bottom: 25px;
+}
+
+
+.content-foo p {
+    color:#ccc;
+}
+
+a {
+    color: inherit; /* Mantiene el color del texto del contenedor */
+    text-decoration: none; /* Quita el subrayado */
+}
+
+a:hover {
+    color: gray; /* Cambia el color al pasar el cursor */
+}
+
+.titulo-final {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+    color:#93ce8c;
+}
+
+.redes-sociales img {
+    width: 80px; /* Ajusta el tamaño de todas las imágenes */
+    height: 80px; /* Garantiza que todas sean iguales */
+    object-fit: contain; /* Mantiene la proporción sin recortar */
+}
