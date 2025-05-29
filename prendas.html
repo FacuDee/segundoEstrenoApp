@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Segundo Estreno</title>
     <link rel="stylesheet" href="./frontend/css/styles.css" />
+    <link rel="stylesheet" href="./frontend/css/prendas.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
@@ -67,51 +68,35 @@
       </nav>
     </header>
 
-    <!-- Fondo oscuro -->
-    <div id="overlay" class="overlay hidden"></div>
+    <section class="filtros">
+      <form id="filtro-form">
+        <input type="text" id="filtro-titulo" placeholder="Buscar por título" />
 
-    <!-- Modal de inicio de sesión -->
-    <div id="loginModal" class="modal hidden">
-      <div class="modal-content">
-        <div class="modal-head">
-          <h2>INICIAR SESIÓN</h2>
-          <span class="close">x</span>
-        </div>
-        <form>
-          <input type="text" placeholder="Usuario" required />
-          <input type="password" placeholder="Contraseña" required />
-          <p class="question">
-            ¿Todavía no te registraste?
-            <a href="" id="linkToRegister">CREAR CUENTA</a>
-          </p>
-          <button type="submit">Entrar</button>
-        </form>
-      </div>
-    </div>
+        <select id="filtro-categoria">
+          <option value="">Todas las categorías</option>
+          <!-- Las opciones se insertan dinámicamente desde JS -->
+        </select>
 
-    <!-- Modal de registro -->
-    <div id="registerModal" class="modal hidden">
-      <div class="modal-content">
-        <div class="modal-head">
-          <h2>CREA TU CUENTA</h2>
-          <span class="close">x</span>
-        </div>
-        <form>
-          <input type="text" placeholder="Nombre de usuario" required />
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Contraseña" required />
-          <input type="password" placeholder="Repetir contraseña" required />
-          <p class="question">
-            ¿Ya tenés una cuenta?
-            <a href="" id="linkToLogin">INICIAR SESIÓN</a>
-          </p>
-          <button type="submit">Registrarse</button>
-        </form>
-      </div>
-    </div>
+        <select id="filtro-talle">
+          <option value="">Todos los talles</option>
+          <!-- Las opciones se insertan dinámicamente desde JS -->
+        </select>
 
-    <h1 style="margin: 30vh auto; text-align: center; color: var(--color-darker)">Inicio</h1>    
+        <!-- Nuevo select para ordenar por precio -->
+        <select id="filtro-orden-precio">
+          <option value="">Ordenar por precio</option>
+          <option value="asc">Menor a Mayor</option>
+          <option value="desc">Mayor a Menor</option>
+        </select>
 
+        <button type="submit">Filtrar</button>
+      </form>
+    </section>
+
+    <main class="productos-container" id="productosContainer"></main>
+
+    <script src="./frontend/js/prendas.js"></script>
+    <script src="./frontend/js/data.js"></script>
     <script src="./frontend/js/main.js"></script>
   </body>
 </html>

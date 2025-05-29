@@ -1,0 +1,82 @@
+.productos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card-producto {
+  background: linear-gradient(180deg, var(--color-primary), var(--color-lighter));
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-producto:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+.card-producto img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-producto .contenido {
+  padding: 1rem;
+}
+
+.card-producto h3 {
+  color: var(--color-darker);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card-producto p {
+  margin: 0.25rem 0;
+}
+
+.filtros {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+#filtro-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+#filtro-form input,
+#filtro-form select,
+#filtro-form button {
+  font-family: var(--font-main);
+  border: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+  flex: 1;
+  min-width: 180px;
+  border-radius: 5px;
+  box-shadow: var(--shadow-sm);
+}
+
+#filtro-form button {
+    background-color: var(--color-darker);
+    color: var(--color-light);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+#filtro-form button:hover {
+    background-color: var(--color-dark);
+}
