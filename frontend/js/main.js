@@ -88,7 +88,6 @@ function initModals() {
   });
 }
 
-
 /*preguntas comprar y vender*/
 document.addEventListener("DOMContentLoaded", function () {
     var questions = document.querySelectorAll(".faq-title");
@@ -103,4 +102,45 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+});
+
+// Carrusel
+document.addEventListener("DOMContentLoaded", function () {
+  const items = document.querySelectorAll(".carousel-item");
+  const dots = document.querySelectorAll(".dot");
+  const prevBtn = document.querySelector(".carousel-control.prev");
+  const nextBtn = document.querySelector(".carousel-control.next");
+
+  let currentIndex = 0;
+
+  function showSlide(index) {
+    items.forEach(item => item.classList.remove("active"));
+    dots.forEach(dot => dot.classList.remove("active"));
+
+    items[index].classList.add("active");
+    dots[index].classList.add("active");
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % items.length;
+    showSlide(currentIndex);
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + items.length) % items.length;
+    showSlide(currentIndex);
+  }
+
+  nextBtn.addEventListener("click", nextSlide);
+  prevBtn.addEventListener("click", prevSlide);
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      currentIndex = index;
+      showSlide(currentIndex);
+    });
+  });
+
+  // Movimiento cada 5 segundos
+  setInterval(nextSlide, 5000);
 });
