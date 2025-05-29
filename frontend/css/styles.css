@@ -315,74 +315,6 @@ body {
   display: none;
 }
 
-/* ===== Media Queries ===== */
-@media (max-width: 992px) {
-  .header-top-content {
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .search-bar {
-    order: 3;
-    min-width: 100%;
-    margin: 0.5rem 0 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .nav {
-    position: relative;
-  }
-
-  .menu-toggle {
-    display: block; /* Solo visible en móvil */
-    position: absolute;
-    right: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .nav-links {
-    display: none;
-    position: fixed;
-    top: auto;
-    left: 0;
-    right: 0;
-    background: var(--color-lighter);
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 0;
-    gap: 1rem;
-    box-shadow: var(--shadow-md);
-    z-index: 100;
-  }
-
-  .nav-links.active {
-    display: flex;
-  }
-
-  .nav-links a {
-    padding: 0.5rem 1rem;
-    width: 100%;
-    text-align: center;
-  }
-
-  .cart-icon {
-    margin-top: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .header-top-content {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .account-actions {
-    font-size: 0.8rem;
-  }
-}
-
 /* --- ESTILOS PARA EL CARRUSEL --- */
 
 .carousel-container {
@@ -508,15 +440,67 @@ body {
   background-color: var(--color-primary);
 }
 
-/* --- MEDIA QUERIES --- */
 
+/* ===== Media Queries ===== */
 @media (max-width: 992px) {
+  .header-top-content {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .search-bar {
+    order: 3;
+    min-width: 100%;
+    margin: 0.5rem 0 0;
+  }
+
   .carousel-item img {
     height: 350px;
   }
 }
 
 @media (max-width: 768px) {
+  .nav {
+    position: relative;
+  }
+
+  .menu-toggle {
+    display: block; /* Solo visible en móvil */
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: auto;
+    left: 0;
+    right: 0;
+    background: var(--color-lighter);
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    gap: 1rem;
+    box-shadow: var(--shadow-md);
+    z-index: 100;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 0.5rem 1rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .cart-icon {
+    margin-top: 1rem;
+  }
+
   .carousel-item img {
     height: 280px;
   }
@@ -531,6 +515,15 @@ body {
 }
 
 @media (max-width: 480px) {
+  .header-top-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .account-actions {
+    font-size: 0.8rem;
+  }
+
   .carousel-item img {
     height: 200px;
   }
