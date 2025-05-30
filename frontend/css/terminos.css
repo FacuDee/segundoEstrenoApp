@@ -1,62 +1,108 @@
-/* Estilos generales */
+/* ===== Variables y Configuraciones Globales ===== */
+:root {
+  /* Colores */
+  --color-primary: #93ce8c;
+  --color-primary-dark: #638d5e;
+  --color-accent: #fbc2b5;
+  --color-dark: #885a89;
+  --color-darker: #6a4570;
+  --color-light: #f5f5f5;
+  --color-lighter: #ffffff;
+  --color-text: #333;
+  --color-text-light: #555;
+
+  /* Tipografía */
+  --font-main: "Montserrat", sans-serif;
+  --font-logo: "Poppins", sans-serif;
+
+  /* Sombras */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+  /* Transiciones */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+/* ===== Reset y Base ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f8f8;
-    color: #333;
+  font-family: var(--font-main);
+  color: var(--color-text);
+  background-color: var(--color-light);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* Encabezado */
 header {
-    background-color: #93ce8c;
-    color: white;
-    text-align: center;
-    padding: 20px;
+  background: linear-gradient(180deg, var(--color-primary), var(--color-light));
+  color: var(--color-lighter);
+  text-align: center;
+  padding: 24px 16px;
+  box-shadow: var(--shadow-sm);
+  border-bottom: 2px solid var(--color-darker);
+  font-family: var(--font-logo);
 }
 
-/* Contenedor principal */
 main {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 960px;
+  margin: 30px auto;
+  padding: 30px 24px;
+  background-color: var(--color-lighter);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
 }
 
-/* Títulos */
+/* ===== Títulos ===== */
 h1 {
-    font-size: 28px;
+  color: var(--color-dark);
+  margin-bottom: 20px;
 }
 
 h2 {
-    font-size: 22px;
-    color: #885a89;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
+  font-size: 24px;
+  color: var(--color-dark);
+  border-bottom: 1px solid var(--color-accent);
+  padding-bottom: 6px;
+  margin-top: 30px;
+  margin-bottom: 16px;
 }
 
-/* Párrafos */
+/* ===== Párrafos ===== */
 p {
-    font-size: 16px;
-    margin-bottom: 15px;
+  font-size: 16px;
+  margin-bottom: 18px;
+  color: var(--color-text-light);
 }
 
-/* Enlaces */
+/* ===== Enlaces ===== */
 a {
-    color: #007bff;
-    text-decoration: none;
+  color: var(--color-primary-dark);
+  transition: color var(--transition-fast);
 }
 
 a:hover {
-    text-decoration: underline;
+  color: var(--color-darker);
+  text-decoration: underline;
 }
 
-/* Pie de página */
+/* ===== Pie de Página ===== */
 footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #93ce8c;
+  height: 100px;
+  text-align: center;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--color-dark), var(--color-darker));
+  color: var(--color-lighter);
+  font-size: 14px;
+  margin-top: 40px;
+  font-family: var(--font-main);
 }

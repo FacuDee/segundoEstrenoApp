@@ -140,9 +140,16 @@ function renderProductos(productos) {
     card.classList.add("card-producto");
 
     card.innerHTML = `
-      <img src="./frontend/images/${
-        producto.imagen || "placeholder.jpg"
-      }" alt="${producto.titulo}">
+      <div class="imagen-contenedor">
+        <img src="./frontend/images/productos/${
+          producto.imagen || "placeholder.jpg"
+        }" alt="${producto.titulo}">
+        <div class="botones-hover">
+          <button title="Agregar al carrito"><i class="fas fa-shopping-bag"></i></button>
+          <button title="Ver producto"><i class="fas fa-eye"></i></button>
+          <button title="Agregar a favorito"><i class="fas fa-heart"></i></button>
+        </div>
+      </div>
       <div class="contenido">
         <h3>${producto.titulo}</h3>
         <p><strong>Precio:</strong> $${producto.precio}</p>

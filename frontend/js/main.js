@@ -90,18 +90,18 @@ function initModals() {
 
 /*preguntas comprar y vender*/
 document.addEventListener("DOMContentLoaded", function () {
-    var questions = document.querySelectorAll(".faq-title");
+  var questions = document.querySelectorAll(".faq-title");
 
-    questions.forEach(function (question) {
-        question.addEventListener("click", function () {
-            var answer = this.nextElementSibling;
-            if (answer.style.display === "none" || answer.style.display === "") {
-                answer.style.display = "block";
-            } else {
-                answer.style.display = "none";
-            }
-        });
+  questions.forEach(function (question) {
+    question.addEventListener("click", function () {
+      var answer = this.nextElementSibling;
+      if (answer.style.display === "none" || answer.style.display === "") {
+        answer.style.display = "block";
+      } else {
+        answer.style.display = "none";
+      }
     });
+  });
 });
 
 // Carrusel
@@ -114,8 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentIndex = 0;
 
   function showSlide(index) {
-    items.forEach(item => item.classList.remove("active"));
-    dots.forEach(dot => dot.classList.remove("active"));
+    items.forEach((item) => item.classList.remove("active"));
+    dots.forEach((dot) => dot.classList.remove("active"));
 
     items[index].classList.add("active");
     dots[index].classList.add("active");
@@ -143,4 +143,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Movimiento cada 5 segundos
   setInterval(nextSlide, 5000);
+});
+
+const btnScrollTop = document.getElementById("btn-scroll-top");
+
+// ==========================
+// Botón flotante para volver arriba
+// ==========================
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    btnScrollTop.style.display = "block";
+  } else {
+    btnScrollTop.style.display = "none";
+  }
+});
+
+btnScrollTop.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 });
