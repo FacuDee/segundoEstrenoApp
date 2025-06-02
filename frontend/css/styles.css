@@ -209,7 +209,7 @@ body {
   z-index: 101;
 }
 
-/* ===== Modals login y register ===== */
+/* Modals login y register */
 .overlay {
   position: fixed;
   top: 0;
@@ -314,7 +314,7 @@ body {
   border-radius: 8px;
   cursor: pointer;
   font-family: var(--font-main);
-  transition: all var(--transition-normal),
+  transition: all var(--transition-normal);
 }
 
 .modal button:hover {
@@ -325,7 +325,7 @@ body {
   display: none;
 }
 
-/* --- ESTILOS PARA EL CARRUSEL --- */
+ /* Carrusel de imagenes */
 
 .carousel-container {
   width: 100%;
@@ -360,7 +360,6 @@ body {
   display: block;
 }
 
-/* --- IMÁGENES DEL CARRUSEL --- */
 .carousel-item img {
   width: 100%;
   height: 600px;
@@ -369,7 +368,6 @@ body {
   display: block;
 }
 
-/* --- LEYENDA (CAPTION) --- */
 .carousel-caption {
   position: absolute;
   bottom: 40px;
@@ -396,7 +394,6 @@ body {
   color: var(--color-primary);
 }
 
-/* --- CONTROLES DE NAVEGACIÓN --- */
 .carousel-control {
   position: absolute;
   top: 50%;
@@ -425,7 +422,6 @@ body {
   right: 5px;
 }
 
-/* --- INDICADORES (PUNTOS) --- */
 .carousel-dots {
   position: absolute;
   bottom: 10px;
@@ -451,7 +447,7 @@ body {
   background-color: var(--color-primary);
 }
 
-/* Servicios */
+/* Cards Servicios */
 .services {
   padding: 4rem 1rem;
   text-align: center;
@@ -492,30 +488,77 @@ body {
   transform: translateY(-5px);
 }
 
-/* Footer */
-footer {
-  background-color: var(--color-darker);
-  color: var(--color-lighter);
-  padding-top: 2rem;
-  width: 100%;
+/* Banner publicitario */
+.ad-banner {
+  margin: 0 auto;
+  padding: 2rem 0;
+  max-width: 1200px;
+  text-align: center;
   position: relative;
-  bottom: 0;
 }
 
-.contenedor-footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
+.banner-content {
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  max-height: 500px;
+}
+
+.banner-content img {
   width: 100%;
-  margin: auto;
-  padding-bottom: 2rem;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  filter: brightness(0.5);
+  transition: filter var(--transition-normal);
 }
 
+.banner-content:hover img {
+  filter: brightness(0.9);
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px 30px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-overlay h3 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.banner-btn {
+  background-color: var(--color-accent);
+  color: var(--color-text);
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.banner-btn:hover {
+  background-color: var(--color-primary-dark);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Preguntas comprar y vender + métodos de pago*/
 .main-container {
   background: linear-gradient(180deg, var(--color-primary), var(--color-light));
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   gap: 10px;
   flex-wrap: wrap;
 }
@@ -566,7 +609,6 @@ footer {
   max-width: 100%;
 }
 
-/*preguntas de comprar y vender*/
 .faq-title {
   color: var(--color-text);
   font-family: var(--font-main);
@@ -585,12 +627,49 @@ footer {
   border-radius: 5px;
 }
 
+/*Footer*/
+footer {
+  background: linear-gradient(180deg, var(--color-darker), #55385a);
+  color: var(--color-lighter);
+  padding-top: 2rem;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
+
+.contenedor-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: auto;
+  padding-bottom: 2rem;
+}
+
+.redes-sociales {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.redes-sociales a {
+  color: var(--color-light);
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  transition: color 0.3s;
+}
+
+.redes-sociales a:hover {
+  color: var(--color-primary);
+}
+
 .content-foo h4 {
+  font-family: var(--font-logo);
+  font-size: large;
   margin: 20px auto;
   text-align: center;
-  color: var(--color-light);
-  border-bottom: 2px solid var(--color-primary);
-  padding-bottom: 10px;
+  color: var(--color-primary);
+  border-bottom: 1px solid var(--color-accent);
+  padding-bottom: 20px;
 }
 
 .content-foo p {
@@ -603,8 +682,10 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  color: var(--color-primary);
+footer a:hover {
+  color: var(--color-pr);
+
+  text-decoration: underline;
 }
 
 .titulo-final {
@@ -613,19 +694,6 @@ a:hover {
   padding: 10px;
   background-color: var(--color-lighter);
   color: var(--color-darker);
-}
-
-.redes-sociales {
-  text-align: center;
-  margin: 10px auto;
-}
-
-.redes-sociales img {
-  margin-right: 0.5rem;
-  width: 30px;
-  height: 30px; 
-  object-fit: contain; 
-  cursor: pointer;
 }
 
 /* Scroll-up */
@@ -730,7 +798,16 @@ a:hover {
     font-size: 1em;
   }
 
+  .banner-overlay h3 {
+    font-size: 30px;
+  }
+
+  .banner-btn {
+    font-size: small;
+  }
+
   .faq-title {
+    width: 100%;
     font-size: medium;
   }
 
@@ -746,7 +823,12 @@ a:hover {
 
   .seller-info,
   .payment-info {
+    padding: 1rem;
     width: 90%;
+  }
+
+  .content-foo h4 {
+    width: 75%;
   }
 }
 
@@ -781,8 +863,5 @@ a:hover {
   .carousel-control {
     padding: 5px 10px;
     font-size: 1.5em;
-  }
-  .carousel-dots {
-    
   }
 }

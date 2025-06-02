@@ -64,7 +64,7 @@ const productos = [
     talle: "S",
   },
   {
-    titulo: "Campera inflable",
+    titulo: "Campera inflable Kappa",
     precio: 42000,
     categoria: "camperas",
     destacado: true,
@@ -120,7 +120,7 @@ const productos = [
     talle: "40",
   },
   {
-    titulo: "Campera vintage deportiva",
+    titulo: "Campera vintage deportiva River Plate",
     precio: 51000,
     categoria: "camperas",
     destacado: true,
@@ -129,85 +129,114 @@ const productos = [
   },
 ];
 
-// Cargar productos
+// Cargar productos solo si existe el contenedor
 const contenedor = document.getElementById("productosContainer");
+if (contenedor) {
+  function renderProductos(productos) {
+    contenedor.innerHTML = "";
 
-function renderProductos(productos) {
-  contenedor.innerHTML = "";
+    productos.forEach((producto, idx) => {
+      const card = document.createElement("div");
+      card.classList.add("card-producto");
+      card.dataset.productoId = idx; // Usamos el índice como ID
 
-  productos.forEach((producto) => {
-    const card = document.createElement("div");
-    card.classList.add("card-producto");
-
-    card.innerHTML = `
-      <div class="imagen-contenedor">
-        <img src="./frontend/images/productos/${
-          producto.imagen || "placeholder.jpg"
-        }" alt="${producto.titulo}">
-        <div class="botones-hover">
-          <button title="Agregar al carrito"><i class="fas fa-shopping-bag"></i></button>
-          <button title="Ver producto"><i class="fas fa-eye"></i></button>
-          <button title="Agregar a favorito"><i class="fas fa-heart"></i></button>
+      card.innerHTML = `
+        <div class="imagen-contenedor">
+          <img src="./frontend/images/productos/${producto.imagen || "placeholder.jpg"}" alt="${producto.titulo}">
+          <div class="botones-hover">
+            <button class="btn-ver-producto" data-producto-id="${idx}" title="Ver producto"><i class="fas fa-eye"></i></button>
+            <button title="Agregar al carrito"><i class="fas fa-shopping-bag"></i></button>
+            <button title="Agregar a favorito"><i class="fas fa-heart"></i></button>
+          </div>
         </div>
-      </div>
-      <div class="contenido">
-        <h3>${producto.titulo}</h3>
-        <p><strong>Precio:</strong> $${producto.precio}</p>
-        <p><strong>Talle:</strong> ${producto.talle}</p>
-      </div>
-    `;
+        <div class="contenido">
+          <h3>${producto.titulo}</h3>
+          <p><strong>Precio:</strong> $${producto.precio}</p>
+          <p><strong>Talle:</strong> ${producto.talle}</p>
+        </div>
+      `;
 
-    contenedor.appendChild(card);
-  });
-}
+      // Al hacer clic en la card o en el botón "Ver producto"
+      card.addEventListener("click", function (e) {
+        // Evita que otros botones (carrito, favorito) disparen el evento
+        if (
+          e.target.closest(".fa-shopping-bag") ||
+          e.target.closest(".fa-heart")
+        ) return;
 
-// Render inicial
-renderProductos(productos);
+        localStorage.setItem("productoSeleccionado", JSON.stringify(producto));
+        window.location.href = "detalle.html";
+      });
 
-// Cargar categorías dinámicas
-const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
-const selectCategoria = document.getElementById("filtro-categoria");
-categoriasUnicas.forEach((cat) => {
-  const opcion = document.createElement("option");
-  opcion.value = cat;
-  opcion.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
-  selectCategoria.appendChild(opcion);
-});
+      // También por si solo quieres el botón "Ver producto"
+      const btnVer = card.querySelector(".btn-ver-producto");
+      if (btnVer) {
+        btnVer.addEventListener("click", function (e) {
+          e.stopPropagation();
+          localStorage.setItem("productoSeleccionado", JSON.stringify(producto));
+          window.location.href = "detalle.html";
+        });
+      }
 
-// Cargar talles dinámicos
-const tallesUnicos = [...new Set(productos.map((p) => p.talle))];
-const selectTalle = document.getElementById("filtro-talle");
-tallesUnicos.forEach((t) => {
-  const opcion = document.createElement("option");
-  opcion.value = t;
-  opcion.textContent = t;
-  selectTalle.appendChild(opcion);
-});
-
-// Filtro
-document.getElementById("filtro-form").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const titulo = document.getElementById("filtro-titulo").value.toLowerCase();
-  const categoria = document.getElementById("filtro-categoria").value;
-  const talle = document.getElementById("filtro-talle").value;
-  const ordenPrecio = document.getElementById("filtro-orden-precio").value;
-
-  // Filtrar productos
-  let productosFiltrados = productos.filter((p) => {
-    const coincideTitulo = p.titulo.toLowerCase().includes(titulo);
-    const coincideCategoria = categoria === "" || p.categoria === categoria;
-    const coincideTalle = talle === "" || p.talle === talle;
-
-    return coincideTitulo && coincideCategoria && coincideTalle;
-  });
-
-  // Ordenar por precio si se seleccionó un orden
-  if (ordenPrecio === "asc") {
-    productosFiltrados.sort((a, b) => a.precio - b.precio);
-  } else if (ordenPrecio === "desc") {
-    productosFiltrados.sort((a, b) => b.precio - a.precio);
+      contenedor.appendChild(card);
+    });
   }
 
-  renderProductos(productosFiltrados);
-});
+  // Render inicial
+  renderProductos(productos);
+
+  // Cargar categorías dinámicas
+  const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
+  const selectCategoria = document.getElementById("filtro-categoria");
+  if (selectCategoria) {
+    categoriasUnicas.forEach((cat) => {
+      const opcion = document.createElement("option");
+      opcion.value = cat;
+      opcion.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+      selectCategoria.appendChild(opcion);
+    });
+  }
+
+  // Cargar talles dinámicos
+  const tallesUnicos = [...new Set(productos.map((p) => p.talle))];
+  const selectTalle = document.getElementById("filtro-talle");
+  if (selectTalle) {
+    tallesUnicos.forEach((t) => {
+      const opcion = document.createElement("option");
+      opcion.value = t;
+      opcion.textContent = t;
+      selectTalle.appendChild(opcion);
+    });
+  }
+
+  // Filtro
+  const filtroForm = document.getElementById("filtro-form");
+  if (filtroForm) {
+    filtroForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const titulo = document.getElementById("filtro-titulo")?.value.toLowerCase() || "";
+      const categoria = document.getElementById("filtro-categoria")?.value || "";
+      const talle = document.getElementById("filtro-talle")?.value || "";
+      const ordenPrecio = document.getElementById("filtro-orden-precio")?.value || "";
+
+      // Filtrar productos
+      let productosFiltrados = productos.filter((p) => {
+        const coincideTitulo = p.titulo.toLowerCase().includes(titulo);
+        const coincideCategoria = categoria === "" || p.categoria === categoria;
+        const coincideTalle = talle === "" || p.talle === talle;
+
+        return coincideTitulo && coincideCategoria && coincideTalle;
+      });
+
+      // Ordenar por precio si se seleccionó un orden
+      if (ordenPrecio === "asc") {
+        productosFiltrados.sort((a, b) => a.precio - b.precio);
+      } else if (ordenPrecio === "desc") {
+        productosFiltrados.sort((a, b) => b.precio - a.precio);
+      }
+
+      renderProductos(productosFiltrados);
+    });
+  }
+}
