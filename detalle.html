@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Segundo Estreno</title>
     <link rel="stylesheet" href="./frontend/css/styles.css" />
+    <link rel="stylesheet" href="./frontend/css/detalle.css" />
+    <link rel="stylesheet" href="./frontend/css/prendas.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
@@ -66,13 +68,39 @@
       </nav>
     </header>
 
-    <h1
-      style="margin: 30vh auto; text-align: center; color: var(--color-darker)"
-    >
-      Blog
-    </h1>
+    <main>
+      <div id="detalleProducto"></div>
+      <div id="productosRelacionados"></div>
+    </main>
 
-    <script src=""></script>
+    <!-- Footer -->
+    <footer>
+      <div class="contenedor-footer">
+        <div class="content-foo">
+          <h4>Seguinos en nuestras Redes</h4>
+          <div class="redes-sociales" class="content-foo">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="content-foo">
+          <h4>Contactanos</h4>
+          <p>segundoestreno@gmail.com</p>
+        </div>
+
+        <div class="content-foo">
+          <h4><a href="terminos.html">Términos y condiciones</a></h4>
+          <p>Todos los derechos reservados</p>
+        </div>
+      </div>
+
+      <p class="titulo-final">&copy; SEGUNDO ESTRENO | 2025</p>
+    </footer>
+
+    <script src="./frontend/js/prendas.js"></script>
+    <script src="./frontend/js/detalle.js"></script>
     <script src="./frontend/js/main.js"></script>
   </body>
 </html>

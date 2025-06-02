@@ -25,21 +25,21 @@ function initHamburgerMenu() {
       menuIcon.classList.toggle("fa-bars", !isActive);
       menuIcon.classList.toggle("fa-times", isActive);
     });
+
+    document.addEventListener("click", (e) => {
+      if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) closeMenu();
+    });
   }
-
-  document.addEventListener("click", (e) => {
-    if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
-      closeMenu();
-    }
-  });
-
-  document.querySelectorAll(".nav-links a").forEach((link) => {
-    link.addEventListener("click", closeMenu);
-  });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 768) closeMenu();
-  });
 }
 
 /* ───── MODALES DE LOGIN / REGISTER ───── */
@@ -95,9 +95,9 @@ document.addEventListener("DOMContentLoaded", function () {
   questions.forEach(function (question) {
     question.addEventListener("click", function () {
       var answer = this.nextElementSibling;
-      if (answer.style.display === "none" || answer.style.display === "") {
+      if (answer && (answer.style.display === "none" || answer.style.display === "")) {
         answer.style.display = "block";
-      } else {
+      } else if (answer) {
         answer.style.display = "none";
       }
     });
@@ -131,18 +131,20 @@ document.addEventListener("DOMContentLoaded", function () {
     showSlide(currentIndex);
   }
 
-  nextBtn.addEventListener("click", nextSlide);
-  prevBtn.addEventListener("click", prevSlide);
+  if (nextBtn && prevBtn && items.length && dots.length) {
+    nextBtn.addEventListener("click", nextSlide);
+    prevBtn.addEventListener("click", prevSlide);
 
-  dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      currentIndex = index;
-      showSlide(currentIndex);
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        currentIndex = index;
+        showSlide(currentIndex);
+      });
     });
-  });
 
-  // Movimiento cada 5 segundos
-  setInterval(nextSlide, 5000);
+    // Movimiento cada 5 segundos
+    setInterval(nextSlide, 5000);
+  }
 });
 
 const btnScrollTop = document.getElementById("btn-scroll-top");
@@ -150,17 +152,19 @@ const btnScrollTop = document.getElementById("btn-scroll-top");
 // ==========================
 // Botón flotante para volver arriba
 // ==========================
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    btnScrollTop.style.display = "block";
-  } else {
-    btnScrollTop.style.display = "none";
-  }
-});
-
-btnScrollTop.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
+if (btnScrollTop) {
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      btnScrollTop.style.display = "block";
+    } else {
+      btnScrollTop.style.display = "none";
+    }
   });
-});
+
+  btnScrollTop.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+}

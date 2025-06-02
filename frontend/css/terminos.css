@@ -68,6 +68,19 @@ h1 {
   margin-bottom: 20px;
 }
 
+button {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+}
+
+button:hover {
+  background-color: var(--color-darker);
+}
+
 h2 {
   font-size: 24px;
   color: var(--color-dark);
@@ -82,17 +95,6 @@ p {
   font-size: 16px;
   margin-bottom: 18px;
   color: var(--color-text-light);
-}
-
-/* ===== Enlaces ===== */
-a {
-  color: var(--color-primary-dark);
-  transition: color var(--transition-fast);
-}
-
-a:hover {
-  color: var(--color-darker);
-  text-decoration: underline;
 }
 
 /* ===== Pie de Página ===== */
