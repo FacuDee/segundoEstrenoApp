@@ -6,6 +6,7 @@ const productos = [
     destacado: true,
     imagen: "producto1.jpg",
     talle: "L",
+    descripcion: "Remera de corte amplio estilo vintage, ideal para un look relajado y moderno.",
   },
   {
     titulo: "Zapatillas urbanas",
@@ -14,6 +15,7 @@ const productos = [
     destacado: false,
     imagen: "producto2.png",
     talle: "42",
+    descripcion: "Zapatillas cómodas y versátiles para uso diario con estilo urbano.",
   },
   {
     titulo: "Pantalón cargo beige",
@@ -22,6 +24,7 @@ const productos = [
     destacado: true,
     imagen: "producto3.jpg",
     talle: "M",
+    descripcion: "Pantalón cargo de algodón con múltiples bolsillos y corte moderno.",
   },
   {
     titulo: "Campera denim clásica",
@@ -30,6 +33,7 @@ const productos = [
     destacado: false,
     imagen: "producto4.jpg",
     talle: "L",
+    descripcion: "Campera de jean atemporal, perfecta para combinar con cualquier outfit.",
   },
   {
     titulo: "Top lencero negro",
@@ -38,6 +42,7 @@ const productos = [
     destacado: true,
     imagen: "producto5.jpg",
     talle: "S",
+    descripcion: "Top elegante de encaje negro con tirantes finos, ideal para la noche.",
   },
   {
     titulo: "Vestido floreado midi",
@@ -46,6 +51,7 @@ const productos = [
     destacado: true,
     imagen: "producto16.jpeg",
     talle: "M",
+    descripcion: "Vestido midi con estampado floral, fresco y femenino para el verano.",
   },
   {
     titulo: "Botas cuero negro",
@@ -54,6 +60,7 @@ const productos = [
     destacado: false,
     imagen: "producto6.jpg",
     talle: "40",
+    descripcion: "Botas de cuero negro con diseño clásico, perfectas para el invierno.",
   },
   {
     titulo: "Pantalón recto sastrero",
@@ -62,6 +69,7 @@ const productos = [
     destacado: true,
     imagen: "producto7.jpg",
     talle: "S",
+    descripcion: "Pantalón sastrero de corte recto, ideal para un look elegante y formal.",
   },
   {
     titulo: "Campera inflable Kappa",
@@ -70,6 +78,7 @@ const productos = [
     destacado: true,
     imagen: "producto8.jpg",
     talle: "XL",
+    descripcion: "Campera inflable con abrigo térmico y estilo deportivo de la marca Kappa.",
   },
   {
     titulo: "Remera gráfica 90s",
@@ -78,6 +87,7 @@ const productos = [
     destacado: false,
     imagen: "producto9.jpg",
     talle: "M",
+    descripcion: "Remera con diseño gráfico estilo noventoso, un guiño a la nostalgia.",
   },
   {
     titulo: "Zapatillas deportivas",
@@ -86,6 +96,7 @@ const productos = [
     destacado: true,
     imagen: "producto10.jpg",
     talle: "42",
+    descripcion: "Zapatillas con tecnología de amortiguación, ideales para entrenar o caminar.",
   },
   {
     titulo: "Pantalón jean roturas",
@@ -94,6 +105,7 @@ const productos = [
     destacado: false,
     imagen: "producto11.png",
     talle: "L",
+    descripcion: "Jean con roturas modernas, estilo casual para todos los días.",
   },
   {
     titulo: "Campera cuero sintético",
@@ -102,6 +114,7 @@ const productos = [
     destacado: false,
     imagen: "producto12.jpg",
     talle: "M",
+    descripcion: "Campera de cuero sintético con estilo urbano, resistente y con actitud.",
   },
   {
     titulo: "Remera básica negra",
@@ -110,6 +123,7 @@ const productos = [
     destacado: false,
     imagen: "producto13.jpg",
     talle: "S",
+    descripcion: "Remera lisa de algodón negra, para cualquier ocasión.",
   },
   {
     titulo: "Botines gamuza marrón",
@@ -118,6 +132,7 @@ const productos = [
     destacado: true,
     imagen: "producto14.jpg",
     talle: "40",
+    descripcion: "Botines de gamuza marrón con diseño elegante y suela resistente.",
   },
   {
     titulo: "Campera vintage deportiva River Plate",
@@ -126,6 +141,7 @@ const productos = [
     destacado: true,
     imagen: "producto15.png",
     talle: "L",
+    descripcion: "Campera retro de River Plate, para hinchas con estilo deportivo y nostálgico.",
   },
 ];
 

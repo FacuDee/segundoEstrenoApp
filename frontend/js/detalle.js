@@ -5,6 +5,9 @@ if (producto) {
     <div class="detalle-container">
       <div class="detalle-img">
         <img src="./frontend/images/productos/${producto.imagen}" alt="${producto.titulo}">
+        <div class="detalle-descripcion-hover">
+          ${producto.descripcion}
+        </div>
       </div>
       <div class="detalle-info">
         <h2>${producto.titulo}</h2>
