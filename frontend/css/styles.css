@@ -382,3 +382,144 @@ body {
     font-size: 0.8rem;
   }
 }
+
+/*destacados
+  .destacados{
+    margin-top: 100px;
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 20px;
+  }
+  .doble{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 50px;
+  }
+  .card{
+   
+    background-color: var(--color-light);
+    padding: 20px;
+    width: 300px;
+    height: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px; 
+    margin-bottom: 20px;
+  }
+  .imgCard {
+    width: 200px; 
+    height: auto; 
+    border-radius: 10px;
+  }
+
+  .container-card{
+    background-color:var(--color-accent);
+    padding: 10px;  
+    border-radius: 10px;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+     margin-top: 20px;
+     margin-bottom: 20px;
+     height:80%;
+     width: 100%;
+
+  }
+  
+  .h3{
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+  }
+  .text{
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+  }*/
+
+  /* destacados */
+.destacados {
+  margin-top: 100px;
+  text-align: center;
+  font-size: 20px;
+  padding-bottom: 20px;
+}
+
+.doble {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding-bottom: 50px;
+}
+
+.card {
+  background-color: var(--color-lighter);
+  padding: 20px;
+  width: 300px;
+  /* Eliminar height fijo si el contenido puede variar mucho */
+  height: 500px; 
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  
+  /* Agregamos Flexbox para centrar contenido */
+  display: flex;
+  flex-direction: column; /* Apila los elementos verticalmente */
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  text-align: center; /* Para asegurar el texto centrado */
+}
+
+.imgCard {
+  max-width: 100%; /* Asegura que la imagen no desborde el contenedor */
+  height: auto;
+  border-radius: 10px;
+  /* Eliminar width fijo si se usa max-width para responsividad */
+  /* width: 200px; */ 
+  margin-bottom: 15px; /* Espacio entre imagen y texto */
+}
+
+.container-card {
+  background-color: var(--color-accent);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 80%;
+  width: 100%;
+  
+  /* Asegura que el contenido dentro de container-card también esté centrado si es necesario */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Considera si necesitas .h3 y .text si ya estás centrando todo el contenido del .card */
+/* Si los mantienes, puedes simplificarlos ya que el padre ya está centrando */
+.h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  /* text-align: center; ya lo centra el padre */
+}
+
+.text {
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  margin-top: 10px; /* Ajusta el margen superior */
+  margin-bottom: 10px; /* Ajusta el margen inferior */
+  /* text-align: center; ya lo centra el padre */
+}
+
+  
