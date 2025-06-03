@@ -10,8 +10,6 @@
   --color-lighter: #ffffff;
   --color-text: #333;
   --color-text-light: #555;
-  --color-button: #fbc2b5;
-  --color-button-hover: #f5f5f5;
 
   /* Tipografía */
   --font-main: "Montserrat", sans-serif;
@@ -327,7 +325,7 @@ body {
   display: none;
 }
 
- /* Carrusel de imagenes */
+/* Carrusel de imagenes */
 
 .carousel-container {
   width: 100%;
@@ -459,7 +457,8 @@ body {
   margin-top: 1rem;
 }
 
-.services h2 {
+.services h2,
+.destacados h2 {
   color: var(--color-darker);
   font-family: var(--font-logo);
 }
@@ -488,6 +487,95 @@ body {
 
 .service-item:hover {
   transform: translateY(-5px);
+}
+
+/* seccion destacados */
+.destacados {
+  margin: 2rem auto;
+  text-align: center;
+  color: var(--color-darker);
+}
+
+.doble {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+.card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  height: auto;
+  margin-bottom: 20px;
+  background-color: var(--color-lighter);
+  padding: 25px;
+  width: 300px;
+  border-radius: 15px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.imgCard {
+  max-width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-md);
+}
+
+.card-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.card-info h3 {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: var(--color-darker);
+  margin-bottom: 1rem;
+}
+
+.card-info .text {
+  font-size: 1.1rem;
+  color: var(--color-text-light);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.btn-ver-mas {
+  font-family: var(--font-main);
+  background-color: var(--color-darker);
+  color: var(--color-lighter);
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: auto;
+}
+
+.btn-ver-mas:hover {
+  background-color: var(--color-dark);
+  transform: translateY(-2px);
 }
 
 /* Banner publicitario */
@@ -547,7 +635,8 @@ body {
   border-radius: 25px;
   font-weight: 600;
   text-decoration: none;
-  transition: background-color var(--transition-fast), transform var(--transition-fast);
+  transition: background-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .banner-btn:hover {
@@ -720,7 +809,9 @@ footer a:hover {
   background-color: var(--color-text-light);
 }
 
+/* ========================= */
 /* ===== Media Queries ===== */
+/* ========================= */
 @media (max-width: 992px) {
   .header-top-content {
     flex-wrap: wrap;
@@ -737,15 +828,12 @@ footer a:hover {
     height: 500px;
   }
 
-  /* .faq.content {
-    font-size: small;
-  } */
-
   .faq-title {
     font-size: small;
   }
 }
 
+/* ===== 768px ===== */
 @media (max-width: 768px) {
   .nav {
     position: relative;
@@ -808,6 +896,21 @@ footer a:hover {
     font-size: small;
   }
 
+  .doble {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+  }
+
+  .card {
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .destacados h1 {
+    font-size: 2em;
+  }
+
   .faq-title {
     width: 100%;
     font-size: medium;
@@ -834,6 +937,7 @@ footer a:hover {
   }
 }
 
+/* ===== 480px ===== */
 @media (max-width: 480px) {
   .header-top-content {
     flex-direction: column;
@@ -843,155 +947,6 @@ footer a:hover {
   .account-actions {
     font-size: 0.8rem;
   }
-
-}
-
-/* seccion destacados */
-  body {
-    font-family: 'Arial', sans-serif; /* Puedes cambiar por 'Roboto', 'Lato', 'Open Sans' de Google Fonts */
-    margin: 0;
-    padding: 0;
-    background-color: var(--color-gray); /* Fondo general suave */
-    color: var(--color-dark);
-}
-
-.destacados {
-    margin-top: 60px; /* Reducimos el margen superior un poco */
-    margin-bottom: 40px; /* Añadimos margen inferior para separar del contenido */
-    text-align: center;
-    font-size: 1.8em; /* Hacemos el título más grande */
-    color: var(--color-dark);
-}
-
-.destacados h1 {
-    font-size: 2.5em; /* Tamaño de fuente para el h1 */
-    font-weight: 700; /* Negrita más pronunciada */
-    color: var(--color-accent); /* Color del título principal */
-    position: relative; /* Para el posible subrayado o efecto */
-    display: inline-block; /* Para que el fondo o efecto solo ocupe el ancho del texto */
-}
-
-.destacados h1 .span-destacados {
-    background-image: linear-gradient(to right, var(--color-accent), var(--color-dark)); /* Degradado sutil */
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    padding-bottom: 5px; /* Espacio para el efecto de subrayado si se añade */
-}
-
-
-.doble {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px; /* Aumentamos el espacio entre las tarjetas */
-    padding: 20px; /* Añadimos padding general para evitar que se peguen a los bordes */
-    max-width: 1200px; /* Máximo ancho del contenedor */
-    margin: 0 auto; /* Centrar el contenedor principal de tarjetas */
-}
-
-.card {
-    background-color: var(--color-light);
-    padding: 25px; /* Aumentamos un poco el padding interno */
-    width: 300px;
-    border-radius: 15px; /* Bordes más redondeados */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada y suave */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave al pasar el mouse */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    overflow: hidden; /* Aseguramos que nada se salga de la tarjeta */
-    height: auto; /* Dejamos que la altura se ajuste al contenido */
-    margin-bottom: 20px; /* Espacio inferior entre tarjetas en vista móvil o cuando se apilan */
-}
-
-.card:hover {
-    transform: translateY(-10px); /* Efecto de "levantar" al pasar el mouse */
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* Sombra más fuerte al pasar el mouse */
-}
-
-.imgCard {
-    max-width: 100%;
-    height: 250px; /* Altura fija para las imágenes */
-    object-fit: cover; /* Recortar la imagen para que cubra el área */
-    border-radius: 10px;
-    margin-bottom: 20px; /* Espacio más grande */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra sutil en la imagen */
-}
-
-.card-info {
-    flex-grow: 1; /* Permite que este div ocupe el espacio restante */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Distribuye el espacio entre los elementos */
-    width: 100%; /* Asegura que ocupe todo el ancho disponible en la card */
-}
-
-.card-info h3 {
-    font-size: 1.6em; /* Hacemos el título del producto más grande */
-    font-weight: 600; /* Negrita moderada */
-    color: var(--color-dark);
-    margin-bottom: 10px; /* Espacio debajo del título */
-}
-
-.card-info .text {
-    font-size: 1.1em; /* Texto de descripción más grande */
-    color: #555; /* Color de texto más suave */
-    line-height: 1.5; /* Altura de línea para mejor legibilidad */
-    margin-bottom: 20px; /* Más espacio antes del botón */
-}
-
-.btn-ver-mas {
-    background-color: var(--color-primary-dark);
-    color: rgb(15, 12, 12);
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: auto; /* Empuja el botón hacia la parte inferior */
-}
-
-.btn-ver-mas:hover {
-    background-color: var(--color-button-hover);
-    transform: translateY(-2px); /* Efecto de "presionar" o levantar */
-}
-
-/* --- Media Queries para Responsividad --- */
-@media (max-width: 768px) {
-    .doble {
-        flex-direction: column; /* Apilamos las tarjetas en pantallas más pequeñas */
-        align-items: center; /* Centramos las tarjetas */
-        padding: 15px;
-    }
-
-    .card {
-        width: 90%; /* Las tarjetas ocupan más ancho */
-        max-width: 350px; /* Pero con un límite para que no sean demasiado grandes */
-    }
-
-    .destacados h1 {
-        font-size: 2em;
-    }
-}
-
-@media (max-width: 480px) {
-    .destacados h1 {
-        font-size: 1.8em;
-    }
-
-    .card {
-        padding: 20px;
-    }
-
-    .btn-ver-mas {
-        padding: 10px 20px;
-        font-size: 1em;
-    }
-}
 
   .carousel-item img {
     height: 300px;
@@ -1014,5 +969,18 @@ footer a:hover {
   .carousel-control {
     padding: 5px 10px;
     font-size: 1.5em;
+  }
+
+  .destacados h1 {
+    font-size: 1.8em;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .btn-ver-mas {
+    padding: 10px 20px;
+    font-size: 1em;
   }
 }
