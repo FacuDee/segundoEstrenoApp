@@ -1,0 +1,251 @@
+/* detalle.css */
+
+.detalle-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: linear-gradient(180deg, var(--color-lighter), var(--color-primary));
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2.5rem 2rem;
+  align-items: center;
+}
+
+.detalle-img {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 1 / 1;
+  min-width: 220px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  background: var(--color-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.detalle-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+.detalle-descripcion-hover {
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 30, 30, 0.8);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 1.1rem;
+  border-radius: 12px;
+}
+
+.detalle-img:hover .detalle-descripcion-hover {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.detalle-info {
+  flex: 2 1 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detalle-info h2 {
+  font-family: var(--font-logo);
+  color: var(--color-darker);
+  font-size: 2rem;
+  margin-bottom: 0.5rem 0;
+}
+
+.detalle-info p {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  margin: 0.5rem 0;
+}
+
+.detalle-precio {
+  font-size: 1.5rem;
+  color: var(--color-dark);
+  font-weight: bold;
+  margin: 1.5rem 0;
+}
+
+.detalle-btns {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.detalle-btn {
+  background: var(--color-dark);
+  color: var(--color-lighter);
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.detalle-btn:hover {
+  background: var(--color-darker);
+  transform: scale(1.05);
+}
+
+/* Productos relacionados */
+.relacionados-titulo {
+  margin: 2.5rem 0 1.5rem 0;
+  text-align: center;
+  color: var(--color-darker);
+  font-family: var(--font-logo);
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.relacionados-grid {
+  max-width: 900px;
+  margin: 4rem auto;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.relacionado-card {
+  background: linear-gradient(180deg, var(--color-lighter), var(--color-primary));
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  width: 220px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform var(--transition-fast);
+}
+
+.relacionado-card:hover {
+  transform: translateY(-5px) scale(1.03);
+}
+
+.relacionado-img {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.relacionado-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+  display: block;
+}
+.relacionado-info {
+  padding: 1rem;
+  text-align: center;
+}
+
+.relacionado-info h4 {
+  font-size: 1.05rem;
+  color: var(--color-darker);
+  margin-bottom: 0.5rem;
+}
+
+.relacionado-precio {
+  color: var(--color-dark);
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+}
+
+.relacionado-ver-btn {
+  background: var(--color-dark);
+  color: var(--color-lighter);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.relacionado-ver-btn:hover {
+  background: var(--color-darker);
+  transform: scale(1.05);
+}
+
+/* Banner publicitario horizontal */
+#banner-publicidad {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 2.5rem 0 2rem 0;
+}
+
+.banner-link {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+}
+
+.banner-img {
+  width: 100%;
+  min-height: auto;
+  object-fit: cover;
+  box-shadow: var(--shadow-md);
+  background: var(--color-light);
+}
+
+@media (max-width: 768px) {
+  .detalle-container {
+    margin: 0;
+    border-radius: 0;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  .detalle-img,
+  .detalle-info {
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+    width: 100%;
+  }
+  .detalle-precio {
+    font-size: 2rem;
+    margin: 0;
+  }
+  .relacionados-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .relacionado-card {
+    width: 90%;
+    max-width: 350px;
+  }
+}

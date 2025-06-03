@@ -160,7 +160,7 @@ body {
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
+  gap: 3rem;
   padding: 0.8rem 0;
 }
 
@@ -211,7 +211,7 @@ body {
   z-index: 101;
 }
 
-/* ===== Modals login y register ===== */
+/* Modals login y register */
 .overlay {
   position: fixed;
   top: 0;
@@ -262,7 +262,7 @@ body {
   font-weight: bold;
   cursor: pointer;
   color: var(--color-darker);
-  transition: color var(--transition-fast);
+  transition: color var(--transition-normal);
 }
 
 .close:hover {
@@ -272,6 +272,18 @@ body {
 .question {
   font-size: small;
   text-align: left;
+}
+
+#linkToLogin,
+#linkToRegister {
+  color: var(--color-darker);
+  transition: all var(--transition-normal);
+}
+
+#linkToLogin:hover,
+#linkToRegister:hover {
+  color: var(--color-dark);
+  font-weight: bold;
 }
 
 .modal input {
@@ -284,7 +296,7 @@ body {
   background-color: var(--color-lighter);
   font-family: var(--font-main);
   color: var(--color-text);
-  transition: border-color var(--transition-fast);
+  transition: var(--transition-fast);
 }
 
 .modal input:focus {
@@ -304,17 +316,408 @@ body {
   border-radius: 8px;
   cursor: pointer;
   font-family: var(--font-main);
-  transition: background-color var(--transition-fast),
-    transform var(--transition-fast);
+  transition: all var(--transition-normal);
 }
 
 .modal button:hover {
   background-color: var(--color-darker);
-  transform: scale(1.01);
 }
 
 .hidden {
   display: none;
+}
+
+ /* Carrusel de imagenes */
+
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  /* border-radius: 8px; */
+  /* box-shadow: var(--shadow-md); */
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+  min-width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: none;
+}
+
+.carousel-item.active {
+  display: block;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: var(--color-lighter);
+  padding: 15px 20px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.carousel-caption h3 {
+  margin: 0 0 5px;
+  font-size: 2em;
+  font-family: var(--font-logo);
+}
+
+.carousel-caption p {
+  margin: 0;
+  font-size: 1.2em;
+  font-family: var(--font-main);
+  color: var(--color-primary);
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 2em;
+  line-height: 1;
+  border-radius: 50%;
+  z-index: 10;
+  transition: background-color var(--transition-fast);
+}
+
+.carousel-control:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-control.prev {
+  left: 5px;
+}
+
+.carousel-control.next {
+  right: 5px;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.carousel-dots .dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 5px;
+  background-color: var(--color-text-light);
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.carousel-dots .dot.active {
+  background-color: var(--color-primary);
+}
+
+/* Cards Servicios */
+.services {
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.services p {
+  margin-top: 1rem;
+}
+
+.services h2 {
+  color: var(--color-darker);
+  font-family: var(--font-logo);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.service-item {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: var(--color-lighter);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal);
+  border-bottom: 5px solid var(--color-accent);
+}
+
+.service-item i {
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.service-item:hover {
+  transform: translateY(-5px);
+}
+
+/* Banner publicitario */
+.ad-banner {
+  margin: 0 auto;
+  padding: 2rem 0;
+  max-width: 1200px;
+  text-align: center;
+  position: relative;
+}
+
+.banner-content {
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  max-height: 500px;
+}
+
+.banner-content img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  filter: brightness(0.5);
+  transition: filter var(--transition-normal);
+}
+
+.banner-content:hover img {
+  filter: brightness(0.9);
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px 30px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-overlay h3 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.banner-btn {
+  background-color: var(--color-accent);
+  color: var(--color-text);
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.banner-btn:hover {
+  background-color: var(--color-primary-dark);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Preguntas comprar y vender + métodos de pago*/
+.main-container {
+  background: linear-gradient(180deg, var(--color-primary), var(--color-light));
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.payment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.payment-item img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(100%) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+  transition: transform var(--transition-normal);
+  cursor: pointer;
+}
+
+.payment-item img:hover {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+.seller-info,
+.payment-info {
+  background-color: transparent;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 30%;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.seller-info h2,
+.payment-info h2 {
+  font-family: var(--font-logo);
+  color: var(--color-darker);
+  margin: 2rem auto;
+}
+
+.payment-info img {
+  width: 50%;
+  margin: auto;
+  max-width: 100%;
+}
+
+.faq-title {
+  color: var(--color-text);
+  font-family: var(--font-main);
+  cursor: pointer;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.faq-content {
+  color: var(--color-light);
+  display: none;
+  background: linear-gradient(135deg, var(--color-dark), var(--color-darker));
+  padding: 10px;
+  border-left: 5px solid var(--color-primary);
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+/*Footer*/
+footer {
+  background: linear-gradient(180deg, var(--color-darker), #55385a);
+  color: var(--color-lighter);
+  padding-top: 2rem;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
+
+.contenedor-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: auto;
+  padding-bottom: 2rem;
+}
+
+.redes-sociales {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.redes-sociales a {
+  color: var(--color-light);
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  transition: color 0.3s;
+}
+
+.redes-sociales a:hover {
+  color: var(--color-primary);
+}
+
+.content-foo h4 {
+  font-family: var(--font-logo);
+  font-size: large;
+  margin: 20px auto;
+  text-align: center;
+  color: var(--color-primary);
+  border-bottom: 1px solid var(--color-accent);
+  padding-bottom: 20px;
+}
+
+.content-foo p {
+  margin: 20px auto;
+  color: var(--color-light);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: var(--color-pr);
+
+  text-decoration: underline;
+}
+
+.titulo-final {
+  font-family: var(--font-logo);
+  text-align: center;
+  padding: 10px;
+  background-color: var(--color-lighter);
+  color: var(--color-darker);
+}
+
+/* Scroll-up */
+#btn-scroll-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  display: none;
+  background-color: var(--color-text);
+  color: var(--color-lighter);
+  border: none;
+  border-radius: 50%;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease;
+}
+
+#btn-scroll-top:hover {
+  background-color: var(--color-text-light);
 }
 
 /* ===== Media Queries ===== */
@@ -328,6 +731,18 @@ body {
     order: 3;
     min-width: 100%;
     margin: 0.5rem 0 0;
+  }
+
+  .carousel-item img {
+    height: 500px;
+  }
+
+  /* .faq.content {
+    font-size: small;
+  } */
+
+  .faq-title {
+    font-size: small;
   }
 }
 
@@ -372,6 +787,51 @@ body {
   .cart-icon {
     margin-top: 1rem;
   }
+
+  .carousel-item img {
+    height: 400px;
+  }
+
+  .carousel-caption h3 {
+    font-size: 1.5em;
+  }
+
+  .carousel-caption p {
+    font-size: 1em;
+  }
+
+  .banner-overlay h3 {
+    font-size: 30px;
+  }
+
+  .banner-btn {
+    font-size: small;
+  }
+
+  .faq-title {
+    width: 100%;
+    font-size: medium;
+  }
+
+  .contenedor-footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .seller-info,
+  .payment-info {
+    padding: 1rem;
+    width: 90%;
+  }
+
+  .content-foo h4 {
+    width: 75%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -383,8 +843,8 @@ body {
   .account-actions {
     font-size: 0.8rem;
   }
-}
 
+}
 
 /* seccion destacados */
   body {
@@ -531,4 +991,28 @@ body {
         padding: 10px 20px;
         font-size: 1em;
     }
+}
+
+  .carousel-item img {
+    height: 300px;
+  }
+
+  .carousel-caption {
+    bottom: 30px;
+    padding: 10px;
+    font-size: 0.9em;
+  }
+
+  .carousel-caption h3 {
+    font-size: 1.2em;
+  }
+
+  .carousel-caption p {
+    font-size: 0.8em;
+  }
+
+  .carousel-control {
+    padding: 5px 10px;
+    font-size: 1.5em;
+  }
 }
