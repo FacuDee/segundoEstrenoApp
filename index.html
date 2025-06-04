@@ -159,6 +159,7 @@
       </div>
     </section>
 
+      <!-- Banner que dirige al blog -->
     <section class="ad-banner">
       <div class="banner-content">
         <img
@@ -171,6 +172,122 @@
         </div>
       </div>
     </section>
+
+    <!-- Seccion destacados -->
+    <section class="destacados">
+      <h2>PRODUCTOS DESTACADOS</h2>
+
+      <div class="doble">
+        <div class="card">
+          <img
+            class="imgCard"
+            src="./frontend/images/pexels-dmitriy-steinke-559643503-20669538.jpg"
+            alt="Remera blanca"
+          />
+          <div class="card-info">
+            <h3>Básica</h3>
+            <p class="text">Remera básica color blanca 100% algodón</p>
+            <button class="btn-ver-mas">Ver más</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            class="imgCard"
+            src="./frontend/images/pexels-liza-summer-6347552.jpg"
+            alt="Chomba gris"
+          />
+          <div class="card-info">
+            <h3>Chomba</h3>
+            <p class="text">
+              Chomba básica estilo formal color gris de algodón
+            </p>
+            <button class="btn-ver-mas">Ver más</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            class="imgCard"
+            src="./frontend/images/pexels-biabrg-19894658.jpg"
+            alt="Jean negro"
+          />
+          <div class="card-info">
+            <h3>Campera de jean</h3>
+            <p class="text">Abrigo clásico de jean oversize unisex</p>
+            <button class="btn-ver-mas">Ver más</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info preguntas y respuestas -->
+    <div class="main-container">
+      <section class="seller-info" id="faq-comprar">
+        <h2>¿Querés comprar?</h2>
+        <!-- El FAQ se insertará aquí por JS -->
+      </section>
+
+      <section class="payment-info">
+        <h2>Métodos de pago</h2>
+        <div class="payment-grid">
+          <div class="payment-item">
+            <img src="frontend/images/pagos/1.png" alt="Mercado Pago" />
+          </div>
+          <div class="payment-item">
+            <img src="frontend/images/pagos/2.png" alt="Modo" />
+          </div>
+          <div class="payment-item">
+            <img src="frontend/images/pagos/3.png" alt="Visa" />
+          </div>
+          <div class="payment-item">
+            <img src="frontend/images/pagos/4.png" alt="Mastercard" />
+          </div>
+          <div class="payment-item">
+            <img src="frontend/images/pagos/5.png" alt="American" />
+          </div>
+          <div class="payment-item">
+            <img src="frontend/images/pagos/6.png" alt="PagoFacil" />
+          </div>
+          <!-- Agregá más según necesites -->
+        </div>
+      </section>
+
+      <section class="seller-info" id="faq-vender">
+        <h2>¿Querés vender?</h2>
+        <!-- El FAQ se insertará aquí por JS -->
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="contenedor-footer">
+        <div class="content-foo">
+          <h4>Seguinos en nuestras Redes</h4>
+          <div class="redes-sociales" class="content-foo">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="content-foo">
+          <h4>Contactanos</h4>
+          <p>segundoestreno@gmail.com</p>
+        </div>
+
+        <div class="content-foo">
+          <h4><a href="terminos.html">Términos y condiciones</a></h4>
+          <p>Todos los derechos reservados</p>
+        </div>
+      </div>
+
+      <p class="titulo-final">&copy; SEGUNDO ESTRENO | 2025</p>
+    </footer>
+
+    <!------------------------------------>
+    <!-- ELEMENTOS QUE ARRANCAN OCULTOS -->
+    <!------------------------------------>
 
     <!-- Fondo oscuro -->
     <div id="overlay" class="overlay hidden"></div>
@@ -215,189 +332,13 @@
       </div>
     </div>
 
-    <!-- Seccion destacados -->
-    <section class="destacados">
-      <h2>PRODUCTOS DESTACADOS</h2>
-
-      <div class="doble">
-        <div class="card">
-          <img
-            class="imgCard"
-            src="./frontend/images/pexels-dmitriy-steinke-559643503-20669538.jpg"
-            alt="Remera blanca"
-          />
-          <div class="card-info">
-            <h3>Básica</h3>
-            <p class="text">Remera básica color blanca 100% algodón</p>
-            <button class="btn-ver-mas">Ver más</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img
-            class="imgCard"
-            src="./frontend/images/pexels-liza-summer-6347552.jpg"
-            alt="Chomba gris"
-          />
-          <div class="card-info">
-            <h3>Chomba</h3>
-            <p class="text">Chomba básica estilo formal color gris de algodón</p>
-            <button class="btn-ver-mas">Ver más</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img
-            class="imgCard"
-            src="./frontend/images/pexels-biabrg-19894658.jpg"
-            alt="Jean negro"
-          />
-          <div class="card-info">
-            <h3>Campera de jean</h3>
-            <p class="text">Abrigo clásico de jean oversize unisex</p>
-            <button class="btn-ver-mas">Ver más</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Info preguntas y respuestas -->
-    <div class="main-container">
-      <section class="seller-info">
-        <h2>¿Querés comprar?</h2>
-
-        <div class="faq-title">¿Cuánto tiempo tarda la entrega?</div>
-        <div class="faq-content">
-          El tiempo de entrega depende del método de envío y tu ubicación.
-          Consulta los detalles en la sección de envíos.
-        </div>
-
-        <div class="faq-title">¿Cómo puedo rastrear mi pedido?</div>
-        <div class="faq-content">
-          Puedes rastrear tu pedido en la página de seguimiento ingresando tu
-          número de orden.
-        </div>
-
-        <div class="faq-title">
-          ¿Puedo cancelar una compra después de pagar?
-        </div>
-        <div class="faq-content">
-          Sí, puedes cancelar tu compra dentro del período permitido. Consulta
-          las políticas de cancelación.
-        </div>
-
-        <div class="faq-title">¿Cómo funcionan las devoluciones?</div>
-        <div class="faq-content">
-          Las devoluciones deben solicitarse dentro del plazo establecido. Se
-          pueden hacer desde tu perfil de usuario.
-        </div>
-
-        <div class="faq-title">
-          ¿Cómo contacto al vendedor antes de comprar?
-        </div>
-        <div class="faq-content">
-          Puedes contactar al vendedor mediante la sección de mensajes en la
-          plataforma.
-        </div>
-      </section>
-
-      <section class="payment-info">
-        <h2>Métodos de pago</h2>
-        <div class="payment-grid">
-          <div class="payment-item">
-            <img src="frontend/images/pagos/1.png" alt="Mercado Pago" />
-          </div>
-          <div class="payment-item">
-            <img src="frontend/images/pagos/2.png" alt="Modo" />
-          </div>
-          <div class="payment-item">
-            <img src="frontend/images/pagos/3.png" alt="Visa" />
-          </div>
-          <div class="payment-item">
-            <img src="frontend/images/pagos/4.png" alt="Mastercard" />
-          </div>
-          <div class="payment-item">
-            <img src="frontend/images/pagos/5.png" alt="American" />
-          </div>
-          <div class="payment-item">
-            <img src="frontend/images/pagos/6.png" alt="PagoFacil" />
-          </div>
-          <!-- Agregá más según necesites -->
-        </div>
-      </section>
-      <section class="seller-info">
-        <h2>¿Querés vender?</h2>
-
-        <div class="faq-title">¿Cómo publico un producto en la plataforma?</div>
-        <div class="faq-content">
-          Para publicar un producto, ve a la sección de vendedores y sigue los
-          pasos para subir imágenes, descripción y precio.
-        </div>
-
-        <div class="faq-title">
-          ¿Cuáles son los costos y comisiones por vender?
-        </div>
-        <div class="faq-content">
-          Las comisiones varían según la categoría del producto y el método de
-          pago elegido.
-        </div>
-
-        <div class="faq-title">¿Cómo recibiré el pago por mis ventas?</div>
-        <div class="faq-content">
-          Los pagos se procesan automáticamente a la cuenta registrada en la
-          plataforma. Puedes consultar los detalles.
-        </div>
-
-        <div class="faq-title">
-          ¿Qué pasa si un comprador solicita una devolución?
-        </div>
-        <div class="faq-content">
-          Si un comprador solicita una devolución, debes seguir el proceso de
-          devolución y reembolso indicado en la plataforma.
-        </div>
-
-        <div class="faq-title">
-          ¿Qué tipo de productos están permitidos en la plataforma?
-        </div>
-        <div class="faq-content">
-          La plataforma permite la venta de una amplia variedad de productos,
-          pero hay restricciones para artículos prohibidos. Revisa las políticas
-          de publicación.
-        </div>
-      </section>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <div class="contenedor-footer">
-        <div class="content-foo">
-          <h4>Seguinos en nuestras Redes</h4>
-          <div class="redes-sociales" class="content-foo">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-tiktok"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-          </div>
-        </div>
-
-        <div class="content-foo">
-          <h4>Contactanos</h4>
-          <p>segundoestreno@gmail.com</p>
-        </div>
-
-        <div class="content-foo">
-          <h4><a href="terminos.html">Términos y condiciones</a></h4>
-          <p>Todos los derechos reservados</p>
-        </div>
-      </div>
-
-      <p class="titulo-final">&copy; SEGUNDO ESTRENO | 2025</p>
-    </footer>
-
     <!-- Botón flotante up -->
     <button id="btn-scroll-top" title="Volver arriba">
       <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- Scripts -->
     <script src="./frontend/js/main.js"></script>
+    <script src="./frontend/js/preguntas.js"></script>
   </body>
 </html>

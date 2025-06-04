@@ -703,9 +703,24 @@ body {
 .faq-title {
   color: var(--color-text);
   font-family: var(--font-main);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   cursor: pointer;
-  font-weight: bold;
-  margin: 10px 0;
+  font-weight: 600;
+  padding: 0.5rem;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.faq-arrow {
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s;
+}
+
+.faq-title.active .faq-arrow {
+  transform: rotate(180deg);
 }
 
 .faq-content {

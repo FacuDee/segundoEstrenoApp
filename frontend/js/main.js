@@ -88,22 +88,6 @@ function initModals() {
   });
 }
 
-/*preguntas comprar y vender*/
-document.addEventListener("DOMContentLoaded", function () {
-  var questions = document.querySelectorAll(".faq-title");
-
-  questions.forEach(function (question) {
-    question.addEventListener("click", function () {
-      var answer = this.nextElementSibling;
-      if (answer && (answer.style.display === "none" || answer.style.display === "")) {
-        answer.style.display = "block";
-      } else if (answer) {
-        answer.style.display = "none";
-      }
-    });
-  });
-});
-
 // Carrusel
 document.addEventListener("DOMContentLoaded", function () {
   const items = document.querySelectorAll(".carousel-item");
