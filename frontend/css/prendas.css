@@ -63,17 +63,13 @@ main {
 .card-producto {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(
-    180deg,
-    var(--color-primary),
-    var(--color-lighter)
-  );
+  background: linear-gradient(0deg, var(--color-lighter), var(--color-primary));
   border: 1px solid #ddd;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
 }
 
 .card-producto img {
@@ -88,7 +84,7 @@ main {
 
 .card-producto h3 {
   color: var(--color-darker);
-  font-size: 1rem;
+  font-size: 1.05rem;
   margin-bottom: 1rem;
 }
 
@@ -124,7 +120,7 @@ main {
   font-weight: 500;
   font-family: var(--font-main);
   cursor: pointer;
-  box-shadow: none;
+  box-shadow: var(--shadow-md);
   opacity: 0.8;
   transition: opacity 0.3s ease;
 }
@@ -132,8 +128,6 @@ main {
 .botones-hover button:hover {
   opacity: 1;
   background-color: var(--color-darker);
-
-
 }
 
 @media (hover: none) {

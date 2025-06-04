@@ -134,8 +134,8 @@
 .relacionado-card {
   background: linear-gradient(180deg, var(--color-lighter), var(--color-primary));
   border-radius: 12px;
-  box-shadow: var(--shadow-sm);
-  width: 220px;
+  box-shadow: var(--shadow-md);
+  width: 250px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
