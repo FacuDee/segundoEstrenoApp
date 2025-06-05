@@ -6,6 +6,8 @@
     <title>Segundo Estreno</title>
     <link rel="stylesheet" href="./frontend/css/styles.css" />
     <link rel="stylesheet" href="./frontend/css/prendas.css" />
+    <link rel="stylesheet" href="./frontend/css/carrito.css" />
+    <link rel="stylesheet" href="./frontend/css/detalle.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
@@ -57,7 +59,10 @@
             <li><a href="./nosotros.html">NOSOTROS</a></li>
             <li><a href="./blog.html">BLOG</a></li>
             <li class="cart-icon">
-              <a href="./carrito.html"><i class="fas fa-shopping-bag"></i> 0</a>
+              <a href="./carrito.html"
+                ><i class="fas fa-shopping-bag"></i>
+                <span id="cart-count">0</span></a
+              >
             </li>
           </ul>
           <button id="menu-toggle" class="menu-toggle" aria-label="Menú">
@@ -127,7 +132,20 @@
       <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- Modal Carrito Lateral -->
+    <div id="modal-carrito" class="modal-carrito">
+      <div class="modal-carrito-content">
+        <button id="cerrar-carrito" class="cerrar-carrito">&times;</button>
+        <h2><i class="fas fa-shopping-bag"></i> Carrito</h2>
+        <div id="carrito-items"></div>
+        <div class="carrito-footer">
+          <button id="ir-a-carrito" class="detalle-btn">Procesar compra</button>
+        </div>
+      </div>
+    </div>
+
     <script src="./frontend/js/prendas.js"></script>
     <script src="./frontend/js/main.js"></script>
+    <script src="./frontend/js/carrito.js"></script>
   </body>
 </html>
