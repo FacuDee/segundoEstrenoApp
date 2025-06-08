@@ -22,15 +22,17 @@ function renderCarrito() {
   actualizarCartCount();
 
   if (carrito.length === 0) {
-    itemsDiv.innerHTML = "<p style='text-align:center;'>El carrito está vacío.</p>";
+    itemsDiv.innerHTML =
+      "<p style='text-align:center;'>El carrito está vacío.</p>";
     if (totalDiv) totalDiv.textContent = "";
     return;
   }
 
   let total = 0;
-  itemsDiv.innerHTML = carrito.map((prod, idx) => {
-    total += Number(prod.precio);
-    return `
+  itemsDiv.innerHTML = carrito
+    .map((prod, idx) => {
+      total += Number(prod.precio);
+      return `
       <div class="carrito-item">
     <div class="carrito-item-info">
       <img src="./frontend/images/productos/${prod.imagen}" alt="${prod.titulo}">
@@ -42,12 +44,13 @@ function renderCarrito() {
     <button class="quitar-item" data-idx="${idx}" title="Quitar">&times;</button>
   </div>
     `;
-  }).join("");
+    })
+    .join("");
   if (totalDiv) totalDiv.textContent = "Total: $" + total;
 
   // Quitar producto
-  itemsDiv.querySelectorAll(".quitar-item").forEach(btn => {
-    btn.addEventListener("click", function() {
+  itemsDiv.querySelectorAll(".quitar-item").forEach((btn) => {
+    btn.addEventListener("click", function () {
       const idx = this.dataset.idx;
       const carrito = getCarrito();
       carrito.splice(idx, 1);
@@ -64,12 +67,12 @@ function setupModalCarrito() {
   const irACarritoBtn = document.getElementById("ir-a-carrito");
 
   if (cerrarBtn) {
-    cerrarBtn.addEventListener("click", function() {
+    cerrarBtn.addEventListener("click", function () {
       modal.classList.remove("abierto");
     });
   }
   if (irACarritoBtn) {
-    irACarritoBtn.addEventListener("click", function() {
+    irACarritoBtn.addEventListener("click", function () {
       window.location.href = "carrito.html";
     });
   }
@@ -93,9 +96,62 @@ document.addEventListener("DOMContentLoaded", function () {
   const finalizarBtn = document.getElementById("finalizar-compra");
   if (finalizarBtn) {
     finalizarBtn.addEventListener("click", function () {
-      alert("¡Gracias por tu compra! (Aquí iría el proceso real de pago)");
+      const metodo = localStorage.getItem("metodoPagoSeleccionado");
+      const carrito = getCarrito();
+      if (!carrito.length) {
+        Swal.fire({
+          icon: "warning",
+          title: "El carrito está vacío",
+          text: "Debe haber al menos un producto seleccionado.",
+          confirmButtonColor: "#885a89",
+          confirmButtonText: "Aceptar",
+        });
+        return;
+      }
+      if (!metodo) {
+        Swal.fire({
+          icon: "warning",
+          title: "Elegí un método de pago",
+          text: "Debes seleccionar uno para finalizar la compra.",
+          confirmButtonColor: "#885a89",
+          confirmButtonText: "Aceptar",
+        });
+        return;
+      }
+      Swal.fire({
+        icon: "success",
+        title: "¡Tu pedido fue procesado!",
+        text: "(Aquí seguiría el proceso real de pago)",
+        confirmButtonColor: "#885a89",
+        confirmButtonText: "Aceptar",
+      });
       setCarrito([]);
       renderCarrito();
+      // Limpiar selección de método de pago
+      const logos = document.querySelectorAll(".metodos-pago-logos img");
+      logos.forEach((i) => i.classList.remove("seleccionado"));
+      localStorage.removeItem("metodoPagoSeleccionado");
     });
+  }
+});
+
+// Selección visual de método de pago
+document.addEventListener("DOMContentLoaded", function () {
+  const logos = document.querySelectorAll(".metodos-pago-logos img");
+  logos.forEach((img) => {
+    img.addEventListener("click", function () {
+      logos.forEach((i) => i.classList.remove("seleccionado"));
+      this.classList.add("seleccionado");
+      // Si quieres guardar la selección:
+      localStorage.setItem("metodoPagoSeleccionado", this.dataset.metodo);
+    });
+  });
+  // Si quieres que recuerde la selección al recargar:
+  const seleccionado = localStorage.getItem("metodoPagoSeleccionado");
+  if (seleccionado) {
+    const imgSel = document.querySelector(
+      `.metodos-pago-logos img[data-metodo="${seleccionado}"]`
+    );
+    if (imgSel) imgSel.classList.add("seleccionado");
   }
 });

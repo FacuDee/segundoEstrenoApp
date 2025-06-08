@@ -75,11 +75,57 @@
         <div id="carrito-items"></div>
         <div id="carrito-total"></div>
         <div class="carrito-footer">
+          <div class="metodos-pago">
+            <span class="metodos-pago-label">Seleccione su método de pago</span>
+            <div class="metodos-pago-logos">
+              <img
+                src="frontend/images/pagos/1.png"
+                alt="Mercado Pago"
+                data-metodo="mercadopago"
+              />
+              <img
+                src="frontend/images/pagos/2.png"
+                alt="Modo"
+                data-metodo="modo"
+              />
+              <img
+                src="frontend/images/pagos/3.png"
+                alt="Visa"
+                data-metodo="visa"
+              />
+              <img
+                src="frontend/images/pagos/4.png"
+                alt="Mastercard"
+                data-metodo="mastercard"
+              />
+              <img
+                src="frontend/images/pagos/5.png"
+                alt="American"
+                data-metodo="american"
+              />
+              <img
+                src="frontend/images/pagos/6.png"
+                alt="PagoFacil"
+                data-metodo="pagofacil"
+              />
+            </div>
+          </div>
           <button id="finalizar-compra" class="detalle-btn">
             Finalizar compra
           </button>
         </div>
       </section>
+
+      <!-- Banner debajo del carrito -->
+      <a href="prendas.html" class="banner-prendas">
+        <div class="banner-prendas-img">
+          <img
+            src="frontend/images/banners/banner-carrito.webp"
+            alt="Nuestras Prendas"
+          />
+          <div class="banner-prendas-titulo">Nuestras Prendas</div>
+        </div>
+      </a>
     </main>
 
     <footer>
@@ -104,9 +150,9 @@
       <p class="titulo-final">&copy; SEGUNDO ESTRENO | 2025</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./frontend/js/main.js"></script>
     <script src="./frontend/js/carrito.js"></script>
     <script src="./frontend/js/prendas.js"></script>
-
   </body>
 </html>
