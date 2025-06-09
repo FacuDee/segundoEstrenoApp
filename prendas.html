@@ -128,6 +128,49 @@
       </div>
     </footer>
 
+    <!-- Fondo oscuro -->
+    <div id="overlay" class="overlay hidden"></div>
+
+     <!-- Modal de inicio de sesión -->
+    <div id="loginModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-head">
+          <h2>INICIAR SESIÓN</h2>
+          <span class="close">x</span>
+        </div>
+        <form>
+          <input type="text" placeholder="Usuario" required />
+          <input type="password" placeholder="Contraseña" required />
+          <p class="question">
+            ¿Todavía no te registraste?
+            <a href="" id="linkToRegister">CREAR CUENTA</a>
+          </p>
+          <button type="submit">Entrar</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal de registro -->
+    <div id="registerModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-head">
+          <h2>CREA TU CUENTA</h2>
+          <span class="close">x</span>
+        </div>
+        <form>
+          <input type="text" placeholder="Nombre de usuario" required />
+          <input type="email" placeholder="Email" required />
+          <input type="password" placeholder="Contraseña" required />
+          <input type="password" placeholder="Repetir contraseña" required />
+          <p class="question">
+            ¿Ya tenés una cuenta?
+            <a href="" id="linkToLogin">INICIAR SESIÓN</a>
+          </p>
+          <button type="submit">Registrarse</button>
+        </form>
+      </div>
+    </div>
+
     <!-- Botón flotante up -->
     <button id="btn-scroll-top" title="Volver arriba">
       <i class="fas fa-arrow-up"></i>
@@ -145,8 +188,9 @@
       </div>
     </div>
 
-    <script src="./frontend/js/prendas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./frontend/js/main.js"></script>
+    <script src="./frontend/js/prendas.js"></script>
     <script src="./frontend/js/carrito.js"></script>
   </body>
 </html>

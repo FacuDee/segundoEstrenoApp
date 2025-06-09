@@ -325,6 +325,70 @@ body {
   display: none;
 }
 
+/* Sesión Usuario */
+#user-icon {
+  cursor: pointer;
+  color: var(--color-accent);
+  transition: color 0.2s;
+}
+
+#user-icon:hover {
+  color: var(--color-primary);
+}
+
+.user-name {
+  margin-left:8px;
+  font-size:1.05rem;
+  vertical-align:middle;
+}
+
+.icon {
+  font-size:1.8rem;
+  vertical-align:middle;
+}
+
+.user-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.user-dropdown {
+  position: absolute;
+  right: 0;
+  top: 120%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+  min-width: 140px;
+  z-index: 100;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.user-dropdown.hidden {
+  display: none;
+}
+
+.dropdown-item {
+  background: none;
+  border: none;
+  color: var(--color-darker);
+  font-size: 1rem;
+  padding: 0.7rem 1.2rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s;
+  border-radius: 6px;
+}
+
+.dropdown-item:hover {
+  background: #f7e7fa;
+}
+
+
+
 /* Carrusel de imagenes */
 
 .carousel-container {
