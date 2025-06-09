@@ -1,9 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
   initHamburgerMenu();
   initModals();
+  actualizarEstadoSesion();
 });
 
-/* ───── MENÚ HAMBURGUESA ───── */
+const loginModal = document.getElementById("loginModal");
+const registerModal = document.getElementById("registerModal");
+const overlay = document.getElementById("overlay");
+
+// Funciones globales para abrir/cerrar modales
+function openModal(modal) {
+  overlay?.classList.remove("hidden");
+  modal?.classList.remove("hidden");
+}
+
+function closeModal() {
+  overlay?.classList.add("hidden");
+  loginModal?.classList.add("hidden");
+  registerModal?.classList.add("hidden");
+}
+
+// ==========================
+// MENÚ HAMBURGUESA
+// ==========================
 function initHamburgerMenu() {
   const menuToggle = document.getElementById("menu-toggle");
   const navLinks = document.querySelector(".nav-links");
@@ -42,23 +61,11 @@ function initHamburgerMenu() {
   }
 }
 
-/* ───── MODALES DE LOGIN / REGISTER ───── */
+// ==========================
+// MODALES DE LOGIN / REGISTER
+// ==========================
 function initModals() {
-  const loginModal = document.getElementById("loginModal");
-  const registerModal = document.getElementById("registerModal");
-  const overlay = document.getElementById("overlay");
   const closeButtons = document.querySelectorAll(".close");
-
-  const openModal = (modal) => {
-    overlay?.classList.remove("hidden");
-    modal?.classList.remove("hidden");
-  };
-
-  const closeModal = () => {
-    overlay?.classList.add("hidden");
-    loginModal?.classList.add("hidden");
-    registerModal?.classList.add("hidden");
-  };
 
   document.getElementById("btnLogin")?.addEventListener("click", (e) => {
     e.preventDefault();
@@ -75,20 +82,158 @@ function initModals() {
 
   document.getElementById("linkToRegister")?.addEventListener("click", (e) => {
     e.preventDefault();
-    document.getElementById("loginModal")?.classList.add("hidden");
-    document.getElementById("registerModal")?.classList.remove("hidden");
-    document.getElementById("overlay")?.classList.remove("hidden");
+    loginModal?.classList.add("hidden");
+    registerModal?.classList.remove("hidden");
+    overlay?.classList.remove("hidden");
   });
 
   document.getElementById("linkToLogin")?.addEventListener("click", (e) => {
     e.preventDefault();
-    document.getElementById("registerModal")?.classList.add("hidden");
-    document.getElementById("loginModal")?.classList.remove("hidden");
-    document.getElementById("overlay")?.classList.remove("hidden");
+    registerModal?.classList.add("hidden");
+    loginModal?.classList.remove("hidden");
+    overlay?.classList.remove("hidden");
   });
 }
 
+// Simulación de registro
+const registerForm = document.querySelector("#registerModal form");
+if (registerForm) {
+  registerForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const username = registerForm.querySelector('input[type="text"]').value;
+    const password = registerForm.querySelector('input[type="password"]').value;
+    // Guarda usuario y contraseña (solo para simulación)
+    localStorage.setItem(
+      "usuarioRegistrado",
+      JSON.stringify({ username, password })
+    );
+    closeModal();
+    Swal.fire({
+      icon: "success",
+      title: "¡Cuenta creada!",
+      text: "Ahora podés iniciar sesión.",
+      confirmButtonColor: "#885a89",
+    }).then(() => {
+      openModal(loginModal); // Abre el modal de iniciar sesión inmediatamente después
+    });
+  });
+}
+
+// Simulación de login
+const loginForm = document.querySelector("#loginModal form");
+if (loginForm) {
+  loginForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const username = loginForm.querySelector('input[type="text"]').value;
+    const password = loginForm.querySelector('input[type="password"]').value;
+    const registrado = JSON.parse(localStorage.getItem("usuarioRegistrado"));
+    if (!registrado) {
+      Swal.fire({
+        icon: "warning",
+        title: "Primero creá tu cuenta",
+        text: "Debes registrarte antes de iniciar sesión.",
+        confirmButtonColor: "#885a89",
+      });
+      closeModal();
+      return;
+    }
+    if (username === registrado.username && password === registrado.password) {
+      localStorage.setItem("usuarioLogueado", username);
+      closeModal();
+      actualizarEstadoSesion();
+      // Mensaje de bienvenida antes de redirigir
+      Swal.fire({
+        icon: "success",
+        title: `¡Bienvenido/a, ${username}!`,
+        text: "Iniciaste sesión correctamente.",
+        confirmButtonColor: "#885a89",
+      }).then(() => {
+        // redirige a prendas.html después de cerrar el modal
+        window.location.href = "prendas.html";
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Datos incorrectos",
+        text: "Usuario o contraseña inválidos.",
+        confirmButtonColor: "#885a89",
+      });
+    }
+  });
+}
+
+// Mostrar/ocultar menú de usuario
+document.body.addEventListener("click", function (e) {
+  const userIcon = document.getElementById("user-icon");
+  const dropdown = document.getElementById("user-dropdown");
+  if (userIcon && dropdown) {
+    if (userIcon.contains(e.target)) {
+      dropdown.classList.toggle("hidden");
+    } else if (!dropdown.contains(e.target)) {
+      dropdown.classList.add("hidden");
+    }
+  }
+  // Cerrar sesión con confirmación
+  if (e.target.id === "logout-btn") {
+    Swal.fire({
+      // title: "¿Cerrar sesión?",
+      text: "¿Estás seguro/a que querés cerrar tu sesión?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#885a89",
+      cancelButtonColor: "#aaa",
+      confirmButtonText: "Cerrar sesión",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("usuarioLogueado");
+        actualizarEstadoSesion();
+        window.location.href = "index.html";
+      }
+    });
+  }
+});
+
+// Actualiza la UI según el estado de sesión
+function actualizarEstadoSesion() {
+  const accountActions = document.querySelector(".account-actions");
+  const usuario = localStorage.getItem("usuarioLogueado");
+  if (accountActions) {
+    if (usuario) {
+      accountActions.innerHTML = `
+        <div class="user-menu-container">
+          <span id="user-icon" title="Mi cuenta">
+            <i class="fas fa-user-circle icon"></i>
+            <span class="user-name">${usuario}</span>
+          </span>
+          <div class="user-dropdown hidden" id="user-dropdown">
+            <button class="dropdown-item" type="button">Mi Cuenta</button>
+            <button id="logout-btn" class="dropdown-item" type="button">Cerrar sesión</button>
+          </div>
+        </div>
+      `;
+    } else {
+      accountActions.innerHTML = `
+        <a href="#" class="account-link" id="btnRegister">CREAR CUENTA</a>
+        <span class="divider">|</span>
+        <a href="#" class="account-link" id="btnLogin">INICIAR SESIÓN</a>
+      `;
+    }
+  }
+  // Reasigna eventos a los nuevos botones
+  document.getElementById("btnLogin")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    openModal(loginModal);
+  });
+  document.getElementById("btnRegister")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    openModal(registerModal);
+  });
+}
+
+// ==========================
 // Carrusel
+// ==========================
 document.addEventListener("DOMContentLoaded", function () {
   const items = document.querySelectorAll(".carousel-item");
   const dots = document.querySelectorAll(".dot");
