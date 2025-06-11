@@ -56,7 +56,10 @@
             <li><a href="./nosotros.html">NOSOTROS</a></li>
             <li><a href="./blog.html">BLOG</a></li>
             <li class="cart-icon">
-              <a href="./carrito.html"><i class="fas fa-shopping-bag"></i> 0</a>
+              <a href="./carrito.html"
+                ><i class="fas fa-shopping-bag"></i>
+                <span id="cart-count">0</span></a
+              >
             </li>
           </ul>
           <button id="menu-toggle" class="menu-toggle" aria-label="Menú">
@@ -159,7 +162,7 @@
       </div>
     </section>
 
-      <!-- Banner que dirige al blog -->
+    <!-- Banner que dirige al blog -->
     <section class="ad-banner">
       <div class="banner-content">
         <img
@@ -222,13 +225,13 @@
     </section>
 
     <!-- Info preguntas y respuestas -->
-    <div class="main-container">
-      <section class="seller-info" id="faq-comprar">
+    <section class="main-container">
+      <div class="seller-info" id="faq-comprar">
         <h2>¿Querés comprar?</h2>
         <!-- El FAQ se insertará aquí por JS -->
-      </section>
+      </div>
 
-      <section class="payment-info">
+      <div class="payment-info">
         <h2>Métodos de pago</h2>
         <div class="payment-grid">
           <div class="payment-item">
@@ -251,38 +254,39 @@
           </div>
           <!-- Agregá más según necesites -->
         </div>
-      </section>
+      </div>
 
-      <section class="seller-info" id="faq-vender">
+      <div class="seller-info" id="faq-vender">
         <h2>¿Querés vender?</h2>
         <!-- El FAQ se insertará aquí por JS -->
-      </section>
-    </div>
+      </div>
+    </section>
 
     <!-- Footer -->
-    <footer>
-      <div class="contenedor-footer">
-        <div class="content-foo">
-          <h4>Seguinos en nuestras Redes</h4>
-          <div class="redes-sociales" class="content-foo">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-tiktok"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-col redes">
+          <h4>Seguinos</h4>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
           </div>
         </div>
-
-        <div class="content-foo">
-          <h4>Contactanos</h4>
-          <p>segundoestreno@gmail.com</p>
+        <div class="footer-col contacto">
+          <h4>Contacto</h4>
+          <p><i class="fas fa-envelope"></i> segundoestreno@gmail.com</p>
         </div>
-
-        <div class="content-foo">
+        <div class="footer-col legal">
           <h4><a href="terminos.html">Términos y condiciones</a></h4>
           <p>Todos los derechos reservados</p>
         </div>
       </div>
-
-      <p class="titulo-final">&copy; SEGUNDO ESTRENO | 2025</p>
+      <div class="footer-bottom">
+        <span>&copy; SEGUNDO ESTRENO | 2025</span>
+      </div>
     </footer>
 
     <!------------------------------------>
@@ -338,7 +342,9 @@
     </button>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./frontend/js/main.js"></script>
     <script src="./frontend/js/preguntas.js"></script>
+    <script src="./frontend/js/carrito.js"></script>
   </body>
 </html>
