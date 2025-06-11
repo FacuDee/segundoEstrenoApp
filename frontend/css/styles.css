@@ -60,7 +60,7 @@ body {
 
 /* Header superior */
 .header-top {
-  background: linear-gradient(135deg, var(--color-dark), var(--color-darker));
+  background: linear-gradient(180deg, var(--color-dark), var(--color-darker));
   padding: 1rem 0;
   color: var(--color-lighter);
 }
@@ -324,6 +324,70 @@ body {
 .hidden {
   display: none;
 }
+
+/* Sesión Usuario */
+#user-icon {
+  cursor: pointer;
+  color: var(--color-accent);
+  transition: color 0.2s;
+}
+
+#user-icon:hover {
+  color: var(--color-primary);
+}
+
+.user-name {
+  margin-left:8px;
+  font-size:1.05rem;
+  vertical-align:middle;
+}
+
+.icon {
+  font-size:1.8rem;
+  vertical-align:middle;
+}
+
+.user-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.user-dropdown {
+  position: absolute;
+  right: 0;
+  top: 120%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+  min-width: 140px;
+  z-index: 100;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.user-dropdown.hidden {
+  display: none;
+}
+
+.dropdown-item {
+  background: none;
+  border: none;
+  color: var(--color-darker);
+  font-size: 1rem;
+  padding: 0.7rem 1.2rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s;
+  border-radius: 6px;
+}
+
+.dropdown-item:hover {
+  background: #f7e7fa;
+}
+
+
 
 /* Carrusel de imagenes */
 
@@ -734,72 +798,78 @@ body {
 }
 
 /*Footer*/
-footer {
+.footer {
   background: linear-gradient(180deg, var(--color-darker), #55385a);
   color: var(--color-lighter);
-  padding-top: 2rem;
-  width: 100%;
-  position: relative;
-  bottom: 0;
+  padding: 2.5rem 0 0 0;
+  font-family: var(--font-main);
+  margin-top: 3rem;
 }
 
-.contenedor-footer {
+.footer-container {
   display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  width: 100%;
-  margin: auto;
-  padding-bottom: 2rem;
+  padding: 0 2rem;
 }
 
-.redes-sociales {
-  text-align: center;
-  margin: 20px 0;
+.footer-col {
+  min-width: 180px;
+  margin-bottom: 2rem;
 }
 
-.redes-sociales a {
-  color: var(--color-light);
-  font-size: 1.5rem;
-  margin-right: 1rem;
-  transition: color 0.3s;
-}
-
-.redes-sociales a:hover {
-  color: var(--color-primary);
-}
-
-.content-foo h4 {
+.footer-col h4 {
   font-family: var(--font-logo);
-  font-size: large;
-  margin: 20px auto;
-  text-align: center;
-  color: var(--color-primary);
-  border-bottom: 1px solid var(--color-accent);
-  padding-bottom: 20px;
+  color: var(--color-accent);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
 }
 
-.content-foo p {
-  margin: 20px auto;
+.footer-col p,
+.footer-col a {
   color: var(--color-light);
-}
-
-a {
-  color: inherit;
+  font-size: 0.98rem;
+  margin-bottom: 0.5rem;
   text-decoration: none;
+  transition: color 0.2s;
 }
 
-footer a:hover {
-  color: var(--color-pr);
-
+.footer-col a:hover {
+  color: var(--color-primary);
   text-decoration: underline;
 }
 
-.titulo-final {
-  font-family: var(--font-logo);
+.footer-social {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.footer-social a {
+  color: var(--color-light);
+  font-size: 1.7rem;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.footer-social a:hover {
+  color: var(--color-primary);
+  transform: scale(1.15);
+}
+
+.footer-bottom {
+  /* border-top: 5px solid var(--color-primary); */
   text-align: center;
-  padding: 10px;
-  background-color: var(--color-lighter);
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: bold;
   color: var(--color-darker);
+  background: var(--color-light);
+  letter-spacing: 0.05em;
 }
 
 /* Scroll-up */
@@ -827,6 +897,8 @@ footer a:hover {
 /* ========================= */
 /* ===== Media Queries ===== */
 /* ========================= */
+
+/* ===== 992px ===== */
 @media (max-width: 992px) {
   .header-top-content {
     flex-wrap: wrap;
@@ -846,6 +918,21 @@ footer a:hover {
   .faq-title {
     font-size: small;
   }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  .footer-col {
+    min-width: 0;
+    width: 100%;
+    text-align: center;
+  }
+  .footer-social {
+    justify-content: center;
+  }
 }
 
 /* ===== 768px ===== */
@@ -855,7 +942,7 @@ footer a:hover {
   }
 
   .menu-toggle {
-    display: block; /* Solo visible en móvil */
+    display: block;
     position: absolute;
     right: 5%;
     top: 50%;
