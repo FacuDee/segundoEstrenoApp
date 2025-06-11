@@ -16,7 +16,7 @@ if (producto) {
         <p><strong>Talle:</strong> ${producto.talle}</p>
         <div class="detalle-btns">
           <a href="prendas.html" class="detalle-btn">Volver</a>
-          <button class="detalle-btn">Agregar al carrito</button>
+          <button class="detalle-btn" id="btn-agregar-carrito">Agregar al carrito</button>
         </div>
       </div>
     </div>
@@ -76,4 +76,19 @@ if (producto && typeof productos !== "undefined") {
   }
 }
 
+// Agregar al carrito desde el button
+const btnAgregar = document.getElementById("btn-agregar-carrito");
+if (btnAgregar) {
+  btnAgregar.addEventListener("click", function() {
+    let carrito = getCarrito();
+    carrito.push(producto);
+    setCarrito(carrito);
+    actualizarCartCount();
+    const modal = document.getElementById("modal-carrito");
+    if (modal) {
+      modal.classList.add("abierto");
+      renderCarrito();
+    }
+  });
+}
 
