@@ -49,6 +49,10 @@ body {
   margin: 0 auto;
 }
 
+section {
+  padding:3rem;
+}
+
 /* ===== Header ===== */
 .header {
   background: var(--color-lighter);
@@ -337,14 +341,14 @@ body {
 }
 
 .user-name {
-  margin-left:8px;
-  font-size:1.05rem;
-  vertical-align:middle;
+  margin-left: 8px;
+  font-size: 1.05rem;
+  vertical-align: middle;
 }
 
 .icon {
-  font-size:1.8rem;
-  vertical-align:middle;
+  font-size: 1.8rem;
+  vertical-align: middle;
 }
 
 .user-menu-container {
@@ -358,7 +362,7 @@ body {
   top: 120%;
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.13);
   min-width: 140px;
   z-index: 100;
   padding: 0.5rem 0;
@@ -387,15 +391,13 @@ body {
   background: #f7e7fa;
 }
 
-
-
 /* Carrusel de imagenes */
 
 .carousel-container {
+  padding: 0;
   width: 100%;
   overflow: hidden;
   position: relative;
-  margin-bottom: 20px;
 }
 
 .carousel {
@@ -522,7 +524,9 @@ body {
 }
 
 .services h2,
-.destacados h2 {
+.destacados h2,
+.opiniones h2 {
+  text-align: center;
   color: var(--color-darker);
   font-family: var(--font-logo);
 }
@@ -554,18 +558,12 @@ body {
 }
 
 /* seccion destacados */
-.destacados {
-  margin: 2rem auto;
-  text-align: center;
-  color: var(--color-darker);
-}
 
 .doble {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
-  padding: 20px;
   max-width: 1200px;
   margin: 2rem auto;
 }
@@ -578,12 +576,11 @@ body {
   text-align: center;
   overflow: hidden;
   height: auto;
-  margin-bottom: 20px;
-  background-color: var(--color-lighter);
+  background: linear-gradient(180deg, var(--color-lighter), #FEE7EB);
   padding: 25px;
   width: 300px;
   border-radius: 15px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -594,7 +591,7 @@ body {
 
 .imgCard {
   max-width: 100%;
-  max-height: 350px;
+  max-height: 320px;
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -610,7 +607,8 @@ body {
 }
 
 .card-info h3 {
-  font-size: 1.5em;
+  font-family: var(--font-logo);
+  font-size: 1.3em;
   font-weight: 600;
   color: var(--color-darker);
   margin-bottom: 1rem;
@@ -618,12 +616,13 @@ body {
 
 .card-info .text {
   font-size: 1.1rem;
-  color: var(--color-text-light);
+  color: var(--color-text);
   line-height: 1.5;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .btn-ver-mas {
+  width: 100%;
   font-family: var(--font-main);
   background-color: var(--color-darker);
   color: var(--color-lighter);
@@ -797,121 +796,102 @@ body {
   border-radius: 5px;
 }
 
-
-/*carrusel opiniones*/
-
-* {
-  box-sizing: border-box;
-}
-
-/*body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #f0f4f3;
-  color: #333;
-}*/
-
-header {
-  background-color: #2d6a4f;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
-
-h2.opiniones {
-  text-align: center;
-  margin-top: 30px;
-  color: #2d6a4f;
-}
-
+/* Carousel de opiniones */
 .carousel-container-opiniones {
   position: relative;
-  width: 90%;
+  max-width: 960px;
+  margin: 3rem auto;
+  background: var(--color-lighter);
+  border-radius: 15px;
+  box-shadow: var(--shadow-md);
   overflow: hidden;
-  margin: 0 auto; /* Esto centra el contenedor */
 }
-
 
 .carousel-opiniones {
   display: flex;
-  transition: transform 1.5s ease;
+  transition: transform 0.7s cubic-bezier(0.77, 0, 0.18, 1);
   width: 100%;
+  max-width: 960px;
+  min-height: 260px;
 }
 
 .user-card {
-  width: 100vw;
-  padding: 20px;
-  background: white;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f7e7fa 70%, #e6f4ea 100%);
   flex-shrink: 0;
   text-align: center;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  border: 10px solid #b7e4c7;
-  border-radius: 16px;
-  margin: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 18px rgba(136, 90, 137, 0.1);
+  border: 3px solid var(--color-primary);
+  border-radius: 15px;
+  transition: all 0.3s;
 }
 
 .user-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  border-color: #74c69d;
+  box-shadow: 0 8px 25px rgba(136, 90, 137, 0.13);
+  border-color: var(--color-dark);
 }
 
 .user-card img {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   object-fit: cover;
   border-radius: 50%;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  border: 5px solid var(--color-accent);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
 }
 
-.stars {
-  color: #f4c542;
+.user-card .user-name {
+  font-weight: 600;
+  color: var(--color-dark);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.user-card .stars {
+  color: var(--color-primary-dark);
   font-size: 1.2em;
+  margin-bottom: 0.5rem;
 }
 
-ul {
-  display: inline-block;
-  text-align: left;
-  margin: 10px auto 0;
-  padding-left: 0;
-  list-style: none;
+.user-card .opinion-text {
+  color: var(--color-text-light);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-style: italic;
 }
 
-.nav-btn {
+.opiniones-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #2d6a4f;
-  color: white;
+  background: var(--color-dark);
+  color: var(--color-lighter);
   border: none;
-  padding: 10px;
+  padding: 0.6em 1em;
   cursor: pointer;
-  font-size: 1.2em;
+  font-size: 1.5rem;
   border-radius: 50%;
   z-index: 10;
-  transition: background 0.3s;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0.8;
 }
 
-.nav-btn:hover {
-  background-color: #1b4332;
+.opiniones-btn:hover {
+  background: var(--color-darker);
 }
 
 .nav-left {
-  left: 10px;
+  left: 2rem;
 }
 
 .nav-right {
-  right: 10px;
+  right: 2rem;
 }
-
-@media (max-width: 600px) {
-  .nav-btn {
-    display: none;
-  }
-}
-
 
 /*Footer*/
 .footer {
@@ -1035,6 +1015,13 @@ ul {
     font-size: small;
   }
 
+  .carousel-container-opiniones {
+    max-width: 95vw;
+  }
+  .user-card {
+    max-width: 95vw;
+  }
+
   .footer-container {
     flex-direction: column;
     align-items: center;
@@ -1052,6 +1039,7 @@ ul {
 }
 
 /* ===== 768px ===== */
+
 @media (max-width: 768px) {
   .nav {
     position: relative;
@@ -1132,6 +1120,15 @@ ul {
   .faq-title {
     width: 100%;
     font-size: medium;
+  }
+  
+  .user-card {
+    max-width: 100vw;
+  }
+
+  .opiniones-btn {
+    font-size: 1.2em;
+    padding: 0.4em 0.8em;
   }
 
   .contenedor-footer {

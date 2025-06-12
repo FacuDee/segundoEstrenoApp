@@ -60,14 +60,14 @@ const productos = [
       "Vestido midi con estampado floral, fresco y femenino para el verano.",
   },
   {
-    titulo: "Botas cuero negro",
+    titulo: "Borcegos cuero negro",
     precio: 40000,
     categoria: "calzado",
     destacado: false,
     imagen: "producto6.jpg",
     talle: "40",
     descripcion:
-      "Botas de cuero negro con diseño clásico, perfectas para el invierno.",
+      "Borcegos de cuero negro con diseño clásico, perfectos para el invierno.",
   },
   {
     titulo: "Pantalón recto sastrero",

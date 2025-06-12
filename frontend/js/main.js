@@ -278,9 +278,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const btnScrollTop = document.getElementById("btn-scroll-top");
 
-
 // ==========================
-// Carrusel opiniones
+// Carrusel opiniones Mejorado
 // ==========================
 
 const usuarios = [
@@ -289,64 +288,88 @@ const usuarios = [
     rating: 4.9,
     image: "https://randomuser.me/api/portraits/women/41.jpg",
     reviews: [
-      "Excelente calidad y muy amable, todo llegó en perfecto estado. Amo la página. ¡¡La ropa es hermosa!!"
-    ]
+      "Excelente calidad y muy amable, todo llegó en perfecto estado. Amo la página. ¡La ropa es hermosa!",
+    ],
   },
   {
-    name: "EcoTrend",
+    name: "Mauro Schmidt",
     rating: 4.9,
     image: "https://randomuser.me/api/portraits/men/45.jpg",
-    reviews: [
-      "Productos de alta calidad. Buen trato y ropa como nueva."
-    ]
+    reviews: ["Productos de alta calidad. Buen trato y ropa como nueva"],
   },
   {
     name: "Luis Ortega",
     rating: 4.2,
     image: "https://randomuser.me/api/portraits/men/59.jpg",
     reviews: [
-      "Siempre llega con responsabilidad. Muy rápido el envío y puntual."
-    ]
+      "Siempre llega con responsabilidad. Muy rápido el envío y puntual",
+    ],
   },
   {
     name: "Camila Soto",
     rating: 4.4,
     image: "https://randomuser.me/api/portraits/women/52.jpg",
-    reviews: [
-      "Gran experiencia comprando."
-    ]
-  }
+    reviews: ["Gran experiencia comprando"],
+  },
 ];
 
 const carrusel = document.getElementById("carruselOpiniones");
+const prevBtn = document.getElementById("opiniones-prev");
+const nextBtn = document.getElementById("opiniones-next");
+const dotsContainer = document.getElementById("opinionesDots");
 let indiceActual = 0;
 
 function obtenerEstrellas(puntaje) {
   const llenas = "★".repeat(Math.floor(puntaje));
-  const media = (puntaje % 1 >= 0.5) ? "½" : "";
+  const media = puntaje % 1 >= 0.5 ? "½" : "";
   const vacías = "☆".repeat(5 - Math.ceil(puntaje));
   return `<span class="stars">${llenas}${media}${vacías}</span>`;
 }
 
 function crearTarjetas() {
-  usuarios.forEach(usuario => {
+  carrusel.innerHTML = "";
+  usuarios.forEach((usuario) => {
     const tarjeta = document.createElement("div");
     tarjeta.className = "user-card";
     tarjeta.innerHTML = `
       <img src="${usuario.image}" alt="Foto de ${usuario.name}">
-      <h3>${usuario.name}</h3>
-      <p><strong>Calificación:</strong> ${obtenerEstrellas(usuario.rating)} (${usuario.rating.toFixed(1)})</p>
-      <div>
-        <strong>Opiniones:</strong>
-        <ul>${usuario.reviews.map(op => `<li>${op}</li>`).join("")}</ul>
-      </div>
+      <div class="user-name">${usuario.name}</div>
+      <div><strong>Calificación:</strong> ${obtenerEstrellas(
+        usuario.rating
+      )} (${usuario.rating.toFixed(1)})</div>
+      <div class="opinion-text">"${usuario.reviews[0]}"</div>
     `;
     carrusel.appendChild(tarjeta);
   });
 }
 
+function crearDots() {
+  dotsContainer.innerHTML = "";
+  usuarios.forEach((_, idx) => {
+    const dot = document.createElement("button");
+    dot.className = "opiniones-dot" + (idx === indiceActual ? " active" : "");
+    dot.addEventListener("click", () => {
+      indiceActual = idx;
+      actualizarCarrusel();
+    });
+    dotsContainer.appendChild(dot);
+  });
+}
+
+function ajustarAnchoCarrusel() {
+  if (carrusel) {
+    carrusel.style.width = `${usuarios.length * 100}%`;
+    Array.from(carrusel.children).forEach((card) => {
+      card.style.width = `${100 / usuarios.length}%`;
+    });
+  }
+}
+
 function actualizarCarrusel() {
-  carrusel.style.transform = `translateX(-${indiceActual * 100}vw)`;
+  carrusel.style.transform = `translateX(-${indiceActual * 100}%)`;
+  Array.from(dotsContainer.children).forEach((dot, idx) => {
+    dot.classList.toggle("active", idx === indiceActual);
+  });
 }
 
 function moverCarrusel(direccion) {
@@ -361,11 +384,14 @@ function autoCarrusel() {
   }, 8000);
 }
 
-window.onload = () => {
+document.addEventListener("DOMContentLoaded", () => {
   crearTarjetas();
+  crearDots();
   actualizarCarrusel();
   autoCarrusel();
-};
+  prevBtn.addEventListener("click", () => moverCarrusel(-1));
+  nextBtn.addEventListener("click", () => moverCarrusel(1));
+});
 
 // ==========================
 // Botón flotante para volver arriba
