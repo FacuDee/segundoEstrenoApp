@@ -57,7 +57,10 @@
             <li><a href="./nosotros.html">NOSOTROS</a></li>
             <li><a href="./blog.html">BLOG</a></li>
             <li class="cart-icon">
-              <a href="./carrito.html"><i class="fas fa-shopping-bag"></i> 0</a>
+              <a href="./carrito.html"
+                ><i class="fas fa-shopping-bag"></i>
+                <span id="cart-count">0</span></a
+              >
             </li>
           </ul>
           <button id="menu-toggle" class="menu-toggle" aria-label="Menú">
@@ -93,7 +96,7 @@
           </p>
           <h3>Nuestro compromiso</h3>
           <p>Cada prenda que encontrás en Segundo Estreno es cuidadosamente seleccionada o creada bajo principios de moda
-            ética y sostenible. Esto significa que: <br>
+            ética y sostenible. Esto significa que: <br></p>
           
             <i class="fas fa-check"></i>Priorizamos materiales eco-amigables: Usamos algodón orgánico, lino, tencel, lyocell, y materiales reciclados o
             upcycled, minimizando el impacto ambiental. <br>
@@ -104,13 +107,40 @@
             del tiempo y las tendencias pasajeras. Decimos no a la moda descartable. <br>
             <i class="fas fa-check"></i>Reducimos nuestra huella: Desde el empaque hasta la logística, buscamos constantemente formas de minimizar nuestro
             impacto ambiental, eligiendo opciones biodegradables, reciclables o compostables.
-          </p>
+          
         </div>
       </div>
 
 </div>
       <!-- Agregar más nosotros según necesites -->
 
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-col redes">
+          <h4>Seguinos</h4>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col contacto">
+          <h4>Contacto</h4>
+          <p><i class="fas fa-envelope"></i> segundoestreno@gmail.com</p>
+        </div>
+        <div class="footer-col legal">
+          <h4><a href="terminos.html">Términos y condiciones</a></h4>
+          <p>Todos los derechos reservados</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; SEGUNDO ESTRENO | 2025</span>
+      </div>
+    </footer>
+
     <script src="./frontend/js/main.js"></script>
+    <script src="./frontend/js/carrito.js"></script>
   </body>
 </html>
