@@ -278,6 +278,95 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const btnScrollTop = document.getElementById("btn-scroll-top");
 
+
+// ==========================
+// Carrusel opiniones
+// ==========================
+
+const usuarios = [
+  {
+    name: "Sofía Rivas",
+    rating: 4.9,
+    image: "https://randomuser.me/api/portraits/women/41.jpg",
+    reviews: [
+      "Excelente calidad y muy amable, todo llegó en perfecto estado. Amo la página. ¡¡La ropa es hermosa!!"
+    ]
+  },
+  {
+    name: "EcoTrend",
+    rating: 4.9,
+    image: "https://randomuser.me/api/portraits/men/45.jpg",
+    reviews: [
+      "Productos de alta calidad. Buen trato y ropa como nueva."
+    ]
+  },
+  {
+    name: "Luis Ortega",
+    rating: 4.2,
+    image: "https://randomuser.me/api/portraits/men/59.jpg",
+    reviews: [
+      "Siempre llega con responsabilidad. Muy rápido el envío y puntual."
+    ]
+  },
+  {
+    name: "Camila Soto",
+    rating: 4.4,
+    image: "https://randomuser.me/api/portraits/women/52.jpg",
+    reviews: [
+      "Gran experiencia comprando."
+    ]
+  }
+];
+
+const carrusel = document.getElementById("carruselOpiniones");
+let indiceActual = 0;
+
+function obtenerEstrellas(puntaje) {
+  const llenas = "★".repeat(Math.floor(puntaje));
+  const media = (puntaje % 1 >= 0.5) ? "½" : "";
+  const vacías = "☆".repeat(5 - Math.ceil(puntaje));
+  return `<span class="stars">${llenas}${media}${vacías}</span>`;
+}
+
+function crearTarjetas() {
+  usuarios.forEach(usuario => {
+    const tarjeta = document.createElement("div");
+    tarjeta.className = "user-card";
+    tarjeta.innerHTML = `
+      <img src="${usuario.image}" alt="Foto de ${usuario.name}">
+      <h3>${usuario.name}</h3>
+      <p><strong>Calificación:</strong> ${obtenerEstrellas(usuario.rating)} (${usuario.rating.toFixed(1)})</p>
+      <div>
+        <strong>Opiniones:</strong>
+        <ul>${usuario.reviews.map(op => `<li>${op}</li>`).join("")}</ul>
+      </div>
+    `;
+    carrusel.appendChild(tarjeta);
+  });
+}
+
+function actualizarCarrusel() {
+  carrusel.style.transform = `translateX(-${indiceActual * 100}vw)`;
+}
+
+function moverCarrusel(direccion) {
+  const total = usuarios.length;
+  indiceActual = (indiceActual + direccion + total) % total;
+  actualizarCarrusel();
+}
+
+function autoCarrusel() {
+  setInterval(() => {
+    moverCarrusel(1);
+  }, 8000);
+}
+
+window.onload = () => {
+  crearTarjetas();
+  actualizarCarrusel();
+  autoCarrusel();
+};
+
 // ==========================
 // Botón flotante para volver arriba
 // ==========================
