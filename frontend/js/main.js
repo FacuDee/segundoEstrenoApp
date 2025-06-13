@@ -201,17 +201,17 @@ function actualizarEstadoSesion() {
   if (accountActions) {
     if (usuario) {
       accountActions.innerHTML = `
-        <div class="user-menu-container">
-          <span id="user-icon" title="Mi cuenta">
-            <i class="fas fa-user-circle icon"></i>
-            <span class="user-name">${usuario}</span>
-          </span>
-          <div class="user-dropdown hidden" id="user-dropdown">
-            <button class="dropdown-item" type="button">Mi Cuenta</button>
-            <button id="logout-btn" class="dropdown-item" type="button">Cerrar sesión</button>
-          </div>
-        </div>
-      `;
+  <div class="user-menu-container">
+    <span id="user-icon" title="Mi cuenta">
+      <i class="fas fa-user-circle icon"></i>
+      <span class="user-name">${usuario}</span>
+    </span>
+    <div class="user-dropdown hidden" id="user-dropdown">
+      <a href="micuenta.html" class="dropdown-item" id="mi-cuenta-btn">Mi Cuenta</a>
+      <button id="logout-btn" class="dropdown-item" type="button">Cerrar sesión</button>
+    </div>
+  </div>
+`;
     } else {
       accountActions.innerHTML = `
         <a href="#" class="account-link" id="btnRegister">CREAR CUENTA</a>
