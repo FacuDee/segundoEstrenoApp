@@ -50,7 +50,7 @@ body {
 }
 
 section {
-  padding:3rem;
+  padding: 3rem;
 }
 
 /* ===== Header ===== */
@@ -379,16 +379,25 @@ section {
   background: none;
   border: none;
   color: var(--color-darker);
-  font-size: 1rem;
   padding: 0.7rem 1.2rem;
   text-align: left;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s; 
   border-radius: 6px;
 }
 
 .dropdown-item:hover {
   background: #f7e7fa;
+}
+
+#logout-btn, #mi-cuenta-btn {
+  font-family: var(--font-logo);
+  font-size: 0.9rem;
+}
+
+#mi-cuenta-btn {
+  font-weight: 600;
+  text-decoration: none;
 }
 
 /* Carrusel de imagenes */

@@ -3,26 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Segundo Estreno</title>
-    <link rel="stylesheet" href="./frontend/css/styles.css" />
-    <link rel="stylesheet" href="./frontend/css/prendas.css" />
-    <link rel="stylesheet" href="./frontend/css/carrito.css" />
-    <link rel="stylesheet" href="./frontend/css/detalle.css" />
+    <title>Mi Cuenta - Segundo Estreno</title>
+    <link rel="stylesheet" href="frontend/css/styles.css" />
+    <link rel="stylesheet" href="frontend/css/blog.css" />
+    <link rel="stylesheet" href="frontend/css/micuenta.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <link
-      rel="icon"
-      href="./frontend/images/shirt-icon.svg"
-      type="image/svg+xml"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
   </head>
   <body>
+    <!-- Header -->
     <!-- Header -->
     <header class="header">
       <!-- Primera fila: Logo, buscador y acciones de cuenta -->
@@ -33,12 +28,14 @@
               <i class="fas fa-recycle logo-icon"></i>
               <span>SEGUNDO ESTRENO</span>
             </a>
+
             <div class="search-bar">
               <input type="text" placeholder="Buscar..." />
               <button class="search-button">
                 <i class="fas fa-search"></i>
               </button>
             </div>
+
             <div class="account-actions">
               <a href="#" class="account-link" id="btnRegister">CREAR CUENTA</a>
               <span class="divider">|</span>
@@ -47,6 +44,7 @@
           </div>
         </div>
       </div>
+
       <!-- Segunda fila: Navegación principal -->
       <nav class="nav">
         <div class="container">
@@ -69,69 +67,52 @@
       </nav>
     </header>
 
-    <main>
-      <section class="carrito-section">
-        <h1><i class="fas fa-shopping-bag"></i> Carrito</h1>
-        <div id="carrito-items"></div>
-        <div id="carrito-total"></div>
-        <div class="carrito-footer">
-          <div class="metodos-pago">
-            <span class="metodos-pago-label">Seleccione su método de pago</span>
-            <div class="metodos-pago-logos">
-              <img
-                src="frontend/images/pagos/1.png"
-                alt="Mercado Pago"
-                data-metodo="mercadopago"
-              />
-              <img
-                src="frontend/images/pagos/2.png"
-                alt="Modo"
-                data-metodo="modo"
-              />
-              <img
-                src="frontend/images/pagos/3.png"
-                alt="Visa"
-                data-metodo="visa"
-              />
-              <img
-                src="frontend/images/pagos/4.png"
-                alt="Mastercard"
-                data-metodo="mastercard"
-              />
-              <img
-                src="frontend/images/pagos/5.png"
-                alt="American"
-                data-metodo="american"
-              />
-              <img
-                src="frontend/images/pagos/6.png"
-                alt="PagoFacil"
-                data-metodo="pagofacil"
-              />
-            </div>
-          </div>
-          <button id="finalizar-compra" class="detalle-btn">
-            Finalizar compra
-          </button>
+    <main class="micuenta-panel">
+      <h2>Mi Cuenta</h2>
+
+      <section class="perfil-usuario">
+        <h3>Mi foto de perfil</h3>
+        <div class="foto-perfil-container">
+          <img
+            id="foto-perfil"
+            src="frontend/images/usuario/user.png"
+            alt="Foto de perfil"
+          />
+          <input
+            type="file"
+            id="input-foto-perfil"
+            accept="image/*"
+            style="display: none"
+          />
+          <label for="input-foto-perfil" class="btn-cambiar-foto"
+            >Cambiar foto</label
+          >
         </div>
       </section>
 
-      <!-- Banner debajo del carrito -->
-      <a href="prendas.html" class="banner-prendas">
-        <div class="banner-prendas-img">
-          <img
-            src="frontend/images/banners/banner-carrito.webp"
-            alt="Nuestras Prendas"
-          />
-          <div class="banner-prendas-titulo">Nuestras Prendas</div>
-        </div>
-      </a>
+      <section class="cargar-prenda">
+        <h3>Cargar nueva prenda</h3>
+        <form id="form-cargar-prenda">
+          <input type="text" placeholder="Nombre de la prenda" required />
+          <input type="text" placeholder="Descripción" required />
+          <input type="text" placeholder="Talle" required />
+          <input type="number" placeholder="Precio" required min="0" />
+          <input type="file" accept="image/*" required />
+          <button type="submit">Cargar prenda</button>
+        </form>
+        <div id="mensaje-carga"></div>
+      </section>
+
+      <section class="mis-favoritos">
+        <h3>Mis favoritos</h3>
+        <ul id="lista-favoritos"></ul>
+      </section>
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-col redes">
-          <h4>Seguinos</h4>
           <div class="footer-social">
             <a href="#" aria-label="Instagram"
               ><i class="fab fa-instagram"></i
@@ -154,10 +135,46 @@
       </div>
     </footer>
 
+    <!-- Fondo oscuro para modales -->
+    <div id="overlay" class="overlay hidden"></div>
+
+    <!-- Modales de login y registro (opcional, si los usás en todas las páginas) -->
+    <div id="loginModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-head">
+          <h2>INICIAR SESIÓN</h2>
+          <span class="close">x</span>
+        </div>
+        <form>
+          <input type="text" placeholder="Usuario" required />
+          <input type="password" placeholder="Contraseña" required />
+          <p class="question">
+            ¿Todavía no te registraste?
+            <a href="" id="linkToRegister">CREAR CUENTA</a>
+          </p>
+          <button type="submit">Entrar</button>
+        </form>
+      </div>
+    </div>
+    <div id="registerModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-head">
+          <h2>CREA TU CUENTA</h2>
+          <span class="close">x</span>
+        </div>
+        <form>
+          <input type="text" placeholder="Nombre de usuario" required />
+          <input type="email" placeholder="Email" required />
+          <input type="password" placeholder="Contraseña" required />
+          <input type="password" placeholder="Repetir contraseña" required />
+          <p class="question"></p>
+        </form>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./frontend/js/main.js"></script>
-    <script src="./frontend/js/carrito.js"></script>
-    <script src="./frontend/js/prendas.js"></script>
+    <script src="frontend/js/main.js"></script>
     <script src="frontend/js/micuenta.js"></script>
+    <script src="frontend/js/carrito.js"></script>
   </body>
 </html>
