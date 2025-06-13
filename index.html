@@ -325,8 +325,13 @@
           <span class="close">x</span>
         </div>
         <form>
-          <input type="text" placeholder="Usuario" required />
-          <input type="password" placeholder="Contraseña" required />
+          <input type="text" placeholder="Usuario" required autocomplete="username"/>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            required
+            autocomplete="current-password"
+          />
           <p class="question">
             ¿Todavía no te registraste?
             <a href="" id="linkToRegister">CREAR CUENTA</a>
@@ -344,10 +349,20 @@
           <span class="close">x</span>
         </div>
         <form>
-          <input type="text" placeholder="Nombre de usuario" required />
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Contraseña" required />
-          <input type="password" placeholder="Repetir contraseña" required />
+          <input type="text" placeholder="Nombre de usuario" required autocomplete="username"/>
+          <input type="email" placeholder="Email" required autocomplete="username"/>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            required
+            autocomplete="current-password"
+          />
+          <input
+            type="password"
+            placeholder="Repetir contraseña"
+            required
+            autocomplete="current-password"
+          />
           <p class="question">
             ¿Ya tenés una cuenta?
             <a href="" id="linkToLogin">INICIAR SESIÓN</a>

@@ -148,8 +148,8 @@ if (loginForm) {
         text: "Iniciaste sesión correctamente.",
         confirmButtonColor: "#885a89",
       }).then(() => {
-        // redirige a prendas.html después de cerrar el modal
-        window.location.href = "prendas.html";
+        // redirige a micuenta.html después de cerrar el modal
+        window.location.href = "micuenta.html";
       });
     } else {
       Swal.fire({
@@ -344,6 +344,7 @@ function crearTarjetas() {
 }
 
 function crearDots() {
+  if (!dotsContainer) return;
   dotsContainer.innerHTML = "";
   usuarios.forEach((_, idx) => {
     const dot = document.createElement("button");
@@ -366,6 +367,7 @@ function ajustarAnchoCarrusel() {
 }
 
 function actualizarCarrusel() {
+  if (!dotsContainer) return;
   carrusel.style.transform = `translateX(-${indiceActual * 100}%)`;
   Array.from(dotsContainer.children).forEach((dot, idx) => {
     dot.classList.toggle("active", idx === indiceActual);
@@ -389,8 +391,12 @@ document.addEventListener("DOMContentLoaded", () => {
   crearDots();
   actualizarCarrusel();
   autoCarrusel();
+  if (prevBtn) {
   prevBtn.addEventListener("click", () => moverCarrusel(-1));
+}
+if (nextBtn) {
   nextBtn.addEventListener("click", () => moverCarrusel(1));
+}
 });
 
 // ==========================
