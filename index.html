@@ -184,20 +184,22 @@
         <div class="card">
           <img
             class="imgCard"
-            src="./frontend/images/pexels-dmitriy-steinke-559643503-20669538.jpg"
+            src="./frontend/images/destacadosHome/pexels-dmitriy-steinke-559643503-20669538.jpg"
             alt="Remera blanca"
           />
           <div class="card-info">
             <h3>Básica</h3>
             <p class="text">Remera básica color blanca 100% algodón</p>
-            <button class="btn-ver-mas">Ver más</button>
+            <a href="prendas.html">
+              <button class="btn-ver-mas">Ver más</button>
+            </a>
           </div>
         </div>
 
         <div class="card">
           <img
             class="imgCard"
-            src="./frontend/images/pexels-liza-summer-6347552.jpg"
+            src="./frontend/images/destacadosHome/pexels-liza-summer-6347552.jpg"
             alt="Chomba gris"
           />
           <div class="card-info">
@@ -205,22 +207,41 @@
             <p class="text">
               Chomba básica estilo formal color gris de algodón
             </p>
-            <button class="btn-ver-mas">Ver más</button>
+            <a href="prendas.html">
+              <button class="btn-ver-mas">Ver más</button>
+            </a>
           </div>
         </div>
 
         <div class="card">
           <img
             class="imgCard"
-            src="./frontend/images/pexels-biabrg-19894658.jpg"
+            src="./frontend/images/destacadosHome/pexels-biabrg-19894658.jpg"
             alt="Jean negro"
           />
           <div class="card-info">
             <h3>Campera de jean</h3>
             <p class="text">Abrigo clásico de jean oversize unisex</p>
-            <button class="btn-ver-mas">Ver más</button>
+            <a href="prendas.html">
+              <button class="btn-ver-mas">Ver más</button>
+            </a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Carrusel de opiniones -->
+    <section class="opiniones">
+      <h2>OPINIONES DESTACADAS</h2>
+
+      <div class="carousel-container-opiniones">
+        <button class="opiniones-btn nav-left" onclick="moverCarrusel(-1)">
+          ❮
+        </button>
+        <div class="carousel-opiniones" id="carruselOpiniones"></div>
+        <button class="opiniones-btn nav-right" onclick="moverCarrusel(1)">
+          ❯
+        </button>
       </div>
     </section>
 
@@ -304,8 +325,13 @@
           <span class="close">x</span>
         </div>
         <form>
-          <input type="text" placeholder="Usuario" required />
-          <input type="password" placeholder="Contraseña" required />
+          <input type="text" placeholder="Usuario" required autocomplete="username"/>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            required
+            autocomplete="current-password"
+          />
           <p class="question">
             ¿Todavía no te registraste?
             <a href="" id="linkToRegister">CREAR CUENTA</a>
@@ -323,10 +349,20 @@
           <span class="close">x</span>
         </div>
         <form>
-          <input type="text" placeholder="Nombre de usuario" required />
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Contraseña" required />
-          <input type="password" placeholder="Repetir contraseña" required />
+          <input type="text" placeholder="Nombre de usuario" required autocomplete="username"/>
+          <input type="email" placeholder="Email" required autocomplete="username"/>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            required
+            autocomplete="current-password"
+          />
+          <input
+            type="password"
+            placeholder="Repetir contraseña"
+            required
+            autocomplete="current-password"
+          />
           <p class="question">
             ¿Ya tenés una cuenta?
             <a href="" id="linkToLogin">INICIAR SESIÓN</a>
@@ -346,5 +382,6 @@
     <script src="./frontend/js/main.js"></script>
     <script src="./frontend/js/preguntas.js"></script>
     <script src="./frontend/js/carrito.js"></script>
+    <script src="frontend/js/micuenta.js"></script>
   </body>
 </html>

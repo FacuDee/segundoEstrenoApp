@@ -90,9 +90,9 @@
   </p>
 </section>
 
-      <!-- Ahorro de Agua -->
-      <section class="water-saving-container" style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem;">
-        <i class="fas fa-globe-americas planet-icon" style="font-size:3rem; color:#2E8B57;"></i>
+      <!-- Bloque Ahorro de Agua -->
+      <section class="water-saving-container">
+        <i class="fas fa-globe-americas planet-icon"></i>
         <div>
           <h2 style="margin:0 0 0.3rem 0;">Ahorro de agua reciclada</h2>
           <p style="margin:0; font-size:1.1rem;">
@@ -105,7 +105,7 @@
       <section class="blog-container">
         <!-- Card 1: Taller -->
         <div class="blog-card">
-          <img src="./frontend/images/Blog/taller.jpg" alt="Taller de costura" />
+          <img src="./frontend/images/Blog/taller.webp" alt="Taller de costura" />
           <div class="blog-content">
             <h2 class="blog-title">Taller de Costura Circular</h2>
             <p class="blog-description">
@@ -139,14 +139,7 @@
         <!-- Card 3: Video en Acción -->
         <div class="blog-card">
           <div class="blog-video">
-            <iframe
-              src="https://www.youtube.com/embed/ficticio1"
-              title="La moda circular en acción"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-              referrerpolicy="strict-origin-when-cross-origin"
-            ></iframe>
+            <iframe width="1317" height="741" src="https://www.youtube.com/embed/RpkcmtvaEtQ" title="¿Cómo reciclar los 8 millones de toneladas de residuos textiles que se producen cada año en la UE?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <div class="blog-content">
             <h2 class="blog-title">La moda circular en acción</h2>
@@ -160,14 +153,7 @@
         <!-- Card 4: Video Explicativo -->
         <div class="blog-card">
           <div class="blog-video">
-            <iframe
-              src="https://www.youtube.com/embed/ficticio2"
-              title="La moda circular explicada"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-              referrerpolicy="strict-origin-when-cross-origin"
-            ></iframe>
+            <iframe width="1317" height="741" src="https://www.youtube.com/embed/Vlv4FWZA18w" title="Larga vida a la ropa: reciclaje textil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <div class="blog-content">
             <h2 class="blog-title">La moda circular explicada</h2>
@@ -239,10 +225,79 @@
       <div class="footer-bottom">
         <span>&copy; SEGUNDO ESTRENO | 2025</span>
       </div>
-    </footer>    
+    </footer>
+    
+    <!------------------------------------>
+    <!-- ELEMENTOS QUE ARRANCAN OCULTOS -->
+    <!------------------------------------>
+
+    <!-- Fondo oscuro -->
+    <div id="overlay" class="overlay hidden"></div>
+
+    <!-- Modal de inicio de sesión -->
+    <div id="loginModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-head">
+          <h2>INICIAR SESIÓN</h2>
+          <span class="close">x</span>
+        </div>
+        <form>
+          <input type="text" placeholder="Usuario" required autocomplete="username"/>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            required
+            autocomplete="current-password"
+          />
+          <p class="question">
+            ¿Todavía no te registraste?
+            <a href="" id="linkToRegister">CREAR CUENTA</a>
+          </p>
+          <button type="submit">Entrar</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal de registro -->
+    <div id="registerModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-head">
+          <h2>CREA TU CUENTA</h2>
+          <span class="close">x</span>
+        </div>
+        <form>
+          <input type="text" placeholder="Nombre de usuario" required autocomplete="username"/>
+          <input type="email" placeholder="Email" required autocomplete="username"/>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            required
+            autocomplete="current-password"
+          />
+          <input
+            type="password"
+            placeholder="Repetir contraseña"
+            required
+            autocomplete="current-password"
+          />
+          <p class="question">
+            ¿Ya tenés una cuenta?
+            <a href="" id="linkToLogin">INICIAR SESIÓN</a>
+          </p>
+          <button type="submit">Registrarse</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Botón flotante up -->
+    <button id="btn-scroll-top" title="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="./frontend/js/main.js"></script>
     <script src="./frontend/js/blog.js"></script>
+    <script src="./frontend/js/carrito.js"></script>
+    <script src="frontend/js/micuenta.js"></script>
   </body>
 </html>
 

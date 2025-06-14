@@ -3,26 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Segundo Estreno</title>
-    <link rel="stylesheet" href="./frontend/css/styles.css" />
-    <link rel="stylesheet" href="./frontend/css/prendas.css" />
-    <link rel="stylesheet" href="./frontend/css/carrito.css" />
-    <link rel="stylesheet" href="./frontend/css/detalle.css" />
+    <title>Mi Cuenta - Segundo Estreno</title>
+    <link rel="stylesheet" href="frontend/css/styles.css" />
+    <link rel="stylesheet" href="frontend/css/blog.css" />
+    <link rel="stylesheet" href="frontend/css/micuenta.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <link
-      rel="icon"
-      href="./frontend/images/shirt-icon.svg"
-      type="image/svg+xml"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
   </head>
   <body>
+    <!-- Header -->
     <!-- Header -->
     <header class="header">
       <!-- Primera fila: Logo, buscador y acciones de cuenta -->
@@ -72,33 +67,46 @@
       </nav>
     </header>
 
-    <section class="filtros">
-      <form id="filtro-form">
-        <input type="text" id="filtro-titulo" placeholder="Buscar por título" />
+    <main class="micuenta-panel">
+      <h2>Mi Cuenta</h2>
 
-        <select id="filtro-categoria">
-          <option value="">Todas las categorías</option>
-          <!-- Las opciones se insertan dinámicamente desde JS -->
-        </select>
+      <section class="perfil-usuario">
+        <h3>Mi foto de perfil</h3>
+        <div class="foto-perfil-container">
+          <img
+            id="foto-perfil"
+            src="frontend/images/usuario/user.png"
+            alt="Foto de perfil"
+          />
+          <input
+            type="file"
+            id="input-foto-perfil"
+            accept="image/*"
+            style="display: none"
+          />
+          <label for="input-foto-perfil" class="btn-cambiar-foto"
+            >Cambiar foto</label
+          >
+        </div>
+      </section>
 
-        <select id="filtro-talle">
-          <option value="">Todos los talles</option>
-          <!-- Las opciones se insertan dinámicamente desde JS -->
-        </select>
+      <section class="cargar-prenda">
+        <h3>Cargar nueva prenda</h3>
+        <form id="form-cargar-prenda">
+          <input type="text" placeholder="Nombre de la prenda" required />
+          <input type="text" placeholder="Descripción" required />
+          <input type="text" placeholder="Talle" required />
+          <input type="number" placeholder="Precio" required min="0" />
+          <input type="file" accept="image/*" required />
+          <button type="submit">Cargar prenda</button>
+        </form>
+        <div id="mensaje-carga"></div>
+      </section>
 
-        <!-- Nuevo select para ordenar por precio -->
-        <select id="filtro-orden-precio">
-          <option value="">Ordenar por precio</option>
-          <option value="asc">Menor a Mayor</option>
-          <option value="desc">Mayor a Menor</option>
-        </select>
-
-        <button type="submit">Filtrar</button>
-      </form>
-    </section>
-
-    <main>
-      <div class="productos-container" id="productosContainer"></div>
+      <section class="mis-favoritos">
+        <h3>Mis favoritos</h3>
+        <ul id="lista-favoritos"></ul>
+      </section>
     </main>
 
     <!-- Footer -->
@@ -127,33 +135,6 @@
         <span>&copy; SEGUNDO ESTRENO | 2025</span>
       </div>
     </footer>
-
-    <!-- Fondo oscuro -->
-    <div id="overlay" class="overlay hidden"></div>
-
-    <!-- Modal de inicio de sesión -->
-    <div id="loginModal" class="modal hidden">
-      <div class="modal-content">
-        <div class="modal-head">
-          <h2>INICIAR SESIÓN</h2>
-          <span class="close">x</span>
-        </div>
-        <form>
-          <input type="text" placeholder="Usuario" required />
-          <input
-            type="password"
-            placeholder="Contraseña"
-            required
-            autocomplete="current-password"
-          />
-          <p class="question">
-            ¿Todavía no te registraste?
-            <a href="" id="linkToRegister">CREAR CUENTA</a>
-          </p>
-          <button type="submit">Entrar</button>
-        </form>
-      </div>
-    </div>
 
     <!------------------------------------>
     <!-- ELEMENTOS QUE ARRANCAN OCULTOS -->
@@ -222,22 +203,9 @@
       <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Modal Carrito Lateral -->
-    <div id="modal-carrito" class="modal-carrito">
-      <div class="modal-carrito-content">
-        <button id="cerrar-carrito" class="cerrar-carrito">&times;</button>
-        <h2><i class="fas fa-shopping-bag"></i> Carrito</h2>
-        <div id="carrito-items"></div>
-        <div class="carrito-footer">
-          <button id="ir-a-carrito" class="detalle-btn">Procesar compra</button>
-        </div>
-      </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./frontend/js/main.js"></script>
-    <script src="./frontend/js/prendas.js"></script>
-    <script src="./frontend/js/carrito.js"></script>
+    <script src="frontend/js/main.js"></script>
     <script src="frontend/js/micuenta.js"></script>
+    <script src="frontend/js/carrito.js"></script>
   </body>
 </html>
