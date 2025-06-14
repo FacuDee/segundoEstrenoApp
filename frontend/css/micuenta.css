@@ -127,11 +127,14 @@
 }
 
 /* Foto perfil */
+.micuenta-panel h2 {
+  text-align: center;
+}
 .perfil-usuario {
   padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
 }
 
 .foto-perfil-container {
