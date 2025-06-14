@@ -232,7 +232,7 @@ function actualizarEstadoSesion() {
 }
 
 // ==========================
-// Carrusel
+// Carrusel de imágenes
 // ==========================
 document.addEventListener("DOMContentLoaded", function () {
   const items = document.querySelectorAll(".carousel-item");
@@ -279,7 +279,7 @@ document.addEventListener("DOMContentLoaded", function () {
 const btnScrollTop = document.getElementById("btn-scroll-top");
 
 // ==========================
-// Carrusel opiniones Mejorado
+// Carrusel de opiniones
 // ==========================
 
 const usuarios = [
@@ -358,17 +358,8 @@ function crearDots() {
   });
 }
 
-function ajustarAnchoCarrusel() {
-  if (carrusel) {
-    carrusel.style.width = `${usuarios.length * 100}%`;
-    Array.from(carrusel.children).forEach((card) => {
-      card.style.width = `${100 / usuarios.length}%`;
-    });
-  }
-}
-
 function actualizarCarrusel() {
-  if (!dotsContainer) return;
+  if (!carrusel || !dotsContainer) return;
   carrusel.style.transform = `translateX(-${indiceActual * 100}%)`;
   Array.from(dotsContainer.children).forEach((dot, idx) => {
     dot.classList.toggle("active", idx === indiceActual);
