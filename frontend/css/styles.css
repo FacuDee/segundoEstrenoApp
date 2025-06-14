@@ -808,25 +808,26 @@ section {
 
 /* Carousel de opiniones */
 .carousel-container-opiniones {
+  overflow: hidden;
+  width: 100%;
   position: relative;
   max-width: 960px;
   margin: 3rem auto;
   background: var(--color-lighter);
   border-radius: 15px;
   box-shadow: var(--shadow-md);
-  overflow: hidden;
 }
 
 .carousel-opiniones {
   display: flex;
-  transition: transform 0.7s cubic-bezier(0.77, 0, 0.18, 1);
+  transition: transform 0.7s cubic-bezier(.77,0,.18,1);
   width: 100%;
-  max-width: 960px;
-  min-height: 260px;
 }
 
 .user-card {
+  flex: 0 0 100%;
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
   margin: 0 auto;
   padding: 2rem;
