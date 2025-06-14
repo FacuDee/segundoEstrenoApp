@@ -327,6 +327,7 @@ function obtenerEstrellas(puntaje) {
 }
 
 function crearTarjetas() {
+  if (!carrusel) return;
   carrusel.innerHTML = "";
   usuarios.forEach((usuario) => {
     const tarjeta = document.createElement("div");
@@ -392,24 +393,28 @@ document.addEventListener("DOMContentLoaded", () => {
   actualizarCarrusel();
   autoCarrusel();
   if (prevBtn) {
-  prevBtn.addEventListener("click", () => moverCarrusel(-1));
-}
-if (nextBtn) {
-  nextBtn.addEventListener("click", () => moverCarrusel(1));
-}
+    prevBtn.addEventListener("click", () => moverCarrusel(-1));
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => moverCarrusel(1));
+  }
 });
 
 // ==========================
 // Botón flotante para volver arriba
 // ==========================
 if (btnScrollTop) {
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) {
-      btnScrollTop.style.display = "block";
-    } else {
-      btnScrollTop.style.display = "none";
-    }
-  });
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (window.scrollY > 300) {
+        btnScrollTop.style.display = "block";
+      } else {
+        btnScrollTop.style.display = "none";
+      }
+    },
+    { passive: true }
+  );
 
   btnScrollTop.addEventListener("click", () => {
     window.scrollTo({

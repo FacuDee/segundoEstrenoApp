@@ -84,3 +84,14 @@ h2 {
   line-height: 2;
   margin: 2rem auto;
 }
+
+@media (max-width: 768px) {
+  .container-padre {
+    margin: 0;
+    padding: 0;
+  }
+
+  p {
+    padding: 1rem;
+  }
+}
