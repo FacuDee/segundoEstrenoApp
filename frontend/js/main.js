@@ -148,8 +148,8 @@ if (loginForm) {
         text: "Iniciaste sesión correctamente.",
         confirmButtonColor: "#885a89",
       }).then(() => {
-        // redirige a prendas.html después de cerrar el modal
-        window.location.href = "prendas.html";
+        // redirige a micuenta.html después de cerrar el modal
+        window.location.href = "micuenta.html";
       });
     } else {
       Swal.fire({
@@ -201,17 +201,17 @@ function actualizarEstadoSesion() {
   if (accountActions) {
     if (usuario) {
       accountActions.innerHTML = `
-        <div class="user-menu-container">
-          <span id="user-icon" title="Mi cuenta">
-            <i class="fas fa-user-circle icon"></i>
-            <span class="user-name">${usuario}</span>
-          </span>
-          <div class="user-dropdown hidden" id="user-dropdown">
-            <button class="dropdown-item" type="button">Mi Cuenta</button>
-            <button id="logout-btn" class="dropdown-item" type="button">Cerrar sesión</button>
-          </div>
-        </div>
-      `;
+  <div class="user-menu-container">
+    <span id="user-icon" title="Mi cuenta">
+      <i class="fas fa-user-circle icon"></i>
+      <span class="user-name">${usuario}</span>
+    </span>
+    <div class="user-dropdown hidden" id="user-dropdown">
+      <a href="micuenta.html" class="dropdown-item" id="mi-cuenta-btn">Mi Cuenta</a>
+      <button id="logout-btn" class="dropdown-item" type="button">Cerrar sesión</button>
+    </div>
+  </div>
+`;
     } else {
       accountActions.innerHTML = `
         <a href="#" class="account-link" id="btnRegister">CREAR CUENTA</a>
@@ -232,7 +232,7 @@ function actualizarEstadoSesion() {
 }
 
 // ==========================
-// Carrusel
+// Carrusel de imágenes
 // ==========================
 document.addEventListener("DOMContentLoaded", function () {
   const items = document.querySelectorAll(".carousel-item");
@@ -279,16 +279,133 @@ document.addEventListener("DOMContentLoaded", function () {
 const btnScrollTop = document.getElementById("btn-scroll-top");
 
 // ==========================
+// Carrusel de opiniones
+// ==========================
+
+const usuarios = [
+  {
+    name: "Sofía Rivas",
+    rating: 4.9,
+    image: "https://randomuser.me/api/portraits/women/41.jpg",
+    reviews: [
+      "Excelente calidad y muy amable, todo llegó en perfecto estado. Amo la página. ¡La ropa es hermosa!",
+    ],
+  },
+  {
+    name: "Mauro Schmidt",
+    rating: 4.9,
+    image: "https://randomuser.me/api/portraits/men/45.jpg",
+    reviews: ["Productos de alta calidad. Buen trato y ropa como nueva"],
+  },
+  {
+    name: "Luis Ortega",
+    rating: 4.2,
+    image: "https://randomuser.me/api/portraits/men/59.jpg",
+    reviews: [
+      "Siempre llega con responsabilidad. Muy rápido el envío y puntual",
+    ],
+  },
+  {
+    name: "Camila Soto",
+    rating: 4.4,
+    image: "https://randomuser.me/api/portraits/women/52.jpg",
+    reviews: ["Gran experiencia comprando"],
+  },
+];
+
+const carrusel = document.getElementById("carruselOpiniones");
+const prevBtn = document.getElementById("opiniones-prev");
+const nextBtn = document.getElementById("opiniones-next");
+const dotsContainer = document.getElementById("opinionesDots");
+let indiceActual = 0;
+
+function obtenerEstrellas(puntaje) {
+  const llenas = "★".repeat(Math.floor(puntaje));
+  const media = puntaje % 1 >= 0.5 ? "½" : "";
+  const vacías = "☆".repeat(5 - Math.ceil(puntaje));
+  return `<span class="stars">${llenas}${media}${vacías}</span>`;
+}
+
+function crearTarjetas() {
+  if (!carrusel) return;
+  carrusel.innerHTML = "";
+  usuarios.forEach((usuario) => {
+    const tarjeta = document.createElement("div");
+    tarjeta.className = "user-card";
+    tarjeta.innerHTML = `
+      <img src="${usuario.image}" alt="Foto de ${usuario.name}">
+      <div class="user-name">${usuario.name}</div>
+      <div><strong>Calificación:</strong> ${obtenerEstrellas(
+        usuario.rating
+      )} (${usuario.rating.toFixed(1)})</div>
+      <div class="opinion-text">"${usuario.reviews[0]}"</div>
+    `;
+    carrusel.appendChild(tarjeta);
+  });
+}
+
+function crearDots() {
+  if (!dotsContainer) return;
+  dotsContainer.innerHTML = "";
+  usuarios.forEach((_, idx) => {
+    const dot = document.createElement("button");
+    dot.className = "opiniones-dot" + (idx === indiceActual ? " active" : "");
+    dot.addEventListener("click", () => {
+      indiceActual = idx;
+      actualizarCarrusel();
+    });
+    dotsContainer.appendChild(dot);
+  });
+}
+
+function actualizarCarrusel() {
+  if (!carrusel || !dotsContainer) return;
+  carrusel.style.transform = `translateX(-${indiceActual * 100}%)`;
+  Array.from(dotsContainer.children).forEach((dot, idx) => {
+    dot.classList.toggle("active", idx === indiceActual);
+  });
+}
+
+function moverCarrusel(direccion) {
+  const total = usuarios.length;
+  indiceActual = (indiceActual + direccion + total) % total;
+  actualizarCarrusel();
+}
+
+function autoCarrusel() {
+  setInterval(() => {
+    moverCarrusel(1);
+  }, 8000);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  crearTarjetas();
+  crearDots();
+  actualizarCarrusel();
+  autoCarrusel();
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => moverCarrusel(-1));
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => moverCarrusel(1));
+  }
+});
+
+// ==========================
 // Botón flotante para volver arriba
 // ==========================
 if (btnScrollTop) {
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) {
-      btnScrollTop.style.display = "block";
-    } else {
-      btnScrollTop.style.display = "none";
-    }
-  });
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (window.scrollY > 300) {
+        btnScrollTop.style.display = "block";
+      } else {
+        btnScrollTop.style.display = "none";
+      }
+    },
+    { passive: true }
+  );
 
   btnScrollTop.addEventListener("click", () => {
     window.scrollTo({

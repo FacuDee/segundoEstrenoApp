@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Segundo Estreno</title>
+    <title>Prendas - Segundo Estreno</title>
     <link rel="stylesheet" href="./frontend/css/styles.css" />
     <link rel="stylesheet" href="./frontend/css/prendas.css" />
     <link rel="stylesheet" href="./frontend/css/carrito.css" />
@@ -35,7 +35,7 @@
             </a>
 
             <div class="search-bar">
-              <input type="text" placeholder="Buscar..." />
+              <input type="text" placeholder="Buscar..."/>
               <button class="search-button">
                 <i class="fas fa-search"></i>
               </button>
@@ -131,7 +131,7 @@
     <!-- Fondo oscuro -->
     <div id="overlay" class="overlay hidden"></div>
 
-     <!-- Modal de inicio de sesión -->
+    <!-- Modal de inicio de sesión -->
     <div id="loginModal" class="modal hidden">
       <div class="modal-content">
         <div class="modal-head">
@@ -139,8 +139,44 @@
           <span class="close">x</span>
         </div>
         <form>
-          <input type="text" placeholder="Usuario" required />
-          <input type="password" placeholder="Contraseña" required />
+          <input type="text" placeholder="Usuario" required autocomplete="username"/>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            required
+            autocomplete="current-password"
+          />
+          <p class="question">
+            ¿Todavía no te registraste?
+            <a href="" id="linkToRegister">CREAR CUENTA</a>
+          </p>
+          <button type="submit">Entrar</button>
+        </form>
+      </div>
+    </div>
+
+    <!------------------------------------>
+    <!-- ELEMENTOS QUE ARRANCAN OCULTOS -->
+    <!------------------------------------>
+
+    <!-- Fondo oscuro -->
+    <div id="overlay" class="overlay hidden"></div>
+
+    <!-- Modal de inicio de sesión -->
+    <div id="loginModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-head">
+          <h2>INICIAR SESIÓN</h2>
+          <span class="close">x</span>
+        </div>
+        <form>
+          <input type="text" placeholder="Usuario" required autocomplete="username"/>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            required
+            autocomplete="current-password"
+          />
           <p class="question">
             ¿Todavía no te registraste?
             <a href="" id="linkToRegister">CREAR CUENTA</a>
@@ -158,10 +194,20 @@
           <span class="close">x</span>
         </div>
         <form>
-          <input type="text" placeholder="Nombre de usuario" required />
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Contraseña" required />
-          <input type="password" placeholder="Repetir contraseña" required />
+          <input type="text" placeholder="Nombre de usuario" required autocomplete="username"/>
+          <input type="email" placeholder="Email" required autocomplete="username"/>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            required
+            autocomplete="current-password"
+          />
+          <input
+            type="password"
+            placeholder="Repetir contraseña"
+            required
+            autocomplete="current-password"
+          />
           <p class="question">
             ¿Ya tenés una cuenta?
             <a href="" id="linkToLogin">INICIAR SESIÓN</a>
@@ -192,5 +238,6 @@
     <script src="./frontend/js/main.js"></script>
     <script src="./frontend/js/prendas.js"></script>
     <script src="./frontend/js/carrito.js"></script>
+    <script src="frontend/js/micuenta.js"></script>
   </body>
 </html>
