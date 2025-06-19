@@ -26,7 +26,7 @@ const faqsComprar = [
 const faqsVender = [
   {
     pregunta: "¿Cómo publico un producto en la plataforma?",
-    respuesta: "Para publicar un producto, ve a la sección de vendedores y sigue los pasos para subir imágenes, descripción y precio."
+    respuesta: "Para publicar un producto, ve a tu cuenta y sigue los pasos para subir imágenes, descripción y precio."
   },
   {
     pregunta: "¿Cuáles son los costos y comisiones por vender?",
