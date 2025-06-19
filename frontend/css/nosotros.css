@@ -178,3 +178,46 @@ gi
   font-size: 1rem;
   line-height: 1.5;
 }
+.slider{
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    position: relative;
+}
+.slider .slider-track{
+    display: flex;
+    animation: scroll 15s linear infinite;
+    width: 100%;
+}
+
+.slider .slide-text{
+    width: 100%;
+
+}
+.slider p{
+    font-family: Ubuntu, sans-serif;
+    font-size: 120%;
+    font-weight: 700;
+    
+}
+.slide {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem; /* Espacio entre icono y texto */
+}
+
+.slide i {
+  color: var(--color-primary-dark);
+  font-size: 2rem; /* Tamaño del icono */
+}
+
+
+@keyframes scroll {
+    0% {
+        transform: translateX (0px); /* Desplazamiento horizontal A LA IZQUIERDA */
+    }
+    100% {
+        transform: translateX(1000px); /* Desplazamiento horizontal A LA DERECHA */
+    }
+}
