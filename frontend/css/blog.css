@@ -205,7 +205,7 @@
   }
 }
 
-/* Banner lateral reciclaje */
+/* Banner reciclaje */
 .recycling-banner {
   position: fixed;
   top: 150px;
@@ -219,6 +219,17 @@
   font-family: var(--font-main);
   z-index: 999;
 }
+
+
+
+.video-reciclaje {
+  float: right;
+  width: 300px;
+  height: auto; 
+  margin-left: 1rem;
+  border-radius: 10px;
+}
+
 
 .recycling-banner h3 {
   font-size: 1.3rem;
@@ -247,7 +258,8 @@
   font-size: 1rem;
 }
 
-/* Responsive para banner lateral */
+
+/* Responsive para banner  */
 @media (max-width: 1425px) {
   .recycling-banner {
     position: static;
