@@ -1,311 +1,315 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Blog - Segundo Estreno</title>
-    <link rel="stylesheet" href="./frontend/css/styles.css" />
-    <link rel="stylesheet" href="./frontend/css/blog.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <link
-      rel="icon"
-      href="./frontend/images/shirt-icon.svg"
-      type="image/svg+xml"
-    />
-  </head>
-  <body>
-    <!-- Header -->
-    <header class="header">
-      <div class="header-top">
-        <div class="container">
-          <div class="header-top-content">
-            <a href="./index.html" class="logo">
-              <i class="fas fa-recycle logo-icon"></i>
-              <span>SEGUNDO ESTRENO</span>
-            </a>
-            <div class="search-bar">
-              <input type="text" placeholder="Buscar..." />
-              <button class="search-button">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
-            <div class="account-actions">
-              <a href="#" class="account-link" id="btnRegister">CREAR CUENTA</a>
-              <span class="divider">|</span>
-              <a href="#" class="account-link" id="btnLogin">INICIAR SESIÓN</a>
+  <!DOCTYPE html>
+  <html lang="es">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Blog - Segundo Estreno</title>
+      <link rel="stylesheet" href="./frontend/css/styles.css" />
+      <link rel="stylesheet" href="./frontend/css/blog.css" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      />
+      <link
+        rel="icon"
+        href="./frontend/images/shirt-icon.svg"
+        type="image/svg+xml"
+      />
+    </head>
+    <body>
+      <!-- Header -->
+      <header class="header">
+        <div class="header-top">
+          <div class="container">
+            <div class="header-top-content">
+              <a href="./index.html" class="logo">
+                <i class="fas fa-recycle logo-icon"></i>
+                <span>SEGUNDO ESTRENO</span>
+              </a>
+              <div class="search-bar">
+                <input type="text" placeholder="Buscar..." />
+                <button class="search-button">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+              <div class="account-actions">
+                <a href="#" class="account-link" id="btnRegister">CREAR CUENTA</a>
+                <span class="divider">|</span>
+                <a href="#" class="account-link" id="btnLogin">INICIAR SESIÓN</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <nav class="nav">
-        <div class="container">
-          <ul class="nav-links">
-            <li><a href="./index.html">INICIO</a></li>
-            <li><a href="./prendas.html">PRENDAS</a></li>
-            <li><a href="./nosotros.html">NOSOTROS</a></li>
-            <li><a href="./blog.html">BLOG</a></li>
-            <li class="cart-icon">
-              <a href="./carrito.html"
-                ><i class="fas fa-shopping-bag"></i>
-                <span id="cart-count">0</span></a
-              >
-            </li>
+        <nav class="nav">
+          <div class="container">
+            <ul class="nav-links">
+              <li><a href="./index.html">INICIO</a></li>
+              <li><a href="./prendas.html">PRENDAS</a></li>
+              <li><a href="./nosotros.html">NOSOTROS</a></li>
+              <li><a href="./blog.html">BLOG</a></li>
+              <li class="cart-icon">
+                <a href="./carrito.html"
+                  ><i class="fas fa-shopping-bag"></i>
+                  <span id="cart-count">0</span></a
+                >
+              </li>
+            </ul>
+            <button id="menu-toggle" class="menu-toggle" aria-label="Menú">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </nav>
+      </header>
+  <div class="recycling-banner">
+      <video class="video-reciclaje" src="https://d1whqwkn09gz4t.cloudfront.net/videos/impacto/ando.mp4" autoplay="" loop="" muted="" playsinline="" preload="auto"></video>
+      <div class="recycling-content"> <h3>Beneficios de reciclar ropa</h3>
+          <ul>
+              <li><i class="fas fa-leaf"></i> Reduce el impacto ambiental</li>
+              <li><i class="fas fa-water"></i> Ahorra agua y energía</li>
+              <li><i class="fas fa-tshirt"></i> Disminuye residuos textiles</li>
+              <li><i class="fas fa-hands-helping"></i> Promueve el consumo responsable</li>
+              <li><i class="fas fa-recycle"></i> Da nueva vida a las prendas</li>
           </ul>
-          <button id="menu-toggle" class="menu-toggle" aria-label="Menú">
-            <i class="fas fa-bars"></i>
-          </button>
-        </div>
-      </nav>
-    </header>
-<div class="recycling-banner">
-  <h3>Beneficios de reciclar ropa</h3>
-  <ul>
-    <li><i class="fas fa-leaf"></i> Reduce el impacto ambiental</li>
-    <li><i class="fas fa-water"></i> Ahorra agua y energía</li>
-    <li><i class="fas fa-tshirt"></i> Disminuye residuos textiles</li>
-    <li><i class="fas fa-hands-helping"></i> Promueve el consumo responsable</li>
-    <li><i class="fas fa-recycle"></i> Da nueva vida a las prendas</li>
-  </ul>
-</div>
-</div>
-
-    <main>
-      <section class="blog-intro">
-  <h2>Nuestro Blog : el futuro es circular</h2>
-  <p>
-    Somos un grupo comprometido con la moda circular en Argentina. Creemos que el futuro de la indumentaria pasa por la sustentabilidad, y por eso trabajamos día a día para construir una lugar consciente y responsable.
-  </p>
-  <p>
-    Nos dedicamos a la compra y venta de ropa nueva y usada, asegurándonos de que cada prenda extienda su ciclo de vida al máximo. Cada prenda que pasa por nuestras tienda tiene una nueva oportunidad de ser útil, valiosa y cuidada.
-  </p>
-  <p>
-    Nuestro propósito es claro, y trabajamos con pasión para alcanzarlo: <strong>recircular toda la ropa del mundo</strong>.
-  </p>
-</section>
-
-      <!-- Bloque Ahorro de Agua -->
-      <section class="water-saving-container">
-        <i class="fas fa-globe-americas planet-icon"></i>
-        <div>
-          <h2 style="margin:0 0 0.3rem 0;">Ahorro de agua reciclada</h2>
-          <p style="margin:0; font-size:1.1rem;">
-            En este planeta se ahorran
-            <span id="waterSaved">1,250,000</span> litros de agua, segundo a segundo.
-          </p>
-        </div>
-      </section>
-
-      <section class="blog-container">
-        <!-- Card 1: Taller -->
-       <div class="blog-card">
-          <img src="./frontend/images/Blog/taller.webp" alt="Taller de costura" />
-          <div class="blog-content">
-            <h2 class="blog-title">Taller de Costura Circular</h2>
-            <p class="blog-description">
-              Aprendé a transformar prendas usadas en piezas únicas. Taller gratuito con inscripción previa.
-            </p>
-            <a
-              href="#"  target="_blank"
-              rel="noopener noreferrer"
-              class="blog-button"
-            >
-              Inscribite al Taller
-            </a>
-            <span class="blog-tag">Taller</span>
-          </div>
-        </div>
-
-        <!-- Card 2: Video Economía Circular -->
-        <div class="blog-card">
-          <div class="blog-video">
-            <iframe
-              src="https://www.youtube.com/embed/mvGgdmUkIsQ?start=21"
-              title="Economía Circular en la Moda"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-              referrerpolicy="strict-origin-when-cross-origin"
-            ></iframe>
-          </div>
-          <div class="blog-content">
-            <h2 class="blog-title">Economía Circular en la Moda</h2>
-            <p class="blog-description">
-            Dale una segunda vida a tu ropa
-            Descubrí cómo la economía circular transforma la industria textil. Un ejemplo claro: las "colitas" o scrunchies para el pelo. Al hacerlas artesanalmente con ropa en desuso, no solo creás accesorios únicos, sino que también contribuís a reducir el desperdicio y a una moda más sostenible. Es darle una nueva vida a lo que ya tenés.
-            </p>
-            <span class="blog-tag">Video</span>
-          </div>
-        </div>
-
-        <!-- Card 3: Video en Acción -->
-        <div class="blog-card">
-          <div class="blog-video">
-            <iframe width="1317" height="741" src="https://www.youtube.com/embed/RpkcmtvaEtQ" title="¿Cómo reciclar los 8 millones de toneladas de residuos textiles que se producen cada año en la UE?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-          <div class="blog-content">
-            <h2 class="blog-title">La moda circular en acción</h2>
-            <p class="blog-description">
-              Este video muestra proyectos reales de moda sustentable y cómo impactan positivamente en el planeta.
-            </p>
-            <span class="blog-tag">Video</span>
-          </div>
-        </div>
-
-        <!-- Card 4: Video Explicativo -->
-        <div class="blog-card">
-          <div class="blog-video">
-            <iframe width="1317" height="741" src="https://www.youtube.com/embed/Vlv4FWZA18w" title="Larga vida a la ropa: reciclaje textil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-          <div class="blog-content">
-            <h2 class="blog-title">La moda circular explicada</h2>
-            <p class="blog-description">
-              Un video inspirador que muestra cómo reutilizar ropa puede ser tendencia y salvar el planeta.
-            </p>
-            <span class="blog-tag">Video</span>
-          </div>
-        </div>
-
-        <!-- Card 5: Feria -->
-        <div class="blog-card">
-          <img src="./frontend/images/Blog/feria.png" alt="Feria de moda circular" />
-          <div class="blog-content">
-            <h2 class="blog-title">Feria de Intercambio</h2>
-            <p class="blog-description">
-            Acá te dejamos info de las ferias semanales y mensuales.  Traé tus prendas para vender o intercambiar. ¡Moda sin residuos!
-            </p>
-            <span class="blog-tag">Feria</span>
-          </div>
-        </div>
-
-        <!-- Card 6: Moda circular en los medios -->
-        <div class="blog-card">
-          <img
-            src="https://d1whqwkn09gz4t.cloudfront.net/images/prensa/ambito-2024-03.webp"
-            alt="Moda circular: la tendencia que cambió el paradigma en el consumo de indumentaria."
-          />
-          <div class="blog-content">
-            <h2 class="blog-title">Moda Circular en los Medios</h2>
-            <p class="blog-description">
-              La moda circular se posiciona como una tendencia clave en el consumo consciente. Esta nota de Ámbito Financiero explica cómo el reciclaje de prendas y el intercambio responsable están transformando la industria textil.
-            </p>
-            <a
-              href= "https://www.ambito.com/negocios/la-moda-circular-cambio-el-paradigma-el-consumo-indumentaria-n5969584"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="blog-button"
-            >
-              Leer artículo completo
-            </a>
-            <span class="blog-tag">Noticia</span>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-col redes">
-          <h4>Seguinos</h4>
-          <div class="footer-social">
-            <a href="#" aria-label="Instagram"
-              ><i class="fab fa-instagram"></i
-            ></a>
-            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-          </div>
-        </div>
-        <div class="footer-col contacto">
-          <h4>Contacto</h4>
-          <p><i class="fas fa-envelope"></i> segundoestreno@gmail.com</p>
-        </div>
-        <div class="footer-col legal">
-          <h4><a href="terminos.html">Términos y condiciones</a></h4>
-          <p>Todos los derechos reservados</p>
-        </div>
+        
       </div>
-      <div class="footer-bottom">
-        <span>&copy; SEGUNDO ESTRENO | 2025</span>
-      </div>
-    </footer>
-    
-    <!------------------------------------>
-    <!-- ELEMENTOS QUE ARRANCAN OCULTOS -->
-    <!------------------------------------>
+      
+  </div>
 
-    <!-- Fondo oscuro -->
-    <div id="overlay" class="overlay hidden"></div>
+      <main>
+        <section class="blog-intro">
+    <h2>Nuestro Blog : el futuro es circular</h2>
+    <p>
+      Somos un grupo comprometido con la moda circular en Argentina. Creemos que el futuro de la indumentaria pasa por la sustentabilidad, y por eso trabajamos día a día para construir una lugar consciente y responsable.
+    </p>
+    <p>
+      Nos dedicamos a la compra y venta de ropa nueva y usada, asegurándonos de que cada prenda extienda su ciclo de vida al máximo. Cada prenda que pasa por nuestras tienda tiene una nueva oportunidad de ser útil, valiosa y cuidada.
+    </p>
+    <p>
+      Nuestro propósito es claro, y trabajamos con pasión para alcanzarlo: <strong>recircular toda la ropa del mundo</strong>.
+    </p>
+  </section>
 
-    <!-- Modal de inicio de sesión -->
-    <div id="loginModal" class="modal hidden">
-      <div class="modal-content">
-        <div class="modal-head">
-          <h2>INICIAR SESIÓN</h2>
-          <span class="close">x</span>
-        </div>
-        <form>
-          <input type="text" placeholder="Usuario" required autocomplete="username"/>
-          <input
-            type="password"
-            placeholder="Contraseña"
-            required
-            autocomplete="current-password"
-          />
-          <p class="question">
-            ¿Todavía no te registraste?
-            <a href="" id="linkToRegister">CREAR CUENTA</a>
-          </p>
-          <button type="submit">Entrar</button>
-        </form>
-      </div>
+        <!-- Bloque Ahorro de Agua -->
+        <section class="water-saving-container">
+          <i class="fas fa-globe-americas planet-icon"></i>
+          <div>
+            <h2 style="margin:0 0 0.3rem 0;">Ahorro de agua reciclada</h2>
+            <p style="margin:0; font-size:1.1rem;">
+              En este planeta se ahorran
+              <span id="waterSaved">1,250,000</span> litros de agua, segundo a segundo.
+            </p>
+          </div>
+        </section>
+
+        <section class="blog-container">
+          <!-- Card 1: Taller -->
+        <div class="blog-card">
+    <img src="./frontend/images/Blog/taller.webp" alt="Taller de costura" />
+    <div class="blog-content">
+      <h2 class="blog-title">Taller de Costura Circular</h2>
+      <p class="blog-description">
+        Aprendé a transformar prendas usadas en piezas únicas. Taller gratuito con inscripción previa.
+      </p>
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLScP6sYGI0Dvpm8cHZyiJ7lK_2Ch_V6_CmB0hDAUOhBLGzN0Hw/viewform?usp=dialog"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="blog-button"
+      >
+        Inscribite al Taller
+      </a>
+      <span class="blog-tag">Taller</span>
     </div>
+  </div>
 
-    <!-- Modal de registro -->
-    <div id="registerModal" class="modal hidden">
-      <div class="modal-content">
-        <div class="modal-head">
-          <h2>CREA TU CUENTA</h2>
-          <span class="close">x</span>
+          <!-- Card 2: Video Economía Circular -->
+          <div class="blog-card">
+            <div class="blog-video">
+              <iframe
+                src="https://www.youtube.com/embed/mvGgdmUkIsQ?start=21"
+                title="Economía Circular en la Moda"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                referrerpolicy="strict-origin-when-cross-origin"
+              ></iframe>
+            </div>
+            <div class="blog-content">
+              <h2 class="blog-title">Economía Circular en la Moda</h2>
+              <p class="blog-description">
+              Dale una segunda vida a tu ropa
+              Descubrí cómo la economía circular transforma la industria textil. Un ejemplo claro: las "colitas" o scrunchies para el pelo. Al hacerlas artesanalmente con ropa en desuso, no solo creás accesorios únicos, sino que también contribuís a reducir el desperdicio y a una moda más sostenible. Es darle una nueva vida a lo que ya tenés.
+              </p>
+              <span class="blog-tag">Video</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Video en Acción -->
+          <div class="blog-card">
+            <div class="blog-video">
+              <iframe width="1317" height="741" src="https://www.youtube.com/embed/RpkcmtvaEtQ" title="¿Cómo reciclar los 8 millones de toneladas de residuos textiles que se producen cada año en la UE?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="blog-content">
+              <h2 class="blog-title">La moda circular en acción</h2>
+              <p class="blog-description">
+                Este video muestra proyectos reales de moda sustentable y cómo impactan positivamente en el planeta.
+              </p>
+              <span class="blog-tag">Video</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Video Explicativo -->
+          <div class="blog-card">
+            <div class="blog-video">
+              <iframe width="1317" height="741" src="https://www.youtube.com/embed/Vlv4FWZA18w" title="Larga vida a la ropa: reciclaje textil" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="blog-content">
+              <h2 class="blog-title">La moda circular explicada</h2>
+              <p class="blog-description">
+                Un video inspirador que muestra cómo reutilizar ropa puede ser tendencia y salvar el planeta.
+              </p>
+              <span class="blog-tag">Video</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Feria -->
+          <div class="blog-card">
+            <img src="./frontend/images/Blog/feria.png" alt="Feria de moda circular" />
+            <div class="blog-content">
+              <h2 class="blog-title">Feria de Intercambio</h2>
+              <p class="blog-description">
+              Acá te dejamos info de las ferias semanales y mensuales.  Traé tus prendas para vender o intercambiar. ¡Moda sin residuos!
+              </p>
+              <span class="blog-tag">Feria</span>
+            </div>
+          </div>
+
+          <!-- Card 6: Moda circular en los medios -->
+          <div class="blog-card">
+            <img
+              src="https://d1whqwkn09gz4t.cloudfront.net/images/prensa/ambito-2024-03.webp"
+              alt="Moda circular: la tendencia que cambió el paradigma en el consumo de indumentaria."
+            />
+            <div class="blog-content">
+              <h2 class="blog-title">Moda Circular en los Medios</h2>
+              <p class="blog-description">
+                La moda circular se posiciona como una tendencia clave en el consumo consciente. Esta nota de Ámbito Financiero explica cómo el reciclaje de prendas y el intercambio responsable están transformando la industria textil.
+              </p>
+              <a
+                href= "https://www.ambito.com/negocios/la-moda-circular-cambio-el-paradigma-el-consumo-indumentaria-n5969584"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="blog-button"
+              >
+                Leer artículo completo
+              </a>
+              <span class="blog-tag">Noticia</span>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-container">
+          <div class="footer-col redes">
+            <h4>Seguinos</h4>
+            <div class="footer-social">
+              <a href="#" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+              <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="footer-col contacto">
+            <h4>Contacto</h4>
+            <p><i class="fas fa-envelope"></i> segundoestreno@gmail.com</p>
+          </div>
+          <div class="footer-col legal">
+            <h4><a href="terminos.html">Términos y condiciones</a></h4>
+            <p>Todos los derechos reservados</p>
+          </div>
         </div>
-        <form>
-          <input type="text" placeholder="Nombre de usuario" required autocomplete="username"/>
-          <input type="email" placeholder="Email" required autocomplete="username"/>
-          <input
-            type="password"
-            placeholder="Contraseña"
-            required
-            autocomplete="current-password"
-          />
-          <input
-            type="password"
-            placeholder="Repetir contraseña"
-            required
-            autocomplete="current-password"
-          />
-          <p class="question">
-            ¿Ya tenés una cuenta?
-            <a href="" id="linkToLogin">INICIAR SESIÓN</a>
-          </p>
-          <button type="submit">Registrarse</button>
-        </form>
+        <div class="footer-bottom">
+          <span>&copy; SEGUNDO ESTRENO | 2025</span>
+        </div>
+      </footer>
+      
+      <!------------------------------------>
+      <!-- ELEMENTOS QUE ARRANCAN OCULTOS -->
+      <!------------------------------------>
+
+      <!-- Fondo oscuro -->
+      <div id="overlay" class="overlay hidden"></div>
+
+      <!-- Modal de inicio de sesión -->
+      <div id="loginModal" class="modal hidden">
+        <div class="modal-content">
+          <div class="modal-head">
+            <h2>INICIAR SESIÓN</h2>
+            <span class="close">x</span>
+          </div>
+          <form>
+            <input type="text" placeholder="Usuario" required autocomplete="username"/>
+            <input
+              type="password"
+              placeholder="Contraseña"
+              required
+              autocomplete="current-password"
+            />
+            <p class="question">
+              ¿Todavía no te registraste?
+              <a href="" id="linkToRegister">CREAR CUENTA</a>
+            </p>
+            <button type="submit">Entrar</button>
+          </form>
+        </div>
       </div>
-    </div>
 
-    <!-- Botón flotante up -->
-    <button id="btn-scroll-top" title="Volver arriba">
-      <i class="fas fa-arrow-up"></i>
-    </button>
+      <!-- Modal de registro -->
+      <div id="registerModal" class="modal hidden">
+        <div class="modal-content">
+          <div class="modal-head">
+            <h2>CREA TU CUENTA</h2>
+            <span class="close">x</span>
+          </div>
+          <form>
+            <input type="text" placeholder="Nombre de usuario" required autocomplete="username"/>
+            <input type="email" placeholder="Email" required autocomplete="username"/>
+            <input
+              type="password"
+              placeholder="Contraseña"
+              required
+              autocomplete="current-password"
+            />
+            <input
+              type="password"
+              placeholder="Repetir contraseña"
+              required
+              autocomplete="current-password"
+            />
+            <p class="question">
+              ¿Ya tenés una cuenta?
+              <a href="" id="linkToLogin">INICIAR SESIÓN</a>
+            </p>
+            <button type="submit">Registrarse</button>
+          </form>
+        </div>
+      </div>
 
-    <script src="./frontend/js/main.js"></script>
-    <script src="./frontend/js/blog.js"></script>
-    <script src="./frontend/js/carrito.js"></script>
-    <script src="frontend/js/micuenta.js"></script>
-  </body>
-</html>
+      <!-- Botón flotante up -->
+      <button id="btn-scroll-top" title="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+
+      <script src="./frontend/js/main.js"></script>
+      <script src="./frontend/js/blog.js"></script>
+      <script src="./frontend/js/carrito.js"></script>
+      <script src="frontend/js/micuenta.js"></script>
+    </body>
+  </html>
 
