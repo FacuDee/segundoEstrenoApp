@@ -51,7 +51,7 @@ main {
   border-radius: 16px;
 }
 
-h2 {
+.container-padre h2 {
   width: 100%;
   padding: 0.5rem;
   text-align: center;
