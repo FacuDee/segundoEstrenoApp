@@ -392,6 +392,29 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================
+// pop up
+// ==========================
+
+  // Mostrar popup después de 2 segundos
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.getElementById('popup-descuento').style.display = 'flex';
+    }, 2000);
+  });
+
+  // Cerrar popup al hacer clic en el botón "cerrar"
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('cerrar')) {
+      document.getElementById('popup-descuento').style.display = 'none';
+    }
+  });
+
+//lleva a la tienda el botón
+  document.querySelector('.boton-aprovechar').addEventListener('click', () => {
+    window.location.href = './prendas.html';
+  });
+
+// ==========================
 // Botón flotante para volver arriba
 // ==========================
 if (btnScrollTop) {
