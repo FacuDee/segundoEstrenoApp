@@ -137,6 +137,29 @@ main {
   animation: fav-pop 0.6s;
 }
 
+.mensaje-fav {
+  color: var(--color-primary-dark);
+  font-size: 0.9rem;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+  text-align: left;
+
+  /* Transición de entrada */
+  opacity: 0;
+  transform: translateY(-5px);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Cuando se activa */
+.mensaje-fav.visible {
+  opacity: 1;
+  transform: translateY(0);
+  height: auto;
+}
+
 @keyframes fav-pop {
   0% { transform: scale(1); }
   30% { transform: scale(1.5); }
