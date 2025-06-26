@@ -172,9 +172,8 @@ if (contenedor) {
 
       card.innerHTML = `
   <div class="imagen-contenedor">
-    <img src="./frontend/images/productos/${
-      producto.imagen || "placeholder.jpg"
-    }" alt="${producto.titulo}">
+    <img src="./frontend/images/productos/${producto.imagen || "placeholder.jpg"
+        }" alt="${producto.titulo}">
     <div class="botones-hover">
       <button class="btn-ver-producto" data-producto-id="${idx}" title="Ver producto"><i class="fas fa-eye"></i></button>
       <button title="Agregar al carrito" class="detalle-btn"><i class="fas fa-shopping-bag"></i></button>
@@ -292,15 +291,31 @@ function setupBotonesProducto(productos) {
         e.stopPropagation();
         const producto = productos[idx];
         let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-        carrito.push(producto);
-        localStorage.setItem("carrito", JSON.stringify(carrito));
-        // Abrir el modal
-        const modal = document.getElementById("modal-carrito");
-        if (modal) {
-          modal.classList.add("abierto");
-          if (typeof renderCarrito === "function") renderCarrito();
+
+        // Verificar si el producto ya está en el carrito (por título)
+        const yaEnCarrito = carrito.some((p) => p.titulo === producto.titulo);
+
+        if (!yaEnCarrito) {
+          carrito.push(producto);
+          localStorage.setItem("carrito", JSON.stringify(carrito));
+
+          // Abrir el modal
+          const modal = document.getElementById("modal-carrito");
+          if (modal) {
+            modal.classList.add("abierto");
+            if (typeof renderCarrito === "function") renderCarrito();
+          }
+          if (typeof actualizarCartCount === "function") actualizarCartCount();
+        } else {
+          Swal.fire({
+            icon: "info",
+            title: "¡Ya está en el carrito!",
+            text: "Esta prenda ya fue agregada",
+            confirmButtonText: "OK",
+            timer: 2500,
+            timerProgressBar: true,
+          });
         }
-        if (typeof actualizarCartCount === "function") actualizarCartCount();
       });
     }
 
