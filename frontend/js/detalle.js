@@ -75,19 +75,34 @@ if (producto && typeof productos !== "undefined") {
     productosRelacionadosDiv.innerHTML = "";
   }
 }
-
 // Agregar al carrito desde el button
 const btnAgregar = document.getElementById("btn-agregar-carrito");
 if (btnAgregar) {
-  btnAgregar.addEventListener("click", function() {
+  btnAgregar.addEventListener("click", function () {
     let carrito = getCarrito();
-    carrito.push(producto);
-    setCarrito(carrito);
-    actualizarCartCount();
-    const modal = document.getElementById("modal-carrito");
-    if (modal) {
-      modal.classList.add("abierto");
-      renderCarrito();
+
+    // Evitar duplicados por título
+    const yaEnCarrito = carrito.some((p) => p.titulo === producto.titulo);
+
+    if (!yaEnCarrito) {
+      carrito.push(producto);
+      setCarrito(carrito);
+      actualizarCartCount();
+
+      const modal = document.getElementById("modal-carrito");
+      if (modal) {
+        modal.classList.add("abierto");
+        renderCarrito();
+      }
+    } else {
+      Swal.fire({
+        icon: "info",
+        title: "Ya en el carrito",
+        text: "Este producto ya fue agregado.",
+        confirmButtonText: "Entendido",
+        timer: 2500,
+        timerProgressBar: true,
+      });
     }
   });
 }
