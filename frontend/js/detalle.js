@@ -97,9 +97,9 @@ if (btnAgregar) {
     } else {
       Swal.fire({
         icon: "info",
-        title: "Ya en el carrito",
-        text: "Este producto ya fue agregado.",
-        confirmButtonText: "Entendido",
+        title: "¡Ya está en el carrito!",
+        text: "Esta prenda ya fue agregada",
+        confirmButtonText: "OK",
         timer: 2500,
         timerProgressBar: true,
       });
