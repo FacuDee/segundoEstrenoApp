@@ -23,15 +23,16 @@
   color: var(--color-dark);
   font-family: var(--font-logo);
   margin-bottom: 1.2rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
 .cargar-prenda,
-.mis-favoritos {
+.mis-favoritos, 
+.lista-prendas {
   margin-bottom: 2.5rem;
   background: var(--color-light);
   border-radius: 10px;
-  border: 2px solid var(--color-primary);
+  border: 2px solid var(--color-primary-dark);
   box-shadow: var(--shadow-sm);
   padding: 1.5rem 1.2rem 1.2rem 1.2rem;
 }
@@ -165,6 +166,44 @@
 }
 .btn-cambiar-foto:hover {
   background: var(--color-primary-dark);
+}
+
+.relacionado-botones {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.editar-prenda-btn,
+.eliminar-prenda-btn {
+  background: var(--color-dark);
+  color: var(--color-lighter);
+  font-family: var(--font-main);
+  border: none;
+  border-radius: 8px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.editar-prenda-btn:hover,
+.eliminar-prenda-btn:hover {
+  background-color: var(--color-darker);
+}
+
+input.editando {
+  background-color: #f7eef8;
+  transition: all 0.3s ease;
+}
+
+#categoria {
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  margin: 1rem 0;
+  padding: 5px;
 }
 
 /* Responsive styles */

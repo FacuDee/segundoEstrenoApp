@@ -35,7 +35,11 @@ function renderCarrito() {
       return `
       <div class="carrito-item">
     <div class="carrito-item-info">
-      <img src="./frontend/images/productos/${prod.imagen}" alt="${prod.titulo}">
+      <img src="${
+        prod.imagenBase64
+          ? prod.imagenBase64
+          : `./frontend/images/productos/${prod.imagen}`
+      }" alt="${prod.titulo}">
       <div>
         <strong>${prod.titulo}</strong><br>
         <span>$${prod.precio}</span> - <span>Talle: ${prod.talle}</span>
