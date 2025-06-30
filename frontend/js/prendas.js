@@ -3,7 +3,6 @@ const productos = [
     titulo: "Remera oversize vintage",
     precio: 12000,
     categoria: "remera",
-    destacado: true,
     imagen: "producto1.jpg",
     talle: "L",
     descripcion:
@@ -13,7 +12,6 @@ const productos = [
     titulo: "Zapatillas urbanas",
     precio: 35000,
     categoria: "calzado",
-    destacado: false,
     imagen: "producto2.png",
     talle: "42",
     descripcion:
@@ -23,7 +21,6 @@ const productos = [
     titulo: "Pantalón cargo beige",
     precio: 22000,
     categoria: "pantalones",
-    destacado: true,
     imagen: "producto3.jpg",
     talle: "M",
     descripcion:
@@ -33,7 +30,6 @@ const productos = [
     titulo: "Campera denim clásica",
     precio: 38000,
     categoria: "camperas",
-    destacado: false,
     imagen: "producto4.jpg",
     talle: "L",
     descripcion:
@@ -43,27 +39,15 @@ const productos = [
     titulo: "Top lencero negro",
     precio: 11000,
     categoria: "remera",
-    destacado: true,
     imagen: "producto5.jpg",
     talle: "S",
     descripcion:
       "Top elegante de encaje negro con tirantes finos, ideal para la noche.",
   },
   {
-    titulo: "Vestido floreado midi",
-    precio: 24000,
-    categoria: "vestidos",
-    destacado: true,
-    imagen: "producto16.jpeg",
-    talle: "M",
-    descripcion:
-      "Vestido midi con estampado floral, fresco y femenino para el verano.",
-  },
-  {
     titulo: "Borcegos cuero negro",
     precio: 40000,
     categoria: "calzado",
-    destacado: false,
     imagen: "producto6.jpg",
     talle: "40",
     descripcion:
@@ -73,7 +57,6 @@ const productos = [
     titulo: "Pantalón recto sastrero",
     precio: 23000,
     categoria: "pantalones",
-    destacado: true,
     imagen: "producto7.jpg",
     talle: "S",
     descripcion:
@@ -83,7 +66,6 @@ const productos = [
     titulo: "Campera inflable Kappa",
     precio: 42000,
     categoria: "camperas",
-    destacado: true,
     imagen: "producto8.jpg",
     talle: "XL",
     descripcion:
@@ -93,7 +75,6 @@ const productos = [
     titulo: "Remera gráfica 90s",
     precio: 15500,
     categoria: "remera",
-    destacado: false,
     imagen: "producto9.jpg",
     talle: "M",
     descripcion:
@@ -103,7 +84,6 @@ const productos = [
     titulo: "Zapatillas deportivas",
     precio: 37000,
     categoria: "calzado",
-    destacado: true,
     imagen: "producto10.jpg",
     talle: "42",
     descripcion:
@@ -113,7 +93,6 @@ const productos = [
     titulo: "Pantalón jean roturas",
     precio: 21000,
     categoria: "pantalones",
-    destacado: false,
     imagen: "producto11.png",
     talle: "L",
     descripcion:
@@ -123,7 +102,6 @@ const productos = [
     titulo: "Campera cuero sintético",
     precio: 39500,
     categoria: "camperas",
-    destacado: false,
     imagen: "producto12.jpg",
     talle: "M",
     descripcion:
@@ -133,7 +111,6 @@ const productos = [
     titulo: "Remera básica negra",
     precio: 11500,
     categoria: "remera",
-    destacado: false,
     imagen: "producto13.jpg",
     talle: "S",
     descripcion: "Remera lisa de algodón negra, para cualquier ocasión.",
@@ -142,7 +119,6 @@ const productos = [
     titulo: "Botines gamuza marrón",
     precio: 56000,
     categoria: "calzado",
-    destacado: true,
     imagen: "producto14.jpg",
     talle: "40",
     descripcion:
@@ -152,11 +128,19 @@ const productos = [
     titulo: "Campera vintage deportiva River Plate",
     precio: 51000,
     categoria: "camperas",
-    destacado: true,
     imagen: "producto15.png",
     talle: "L",
     descripcion:
       "Campera retro de River Plate, para hinchas con estilo deportivo y nostálgico.",
+  },
+  {
+    titulo: "Vestido floreado midi",
+    precio: 24000,
+    categoria: "vestidos",
+    imagen: "producto16.jpeg",
+    talle: "M",
+    descripcion:
+      "Vestido midi con estampado floral, fresco y femenino para el verano.",
   },
 ];
 
@@ -172,8 +156,9 @@ if (contenedor) {
 
       card.innerHTML = `
   <div class="imagen-contenedor">
-    <img src="./frontend/images/productos/${producto.imagen || "placeholder.jpg"
-        }" alt="${producto.titulo}">
+    <img src="./frontend/images/productos/${
+      producto.imagen || "placeholder.jpg"
+    }" alt="${producto.titulo}">
     <div class="botones-hover">
       <button class="btn-ver-producto" data-producto-id="${idx}" title="Ver producto"><i class="fas fa-eye"></i></button>
       <button title="Agregar al carrito" class="detalle-btn"><i class="fas fa-shopping-bag"></i></button>

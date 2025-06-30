@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mi Cuenta - Segundo Estreno</title>
     <link rel="stylesheet" href="frontend/css/styles.css" />
+    <link rel="stylesheet" href="frontend/css/prendas.css" />
+    <link rel="stylesheet" href="frontend/css/detalle.css" />
     <link rel="stylesheet" href="frontend/css/blog.css" />
     <link rel="stylesheet" href="frontend/css/micuenta.css" />
     <link
@@ -101,11 +103,35 @@
           <input type="text" placeholder="Nombre de la prenda" required />
           <input type="text" placeholder="Descripción" required />
           <input type="text" placeholder="Talle" required />
+          <select id="categoria" name="categoria" required>
+            <option value="" disabled selected>Seleccioná una categoría</option>
+            <option value="Remera">Remera</option>
+            <option value="Calzado">Calzado</option>
+            <option value="Pantalones">Pantalones</option>
+            <option value="Camperas">Camperas</option>
+            <option value="Vestidos">Vestidos</option>
+            <!-- Algunas categorías adicionales comunes en un marketplace de ropa -->
+            <option value="Accesorios">Accesorios</option>
+            <option value="Buzos">Buzos</option>
+            <option value="Camisas">Camisas</option>
+            <option value="Ropa interior">Ropa interior</option>
+            <option value="Deportiva">Ropa deportiva</option>
+            <option value="Niños">Ropa para niños</option>
+          </select>
           <input type="number" placeholder="Precio" required min="0" />
-          <input type="file" accept="image/*" required />
+          <input type="file" accept="image/*" />
+          <div id="preview-imagen-actual" style="margin: 10px 0"></div>
           <button type="submit">Cargar prenda</button>
         </form>
         <div id="mensaje-carga"></div>
+        
+      </section>
+
+      <section class="lista-prendas">
+        <div id="prendas-cargadas">
+          <h3 class="relacionados-titulo">Tus prendas cargadas</h3>
+          <div class="relacionados-grid" id="grid-prendas-cargadas"></div>
+        </div>
       </section>
 
       <section class="mis-favoritos">
@@ -156,7 +182,12 @@
           <span class="close">x</span>
         </div>
         <form>
-          <input type="text" placeholder="Usuario" required autocomplete="username"/>
+          <input
+            type="text"
+            placeholder="Usuario"
+            required
+            autocomplete="username"
+          />
           <input
             type="password"
             placeholder="Contraseña"
@@ -180,8 +211,18 @@
           <span class="close">x</span>
         </div>
         <form>
-          <input type="text" placeholder="Nombre de usuario" required autocomplete="username"/>
-          <input type="email" placeholder="Email" required autocomplete="username"/>
+          <input
+            type="text"
+            placeholder="Nombre de usuario"
+            required
+            autocomplete="username"
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            required
+            autocomplete="username"
+          />
           <input
             type="password"
             placeholder="Contraseña"
