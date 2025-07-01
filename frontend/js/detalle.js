@@ -1,19 +1,28 @@
 const producto = JSON.parse(localStorage.getItem("productoSeleccionado"));
 const productosRelacionadosDiv = document.getElementById("productosRelacionados");
+const detalleProductoDiv = document.getElementById("detalleProducto");
 if (producto) {
-  document.getElementById("detalleProducto").innerHTML = `
+  const imagenSrc = producto.imagenBase64
+    ? producto.imagenBase64
+    : `./frontend/images/productos/${producto.imagen}`;
+
+  detalleProductoDiv.innerHTML = `
     <div class="detalle-container">
       <div class="detalle-img">
-        <img src="./frontend/images/productos/${producto.imagen}" alt="${producto.titulo}">
+        <img src="${imagenSrc}" alt="${producto.titulo}">
         <div class="detalle-descripcion-hover">
-          ${producto.descripcion}
+          ${producto.descripcion || "Sin descripción"}
         </div>
       </div>
       <div class="detalle-info">
         <h2>${producto.titulo}</h2>
         <div class="detalle-precio">$${producto.precio}</div>
-        <p><strong>Categoría:</strong> ${producto.categoria}</p>
-        <p><strong>Talle:</strong> ${producto.talle}</p>
+        ${
+          producto.categoria
+            ? `<p><strong>Categoría:</strong> ${producto.categoria}</p>`
+            : ""
+        }
+        <p><strong>Talle:</strong> ${producto.talle || "No especificado"}</p>
         <div class="detalle-btns">
           <a href="prendas.html" class="detalle-btn">Volver</a>
           <button class="detalle-btn" id="btn-agregar-carrito">Agregar al carrito</button>
@@ -23,8 +32,7 @@ if (producto) {
     <div id="banner-publicidad"></div>
   `;
 } else {
-  document.getElementById("detalleProducto").innerHTML =
-    "<p>No se encontró el producto.</p>";
+  detalleProductoDiv.innerHTML = "<p>No se encontró el producto.</p>";
 }
 
 // Insertar el banner publicitario
@@ -75,19 +83,34 @@ if (producto && typeof productos !== "undefined") {
     productosRelacionadosDiv.innerHTML = "";
   }
 }
-
 // Agregar al carrito desde el button
 const btnAgregar = document.getElementById("btn-agregar-carrito");
 if (btnAgregar) {
-  btnAgregar.addEventListener("click", function() {
+  btnAgregar.addEventListener("click", function () {
     let carrito = getCarrito();
-    carrito.push(producto);
-    setCarrito(carrito);
-    actualizarCartCount();
-    const modal = document.getElementById("modal-carrito");
-    if (modal) {
-      modal.classList.add("abierto");
-      renderCarrito();
+
+    // Evitar duplicados por título
+    const yaEnCarrito = carrito.some((p) => p.titulo === producto.titulo);
+
+    if (!yaEnCarrito) {
+      carrito.push(producto);
+      setCarrito(carrito);
+      actualizarCartCount();
+
+      const modal = document.getElementById("modal-carrito");
+      if (modal) {
+        modal.classList.add("abierto");
+        renderCarrito();
+      }
+    } else {
+      Swal.fire({
+        icon: "info",
+        title: "¡Ya está en el carrito!",
+        text: "Esta prenda ya fue agregada",
+        confirmButtonText: "OK",
+        timer: 2500,
+        timerProgressBar: true,
+      });
     }
   });
 }

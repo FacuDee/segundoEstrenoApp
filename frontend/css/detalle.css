@@ -184,10 +184,11 @@
 .relacionado-ver-btn {
   background: var(--color-dark);
   color: var(--color-lighter);
+  font-family: var(--font-main);
   border: none;
   border-radius: 8px;
   padding: 0.5rem 1.2rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   transition: background var(--transition-fast), transform var(--transition-fast);
