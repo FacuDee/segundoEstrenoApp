@@ -10,7 +10,7 @@
 Accedé a la carpeta de documentación completa en Google Drive:
 🔗 [Ver documentación](https://drive.google.com/drive/folders/1RyvozNMGtN-Vp32IwOnOkx_btwdP2gL-)
 
-## 📂 Presentación
+## 🖥️ Presentación
 Link a la presentación del proyecto:
 🔗 [Ver presentación](https://gamma.app/docs/Segundo-Estreno-gt28i25c38ine3n?mode=doc)
 
