@@ -203,16 +203,14 @@
   z-index: 999;
 }
 
-
-
 .video-reciclaje {
   float: right;
   width: 300px;
   height: auto; 
   margin-left: 1rem;
+  margin-bottom: 1rem;
   border-radius: 10px;
 }
-
 
 .recycling-banner h3 {
   font-size: 1.3rem;
