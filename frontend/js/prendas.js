@@ -155,23 +155,23 @@ if (contenedor) {
       card.dataset.productoId = idx; // Usamos el índice como ID
 
       card.innerHTML = `
-  <div class="imagen-contenedor">
-    <img src="./frontend/images/productos/${
-      producto.imagen || "placeholder.jpg"
-    }" alt="${producto.titulo}">
-    <div class="botones-hover">
-      <button class="btn-ver-producto" data-producto-id="${idx}" title="Ver producto"><i class="fas fa-eye"></i></button>
-      <button title="Agregar al carrito" class="detalle-btn"><i class="fas fa-shopping-bag"></i></button>
-      <button title="Agregar a favorito" class="btn-favorito"><i class="fas fa-heart"></i></button>
-    </div>
-  </div>
-  <div class="contenido">
-    <h3>${producto.titulo}</h3>
-    <p><strong>Precio:</strong> $${producto.precio}</p>
-    <p><strong>Talle:</strong> ${producto.talle}</p>
-    <div class="mensaje-fav">Se agregó a tus favoritos</div>
-  </div>
-`;
+      <div class="imagen-contenedor">
+        <img src="./frontend/images/productos/${
+          producto.imagen || "placeholder.jpg"
+        }" alt="${producto.titulo}">
+        <div class="botones-hover">
+          <button class="btn-ver-producto" data-producto-id="${idx}" title="Ver producto"><i class="fas fa-eye"></i></button>
+          <button title="Agregar al carrito" class="detalle-btn"><i class="fas fa-shopping-bag"></i></button>
+          <button title="Agregar a favorito" class="btn-favorito"><i class="fas fa-heart"></i></button>
+        </div>
+      </div>
+      <div class="contenido">
+        <h3>${producto.titulo}</h3>
+        <p><strong>Precio:</strong> $${producto.precio}</p>
+        <p><strong>Talle:</strong> ${producto.talle}</p>
+        <div class="mensaje-fav">Se agregó a tus favoritos</div>
+      </div>
+      `;
 
       contenedor.appendChild(card);
     });
