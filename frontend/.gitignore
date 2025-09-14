@@ -1,7 +1,13 @@
 # =======================
-# Compilación de NestJS
+# Node modules
+# =======================
+/node_modules
+
+# =======================
+# Build outputs
 # =======================
 /dist
+/build
 
 # =======================
 # Entornos de desarrollo
