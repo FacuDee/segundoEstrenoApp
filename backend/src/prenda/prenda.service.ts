@@ -1,11 +1,23 @@
 // src/prenda/prenda.service.ts
-
 import { Injectable } from '@nestjs/common';
 import { CreatePrendaDto } from './dto/create-prenda.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Prenda } from './prenda.entity';
 
 @Injectable()
 export class PrendaService {
-  // Método para crear una prenda
+  constructor(
+        @InjectRepository(Prenda)
+        private readonly prendaRepository: Repository<Prenda>,
+    ) {}
+
+    async findAll(): Promise<Prenda[]> {
+        return this.prendaRepository.find();
+    }
+    async findOne(id: number): Promise<Prenda | null> {
+        return this.prendaRepository.findOneBy({ id });
+    }
   async create(createPrendaDto: CreatePrendaDto) {
     console.log('Datos recibidos y listos para guardar en la base de datos:', createPrendaDto);
     return { mensaje: 'Prenda subida con éxito!' };

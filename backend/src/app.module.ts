@@ -8,15 +8,17 @@ import { CategoriaModule } from './categoria/categoria.module';
 import { CarritoModule } from './carrito/carrito.module';
 import { TransaccionModule } from './transaccion/transaccion.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'admin08_sql',
+      password: 'root',
       database: 'segundo_estreno',
       autoLoadEntities: true,
       synchronize: false,
