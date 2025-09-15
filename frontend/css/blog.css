@@ -65,14 +65,12 @@
 }
 
 @media (max-width: 600px) {
-
   .blog-card img,
   .blog-video {
     height: 150px;
     border-radius: 12px 12px 0 0;
   }
 }
-
 .blog-card:hover img {
   filter: brightness(0.85);
 }
@@ -136,8 +134,7 @@
 /* Video responsive */
 .blog-video {
   position: relative;
-  padding-bottom: 56.25%;
-  /* Aspect ratio 16:9 */
+  padding-bottom: 56.25%; /* Aspect ratio 16:9 */
   height: 0;
   overflow: hidden;
   border-radius: 16px 16px 0 0;
@@ -209,7 +206,7 @@
 .video-reciclaje {
   float: right;
   width: 300px;
-  height: auto;
+  height: auto; 
   margin-left: 1rem;
   margin-bottom: 1rem;
   border-radius: 10px;
@@ -262,9 +259,6 @@
     align-items: start;
     padding-left: 0;
   }
-<<<<<<< HEAD
-}
-=======
 }
 
 @media (max-width: 1100px) {
@@ -282,4 +276,3 @@
     font-size: 0.98rem;
   }
 }
->>>>>>> developer
