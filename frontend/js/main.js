@@ -392,27 +392,34 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================
-// pop up
+// Pop Up
 // ==========================
 
-  // Mostrar popup después de 2 segundos
-  window.addEventListener('DOMContentLoaded', () => {
+// Mostrar popup solo si existe en el DOM de la vista
+window.addEventListener("DOMContentLoaded", () => {
+  const popup = document.getElementById("popup-descuento");
+
+  if (popup) {
     setTimeout(() => {
-      document.getElementById('popup-descuento').style.display = 'flex';
+      popup.style.display = "flex";
     }, 2000);
-  });
 
-  // Cerrar popup al hacer clic en el botón "cerrar"
-  document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('cerrar')) {
-      document.getElementById('popup-descuento').style.display = 'none';
-    }
-  });
+    // Cerrar popup al hacer clic en el botón "cerrar"
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("cerrar")) {
+        popup.style.display = "none";
+      }
+    });
+  }
+});
 
-//lleva a la tienda el botón
-  document.querySelector('.boton-aprovechar').addEventListener('click', () => {
-    window.location.href = './prendas.html';
+// Lleva a la Tienda el botón
+const boton = document.querySelector(".boton-aprovechar");
+if (boton) {
+  boton.addEventListener("click", () => {
+    window.location.href = "./prendas.html";
   });
+}
 
 // ==========================
 // Botón flotante para volver arriba
