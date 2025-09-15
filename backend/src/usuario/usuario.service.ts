@@ -22,4 +22,8 @@ export class UsuarioService {
     const usuario = this.usuarioRepository.create(usuarioData);
     return await this.usuarioRepository.save(usuario);
   }
+
+  async findByEmail(email: string): Promise<Usuario | null> {
+    return await this.usuarioRepository.findOne({ where: { email } });
+  }
 }
