@@ -1,19 +1,26 @@
-import { IsString, IsNumber, IsOptional } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsBoolean } from 'class-validator';
 
 export class CreatePrendaDto {
   @IsString()
-  @IsOptional()
-  nombre: string;
+  titulo: string;
 
   @IsNumber()
-  @IsOptional()
   precio: number;
 
   @IsString()
-  @IsOptional()
   descripcion: string;
 
   @IsString()
   @IsOptional()
-  color: string;
+  imagen_url?: string;
+
+  @IsBoolean()
+  @IsOptional()
+  disponible?: boolean;
+
+  @IsNumber()
+  categoria: number; // ID de la categoría
+
+  // @IsNumber()
+  // vendedor?: number; // si tienes relación con vendedor
 }
