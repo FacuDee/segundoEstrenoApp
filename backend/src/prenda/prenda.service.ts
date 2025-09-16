@@ -8,31 +8,57 @@ import { Prenda } from './prenda.entity';
 @Injectable()
 export class PrendaService {
   constructor(
-        @InjectRepository(Prenda)
-        private readonly prendaRepository: Repository<Prenda>,
-    ) {}
+    @InjectRepository(Prenda)
+    private readonly prendaRepository: Repository<Prenda>,
+  ) {}
 
-    async findAll(): Promise<Prenda[]> {
-        return this.prendaRepository.find();
-    }
-    async findOne(id: number): Promise<Prenda | null> {
-        return this.prendaRepository.findOneBy({ id });
-    }
+  async findAll(): Promise<Prenda[]> {
+  return this.prendaRepository.find({ relations: ['categoria'] });
+  }
+  async findOne(id: number): Promise<Prenda | null> {
+    return this.prendaRepository.findOneBy({ id });
+  }
   async create(createPrendaDto: CreatePrendaDto) {
-    console.log('Datos recibidos y listos para guardar en la base de datos:', createPrendaDto);
-    return { mensaje: 'Prenda subida con éxito!' };
+    // Asume que categoria viene como ID en el DTO
+    const prenda = this.prendaRepository.create({
+      titulo: createPrendaDto.titulo,
+      descripcion: createPrendaDto.descripcion,
+      precio: createPrendaDto.precio,
+      imagen_url: createPrendaDto.imagen_url,
+      disponible: true, // o usa createPrendaDto.disponible si lo agregas al DTO
+      categoria: { id: createPrendaDto.categoria },
+      // vendedor: { id: createPrendaDto.vendedor }, // si tienes relación con vendedor
+    });
+    return await this.prendaRepository.save(prenda);
   }
 
   // Método para actualizar una prenda
   async update(id: string, updatePrendaDto: CreatePrendaDto) {
-    console.log(`Actualizando la prenda con ID: ${id}`);
-    console.log('Datos a actualizar:', updatePrendaDto);
-    return { mensaje: `Prenda con ID ${id} actualizada.` };
+    const prendaId = Number(id);
+    const prenda = await this.prendaRepository.findOne({ where: { id: prendaId } });
+    if (!prenda) {
+      throw new Error(`Prenda con ID ${id} no encontrada.`);
+    }
+    await this.prendaRepository.update(prendaId, {
+      titulo: updatePrendaDto.titulo,
+      descripcion: updatePrendaDto.descripcion,
+      precio: updatePrendaDto.precio,
+      imagen_url: updatePrendaDto.imagen_url,
+      disponible: updatePrendaDto.disponible ?? true,
+      categoria: { id: updatePrendaDto.categoria },
+      // vendedor: { id: updatePrendaDto.vendedor },
+    });
+    return await this.prendaRepository.findOne({ where: { id: prendaId }, relations: ['categoria'] });
   }
 
   // Método para eliminar una prenda
   async remove(id: string) {
-    console.log(`Eliminando la prenda con ID: ${id}`);
-    return { mensaje: `Prenda con ID ${id} eliminada.` };
+    const prendaId = Number(id);
+    const result = await this.prendaRepository.delete(prendaId);
+    if (result.affected && result.affected > 0) {
+      return { mensaje: `Prenda con ID ${id} eliminada.` };
+    } else {
+      return { mensaje: `Prenda con ID ${id} no encontrada o ya eliminada.` };
+    }
   }
 }
