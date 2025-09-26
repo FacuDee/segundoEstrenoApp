@@ -1,0 +1,131 @@
+/*Footer*/
+.footer {
+  background: linear-gradient(180deg, var(--color-darker), #55385a);
+  color: var(--color-lighter);
+  padding: 2.5rem 0 0 0;
+  font-family: var(--font-main);
+  margin-top: 3rem;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  padding: 0 2rem;
+}
+
+.footer-col {
+  min-width: 180px;
+  margin-bottom: 2rem;
+}
+
+.footer-col h4 {
+  font-family: var(--font-logo);
+  color: var(--color-accent);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
+}
+
+.footer-col p,
+.footer-col a {
+  color: var(--color-light);
+  font-size: 0.98rem;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.footer-social a {
+  color: var(--color-light);
+  font-size: 1.7rem;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.footer-social a:hover {
+  color: var(--color-primary);
+  transform: scale(1.15);
+}
+
+.footer-bottom {
+  /* border-top: 5px solid var(--color-primary); */
+  text-align: center;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--color-darker);
+  background: var(--color-light);
+  letter-spacing: 0.05em;
+}
+
+/* Scroll-up */
+#btn-scroll-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  display: none;
+  background-color: var(--color-text);
+  color: var(--color-lighter);
+  border: none;
+  border-radius: 50%;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease;
+}
+
+#btn-scroll-top:hover {
+  background-color: var(--color-text-light);
+}
+
+/* ========================= */
+/* ===== Media Queries ===== */
+/* ========================= */
+
+/* ===== 992px ===== */
+@media (max-width: 992px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  .footer-col {
+    min-width: 0;
+    width: 100%;
+    text-align: center;
+  }
+  .footer-social {
+    justify-content: center;
+  }
+}
+
+/* ===== 768px ===== */
+@media (max-width: 768px) {
+  .contenedor-footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ===== 480px ===== */
+@media (max-width: 480px) {
+  /* No hay reglas específicas de footer en este breakpoint */
+}

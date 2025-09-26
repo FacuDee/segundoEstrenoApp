@@ -1,0 +1,119 @@
+/* Modals login y register */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  z-index: 900;
+  transition: opacity var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(45deg, var(--color-primary), rgb(188, 247, 182));
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+  width: 90%;
+  max-width: 400px;
+  font-family: var(--font-main);
+  color: var(--color-text);
+  transition: all var(--transition-normal);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-head h2 {
+  font-size: large;
+  color: var(--color-darker);
+  margin-bottom: 2rem;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close {
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--color-darker);
+  transition: color var(--transition-normal);
+}
+
+.close:hover {
+  color: var(--color-dark);
+}
+
+.question {
+  font-size: small;
+  text-align: left;
+}
+
+.link-btn {
+  background: none;
+  border: 2px solid var(--color-darker);
+  color: var(--color-darker);
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1em;
+  margin-left: 0.5em;
+  padding: 0;
+  transition: all var(--transition-normal);
+}
+
+.link-btn:hover {
+  color: var(--color-dark);
+  font-weight: bold;
+}
+
+.modal input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--color-primary-dark);
+  border-radius: 8px;
+  background-color: var(--color-lighter);
+  font-family: var(--font-main);
+  color: var(--color-text);
+  transition: var(--transition-fast);
+}
+.modal input:focus {
+  outline: none;
+  border-color: var(--color-primary-dark);
+}
+
+.modal button {
+  width: 100%;
+  margin: 1rem auto;
+  display: block;
+  padding: 0.75rem;
+  background-color: var(--color-dark);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font-main);
+  transition: all var(--transition-normal);
+}
+.modal button:hover {
+  color: var(--color-light);
+  background-color: var(--color-darker);
+}
