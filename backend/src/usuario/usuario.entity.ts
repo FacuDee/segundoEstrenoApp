@@ -6,16 +6,13 @@ export class Usuario {
   id: number;
 
   @Column()
-  nombre: string;
+  username: string;
 
   @Column({ unique: true })
   email: string;
 
   @Column()
   password: string;
-
-  @Column({ nullable: true })
-  direccion: string;
 
   @Column({ type: 'enum', enum: ['comprador', 'vendedor', 'admin'], default: 'comprador' })
   rol: string;
