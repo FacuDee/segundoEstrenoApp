@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 import AccountActions from "./AccountActions";
+import UserMenu from "./UserMenu";
+import { jwtDecode } from "jwt-decode";
 import NavLinks from "./NavLinks";
 import { FaBars, FaTimes } from "react-icons/fa";
 import LoginModal from "../modals/LoginModal";
@@ -12,6 +14,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [user, setUser] = useState(null);
 
   // Cierra el menú al hacer click en un link
   const handleNavClick = () => setMenuOpen(false);
@@ -32,6 +35,21 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleOverlayClick);
   });
 
+  // Leer usuario del token
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+  const decoded = jwtDecode(token);
+        setUser(decoded);
+      } catch {
+        setUser(null);
+      }
+    } else {
+      setUser(null);
+    }
+  }, [showLogin, showRegister]);
+
   // Handlers para abrir/cerrar modales
   const openLogin = () => {
     setShowLogin(true);
@@ -46,6 +64,11 @@ const Header = () => {
     setShowRegister(false);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+  };
+
   return (
     <header className="header">
       <div className="header-top">
@@ -53,7 +76,11 @@ const Header = () => {
           <div className="header-top-content">
             <Logo />
             <SearchBar />
-            <AccountActions onLogin={openLogin} onRegister={openRegister} />
+            {user ? (
+              <UserMenu user={user} onLogout={handleLogout} />
+            ) : (
+              <AccountActions onLogin={openLogin} onRegister={openRegister} />
+            )}
           </div>
         </div>
       </div>
