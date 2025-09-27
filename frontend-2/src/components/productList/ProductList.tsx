@@ -1,6 +1,6 @@
 import './productList.css'
 import { useState } from 'react'
-import SelectorDeCategoria from './SelectorDeCategoria'
+import Filtros from './Filtros'
 
     export const productos = [
   {
@@ -162,9 +162,9 @@ function ProductList() {
     };
 
     return (
-        
+
       <div>
-       <SelectorDeCategoria productos={productos} onCategoriaChange={handleCategoriaChange} />
+        <Filtros productos={productos} handleCategoriaChange={handleCategoriaChange} />
       <h2> Mostrando productos de la categoria {prendas[0]?.categoria || "todas"}</h2>
          <ul className='product-list'>
       {prendas.map((producto, index) => (

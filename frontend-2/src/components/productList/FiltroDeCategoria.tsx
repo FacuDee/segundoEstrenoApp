@@ -6,18 +6,17 @@ interface Producto {
   categoria: string;
 }
 
-interface SelectorDeCategoriaProps {
+interface FiltroDeCategoriaProps {
   productos: Producto[];
   onCategoriaChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
-const capitalizar = (texto: string): string => {
+const capitalizar = (texto: string) => {
     if (!texto) return ''; 
     return texto.charAt(0).toUpperCase() + texto.slice(1);
 };
 
-function selectorDeCategoria({ productos, onCategoriaChange }: SelectorDeCategoriaProps) {
-const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
-  
+function FiltroDeCategoria({ productos, onCategoriaChange }: FiltroDeCategoriaProps) {
+  const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
 
   return (
     <div>
@@ -37,5 +36,5 @@ const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
 
 
 
-export default selectorDeCategoria
+export default FiltroDeCategoria
 
