@@ -40,6 +40,13 @@ main {
   background-color: var(--color-dark);
 }
 
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--color-darker);
+  margin-top: 2rem;
+}
+
 .product-list{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -58,6 +65,7 @@ main {
 .imagen-contenedor {
   position: relative;
 }
+
 .imagen-contenedor img {
   width: 100%;
   display: block;
