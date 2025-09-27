@@ -16,7 +16,7 @@ const ProductList = () => {
       .catch(() => setLoading(false));
   }, []);
 
-  if (loading) return <div>Cargando prendas...</div>;
+  if (loading) return <div className="loading">Cargando prendas...</div>;
 
   return (
     <div className="product-list">

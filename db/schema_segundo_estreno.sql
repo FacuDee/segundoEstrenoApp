@@ -40,6 +40,7 @@ CREATE TABLE `prendas` (
   `id_prenda` INT AUTO_INCREMENT PRIMARY KEY,
   `titulo` VARCHAR(200) NOT NULL,
   `descripcion` TEXT,
+  `talle` VARCHAR(50) NOT NULL,
   `precio` DECIMAL(10,2) NOT NULL,
   `imagen_url` VARCHAR(500),
   `disponible` TINYINT(1) NOT NULL DEFAULT 1,

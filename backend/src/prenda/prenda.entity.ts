@@ -13,6 +13,9 @@ export class Prenda {
   @Column()
   descripcion: string;
 
+  @Column()
+  talle: string;
+
   @Column('decimal', { precision: 10, scale: 2 })
   precio: number;
 
