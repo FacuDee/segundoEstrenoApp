@@ -1,4 +1,7 @@
 //import { useState } from 'react'
+import Header from './components/header/Header'
+import Footer from './components/footer/Footer'
+import ProductList from './components/productList/ProductList'
 import './App.css'
 import Header from './components/header/Header.jsx'
 import Footer from './components/footer/Footer.jsx'
@@ -7,15 +10,23 @@ import FAQ from './components/FaQ/FAQ.jsx'
 
 
 function App() {
-  //const [count, setCount] = useState(0)
+
+
 
   return (
     <>
       <Header />
+
+       
+      <ProductList  />
+
+
       <ProductList />
       <FAQ />
+
       <Footer />
     </>
+
   )
 }
 
