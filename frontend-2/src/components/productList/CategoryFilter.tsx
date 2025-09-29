@@ -2,20 +2,16 @@ import React from 'react'
 
 
 
-interface Producto {
+type prendas = {
   categoria: string;
 }
 
-interface FiltroDeCategoriaProps {
-  productos: Producto[];
-  onCategoriaChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-}
 const capitalizar = (texto: string) => {
     if (!texto) return ''; 
     return texto.charAt(0).toUpperCase() + texto.slice(1);
 };
 
-function FiltroDeCategoria({ productos, onCategoriaChange }: FiltroDeCategoriaProps) {
+function CategoryFilter({ productos, onCategoriaChange }: { productos: prendas[], onCategoriaChange: (e: React.ChangeEvent<HTMLSelectElement>) => void }) {
   const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
 
   return (
@@ -36,5 +32,5 @@ function FiltroDeCategoria({ productos, onCategoriaChange }: FiltroDeCategoriaPr
 
 
 
-export default FiltroDeCategoria
+export default CategoryFilter;
 
