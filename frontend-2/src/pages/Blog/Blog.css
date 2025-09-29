@@ -1,0 +1,283 @@
+/* src/pages/Blog/Blog.css */
+
+/* --- BLOG INTRO --- */
+.blog-intro {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  color: var(--color-text);
+  background: var(--color-lighter);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.blog-intro h2 {
+  text-align: center;
+  color: var(--color-darker);
+  font-family: var(--font-logo);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.blog-intro p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* --- BLOG CONTAINER (GRID) --- */
+.blog-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 700px) {
+  .blog-container {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    padding: 0 0.2rem;
+  }
+}
+
+/* --- BLOG CARD --- */
+.blog-card {
+  background: var(--color-lighter);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s var(--transition-normal),
+    box-shadow 0.3s var(--transition-normal);
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.blog-card img,
+.blog-video {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+  background: #e6f4ea;
+}
+
+@media (max-width: 600px) {
+  .blog-card img,
+  .blog-video {
+    height: 150px;
+    border-radius: 12px 12px 0 0;
+  }
+}
+.blog-card:hover img {
+  filter: brightness(0.85);
+}
+
+.blog-content {
+  padding: 1rem 1.5rem 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.blog-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--color-darker);
+  font-family: var(--font-logo);
+}
+
+.blog-description {
+  font-size: 1rem;
+  color: var(--color-text-light);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.blog-tag {
+  background-color: #e0f2f1;
+  color: #00695c;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 12px;
+  display: inline-block;
+  font-weight: 600;
+  margin-top: 1rem;
+  align-self: flex-start;
+}
+
+.blog-button {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  background-color: #00796b;
+  color: white;
+  border-radius: 24px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-bottom: 0.5rem;
+  align-self: flex-start;
+  box-shadow: 0 4px 8px rgba(0, 121, 107, 0.4);
+}
+
+.blog-button:hover {
+  background-color: #004d40;
+  box-shadow: 0 6px 12px rgba(0, 77, 64, 0.6);
+}
+
+/* --- VIDEO RESPONSIVE --- */
+.blog-video {
+  position: relative;
+  padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+  background: #e6f4ea;
+}
+
+.blog-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* --- CONTENEDOR AHORRO DE AGUA --- */
+.water-saving-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #e0f7fa;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  max-width: 800px;
+  margin: 1rem auto 3rem;
+  box-shadow: 0 4px 10px rgba(0, 150, 136, 0.2);
+  font-family: var(--font-main);
+}
+
+.planet-icon {
+  font-size: 5rem;
+  color: #004d40;
+  flex-shrink: 0;
+}
+
+.water-saving-container h2 {
+  margin: 0;
+  font-weight: 600;
+  color: #004d40;
+}
+
+.water-saving-container p {
+  margin: 0.3rem 0 0;
+  font-size: 1.1rem;
+  color: #00695c;
+}
+
+#waterSaved {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #004d40;
+}
+
+/* --- BANNER RECICLAJE (POSICIONAMIENTO FIJO) --- */
+.recycling-banner {
+  position: fixed;
+  top: 150px;
+  left: 50px;
+  width: 340px;
+  background-color: #e0f7fa;
+  color: #004d40;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  font-family: var(--font-main);
+  z-index: 999;
+}
+
+.video-reciclaje {
+  float: right;
+  width: 300px;
+  height: auto; 
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+}
+
+.recycling-banner h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: var(--color-darker);
+}
+
+.recycling-banner ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recycling-banner li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.7rem;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.recycling-banner li i {
+  margin-right: 1rem;
+  color: #00695c;
+  font-size: 1rem;
+}
+
+
+/* --- RESPONSIVE GENERAL --- */
+@media (max-width: 1425px) {
+  .recycling-banner {
+    position: static; /* Cambia a estático para que fluya con el contenido */
+    width: auto;
+    max-width: 800px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    left: unset;
+    right: unset;
+    margin: 0.5rem auto;
+  }
+
+  .recycling-banner ul {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  main {
+    padding: 0 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .water-saving-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0.7rem;
+    max-width: 98vw;
+    font-size: 0.98rem;
+  }
+}
