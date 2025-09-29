@@ -1,0 +1,93 @@
+
+/* Preguntas comprar y vender + métodos de pago*/
+.main-container {
+  background: linear-gradient(180deg, var(--color-primary), var(--color-light));
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.payment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.payment-item img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(100%) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+  transition: transform var(--transition-normal);
+  cursor: pointer;
+}
+
+.payment-item img:hover {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+.seller-info,
+.payment-info {
+  background-color: transparent;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 30%;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.seller-info h2,
+.payment-info h2 {
+  font-family: var(--font-logo);
+  color: var(--color-darker);
+  margin: 2rem auto;
+}
+
+.payment-info img {
+  width: 50%;
+  margin: auto;
+  max-width: 100%;
+}
+
+.faq-title {
+  color: var(--color-text);
+  font-family: var(--font-main);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.5rem;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.faq-arrow {
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s;
+}
+
+.faq-title.active .faq-arrow {
+  transform: rotate(180deg);
+}
+
+.faq-content {
+  color: var(--color-light);
+  background: linear-gradient(135deg, var(--color-dark), var(--color-darker));
+  padding: 10px;
+  border-left: 5px solid var(--color-accent);
+  margin: 5px 0;
+  border-radius: 5px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
