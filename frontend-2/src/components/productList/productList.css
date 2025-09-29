@@ -40,6 +40,13 @@ main {
   background-color: var(--color-dark);
 }
 
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--color-darker);
+  margin-top: 2rem;
+}
+
 .product-list{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -53,6 +60,10 @@ main {
   position: relative;
   width: 100%;
   overflow: hidden;
+}
+
+.imagen-contenedor {
+  position: relative;
 }
 
 .imagen-contenedor img {
@@ -93,25 +104,26 @@ main {
 }
 
 /* Botones fijos con opacidad */
-.botones-hover {
+.btns-hover {
   cursor: pointer;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 10px;
   justify-content: center;
   padding: 10px;
   opacity: 0;
   transition: opacity 0.3s ease;
+  z-index: 2;
 }
 
-.card-producto:hover .botones-hover {
+.card-producto:hover .btns-hover {
   opacity: 1;
 }
 
-.botones-hover button {
+.btns-hover button {
   padding: 10px 12px;
   border: none;
   border-radius: 50%;
@@ -125,7 +137,7 @@ main {
   transition: opacity 0.3s ease;
 }
 
-.botones-hover button:hover {
+.btns-hover button:hover {
   opacity: 1;
   background-color: var(--color-darker);
 }

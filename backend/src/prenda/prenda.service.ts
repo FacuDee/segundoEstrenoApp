@@ -19,15 +19,16 @@ export class PrendaService {
     return this.prendaRepository.findOneBy({ id });
   }
   async create(createPrendaDto: CreatePrendaDto) {
-    // Asume que categoria viene como ID en el DTO
+    // Asume que categoria y vendedor vienen como ID en el DTO
     const prenda = this.prendaRepository.create({
       titulo: createPrendaDto.titulo,
       descripcion: createPrendaDto.descripcion,
+      talle: createPrendaDto.talle,
       precio: createPrendaDto.precio,
       imagen_url: createPrendaDto.imagen_url,
-      disponible: true, // o usa createPrendaDto.disponible si lo agregas al DTO
+      disponible: createPrendaDto.disponible ?? true,
       categoria: { id: createPrendaDto.categoria },
-      // vendedor: { id: createPrendaDto.vendedor }, // si tienes relación con vendedor
+      vendedor: { id: createPrendaDto.vendedor },
     });
     return await this.prendaRepository.save(prenda);
   }
@@ -42,11 +43,12 @@ export class PrendaService {
     await this.prendaRepository.update(prendaId, {
       titulo: updatePrendaDto.titulo,
       descripcion: updatePrendaDto.descripcion,
+      talle: updatePrendaDto.talle,
       precio: updatePrendaDto.precio,
       imagen_url: updatePrendaDto.imagen_url,
       disponible: updatePrendaDto.disponible ?? true,
       categoria: { id: updatePrendaDto.categoria },
-      // vendedor: { id: updatePrendaDto.vendedor },
+      vendedor: { id: updatePrendaDto.vendedor },
     });
     return await this.prendaRepository.findOne({ where: { id: prendaId }, relations: ['categoria'] });
   }

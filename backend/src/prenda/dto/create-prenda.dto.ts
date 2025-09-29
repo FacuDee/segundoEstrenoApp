@@ -11,6 +11,9 @@ export class CreatePrendaDto {
   descripcion: string;
 
   @IsString()
+  talle: string;
+
+  @IsString()
   @IsOptional()
   imagen_url?: string;
 
@@ -21,6 +24,6 @@ export class CreatePrendaDto {
   @IsNumber()
   categoria: number; // ID de la categoría
 
-  // @IsNumber()
-  // vendedor?: number; // si tienes relación con vendedor
+  @IsNumber()
+  vendedor: number; // id del usuario vendedor
 }

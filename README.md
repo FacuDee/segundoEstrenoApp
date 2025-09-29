@@ -58,9 +58,9 @@ Link a la presentación del proyecto:
 - NestJS
 
 ### 🧰 Herramientas y Recursos
-- Git & GitHub
-- Google Drive (para documentación)
-- Jira  
+   - Git & GitHub
+   - Google Drive (para documentación)
+   - Jira  
 
 ---
 
@@ -74,3 +74,15 @@ Link a la presentación del proyecto:
    ```bash
    Ejecuta el archivo index.html en tu navegador
    ```
+   
+## 🗄️ Inicializar base de datos local
+
+Para crear la base de datos local ejecutá el siguiente comando en tu terminal MySQL:
+
+```sh
+mysql -u tu_usuario -p < db/schema_segundo_estreno.sql
+```
+
+Esto creará todas las tablas y relaciones necesarias para el proyecto.
+
+---
