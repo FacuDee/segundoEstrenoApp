@@ -238,10 +238,10 @@
   line-height: 1.3;
 }
 
-.recycling-banner li i {
+.recycling-banner li .recycling-icon {
   margin-right: 1rem;
-  color: #00695c;
-  font-size: 1rem;
+  color: var(--color-primary-dark);
+  font-size: 1.2rem;
 }
 
 

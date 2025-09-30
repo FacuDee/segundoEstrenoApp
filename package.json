@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@nestjs/config": "^4.0.2",
+    "@nestjs/platform-express": "^11.1.6",
     "class-validator": "^0.14.2"
   }
 }

@@ -8,7 +8,8 @@ export default defineConfig({
     proxy: {
       '/auth': 'http://localhost:3000',
       '/usuario': 'http://localhost:3000',
-      '/prenda': 'http://localhost:3000'
+      // Solo proxy para la API REST, no para /prendas (SPA)
+      '^/prenda($|/)': 'http://localhost:3000'
     }
   }
 })

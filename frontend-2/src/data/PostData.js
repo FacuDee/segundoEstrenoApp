@@ -6,7 +6,7 @@ export const blogPosts = [
     type: 'taller',
     title: 'Taller de Costura Circular',
     description: 'Aprendé a transformar prendas usadas en piezas únicas. Taller gratuito con inscripción previa.',
-    image: '/Blog/taller.webp',
+    image: 'https://cordoba.gob.ar/wp-content/uploads/2024/06/DSC09058-scaled.jpg',
     imageAlt: 'Taller de costura',
     link: 'https://docs.google.com/forms/d/e/1FAIpQLScP6sYGI0Dvpm8cHZyiJ7lK_2Ch_V6_CmB0hDAUOhBLGzN0Hw/viewform?usp=dialog',
     linkText: 'Inscribite al Taller',
@@ -44,7 +44,7 @@ export const blogPosts = [
     type: 'feria',
     title: 'Feria de Intercambio',
     description: 'Acá te dejamos info de las ferias semanales y mensuales. Traé tus prendas para vender o intercambiar. ¡Moda sin residuos!',
-    image: './frontend/images/Blog/feria.png',
+    image: 'https://elresaltador.com.ar/wp-content/uploads/2022/09/feria-de-moda-circular.jpg',
     imageAlt: 'Feria de moda circular',
     tag: 'Feria'
   },
