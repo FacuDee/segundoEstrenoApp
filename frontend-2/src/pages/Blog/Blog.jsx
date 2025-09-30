@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import './Blog.css';
-import Header from '../../components/header/Header'; 
-import Footer from '../../components/footer/Footer';
+// ...existing code...
 import PostCard from '../../components/blog/PostCard';
 import { blogPosts } from '../../data/PostData';
 
@@ -37,9 +36,6 @@ const Blog = () => {
 
   return (
     <>
-      {/* Usa tu Header existente */}
-      <Header />
-      
       {/* Banner de reciclaje */}
       <div className="recycling-banner">
         <video 
@@ -98,8 +94,7 @@ const Blog = () => {
         </section>
       </main>
 
-      {/* Usa tu Footer existente */}
-      <Footer />
+  {/* Usa tu Footer existente */}
 
       {/* Botón flotante de scroll */}
       {showScrollButton && (

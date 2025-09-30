@@ -1,4 +1,3 @@
-
 /* Preguntas comprar y vender + métodos de pago*/
 .main-container {
   background: linear-gradient(180deg, var(--color-primary), var(--color-light));
@@ -91,4 +90,47 @@
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .faq-title {
+    font-size: small;
+    gap: 0.5rem;
+  }
+  .faq-content {
+    font-size: small;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1rem;
+  }
+  .seller-info,
+  .payment-info {
+    width: 100%;
+    margin: 1rem 0;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  .faq-title,
+  .faq-content {
+    width: 100%;
+    font-size: medium;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-title {
+    font-size: 0.9rem;
+  }
+  .faq-content {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
 }
