@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import './Blog.css';
-// ...existing code...
+import { FaLeaf, FaWater, FaTshirt, FaHandsHelping, FaRecycle, FaGlobeAmericas, FaArrowUp } from 'react-icons/fa';
 import PostCard from '../../components/blog/PostCard';
 import { blogPosts } from '../../data/PostData';
 
@@ -50,11 +50,11 @@ const Blog = () => {
         <div className="recycling-content"> 
           <h3>Beneficios de reciclar ropa</h3>
           <ul>
-            <li><i className="fas fa-leaf"></i> Reduce el impacto ambiental</li>
-            <li><i className="fas fa-water"></i> Ahorra agua y energía</li>
-            <li><i className="fas fa-tshirt"></i> Disminuye residuos textiles</li>
-            <li><i className="fas fa-hands-helping"></i> Promueve el consumo responsable</li>
-            <li><i className="fas fa-recycle"></i> Da nueva vida a las prendas</li>
+            <li><FaLeaf className="recycling-icon" /> Reduce el impacto ambiental</li>
+            <li><FaWater className="recycling-icon" /> Ahorra agua y energía</li>
+            <li><FaTshirt className="recycling-icon" /> Disminuye residuos textiles</li>
+            <li><FaHandsHelping className="recycling-icon" /> Promueve el consumo responsable</li>
+            <li><FaRecycle className="recycling-icon" /> Da nueva vida a las prendas</li>
           </ul>
         </div>
       </div>
@@ -76,7 +76,7 @@ const Blog = () => {
 
         {/* Contador de agua */}
         <section className="water-saving-container">
-          <i className="fas fa-globe-americas planet-icon"></i>
+          <FaGlobeAmericas className="planet-icon" />
           <div>
             <h2 style={{margin: '0 0 0.3rem 0'}}>Ahorro de agua reciclada</h2>
             <p style={{margin: 0, fontSize: '1.1rem'}}>
@@ -103,7 +103,7 @@ const Blog = () => {
           title="Volver arriba"
           onClick={scrollToTop}
         >
-          <i className="fas fa-arrow-up"></i>
+          <FaArrowUp />
         </button>
       )}
     </>
