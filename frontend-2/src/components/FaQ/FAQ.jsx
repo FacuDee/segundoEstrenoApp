@@ -1,7 +1,8 @@
-import React from 'react';
+
 import FAQList from './FAQList';
 import "./FAQ.css";
 import { faqsComprar, faqsVender } from './faqData';
+import PaymentInfo from './PaymentInfo';
 
 const FAQ = () => {
   return (
@@ -11,6 +12,9 @@ const FAQ = () => {
         <FAQList faqs={faqsComprar} />
       </div>
 
+       <PaymentInfo /> {/* ← Sección de métodos de pago */}
+
+  
       <div className="seller-info">
         <h2>¿Querés vender?</h2>
         <FAQList faqs={faqsVender} />
