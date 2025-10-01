@@ -1,17 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaShoppingBag } from "react-icons/fa";
 
 const NavLinks = ({ menuOpen, handleNavClick }) => (
   <ul className={`nav-links${menuOpen ? " active" : ""}`}>
-    <li><a href="/" onClick={handleNavClick}>INICIO</a></li>
-    <li><a href="/prendas" onClick={handleNavClick}>PRENDAS</a></li>
-    <li><a href="/nosotros" onClick={handleNavClick}>NOSOTROS</a></li>
-    <li><a href="/blog" onClick={handleNavClick}>BLOG</a></li>
+    <li><Link to="/" onClick={handleNavClick}>INICIO</Link></li>
+    <li><Link to="/prendas" onClick={handleNavClick}>PRENDAS</Link></li>
+    <li><Link to="/nosotros" onClick={handleNavClick}>NOSOTROS</Link></li>
+    <li><Link to="/blog" onClick={handleNavClick}>BLOG</Link></li>
     <li className="cart-icon">
-      <a href="/carrito" onClick={handleNavClick}>
+      <Link to="/carrito" onClick={handleNavClick}>
         <FaShoppingBag />
         <span id="cart-count">0</span>
-      </a>
+      </Link>
     </li>
   </ul>
 );
