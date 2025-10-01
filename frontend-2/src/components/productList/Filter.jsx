@@ -3,19 +3,15 @@ import PriceFilter from './PriceFilter';
 import { useState } from 'react';
 
 
-type Prendas = {
-    id: number;
-  categoria: string;
-  precio: number;
-}
 
 
-function Filter({ setPrendas, productos }: { setPrendas: (prendas: Prendas[])=> void, productos: Prendas []}) {
+
+function Filter({ setPrendas, productos }) {
    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
   const [ordenPrecio, setOrdenPrecio] = useState("");
 
   // aplicar ambos filtros
-  const aplicarFiltros = (categoria: string, orden: string) => {
+  const aplicarFiltros = (categoria, orden) => {
     let productosFiltrados = [...productos];
     // filtrar por categoria
      if (categoria !== "") {
@@ -28,12 +24,12 @@ function Filter({ setPrendas, productos }: { setPrendas: (prendas: Prendas[])=> 
     } else if (orden === 'desc') {
       productosFiltrados.sort((a, b) => b.precio - a.precio);
     }
-const handleCategoriaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+const handleCategoriaChange = (e) => {
       const categoria = e.target.value;
      setCategoriaSeleccionada(categoria);
     aplicarFiltros(categoria, ordenPrecio);
     };
-     const handlePrecioChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+     const handlePrecioChange = (e) => {
     const orden = e.target.value;
     setOrdenPrecio(orden);
     aplicarFiltros(categoriaSeleccionada, orden);

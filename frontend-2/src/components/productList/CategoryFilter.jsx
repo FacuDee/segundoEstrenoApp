@@ -1,17 +1,12 @@
 import React from 'react'
 
 
-
-type prendas = {
-  categoria: string;
-}
-
-const capitalizar = (texto: string) => {
+const capitalizar = (texto) => {
     if (!texto) return ''; 
     return texto.charAt(0).toUpperCase() + texto.slice(1);
 };
 
-function CategoryFilter({ productos, onCategoriaChange }: { productos: prendas[], onCategoriaChange: (e: React.ChangeEvent<HTMLSelectElement>) => void }) {
+function CategoryFilter({ productos, onCategoriaChange }) {
   const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
 
   return (

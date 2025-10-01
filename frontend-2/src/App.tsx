@@ -1,12 +1,12 @@
 //import { useState } from 'react'
-import Header from './components/header/Header'
-import Footer from './components/footer/Footer'
-import ProductList from './components/productList/ProductList'
 import './App.css'
 import Header from './components/header/Header.jsx'
 import Footer from './components/footer/Footer.jsx'
 import ProductList from './components/productList/ProductList.jsx'
 import FAQ from './components/FaQ/FAQ.jsx'
+import Blog from './components/blog/PostCard.jsx'
+
+
 
 
 function App() {
@@ -16,10 +16,7 @@ function App() {
   return (
     <>
       <Header />
-
-       
-      <ProductList  />
-
+      <Blog/>
 
       <ProductList />
       <FAQ />

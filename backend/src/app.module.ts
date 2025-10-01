@@ -18,7 +18,7 @@ import { ConfigModule } from '@nestjs/config';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'admin08_sql',
+      password: 'Fassina1051',
       database: 'segundo_estreno',
       autoLoadEntities: true,
       synchronize: false,

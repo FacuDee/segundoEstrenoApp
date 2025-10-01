@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-function PriceFilter({onPrecioChange }: { onPrecioChange: (e: React.ChangeEvent<HTMLSelectElement>) => void }) {
+function PriceFilter({onPrecioChange }) {
 
     return (
         <div>
