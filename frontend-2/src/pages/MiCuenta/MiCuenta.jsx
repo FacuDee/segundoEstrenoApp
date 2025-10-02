@@ -1,0 +1,117 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
+import PerfilUsuario from '../../components/miCuenta/PerfilUsuario.jsx';
+import ComprasUsuario from '../../components/miCuenta/ComprasUsuario.jsx';
+import VentasUsuario from '../../components/miCuenta/VentasUsuario.jsx';
+import PrendasGestion from '../../components/miCuenta/PrendasGestion.jsx';
+import UsuariosAdmin from '../../components/miCuenta/UsuariosAdmin.jsx';
+import './MiCuenta.css';
+
+const MiCuenta = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [activeTab, setActiveTab] = useState('perfil');
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setUser(decoded);
+      } catch (error) {
+        console.error('Error decodificando token:', error);
+        // Redirigir al login si el token es inválido
+        localStorage.removeItem('token');
+        window.location.href = '/';
+      }
+    } else {
+      // Redirigir al login si no hay token
+      window.location.href = '/';
+    }
+  }, []);
+
+  if (!user) {
+    return <div className="loading">Cargando...</div>;
+  }
+
+  const isVendedor = user.rol === 'vendedor' || user.rol === 'admin';
+  const isAdmin = user.rol === 'admin';
+
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'perfil':
+        return <PerfilUsuario user={user} />;
+      case 'compras':
+        return <ComprasUsuario userId={user.id} />;
+      case 'ventas':
+        return isVendedor ? <VentasUsuario userId={user.id} /> : null;
+      case 'prendas':
+        return isVendedor ? <PrendasGestion userId={user.id} /> : null;
+      case 'usuarios':
+        return isAdmin ? <UsuariosAdmin /> : null;
+      default:
+        return <PerfilUsuario user={user} />;
+    }
+  };
+
+  return (
+    <div className="micuenta-container">
+      <div className="micuenta-header">
+        <h1>Mi Cuenta</h1>
+        <p>Bienvenido/a, {user.nombre}</p>
+      </div>
+
+      <div className="micuenta-content">
+        <nav className="micuenta-nav">
+          <button
+            className={activeTab === 'perfil' ? 'active' : ''}
+            onClick={() => setActiveTab('perfil')}
+          >
+            Mi Perfil
+          </button>
+          
+          <button
+            className={activeTab === 'compras' ? 'active' : ''}
+            onClick={() => setActiveTab('compras')}
+          >
+            Mis Compras
+          </button>
+
+          {isVendedor && (
+            <>
+              <button
+                className={activeTab === 'ventas' ? 'active' : ''}
+                onClick={() => setActiveTab('ventas')}
+              >
+                Mis Ventas
+              </button>
+              
+              <button
+                className={activeTab === 'prendas' ? 'active' : ''}
+                onClick={() => setActiveTab('prendas')}
+              >
+                Gestionar Prendas
+              </button>
+            </>
+          )}
+
+          {isAdmin && (
+            <button
+              className={activeTab === 'usuarios' ? 'active' : ''}
+              onClick={() => setActiveTab('usuarios')}
+            >
+              Gestionar Usuarios
+            </button>
+          )}
+        </nav>
+
+        <div className="micuenta-panel">
+          {renderTabContent()}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MiCuenta;
