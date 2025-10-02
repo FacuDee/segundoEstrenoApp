@@ -26,7 +26,7 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister, onLoginSuccess, prefi
     e.preventDefault();
     setError("");
     try {
-      const res = await fetch("/auth/login", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

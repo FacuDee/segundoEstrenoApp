@@ -13,13 +13,29 @@ export class PrendaService {
   ) {}
 
   async findAll(): Promise<Prenda[]> {
-  return this.prendaRepository.find({ relations: ['categoria'] });
+    return this.prendaRepository.find({ 
+      relations: ['categoria'],
+      order: { createdAt: 'DESC' } // Más recientes primero
+    });
   }
   async findOne(id: number): Promise<Prenda | null> {
-    return this.prendaRepository.findOneBy({ id });
+    return this.prendaRepository.findOne({ 
+      where: { id }, 
+      relations: ['categoria', 'vendedor'] 
+    });
   }
-  async create(createPrendaDto: CreatePrendaDto) {
-    // Asume que categoria y vendedor vienen como ID en el DTO
+
+  async findByUser(userId: number): Promise<Prenda[]> {
+    const prendas = await this.prendaRepository.find({ 
+      where: { vendedor: { id: userId } }, 
+      relations: ['categoria', 'vendedor'],
+      order: { createdAt: 'DESC' } // Más recientes primero
+    });
+    
+    return prendas;
+  }
+  async create(createPrendaDto: any) {
+    // Crear la prenda con los datos del DTO y el vendedor_id
     const prenda = this.prendaRepository.create({
       titulo: createPrendaDto.titulo,
       descripcion: createPrendaDto.descripcion,
@@ -28,9 +44,11 @@ export class PrendaService {
       imagen_url: createPrendaDto.imagen_url,
       disponible: createPrendaDto.disponible ?? true,
       categoria: { id: createPrendaDto.categoria },
-      vendedor: { id: createPrendaDto.vendedor },
+      vendedor: { id: createPrendaDto.vendedor_id },
     });
-    return await this.prendaRepository.save(prenda);
+    
+    const savedPrenda = await this.prendaRepository.save(prenda);
+    return savedPrenda;
   }
 
   // Método para actualizar una prenda

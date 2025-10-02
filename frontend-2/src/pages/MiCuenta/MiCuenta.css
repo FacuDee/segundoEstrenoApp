@@ -179,16 +179,33 @@
 
 .rol-badge {
   display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-size: 0.8rem;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
 }
 
-.rol-comprador { background: var(--color-accent); color: var(--color-darker); }
-.rol-vendedor { background: var(--color-primary); color: var(--color-lighter); }
-.rol-admin { background: var(--color-darker); color: var(--color-lighter); }
+.rol-comprador { 
+  background: rgba(106, 69, 112, 0.15);
+  color: var(--color-darker); 
+  border-color: rgba(106, 69, 112, 0.3);
+}
+
+.rol-vendedor { 
+  background: rgba(147, 206, 140, 0.2);
+  color: var(--color-primary-dark); 
+  border-color: rgba(147, 206, 140, 0.5);
+}
+
+.rol-admin { 
+  background: var(--color-accent-light);
+  color: var(--color-dark); 
+  border-color: var(--color-accent);
+}
 
 .perfil-actions {
   display: flex;
@@ -415,8 +432,40 @@
   justify-content: center;
 }
 
+.user-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.btn-detail {
+  cursor: pointer;
+  color: var(--color-darker) !important;
+  border: none;
+  background: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-detail:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
 .btn-delete {
-  color: #dc3545 !important;
+  cursor: pointer;
+  color: var(--color-darker) !important;
+  border: none;
+  background: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
 }
 
 /* Usuarios Admin */
@@ -503,5 +552,225 @@
   
   .usuarios-table {
     overflow-x: auto;
+  }
+}
+
+/* Modal de detalle del usuario */
+.user-detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.user-detail-modal .modal-content {
+  background: var(--color-lighter);
+  border-radius: 12px;
+  padding: 0;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+
+.user-detail-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 2px solid var(--color-light);
+  background: var(--color-light);
+  border-radius: 12px 12px 0 0;
+}
+
+.user-detail-modal .modal-header h3 {
+  margin: 0;
+  color: var(--color-darker);
+  font-family: var(--font-logo);
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--color-text-light);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.btn-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: var(--color-darker);
+}
+
+.user-detail-modal .modal-body {
+  padding: 2rem;
+}
+
+.user-info-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-item label {
+  font-weight: 600;
+  color: var(--color-darker);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-item span {
+  color: var(--color-text-light);
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-light);
+}
+
+/* Badges específicos para el modal */
+.user-detail-modal .rol-badge {
+  width: fit-content;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+  border-radius: 30px;
+  box-shadow: var(--shadow-md);
+  margin-top: 0.5rem;
+}
+
+.user-detail-modal .rol-comprador {
+  background: linear-gradient(135deg, rgba(106, 69, 112, 0.1), rgba(106, 69, 112, 0.2));
+  color: var(--color-darker);
+  border-color: var(--color-darker);
+}
+
+.user-detail-modal .rol-vendedor {
+  background: linear-gradient(135deg, rgba(147, 206, 140, 0.15), rgba(147, 206, 140, 0.3));
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary);
+}
+
+.user-detail-modal .rol-admin {
+  background: linear-gradient(135deg, var(--color-accent-light), var(--color-accent));
+  color: var(--color-darker);
+  border-color: var(--color-dark);
+}
+
+/* Sección de prendas en el modal */
+.user-prendas-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--color-light);
+}
+
+.user-prendas-section .section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-light);
+}
+
+.user-prendas-section .section-header h4 {
+  margin: 0;
+  color: var(--color-darker);
+  font-size: 1.1rem;
+}
+
+.user-prendas-section .section-icon {
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+.loading-prendas,
+.empty-prendas {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-text-light);
+  font-style: italic;
+}
+
+.prendas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.prenda-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: var(--color-light);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.prenda-item:hover {
+  background: var(--color-lighter);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.prenda-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.prenda-name {
+  font-weight: 600;
+  color: var(--color-darker);
+}
+
+.prenda-category,
+.prenda-date {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+.prenda-price {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .user-detail-modal .modal-content {
+    width: 95%;
+    margin: 1rem;
+  }
+  
+  .user-detail-modal .modal-header,
+  .user-detail-modal .modal-body {
+    padding: 1rem;
+  }
+
+  .prenda-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .prenda-price {
+    align-self: flex-end;
   }
 }

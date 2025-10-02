@@ -13,6 +13,14 @@ const MiCuenta = () => {
   const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState('perfil');
 
+  // Función para actualizar el usuario después de cambios en el perfil
+  const handleUserUpdate = (updatedUserData) => {
+    setUser(prevUser => ({
+      ...prevUser,
+      ...updatedUserData
+    }));
+  };
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -38,20 +46,24 @@ const MiCuenta = () => {
   const isVendedor = user.rol === 'vendedor' || user.rol === 'admin';
   const isAdmin = user.rol === 'admin';
 
+
+
+
+
   const renderTabContent = () => {
     switch (activeTab) {
       case 'perfil':
-        return <PerfilUsuario user={user} />;
+        return <PerfilUsuario user={user} onUserUpdate={handleUserUpdate} />;
       case 'compras':
-        return <ComprasUsuario userId={user.id} />;
+        return <ComprasUsuario userId={user.sub || user.id} />;
       case 'ventas':
-        return isVendedor ? <VentasUsuario userId={user.id} /> : null;
+        return isVendedor ? <VentasUsuario userId={user.sub || user.id} /> : null;
       case 'prendas':
-        return isVendedor ? <PrendasGestion userId={user.id} /> : null;
+        return isVendedor ? <PrendasGestion userId={user.sub || user.id} /> : null;
       case 'usuarios':
         return isAdmin ? <UsuariosAdmin /> : null;
       default:
-        return <PerfilUsuario user={user} />;
+        return <PerfilUsuario user={user} onUserUpdate={handleUserUpdate} />;
     }
   };
 
@@ -59,7 +71,7 @@ const MiCuenta = () => {
     <div className="micuenta-container">
       <div className="micuenta-header">
         <h1>Mi Cuenta</h1>
-        <p>Bienvenido/a, {user.nombre}</p>
+        <p>Bienvenido/a, {user.username || user.nombre}</p>
       </div>
 
       <div className="micuenta-content">
