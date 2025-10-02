@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 import AccountActions from "./AccountActions";
@@ -11,10 +12,12 @@ import RegisterModal from "../modals/RegisterModal";
 import "./Header.css";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [user, setUser] = useState(null);
+  const [prefilledLoginData, setPrefilledLoginData] = useState(null);
 
   // Cierra el menú al hacer click en un link
   const handleNavClick = () => setMenuOpen(false);
@@ -62,11 +65,17 @@ const Header = () => {
   const closeModals = () => {
     setShowLogin(false);
     setShowRegister(false);
+    setPrefilledLoginData(null); // Limpiar datos prellenados
   };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setUser(null);
+    navigate('/');
+  };
+  
+  const handleRegisterSuccess = (email, password) => {
+    setPrefilledLoginData({ email, password });
   };
 
   return (
@@ -103,11 +112,26 @@ const Header = () => {
         isOpen={showLogin}
         onClose={closeModals}
         onSwitchToRegister={openRegister}
+        prefilledData={prefilledLoginData}
+        onLoginSuccess={() => {
+          // Actualizar estado del usuario después del login
+          const token = localStorage.getItem("token");
+          if (token) {
+            try {
+              const decoded = jwtDecode(token);
+              setUser(decoded);
+            } catch (error) {
+              console.error("Error decodificando token:", error);
+            }
+          }
+          setPrefilledLoginData(null); // Limpiar datos después del login
+        }}
       />
       <RegisterModal
         isOpen={showRegister}
         onClose={closeModals}
         onSwitchToLogin={openLogin}
+        onRegisterSuccess={handleRegisterSuccess}
       />
     </header>
   );
