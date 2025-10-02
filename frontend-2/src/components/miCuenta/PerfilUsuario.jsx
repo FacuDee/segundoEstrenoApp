@@ -1,14 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaUser, FaEdit, FaSave, FaTimes } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
-const PerfilUsuario = ({ user }) => {
+const PerfilUsuario = ({ user, onUserUpdate }) => {
+  
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({
-    nombre: user.nombre || '',
+    // Campos que existen en la BD
+    username: user.username || user.nombre || '',
     email: user.email || '',
-    telefono: user.telefono || '',
-    direccion: user.direccion || ''
+    // Campos locales (no en BD)
+    telefono: '',
+    direccion: ''
   });
+
+  // Obtener el ID correcto del usuario
+  const userId = user.sub || user.id;
+
+  // Cargar datos locales del localStorage
+  useEffect(() => {
+    const localData = localStorage.getItem(`userProfile_${userId}`);
+    if (localData) {
+      const parsed = JSON.parse(localData);
+      setFormData(prev => ({
+        ...prev,
+        telefono: parsed.telefono || '',
+        direccion: parsed.direccion || ''
+      }));
+    }
+  }, [userId]);
 
   const handleInputChange = (e) => {
     setFormData({
@@ -20,34 +40,131 @@ const PerfilUsuario = ({ user }) => {
   const handleSave = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`/usuario/${user.id}`, {
+      
+      // Datos para la base de datos (solo campos que realmente cambiaron)
+      const dbData = {};
+      
+      if (formData.username !== (user.username || user.nombre)) {
+        dbData.username = formData.username;
+      }
+      
+      if (formData.email !== user.email) {
+        dbData.email = formData.email;
+      }
+      
+      // Si no hay cambios en BD, solo actualizar localStorage
+      if (Object.keys(dbData).length === 0) {
+        // Solo guardar datos locales
+        const localData = {
+          telefono: formData.telefono,
+          direccion: formData.direccion
+        };
+        localStorage.setItem(`userProfile_${userId}`, JSON.stringify(localData));
+        
+        setEditing(false);
+        Swal.fire({
+          title: '¡Actualizado!',
+          text: 'Información local actualizada correctamente',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
+        return;
+      }
+      
+      // Datos para localStorage (campos adicionales)
+      const localData = {
+        telefono: formData.telefono,
+        direccion: formData.direccion
+      };
+      
+      // Debug: mostrar qué datos se están enviando
+      console.log('Datos a enviar:', dbData);
+      console.log('Usuario ID:', userId);
+      
+      // Actualizar en la BD usando el endpoint de perfil
+      const response = await fetch(`/api/usuario/${userId}/perfil`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(dbData)
       });
 
       if (response.ok) {
+        // Obtener los datos actualizados del servidor
+        const updatedUser = await response.json();
+        
+        // Actualizar el token en localStorage con los nuevos datos
+        const currentToken = localStorage.getItem('token');
+        if (currentToken) {
+          try {
+            const decoded = JSON.parse(atob(currentToken.split('.')[1])); // Decodificar payload
+            const newPayload = {
+              ...decoded,
+              username: updatedUser.username || formData.username,
+              email: updatedUser.email || formData.email
+            };
+            
+            // Crear nuevo token actualizado (simulado - en producción el backend enviaría uno nuevo)
+            const tokenParts = currentToken.split('.');
+            const newTokenPayload = btoa(JSON.stringify(newPayload));
+            const newToken = `${tokenParts[0]}.${newTokenPayload}.${tokenParts[2]}`;
+            localStorage.setItem('token', newToken);
+            
+            // Crear objeto de datos actualizados
+            const newTokenData = { ...user, ...updatedUser };
+            
+            // Notificar al componente padre sobre la actualización
+            if (onUserUpdate) {
+              onUserUpdate(newTokenData);
+            }
+            
+            // Disparar evento personalizado para notificar a otros componentes
+            window.dispatchEvent(new CustomEvent('userUpdated', { 
+              detail: newTokenData 
+            }));
+          } catch (error) {
+            console.error('Error actualizando token:', error);
+          }
+        }
+        
+        // Guardar datos locales
+        localStorage.setItem(`userProfile_${userId}`, JSON.stringify(localData));
+        
         setEditing(false);
-        // Aquí podrías actualizar el contexto del usuario o mostrar un mensaje de éxito
-        alert('Perfil actualizado correctamente');
+        Swal.fire({
+          title: '¡Actualizado!',
+          text: 'Perfil actualizado correctamente',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
       } else {
-        throw new Error('Error al actualizar perfil');
+        const errorData = await response.json().catch(() => null);
+        console.error('Error del servidor:', errorData);
+        throw new Error(errorData?.message || `Error ${response.status}: ${response.statusText}`);
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Error al actualizar el perfil');
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al actualizar el perfil',
+        icon: 'error'
+      });
     }
   };
 
   const handleCancel = () => {
+    const localData = localStorage.getItem(`userProfile_${userId}`);
+    const parsed = localData ? JSON.parse(localData) : {};
+    
     setFormData({
-      nombre: user.nombre || '',
+      username: user.username || user.nombre || '',
       email: user.email || '',
-      telefono: user.telefono || '',
-      direccion: user.direccion || ''
+      telefono: parsed.telefono || '',
+      direccion: parsed.direccion || ''
     });
     setEditing(false);
   };
@@ -66,16 +183,16 @@ const PerfilUsuario = ({ user }) => {
 
       <div className="perfil-info">
         <div className="info-group">
-          <label>Nombre completo</label>
+          <label>Nombre de usuario</label>
           {editing ? (
             <input
               type="text"
-              name="nombre"
-              value={formData.nombre}
+              name="username"
+              value={formData.username}
               onChange={handleInputChange}
             />
           ) : (
-            <p>{user.nombre}</p>
+            <p>{user.username || user.nombre}</p>
           )}
         </div>
 
@@ -104,7 +221,7 @@ const PerfilUsuario = ({ user }) => {
               placeholder="Ingrese su teléfono"
             />
           ) : (
-            <p>{user.telefono || 'No especificado'}</p>
+            <p>{formData.telefono || 'No especificado'}</p>
           )}
         </div>
 
@@ -119,7 +236,7 @@ const PerfilUsuario = ({ user }) => {
               rows="3"
             />
           ) : (
-            <p>{user.direccion || 'No especificada'}</p>
+            <p>{formData.direccion || 'No especificada'}</p>
           )}
         </div>
 

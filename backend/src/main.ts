@@ -8,6 +8,14 @@ import * as express from 'express';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  // Configurar CORS
+  app.enableCors({
+    origin: ['http://localhost:5173', 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    credentials: true,
+  });
+
   // Servir archivos estáticos del frontend build (ajustar la ruta si es necesario)
   app.useStaticAssets(join(__dirname, '..', '..', 'frontend-2', 'public'));
 
@@ -19,7 +27,13 @@ async function bootstrap() {
         req.url === '/prenda' ||
         req.url.startsWith('/prenda/') ||
         req.url === '/carrito' ||
-        req.url.startsWith('/carrito/')
+        req.url.startsWith('/carrito/') ||
+        req.url === '/usuario' ||
+        req.url.startsWith('/usuario/') ||
+        req.url === '/categoria' ||
+        req.url.startsWith('/categoria/') ||
+        req.url === '/transaccion' ||
+        req.url.startsWith('/transaccion/')
       ) {
         return next();
       }

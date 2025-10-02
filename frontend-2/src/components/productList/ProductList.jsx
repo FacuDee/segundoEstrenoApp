@@ -7,7 +7,7 @@ const ProductList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/prenda")
+    fetch("/api/prenda")
       .then((res) => res.json())
       .then((data) => {
         setPrendas(data);

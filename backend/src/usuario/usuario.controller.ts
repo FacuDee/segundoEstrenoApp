@@ -1,5 +1,8 @@
-import { Controller, Get, Post, Body, Param ,Put, Delete} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { UsuarioService } from './usuario.service';
+import { RolesGuard } from '../auth/roles.guard';
+import { Roles } from '../auth/roles.decorator';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -16,11 +19,14 @@ export class UsuarioController {
   }
 
   @Get()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles('admin')
   async getAll() {
     return await this.usuarioService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
   async getById(@Param('id') id: number) {
     return await this.usuarioService.findOne(id);
   }
@@ -31,12 +37,27 @@ export class UsuarioController {
   }
 
   @Put(':id')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles('admin')
   async update(@Param('id') id: number, @Body() usuarioData: any) {
     return await this.usuarioService.update(id, usuarioData);
   }
 
+  @Put(':id/perfil')
+  @UseGuards(AuthGuard('jwt'))
+  async updatePerfil(@Param('id') id: number, @Body() usuarioData: any) {
+    // Solo permite actualizar username y email (no rol ni password)
+    const allowedFields = {
+      ...(usuarioData.username && { username: usuarioData.username }),
+      ...(usuarioData.email && { email: usuarioData.email })
+    };
+    return await this.usuarioService.update(id, allowedFields);
+  }
+
   
   @Delete(':id')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles('admin')
   async remove(@Param('id') id: number) {
     return await this.usuarioService.remove(id);
   }

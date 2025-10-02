@@ -13,7 +13,7 @@ const VentasUsuario = ({ userId }) => {
   const fetchVentas = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`/transaccion/vendedor/${userId}`, {
+      const response = await fetch(`/api/transaccion/vendedor/${userId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

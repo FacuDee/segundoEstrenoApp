@@ -8,7 +8,10 @@ import {
   Delete,
   HttpException,
   HttpStatus,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { PrendaService } from './prenda.service';
 import { Prenda } from './prenda.entity';
 import { CreatePrendaDto } from './dto/create-prenda.dto';
@@ -28,8 +31,23 @@ export class PrendaController {
     }
   }
 
+  @Get('usuario/:userId')
+  @UseGuards(AuthGuard('jwt'))
+  async findByUser(@Param('userId') userId: string): Promise<Prenda[]> {
+    try {
+      const userIdNumber = parseInt(userId, 10);
+      const prendas = await this.prendaService.findByUser(userIdNumber);
+      return prendas;
+    } catch (error) {
+      throw new HttpException(
+        'Error retrieving user prendas',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
   @Get(':id')
-  async findOne(id: number): Promise<Prenda | null> {
+  async findOne(@Param('id') id: number): Promise<Prenda | null> {
     try {
       return await this.prendaService.findOne(id);
     } catch (error) {
@@ -39,22 +57,41 @@ export class PrendaController {
 
   //crear una prenda
   @Post()
-  async create(@Body() createPrendaDto: CreatePrendaDto) {
-    return this.prendaService.create(createPrendaDto);
+  @UseGuards(AuthGuard('jwt'))
+  async create(@Body() createPrendaDto: CreatePrendaDto, @Request() req) {
+    // Agregar el vendedor_id del usuario autenticado
+    const prendaData = {
+      ...createPrendaDto,
+      vendedor_id: req.user.id
+    };
+    return this.prendaService.create(prendaData);
   }
 
-  // actulizar una prenda
+  // actualizar una prenda
   @Put(':id')
+  @UseGuards(AuthGuard('jwt'))
   async update(
     @Param('id') id: string,
     @Body() updatePrendaDto: CreatePrendaDto,
+    @Request() req,
   ) {
+    // Verificar que la prenda pertenezca al usuario
+    const prenda = await this.prendaService.findOne(+id);
+    if (!prenda || prenda.vendedor?.id !== req.user.id) {
+      throw new HttpException('Prenda not found or access denied', HttpStatus.FORBIDDEN);
+    }
     return this.prendaService.update(id, updatePrendaDto);
   }
 
   // borrar una prenda
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  @UseGuards(AuthGuard('jwt'))
+  async remove(@Param('id') id: string, @Request() req) {
+    // Verificar que la prenda pertenezca al usuario
+    const prenda = await this.prendaService.findOne(+id);
+    if (!prenda || prenda.vendedor?.id !== req.user.id) {
+      throw new HttpException('Prenda not found or access denied', HttpStatus.FORBIDDEN);
+    }
     return this.prendaService.remove(id);
   }
 }

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { FaUsers, FaEdit, FaTrash, FaSearch } from 'react-icons/fa';
+import { FaUsers, FaEdit, FaTrash, FaSearch, FaEye } from 'react-icons/fa';
+import Swal from 'sweetalert2';
+import UserDetailModal from './UserDetailModal.jsx';
 
 const UsuariosAdmin = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterRole, setFilterRole] = useState('');
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [showUserDetail, setShowUserDetail] = useState(false);
 
   useEffect(() => {
     fetchUsuarios();
@@ -14,18 +18,38 @@ const UsuariosAdmin = () => {
   const fetchUsuarios = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/usuario', {
+
+      
+      const response = await fetch('/api/usuario', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
       
+
+      
       if (response.ok) {
         const data = await response.json();
+
         setUsuarios(data);
+      } else {
+        const errorText = await response.text();
+        console.error('Error al cargar usuarios:', response.status, errorText);
+        
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudieron cargar los usuarios: ${response.status}`,
+          icon: 'error'
+        });
       }
     } catch (error) {
       console.error('Error al cargar usuarios:', error);
+      
+      Swal.fire({
+        title: 'Error',
+        text: 'Error de conexión al cargar usuarios',
+        icon: 'error'
+      });
     } finally {
       setLoading(false);
     }
@@ -34,7 +58,7 @@ const UsuariosAdmin = () => {
   const handleRoleChange = async (userId, newRole) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`/usuario/${userId}`, {
+      const response = await fetch(`/api/usuario/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -45,19 +69,48 @@ const UsuariosAdmin = () => {
 
       if (response.ok) {
         fetchUsuarios();
-        alert('Rol actualizado correctamente');
+        Swal.fire({
+          title: '¡Actualizado!',
+          text: `Rol cambiado a ${newRole} correctamente`,
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false,
+          toast: true,
+          position: 'top-end'
+        });
+      } else {
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudo actualizar el rol',
+          icon: 'error'
+        });
       }
     } catch (error) {
       console.error('Error al actualizar rol:', error);
-      alert('Error al actualizar el rol');
+      Swal.fire({
+        title: 'Error',
+        text: 'Error de conexión al actualizar el rol',
+        icon: 'error'
+      });
     }
   };
 
   const handleDeleteUser = async (userId) => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
+    const result = await Swal.fire({
+      title: '¿Eliminar usuario?',
+      text: 'Esta acción no se puede deshacer',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'var(--color-darker)',
+      cancelButtonColor: 'var(--color-text-light)',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (result.isConfirmed) {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`/usuario/${userId}`, {
+        const response = await fetch(`/api/usuario/${userId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -66,23 +119,66 @@ const UsuariosAdmin = () => {
 
         if (response.ok) {
           fetchUsuarios();
-          alert('Usuario eliminado correctamente');
+          Swal.fire({
+            title: '¡Eliminado!',
+            text: 'El usuario ha sido eliminado correctamente',
+            icon: 'success',
+            timer: 2000,
+            showConfirmButton: false
+          });
+        } else {
+          Swal.fire({
+            title: 'Error',
+            text: 'No se pudo eliminar el usuario',
+            icon: 'error'
+          });
         }
       } catch (error) {
         console.error('Error al eliminar usuario:', error);
-        alert('Error al eliminar el usuario');
+        Swal.fire({
+          title: 'Error',
+          text: 'Error de conexión al eliminar el usuario',
+          icon: 'error'
+        });
       }
     }
   };
 
+  const handleViewUser = (usuario) => {
+    setSelectedUser(usuario);
+    setShowUserDetail(true);
+  };
+
+  const closeUserDetail = () => {
+    setShowUserDetail(false);
+    setSelectedUser(null);
+  };
+
   const filteredUsuarios = usuarios.filter(usuario => {
-    const matchesSearch = usuario.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         usuario.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = (usuario.username || usuario.nombre || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (usuario.email || '').toLowerCase().includes(searchTerm.toLowerCase());
     const matchesRole = filterRole === '' || usuario.rol === filterRole;
     return matchesSearch && matchesRole;
   });
 
   if (loading) return <div className="loading">Cargando usuarios...</div>;
+
+  if (usuarios.length === 0) {
+    return (
+      <div className="usuarios-admin">
+        <div className="section-header">
+          <FaUsers className="section-icon" />
+          <h2>Gestionar Usuarios</h2>
+        </div>
+        <div className="no-users">
+          <p>No se encontraron usuarios o hay un problema de conexión.</p>
+          <button onClick={fetchUsuarios} className="btn-reload">
+            Reintentar
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="usuarios-admin">
@@ -96,7 +192,7 @@ const UsuariosAdmin = () => {
           <FaSearch className="search-icon" />
           <input
             type="text"
-            placeholder="Buscar por nombre o email..."
+            placeholder="Buscar por usuario o email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -146,7 +242,7 @@ const UsuariosAdmin = () => {
           <tbody>
             {filteredUsuarios.map(usuario => (
               <tr key={usuario.id}>
-                <td>{usuario.nombre}</td>
+                <td>{usuario.username || usuario.nombre}</td>
                 <td>{usuario.email}</td>
                 <td>
                   <select
@@ -161,13 +257,22 @@ const UsuariosAdmin = () => {
                 </td>
                 <td>{new Date(usuario.createdAt || Date.now()).toLocaleDateString()}</td>
                 <td>
-                  <button
-                    onClick={() => handleDeleteUser(usuario.id)}
-                    className="btn-delete"
-                    title="Eliminar usuario"
-                  >
-                    <FaTrash />
-                  </button>
+                  <div className="user-actions">
+                    <button
+                      onClick={() => handleViewUser(usuario)}
+                      className="btn-detail"
+                      title="Ver detalle del usuario"
+                    >
+                      <FaEye />
+                    </button>
+                    <button
+                      onClick={() => handleDeleteUser(usuario.id)}
+                      className="btn-delete"
+                      title="Eliminar usuario"
+                    >
+                      <FaTrash />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -180,6 +285,13 @@ const UsuariosAdmin = () => {
           <p>No se encontraron usuarios que coincidan con los filtros.</p>
         </div>
       )}
+
+      {/* Modal de detalle del usuario */}
+      <UserDetailModal 
+        user={selectedUser}
+        isOpen={showUserDetail}
+        onClose={closeUserDetail}
+      />
     </div>
   );
 };

@@ -43,7 +43,7 @@ const Header = () => {
     const token = localStorage.getItem("token");
     if (token) {
       try {
-  const decoded = jwtDecode(token);
+        const decoded = jwtDecode(token);
         setUser(decoded);
       } catch {
         setUser(null);
@@ -52,6 +52,23 @@ const Header = () => {
       setUser(null);
     }
   }, [showLogin, showRegister]);
+
+  // Escuchar eventos de actualización del usuario
+  useEffect(() => {
+    const handleUserUpdate = (event) => {
+      const updatedUser = event.detail;
+      setUser(prevUser => ({
+        ...prevUser,
+        ...updatedUser
+      }));
+    };
+
+    window.addEventListener('userUpdated', handleUserUpdate);
+    
+    return () => {
+      window.removeEventListener('userUpdated', handleUserUpdate);
+    };
+  }, []);
 
   // Handlers para abrir/cerrar modales
   const openLogin = () => {

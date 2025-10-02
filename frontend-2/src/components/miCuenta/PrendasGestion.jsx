@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaTshirt, FaPlus, FaEdit, FaTrash, FaEye } from 'react-icons/fa';
+import Swal from 'sweetalert2';
+import './PrendasGestion.css';
 
 const PrendasGestion = ({ userId }) => {
   const [prendas, setPrendas] = useState([]);
@@ -24,7 +26,7 @@ const PrendasGestion = ({ userId }) => {
   const fetchPrendas = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`/prenda/usuario/${userId}`, {
+      const response = await fetch(`/api/prenda/usuario/${userId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -33,9 +35,32 @@ const PrendasGestion = ({ userId }) => {
       if (response.ok) {
         const data = await response.json();
         setPrendas(data);
+      } else {
+        const errorData = await response.json();
+        console.error('Error al cargar prendas:', response.status, errorData);
+        
+        if (response.status === 401) {
+          Swal.fire({
+            title: 'Error de autenticación',
+            text: 'Tu sesión ha expirado. Por favor, inicia sesión nuevamente.',
+            icon: 'error'
+          });
+        } else {
+          Swal.fire({
+            title: 'Error',
+            text: 'No se pudieron cargar las prendas',
+            icon: 'error'
+          });
+        }
       }
     } catch (error) {
       console.error('Error al cargar prendas:', error);
+      
+      Swal.fire({
+        title: 'Error',
+        text: 'Error de conexión al cargar las prendas',
+        icon: 'error'
+      });
     } finally {
       setLoading(false);
     }
@@ -43,7 +68,7 @@ const PrendasGestion = ({ userId }) => {
 
   const fetchCategorias = async () => {
     try {
-      const response = await fetch('/categoria');
+      const response = await fetch('/api/categoria');
       if (response.ok) {
         const data = await response.json();
         setCategorias(data);
@@ -65,21 +90,43 @@ const PrendasGestion = ({ userId }) => {
     try {
       const token = localStorage.getItem('token');
       const method = editingPrenda ? 'PUT' : 'POST';
-      const url = editingPrenda ? `/prenda/${editingPrenda.id}` : '/prenda';
+      const url = editingPrenda ? `/api/prenda/${editingPrenda.id}` : '/api/prenda';
       
+      // Preparar los datos con el formato correcto
+      const dataToSend = {
+        ...formData,
+        categoria: parseInt(formData.categoria), // Convertir a número
+        precio: parseFloat(formData.precio) // Convertir a número
+      };
+
       const response = await fetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(dataToSend)
       });
 
       if (response.ok) {
         fetchPrendas();
         resetForm();
-        alert(editingPrenda ? 'Prenda actualizada' : 'Prenda creada correctamente');
+        
+        Swal.fire({
+          title: '¡Éxito!',
+          text: editingPrenda ? 'Prenda actualizada correctamente' : 'Prenda creada correctamente',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
+      } else {
+        const errorData = await response.json();
+        
+        Swal.fire({
+          title: 'Error',
+          text: errorData.message || 'Error al guardar la prenda',
+          icon: 'error'
+        });
       }
     } catch (error) {
       console.error('Error al guardar prenda:', error);
@@ -92,19 +139,30 @@ const PrendasGestion = ({ userId }) => {
     setFormData({
       titulo: prenda.titulo,
       descripcion: prenda.descripcion,
-      precio: prenda.precio,
+      precio: prenda.precio.toString(),
       talle: prenda.talle,
-      categoria: prenda.categoria?.id || '',
+      categoria: prenda.categoria?.id?.toString() || '',
       imagen_url: prenda.imagen_url
     });
     setShowForm(true);
   };
 
-  const handleDelete = async (id) => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar esta prenda?')) {
+  const handleDelete = async (id, titulo) => {
+    const result = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: `¿Deseas eliminar "${titulo}"? Esta acción no se puede deshacer.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'var(--color-primary)',
+      cancelButtonColor: 'var(--color-dark)',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (result.isConfirmed) {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`/prenda/${id}`, {
+        const response = await fetch(`/api/prenda/${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -113,11 +171,31 @@ const PrendasGestion = ({ userId }) => {
 
         if (response.ok) {
           fetchPrendas();
-          alert('Prenda eliminada correctamente');
+          
+          Swal.fire({
+            title: '¡Eliminada!',
+            text: 'La prenda ha sido eliminada correctamente',
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false
+          });
+        } else {
+          const errorData = await response.json();
+          
+          Swal.fire({
+            title: 'Error',
+            text: errorData.message || 'Error al eliminar la prenda',
+            icon: 'error'
+          });
         }
       } catch (error) {
         console.error('Error al eliminar prenda:', error);
-        alert('Error al eliminar la prenda');
+        
+        Swal.fire({
+          title: 'Error',
+          text: 'Error de conexión al eliminar la prenda',
+          icon: 'error'
+        });
       }
     }
   };
@@ -217,20 +295,22 @@ const PrendasGestion = ({ userId }) => {
 
       <div className="prendas-grid">
         {prendas.map(prenda => (
-          <div key={prenda.id} className="prenda-card">
-            <img src={prenda.imagen_url} alt={prenda.titulo} />
-            <div className="prenda-info">
+          <div key={prenda.id} className="prenda-card card-producto">
+            <div className="imagen-contenedor">
+              <img src={prenda.imagen_url} alt={prenda.titulo} />
+              <div className="btns-hover">
+                <button onClick={() => handleEdit(prenda)} title="Editar">
+                  <FaEdit />
+                </button>
+                <button onClick={() => handleDelete(prenda.id, prenda.titulo)} title="Eliminar">
+                  <FaTrash />
+                </button>
+              </div>
+            </div>
+            <div className="contenido prenda-info">
               <h3>{prenda.titulo}</h3>
               <p className="precio">${prenda.precio}</p>
               <p className="talle">Talle: {prenda.talle}</p>
-            </div>
-            <div className="prenda-actions">
-              <button onClick={() => handleEdit(prenda)} title="Editar">
-                <FaEdit />
-              </button>
-              <button onClick={() => handleDelete(prenda.id)} title="Eliminar" className="btn-delete">
-                <FaTrash />
-              </button>
             </div>
           </div>
         ))}
