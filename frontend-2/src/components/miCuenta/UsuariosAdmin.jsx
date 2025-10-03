@@ -210,19 +210,19 @@ const UsuariosAdmin = () => {
       </div>
 
       <div className="usuarios-stats">
-        <div className="stat-card">
+        <div className="stat-card stat-card-total">
           <h3>Total Usuarios</h3>
           <p className="stat-number">{usuarios.length}</p>
         </div>
-        <div className="stat-card">
+        <div className="stat-card stat-card-comprador">
           <h3>Compradores</h3>
           <p className="stat-number">{usuarios.filter(u => u.rol === 'comprador').length}</p>
         </div>
-        <div className="stat-card">
+        <div className="stat-card stat-card-vendedor">
           <h3>Vendedores</h3>
           <p className="stat-number">{usuarios.filter(u => u.rol === 'vendedor').length}</p>
         </div>
-        <div className="stat-card">
+        <div className="stat-card stat-card-admin">
           <h3>Administradores</h3>
           <p className="stat-number">{usuarios.filter(u => u.rol === 'admin').length}</p>
         </div>
