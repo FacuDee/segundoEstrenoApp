@@ -158,7 +158,10 @@
 }
 
 .info-group {
-  margin-bottom: 1.5rem;
+  border: 1px dashed var(--color-dark);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
 }
 
 .info-group label {

@@ -2,7 +2,7 @@
 import FAQList from './FAQList';
 import "./FAQ.css";
 import { faqsComprar, faqsVender } from './faqData';
-import PaymentInfo from './PaymentInfo';
+import PaymentMethods from '../payment/PaymentMethods';
 
 const FAQ = () => {
   return (
@@ -12,7 +12,7 @@ const FAQ = () => {
         <FAQList faqs={faqsComprar} />
       </div>
 
-       <PaymentInfo /> {/* ← Sección de métodos de pago */}
+       <PaymentMethods /> {/* ← Sección de métodos de pago */}
 
   
       <div className="seller-info">
