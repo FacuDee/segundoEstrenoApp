@@ -9,6 +9,7 @@ import NavLinks from "./NavLinks";
 import { FaBars, FaTimes } from "react-icons/fa";
 import LoginModal from "../modals/LoginModal";
 import RegisterModal from "../modals/RegisterModal";
+import CartModal from "../cart/CartModal";
 import "./Header.css";
 
 const Header = () => {
@@ -150,6 +151,7 @@ const Header = () => {
         onSwitchToLogin={openLogin}
         onRegisterSuccess={handleRegisterSuccess}
       />
+      <CartModal />
     </header>
   );
 };

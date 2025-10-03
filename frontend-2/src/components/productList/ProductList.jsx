@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { FaHeart, FaShoppingCart, FaEye } from "react-icons/fa";
+import { useCart } from "../../context/CartContext";
 import "./ProductList.css";
 
 const ProductList = () => {
   const [prendas, setPrendas] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     fetch("/api/prenda")
@@ -15,6 +17,10 @@ const ProductList = () => {
       })
       .catch(() => setLoading(false));
   }, []);
+
+  const handleAddToCart = (prenda) => {
+    addToCart(prenda);
+  };
 
   if (loading) return <div className="loading">Cargando prendas...</div>;
 
@@ -31,7 +37,10 @@ const ProductList = () => {
               <button title="Agregar a favoritos">
                 <FaHeart />
               </button>
-              <button title="Agregar al carrito">
+              <button 
+                title="Agregar al carrito"
+                onClick={() => handleAddToCart(prenda)}
+              >
                 <FaShoppingCart />
               </button>
             </div>

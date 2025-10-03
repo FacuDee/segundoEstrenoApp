@@ -115,7 +115,7 @@ const GestionarTodasPrendas = () => {
       <div className="section-header">
         <FaTshirt className="section-icon" />
         <h2>Todas las Prendas</h2>
-        <span className="total-count">({filteredPrendas.length} prendas)</span>
+        <span className="total-count">{filteredPrendas.length} prendas</span>
       </div>
 
       {/* Filtros y búsqueda */}

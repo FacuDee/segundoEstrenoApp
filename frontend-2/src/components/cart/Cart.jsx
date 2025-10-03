@@ -1,7 +1,188 @@
+import { useState } from 'react';
+import { useCart } from '../../context/CartContext';
+import { FaShoppingBag, FaTrash, FaCreditCard } from 'react-icons/fa';
+import CartItem from './CartItem';
+import PaymentMethods from '../payment/PaymentMethods';
+import Swal from 'sweetalert2';
+import './Cart.css';
+
 const Cart = () => {
-	return (
-		<div style={{padding:'2rem',textAlign:'center'}}>Carrito (en construcción)</div>
-	);
+  const { cartItems, removeFromCart, clearCart, getCartTotal } = useCart();
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
+
+  const handleFinalizePurchase = async () => {
+    if (cartItems.length === 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'El carrito está vacío',
+        text: 'Debe haber al menos un producto seleccionado.',
+        confirmButtonColor: 'var(--color-primary)',
+      });
+      return;
+    }
+
+    if (!selectedPaymentMethod) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Selecciona un método de pago',
+        text: 'Debes elegir una forma de pago para continuar.',
+        confirmButtonColor: 'var(--color-primary)',
+      });
+      return;
+    }
+
+    // Verificar si el usuario está logueado
+    const token = localStorage.getItem('token');
+    if (!token) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Debes iniciar sesión',
+        text: 'Para finalizar la compra necesitas estar logueado.',
+        confirmButtonColor: 'var(--color-primary)',
+      });
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/transaccion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          prendas: cartItems.map(item => item.id),
+          metodoPago: selectedPaymentMethod,
+          total: getCartTotal()
+        })
+      });
+
+      if (response.ok) {
+        Swal.fire({
+          icon: 'success',
+          title: '¡Compra realizada!',
+          text: 'Tu pedido ha sido procesado correctamente',
+          confirmButtonColor: 'var(--color-primary)',
+        });
+        
+        clearCart();
+        setSelectedPaymentMethod('');
+      } else {
+        throw new Error('Error al procesar la compra');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un problema al procesar tu compra. Intenta nuevamente.',
+        confirmButtonColor: 'var(--color-primary)',
+      });
+    }
+  };
+
+  const handleClearCart = async () => {
+    const result = await Swal.fire({
+      title: '¿Vaciar carrito?',
+      text: 'Se eliminarán todos los productos del carrito',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'var(--color-darker)',
+      cancelButtonColor: 'var(--color-text-light)',
+      confirmButtonText: 'Sí, vaciar',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (result.isConfirmed) {
+      clearCart();
+      Swal.fire({
+        title: 'Se vació el Carrito',
+        text: 'Se han eliminado todos los productos',
+        icon: 'success',
+        timer: 1500,
+        showConfirmButton: false
+      });
+    }
+  };
+
+  if (cartItems.length === 0) {
+    return (
+      <div className="carrito-vacio">
+        <div className="carrito-vacio-content">
+          <FaShoppingBag className="carrito-vacio-icon" />
+          <h2>Tu carrito está vacío</h2>
+          <p>¡Descubre nuestras prendas de segunda mano!</p>
+          <a href="/prendas" className="btn-primary">
+            Ver Prendas
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="carrito-container">
+      <div className="carrito-section">
+        <div className="carrito-header">
+          <h1>
+            <FaShoppingBag className="carrito-icon" /> 
+            Mi Carrito
+          </h1>
+          <span className="carrito-count">
+            {cartItems.length} {cartItems.length === 1 ? 'producto' : 'productos'}
+          </span>
+        </div>
+        
+        <div className="carrito-items">
+          {cartItems.map(item => (
+            <CartItem 
+              key={item.id} 
+              item={item} 
+              onRemove={removeFromCart}
+            />
+          ))}
+        </div>
+
+        <div className="carrito-summary">
+          <div className="carrito-total">
+            <span className="total-label">Total:</span>
+            <span className="total-amount">${getCartTotal().toFixed(2)}</span>
+          </div>
+
+          <PaymentMethods 
+            onMethodSelect={setSelectedPaymentMethod}
+            selectedMethod={selectedPaymentMethod}
+          />
+          
+          <div className="carrito-actions">
+            <button 
+              className="btn-secondary"
+              onClick={handleClearCart}
+            >
+              <FaTrash /> Vaciar Carrito
+            </button>
+            <button 
+              className="btn-primary"
+              onClick={handleFinalizePurchase}
+            >
+              <FaCreditCard /> Finalizar Compra
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Banner lateral */}
+      <div className="carrito-banner">
+        <a href="/prendas" className="banner-link">
+          <div className="banner-content">
+            <h3>¿Necesitas más prendas?</h3>
+            <p>Descubre nuestra colección completa</p>
+            <span className="btn-banner">Seguir Comprando</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  );
 };
 
 export default Cart;

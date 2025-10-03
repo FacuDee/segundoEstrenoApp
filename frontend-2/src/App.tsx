@@ -9,10 +9,11 @@ import ProductList from "./components/productList/ProductList.jsx";
 import Header from "./components/header/Header.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import Cart from "./components/cart/Cart.jsx";
+import CartProvider from "./context/CartContext.jsx";
 
 function App() {
   return (
-    <>
+    <CartProvider>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -23,7 +24,7 @@ function App() {
         <Route path="/carrito" element={<Cart />} />
       </Routes>
       <Footer />
-    </>
+    </CartProvider>
   );
 }
 
