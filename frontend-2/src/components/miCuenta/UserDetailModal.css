@@ -118,10 +118,12 @@
 .prendas-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   max-height: 300px;
   overflow-y: auto;
-  padding-right: 5px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 10px;
 }
 
 .prendas-list::-webkit-scrollbar {
@@ -141,43 +143,66 @@
 .prenda-item {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 12px;
-  background: #f9f9f9;
-  border-radius: 10px;
-  border-left: 4px solid var(--color-secondary);
+  gap: 12px;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
   transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .prenda-item:hover {
   background: #f0f0f0;
-  transform: translateX(5px);
+  border-color: #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.prenda-image {
+.user-detail-modal .prenda-image {
   flex-shrink: 0;
+  position: relative;
+  width: 80px !important;
+  height: 80px !important;
 }
 
-.prenda-image img {
-  width: 50px;
-  height: 50px;
-  border-radius: 8px;
+.user-detail-modal .prenda-image img {
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 6px;
   object-fit: cover;
-  border: 2px solid #ddd;
+  border: 1px solid #ddd;
+  background: #f8f9fa;
+  display: block;
+}
+
+.user-detail-modal .image-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #999;
 }
 
 .prenda-info {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
   min-width: 0; /* Para permitir text-overflow */
+  padding-right: 8px;
 }
 
 .prenda-name {
   font-weight: 600;
   color: #333;
   font-size: 14px;
+  line-height: 1.2;
+  margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -185,8 +210,9 @@
 
 .prenda-category,
 .prenda-date {
-  font-size: 12px;
-  color: #666;
+  font-size: 11px;
+  color: #777;
+  line-height: 1.1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -195,8 +221,10 @@
 .prenda-price {
   flex-shrink: 0;
   font-weight: 700;
-  font-size: 16px;
-  color: var(--color-secondary);
+  font-size: 14px;
+  color: var(--color-primary);
+  text-align: right;
+  min-width: 60px;
 }
 
 .empty-prendas {

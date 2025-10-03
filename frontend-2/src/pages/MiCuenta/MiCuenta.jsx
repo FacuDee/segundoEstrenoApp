@@ -6,6 +6,7 @@ import ComprasUsuario from '../../components/miCuenta/ComprasUsuario.jsx';
 import VentasUsuario from '../../components/miCuenta/VentasUsuario.jsx';
 import PrendasGestion from '../../components/miCuenta/PrendasGestion.jsx';
 import UsuariosAdmin from '../../components/miCuenta/UsuariosAdmin.jsx';
+import GestionarTodasPrendas from '../../components/miCuenta/GestionarTodasPrendas.jsx';
 import './MiCuenta.css';
 
 const MiCuenta = () => {
@@ -59,9 +60,11 @@ const MiCuenta = () => {
       case 'ventas':
         return isVendedor ? <VentasUsuario userId={user.sub || user.id} /> : null;
       case 'prendas':
-        return isVendedor ? <PrendasGestion userId={user.sub || user.id} /> : null;
+        return isVendedor ? <PrendasGestion userId={user.sub || user.id} user={user} /> : null;
       case 'usuarios':
         return isAdmin ? <UsuariosAdmin /> : null;
+      case 'todas-prendas':
+        return isAdmin ? <GestionarTodasPrendas /> : null;
       default:
         return <PerfilUsuario user={user} onUserUpdate={handleUserUpdate} />;
     }
@@ -109,12 +112,21 @@ const MiCuenta = () => {
           )}
 
           {isAdmin && (
-            <button
-              className={activeTab === 'usuarios' ? 'active' : ''}
-              onClick={() => setActiveTab('usuarios')}
-            >
-              Gestionar Usuarios
-            </button>
+            <>
+              <button
+                className={activeTab === 'usuarios' ? 'active' : ''}
+                onClick={() => setActiveTab('usuarios')}
+              >
+                Gestionar Usuarios
+              </button>
+              
+              <button
+                className={activeTab === 'todas-prendas' ? 'active' : ''}
+                onClick={() => setActiveTab('todas-prendas')}
+              >
+                Todas las Prendas
+              </button>
+            </>
           )}
         </nav>
 

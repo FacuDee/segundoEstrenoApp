@@ -438,21 +438,7 @@
   align-items: center;
 }
 
-.btn-detail {
-  cursor: pointer;
-  color: var(--color-darker) !important;
-  border: none;
-  background: none;
-  padding: 0.5rem;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.btn-detail:hover {
-  background: rgba(0, 0, 0, 0.1);
-  transform: scale(1.1);
-}
-
+.btn-detail,
 .btn-delete {
   cursor: pointer;
   color: var(--color-darker) !important;
@@ -461,11 +447,14 @@
   padding: 0.5rem;
   border-radius: 4px;
   transition: all 0.3s ease;
+  box-shadow: none !important;
 }
 
+.btn-detail:hover,
 .btn-delete:hover {
   background: rgba(0, 0, 0, 0.1);
   transform: scale(1.1);
+  box-shadow: none !important;
 }
 
 /* Usuarios Admin */
@@ -585,8 +574,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  border-bottom: 2px solid var(--color-light);
-  background: var(--color-light);
+  border-bottom: 2px solid var(--color-dark);
+  background: var(--color-primary);
   border-radius: 12px 12px 0 0;
 }
 
@@ -600,7 +589,7 @@
   background: none;
   border: none;
   font-size: 1.2rem;
-  color: var(--color-text-light);
+  color: var(--color-lighter);
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 50%;

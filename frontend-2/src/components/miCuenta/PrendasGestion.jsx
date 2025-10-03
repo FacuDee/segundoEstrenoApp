@@ -3,7 +3,7 @@ import { FaTshirt, FaPlus, FaEdit, FaTrash, FaEye } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import './PrendasGestion.css';
 
-const PrendasGestion = ({ userId }) => {
+const PrendasGestion = ({ userId, user }) => {
   const [prendas, setPrendas] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -90,7 +90,15 @@ const PrendasGestion = ({ userId }) => {
     try {
       const token = localStorage.getItem('token');
       const method = editingPrenda ? 'PUT' : 'POST';
-      const url = editingPrenda ? `/api/prenda/${editingPrenda.id}` : '/api/prenda';
+      
+      // Usar endpoint admin si es admin y está editando
+      const isAdmin = user?.rol === 'admin';
+      let url;
+      if (editingPrenda) {
+        url = isAdmin ? `/api/prenda/admin/${editingPrenda.id}` : `/api/prenda/${editingPrenda.id}`;
+      } else {
+        url = '/api/prenda';
+      }
       
       // Preparar los datos con el formato correcto
       const dataToSend = {
