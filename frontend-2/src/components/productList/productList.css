@@ -56,6 +56,11 @@ main {
   margin: 2rem auto;
 }
 
+/* Ancho máximo para cada prenda individual */
+.product-list .product-item {
+  max-width: 350px;
+}
+
 .product-item {
   position: relative;
   width: 100%;
@@ -210,5 +215,175 @@ main {
 @media (hover: none) {
   .botones-hover {
     opacity: 1;
+  }
+}
+
+/* ===== Estilos para filtros ===== */
+.product-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.filters-section {
+  background: var(--color-lighter);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+}
+
+.search-box {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: var(--font-main);
+  transition: border-color var(--transition-normal);
+  height: 56px;
+  box-sizing: border-box;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--secondary-text-color);
+}
+
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: flex-start;
+}
+
+.category-filter,
+.price-filter {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.category-filter select,
+.price-filter select {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: var(--font-main);
+  background: white;
+  cursor: pointer;
+  transition: border-color var(--transition-normal);
+  height: 56px;
+  box-sizing: border-box;
+}
+
+.category-filter select:focus,
+.price-filter select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.filter-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--secondary-text-color);
+}
+
+.results-count {
+  text-align: center;
+  color: var(--secondary-text-color);
+  font-weight: 600;
+  padding: 1rem;
+  background: var(--color-light);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  box-sizing: border-box;
+}
+
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--secondary-text-color);
+}
+
+.no-results p {
+  font-size: 1.1rem;
+}
+
+/* Responsive para filtros */
+/* Tablet - Los filtros se mantienen en fila pero más ajustados */
+@media (max-width: 1024px) {
+  .category-filter,
+  .price-filter {
+    min-width: 180px;
+  }
+}
+
+/* Tablet pequeño - Filtros se apilan */
+@media (max-width: 768px) {
+  .filters-section {
+    padding: 1.5rem;
+  }
+  
+  .filters-row {
+    flex-direction: column;
+  }
+  
+  .category-filter,
+  .price-filter {
+    min-width: unset;
+    width: 100%;
+  }
+}
+
+/* Móvil - Todo al 100% del ancho */
+@media (max-width: 480px) {
+  .filters-section {
+    padding: 1rem;
+  }
+  
+  .search-box input,
+  .category-filter select,
+  .price-filter select {
+    padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+    height: 50px;
+  }
+  
+  .search-icon,
+  .filter-icon {
+    left: 0.75rem;
+  }
+  
+  .results-count {
+    padding: 0.75rem 1rem;
+    min-height: 45px;
+  }
+  
+  .product-list .product-item {
+    max-width: 100%;
   }
 }
