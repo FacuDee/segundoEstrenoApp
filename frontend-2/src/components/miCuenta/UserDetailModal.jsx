@@ -132,19 +132,24 @@ const UserDetailModal = ({ user, isOpen, onClose }) => {
                       // Mostrar prenda publicada con imagen, nombre y precio
                       <>
                         <div className="prenda-image">
-                          <img 
-                            src={item.imagen_url} 
-                            alt={item.titulo}
-                            onError={(e) => {
-                              e.target.src = '/images/no-image.png'; // Imagen por defecto
-                            }}
-                          />
+                          {item.imagen_url ? (
+                            <img 
+                              src={item.imagen_url} 
+                              alt={item.titulo}
+                              onError={(e) => {
+                                e.target.style.display = 'none';
+                                e.target.parentElement.innerHTML = '<div class="image-placeholder">📷</div>';
+                              }}
+                            />
+                          ) : (
+                            <div className="image-placeholder">📷</div>
+                          )}
                         </div>
                         <div className="prenda-info">
-                          <span className="prenda-name">{item.titulo}</span>
-                          <span className="prenda-category">
+                          <div className="prenda-name">{item.titulo}</div>
+                          <div className="prenda-category">
                             {item.categoria?.nombre || 'Sin categoría'} • Talle {item.talle}
-                          </span>
+                          </div>
                         </div>
                         <div className="prenda-price">
                           ${item.precio}

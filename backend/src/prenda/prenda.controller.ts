@@ -15,6 +15,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { PrendaService } from './prenda.service';
 import { Prenda } from './prenda.entity';
 import { CreatePrendaDto } from './dto/create-prenda.dto';
+import { Roles } from '../auth/roles.decorator';
+import { RolesGuard } from '../auth/roles.guard';
 
 @Controller('prenda')
 export class PrendaController {
@@ -26,6 +28,21 @@ export class PrendaController {
     } catch (error) {
       throw new HttpException(
         'Error retrieving prendas',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  // Endpoint para admin: obtener todas las prendas con detalles del vendedor
+  @Get('admin/todas')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles('admin')
+  async findAllWithVendedor(): Promise<Prenda[]> {
+    try {
+      return await this.prendaService.findAllWithVendedor();
+    } catch (error) {
+      throw new HttpException(
+        'Error retrieving all prendas for admin',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -81,6 +98,34 @@ export class PrendaController {
       throw new HttpException('Prenda not found or access denied', HttpStatus.FORBIDDEN);
     }
     return this.prendaService.update(id, updatePrendaDto);
+  }
+
+  // Endpoint para admin: actualizar cualquier prenda
+  @Put('admin/:id')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles('admin')
+  async adminUpdate(
+    @Param('id') id: string,
+    @Body() updatePrendaDto: CreatePrendaDto,
+  ) {
+    try {
+      // Admin puede actualizar cualquier prenda sin verificar propiedad
+      return await this.prendaService.adminUpdate(id, updatePrendaDto);
+    } catch (error) {
+      throw new HttpException('Error updating prenda', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  // Endpoint para admin: eliminar cualquier prenda
+  @Delete('admin/:id')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles('admin')
+  async adminRemove(@Param('id') id: string) {
+    try {
+      return await this.prendaService.remove(id);
+    } catch (error) {
+      throw new HttpException('Error deleting prenda', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   // borrar una prenda

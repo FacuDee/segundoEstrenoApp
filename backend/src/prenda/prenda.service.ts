@@ -18,6 +18,14 @@ export class PrendaService {
       order: { createdAt: 'DESC' } // Más recientes primero
     });
   }
+
+  // Método para admin: obtener todas las prendas con información del vendedor
+  async findAllWithVendedor(): Promise<Prenda[]> {
+    return this.prendaRepository.find({ 
+      relations: ['categoria', 'vendedor'],
+      order: { createdAt: 'DESC' }
+    });
+  }
   async findOne(id: number): Promise<Prenda | null> {
     return this.prendaRepository.findOne({ 
       where: { id }, 
@@ -69,6 +77,37 @@ export class PrendaService {
       vendedor: { id: updatePrendaDto.vendedor },
     });
     return await this.prendaRepository.findOne({ where: { id: prendaId }, relations: ['categoria'] });
+  }
+
+  // Método para admin actualizar cualquier prenda preservando el vendedor original
+  async adminUpdate(id: string, updatePrendaDto: CreatePrendaDto) {
+    const prendaId = Number(id);
+    const prenda = await this.prendaRepository.findOne({ 
+      where: { id: prendaId }, 
+      relations: ['vendedor', 'categoria'] 
+    });
+    
+    if (!prenda) {
+      throw new Error(`Prenda con ID ${id} no encontrada.`);
+    }
+
+    // Preservar el vendedor original
+    await this.prendaRepository.update(prendaId, {
+      titulo: updatePrendaDto.titulo,
+      descripcion: updatePrendaDto.descripcion,
+      talle: updatePrendaDto.talle,
+      precio: updatePrendaDto.precio,
+      imagen_url: updatePrendaDto.imagen_url,
+      disponible: updatePrendaDto.disponible ?? true,
+      categoria: { id: updatePrendaDto.categoria },
+      // Mantener el vendedor original, no actualizarlo
+      vendedor: { id: prenda.vendedor.id },
+    });
+    
+    return await this.prendaRepository.findOne({ 
+      where: { id: prendaId }, 
+      relations: ['categoria', 'vendedor'] 
+    });
   }
 
   // Método para eliminar una prenda
