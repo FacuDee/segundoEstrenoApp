@@ -62,11 +62,16 @@ export class PrendaService {
   // Método para actualizar una prenda
   async update(id: string, updatePrendaDto: CreatePrendaDto) {
     const prendaId = Number(id);
-    const prenda = await this.prendaRepository.findOne({ where: { id: prendaId } });
+    const prenda = await this.prendaRepository.findOne({ 
+      where: { id: prendaId }, 
+      relations: ['vendedor', 'categoria'] 
+    });
     if (!prenda) {
       throw new Error(`Prenda con ID ${id} no encontrada.`);
     }
-    await this.prendaRepository.update(prendaId, {
+    
+    // Preparar datos de actualización preservando el vendedor original
+    const updateData = {
       titulo: updatePrendaDto.titulo,
       descripcion: updatePrendaDto.descripcion,
       talle: updatePrendaDto.talle,
@@ -74,9 +79,11 @@ export class PrendaService {
       imagen_url: updatePrendaDto.imagen_url,
       disponible: updatePrendaDto.disponible ?? true,
       categoria: { id: updatePrendaDto.categoria },
-      vendedor: { id: updatePrendaDto.vendedor },
-    });
-    return await this.prendaRepository.findOne({ where: { id: prendaId }, relations: ['categoria'] });
+      ...(updatePrendaDto.vendedor && { vendedor: { id: updatePrendaDto.vendedor } })
+    };
+    
+    await this.prendaRepository.update(prendaId, updateData);
+    return await this.prendaRepository.findOne({ where: { id: prendaId }, relations: ['categoria', 'vendedor'] });
   }
 
   // Método para admin actualizar cualquier prenda preservando el vendedor original
