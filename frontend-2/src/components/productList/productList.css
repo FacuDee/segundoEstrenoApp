@@ -51,7 +51,7 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
-  padding: 1rem;
+  padding: 1rem 0;
   max-width: 1200px;
   margin: 2rem auto;
 }
@@ -133,8 +133,6 @@ main {
   padding-top: 0.5rem;
   border-top: 1px solid rgba(0,0,0,0.1);
 }
-
-
 
 /* Botones fijos con opacidad */
 .btns-hover {
@@ -226,7 +224,7 @@ main {
 }
 
 .filters-section {
-  background: var(--color-lighter);
+  background: var(--color-accent-light);
   padding: 2rem;
   border-radius: 12px;
   box-shadow: var(--shadow-md);
@@ -236,7 +234,6 @@ main {
 .search-box input {
   width: 100%;
   padding: 1rem 1rem 1rem 3rem;
-  border: 1px solid var(--color-accent);
   border-radius: 8px;
   font-size: 1rem;
   font-family: var(--font-main);
@@ -247,7 +244,7 @@ main {
 
 .search-box input:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: var(--color-darker);
 }
 
 .search-icon {
@@ -293,7 +290,7 @@ main {
 .size-filter select:focus,
 .price-filter select:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: var(--color-darker);
 }
 
 .filter-icon {
