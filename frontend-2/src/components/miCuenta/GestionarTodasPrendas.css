@@ -281,35 +281,41 @@
   color: var(--secondary-text-color);
 }
 
+@media (max-width: 994px) {
+  .gestionar-todas-prendas h2 {
+    font-size: 1.4rem;
+  }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .gestionar-todas-prendas {
     padding: 15px;
   }
-  
+
   .filters-section {
     flex-direction: column;
     gap: 15px;
   }
-  
+
   .search-box {
     min-width: auto;
   }
-  
+
   .category-filter {
     min-width: auto;
   }
-  
+
   .prendas-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .gestionar-todas-prendas .section-header {
     flex-wrap: wrap;
     gap: 10px;
   }
-  
+
   .gestionar-todas-prendas h2 {
     font-size: 1.5rem;
   }

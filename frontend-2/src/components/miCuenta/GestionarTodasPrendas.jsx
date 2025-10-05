@@ -185,7 +185,6 @@ const GestionarTodasPrendas = () => {
                   </div>
                   
                   <div className="detail-item price">
-                    <FaDollarSign className="detail-icon" />
                     <span className="precio">${prenda.precio}</span>
                   </div>
                 </div>

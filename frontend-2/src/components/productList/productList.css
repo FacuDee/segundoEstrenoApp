@@ -233,15 +233,10 @@ main {
   margin-bottom: 2rem;
 }
 
-.search-box {
-  position: relative;
-  margin-bottom: 1.5rem;
-}
-
 .search-box input {
   width: 100%;
   padding: 1rem 1rem 1rem 3rem;
-  border: 2px solid #e0e0e0;
+  border: 1px solid var(--color-accent);
   border-radius: 8px;
   font-size: 1rem;
   font-family: var(--font-main);
@@ -267,29 +262,27 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 1rem;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .category-filter,
+.size-filter,
 .price-filter {
   position: relative;
-  flex: 1;
-  min-width: 200px;
-  height: 56px;
   display: flex;
   align-items: center;
 }
 
 .category-filter select,
+.size-filter select,
 .price-filter select {
-  width: 100%;
+  width: fit-content;
   padding: 1rem 1rem 1rem 3rem;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
   font-size: 1rem;
   font-family: var(--font-main);
-  background: white;
+  background: var(--color-lighter);
   cursor: pointer;
   transition: border-color var(--transition-normal);
   height: 56px;
@@ -297,6 +290,7 @@ main {
 }
 
 .category-filter select:focus,
+.size-filter select:focus,
 .price-filter select:focus {
   outline: none;
   border-color: var(--color-primary);
@@ -308,20 +302,6 @@ main {
   top: 50%;
   transform: translateY(-50%);
   color: var(--secondary-text-color);
-}
-
-.results-count {
-  text-align: center;
-  color: var(--secondary-text-color);
-  font-weight: 600;
-  padding: 1rem;
-  background: var(--color-light);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 56px;
-  box-sizing: border-box;
 }
 
 .no-results {
@@ -338,8 +318,15 @@ main {
 /* Tablet - Los filtros se mantienen en fila pero más ajustados */
 @media (max-width: 1024px) {
   .category-filter,
+  .size-filter,
   .price-filter {
     min-width: 180px;
+  }
+
+  .category-filter select,
+  .size-filter select,
+  .price-filter select {
+    width: 100%;
   }
 }
 
@@ -354,6 +341,7 @@ main {
   }
   
   .category-filter,
+  .size-filter,
   .price-filter {
     min-width: unset;
     width: 100%;
@@ -368,19 +356,15 @@ main {
   
   .search-box input,
   .category-filter select,
-  .price-filter select {
+  .size-filter select,
+  .price-filter select { 
     padding: 0.75rem 0.75rem 0.75rem 2.5rem;
-    height: 50px;
+    height: 56px;
   }
   
   .search-icon,
   .filter-icon {
     left: 0.75rem;
-  }
-  
-  .results-count {
-    padding: 0.75rem 1rem;
-    min-height: 45px;
   }
   
   .product-list .product-item {

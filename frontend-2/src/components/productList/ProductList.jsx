@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaHeart, FaShoppingCart, FaEye, FaSearch, FaFilter, FaDollarSign } from "react-icons/fa";
+import { FaHeart, FaShoppingCart, FaEye, FaSearch, FaFilter, FaDollarSign, FaTshirt } from "react-icons/fa";
 import { useCart } from "../../context/CartContext";
 import "./ProductList.css";
 
@@ -10,6 +10,7 @@ const ProductList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
   const [priceFilter, setPriceFilter] = useState('');
+  const [sizeFilter, setSizeFilter] = useState('');
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -59,21 +60,30 @@ const ProductList = () => {
     if (priceFilter !== '') {
       const precio = parseFloat(prenda.precio);
       switch (priceFilter) {
+        case 'muy-bajo':
+          matchesPrice = precio <= 25000;
+          break;
         case 'bajo':
-          matchesPrice = precio < 30000;
+          matchesPrice = precio > 25000 && precio <= 50000;
           break;
         case 'medio':
-          matchesPrice = precio >= 30000 && precio <= 80000;
+          matchesPrice = precio > 50000 && precio <= 80000;
           break;
         case 'alto':
-          matchesPrice = precio > 80000;
+          matchesPrice = precio > 80000 && precio <= 100000;
+          break;
+        case 'muy-alto':
+          matchesPrice = precio > 100000;
           break;
         default:
           matchesPrice = true;
       }
     }
     
-    return matchesSearch && matchesCategory && matchesPrice;
+    // Filtro por talle
+    const matchesSize = sizeFilter === '' || (prenda.talle && prenda.talle.toLowerCase() === sizeFilter.toLowerCase());
+    
+    return matchesSearch && matchesCategory && matchesPrice && matchesSize;
   });
 
   if (loading) return <div className="loading">Cargando prendas...</div>;
@@ -107,6 +117,33 @@ const ProductList = () => {
               ))}
             </select>
           </div>
+          
+          <div className="size-filter">
+            <FaTshirt className="filter-icon" />
+            <select
+              value={sizeFilter}
+              onChange={(e) => setSizeFilter(e.target.value)}
+            >
+              <option value="">Todos los talles</option>
+              <option value="XS">XS</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+              <option value="35">35</option>
+              <option value="36">36</option>
+              <option value="37">37</option>
+              <option value="38">38</option>
+              <option value="39">39</option>
+              <option value="40">40</option>
+              <option value="41">41</option>
+              <option value="42">42</option>
+              <option value="43">43</option>
+              <option value="44">44</option>
+              <option value="45">45</option>
+            </select>
+          </div>
 
           <div className="price-filter">
             <FaDollarSign className="filter-icon" />
@@ -115,15 +152,13 @@ const ProductList = () => {
               onChange={(e) => setPriceFilter(e.target.value)}
             >
               <option value="">Todos los precios</option>
-              <option value="bajo">Hasta $30.000</option>
-              <option value="medio">$30.000 - $80.000</option>
-              <option value="alto">Más de $80.000</option>
+              <option value="muy-bajo">Hasta $25.000</option>
+              <option value="bajo">$25.000 - $50.000</option>
+              <option value="medio">$50.000 - $80.000</option>
+              <option value="alto">$80.000 - $100.000</option>
+              <option value="muy-alto">Más de $100.000</option>
             </select>
           </div>
-        </div>
-
-        <div className="results-count">
-          {filteredPrendas.length} {filteredPrendas.length === 1 ? 'prenda encontrada' : 'prendas encontradas'}
         </div>
       </div>
 
