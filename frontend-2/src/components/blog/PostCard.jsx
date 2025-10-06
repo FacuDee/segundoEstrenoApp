@@ -48,7 +48,7 @@ const PostCard = ({ post }) => {
   return (
     <div className="blog-card">
       {renderMedia()}
-      <div className="blog-content">
+      <div className="blog-content-card">
         <h2 className="blog-title">{post.title}</h2>
         <p className="blog-description">{post.description}</p>
         {renderActionButton()}
