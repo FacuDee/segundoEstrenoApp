@@ -115,7 +115,7 @@ export const CartProvider = ({ children }) => {
       Swal.fire({
         icon: 'info',
         title: 'Ya está en el carrito',
-        text: 'Este producto ya se encuentra en tu carrito de compras',
+        text: 'Este producto ya se encuentra en tu carrito de compras. Son prendas únicas.',
         timer: 2500,
         showConfirmButton: false,
         toast: true,

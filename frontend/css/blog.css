@@ -47,7 +47,7 @@
   display: flex;
   flex-direction: column;
   transition: transform 0.3s var(--transition-normal),
-    box-shadow 0.3s var(--transition-normal);
+  box-shadow 0.3s var(--transition-normal);
 }
 
 .blog-card:hover {

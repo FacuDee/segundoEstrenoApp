@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1rem 1rem 0;
-  background: white;
+  background: linear-gradient(270deg, var(--color-accent-light) 0%, var(--color-light) 100%);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 1.5rem;
@@ -112,7 +112,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .carrito-item {
-    height: 80px;
+    height: 100px;
     padding: 0.5rem 0.75rem 0.5rem 0;
     margin-bottom: 1rem;
   }
@@ -122,18 +122,18 @@
   }
 
   .item-image {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
 
   .item-image img {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
 
   .image-placeholder {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
 
   .item-title {
