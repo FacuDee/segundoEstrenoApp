@@ -89,14 +89,37 @@ export const CartProvider = ({ children }) => {
 
   // Agregar producto al carrito
   const addToCart = (prenda) => {
+    // Verificar si el usuario está logueado
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // Abrir el modal del carrito (vacío) y mostrar mensaje toast
+      setIsCartOpen(true);
+      
+      Swal.fire({
+        icon: 'warning',
+        title: 'Inicia sesión para comprar',
+        text: 'Necesitas estar logueado para agregar productos al carrito',
+        timer: 3000,
+        showConfirmButton: false,
+        toast: true,
+        position: 'top-end'
+      });
+      return;
+    }
+
     const existingItem = cartItems.find(item => item.id === prenda.id);
     
     if (existingItem) {
+      setIsCartOpen(true); // Abrir el carrito para mostrar el producto existente
+      
       Swal.fire({
         icon: 'info',
-        title: 'Producto ya en carrito',
-        text: 'Este producto ya está en tu carrito',
-        confirmButtonColor: 'var(--primary-color)',
+        title: 'Ya está en el carrito',
+        text: 'Este producto ya se encuentra en tu carrito de compras',
+        timer: 2500,
+        showConfirmButton: false,
+        toast: true,
+        position: 'top-end'
       });
       return;
     }

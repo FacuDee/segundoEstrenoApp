@@ -425,7 +425,7 @@
 .precio {
   font-size: 1.2rem;
   font-weight: bold;
-  color: var(--color-primary);
+  color: var(--color-darker);
 }
 
 .prenda-actions {
@@ -457,12 +457,13 @@
 
 .btn-detail,
 .btn-delete {
+  font-size: 1rem;
   cursor: pointer;
   color: var(--color-darker) !important;
   border: none;
   background: none;
   padding: 0.5rem;
-  border-radius: 4px;
+  border-radius: 5px;
   transition: all 0.3s ease;
   box-shadow: none !important;
 }

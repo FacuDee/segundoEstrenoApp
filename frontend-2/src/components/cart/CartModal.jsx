@@ -69,7 +69,7 @@ const CartModal = () => {
         {cartItems.length > 0 && (
           <div className="cart-modal-footer">
             <button className="btn-clear" onClick={handleClearCart}>
-              <FaTrash /> Vaciar
+              <FaTrash /> Vaciar Carrito
             </button>
             <a href="/carrito" className="btn-checkout" onClick={closeCart}>
               Ver Carrito Completo

@@ -113,7 +113,7 @@ main {
 .card-producto .contenido p {
   color: var(--color-text);
   font-size: 0.9rem;
-  margin: 0.25rem 0;
+  margin: 0.75rem 0;
   line-height: 1.4;
   flex: 1; /* La descripción ocupa el espacio disponible */
   display: -webkit-box;
@@ -155,11 +155,12 @@ main {
 }
 
 .btns-hover button {
+  font-size: 1rem;
   padding: 10px 12px;
   border: none;
   border-radius: 50%;
-  background-color: var(--color-dark);
-  color: var(--color-lighter);
+  background-color: var(--color-lighter);
+  color: var(--color-darker);
   font-weight: 500;
   font-family: var(--font-main);
   cursor: pointer;
@@ -170,7 +171,7 @@ main {
 
 .btns-hover button:hover {
   opacity: 1;
-  background-color: var(--color-darker);
+  background-color: var(--color-accent-light) !important;
 }
 
 .anim-fav {
