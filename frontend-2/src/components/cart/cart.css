@@ -104,6 +104,9 @@
   gap: 0.5rem;
   text-decoration: none;
   text-align: center;
+  height: 48px;
+  min-height: 48px;
+  box-sizing: border-box;
 }
 
 .btn-primary {
@@ -123,7 +126,7 @@
 }
 
 .btn-secondary:hover {
-  background: var(--text-color);
+  background: var(--color-primary);
   transform: translateY(-2px);
 }
 

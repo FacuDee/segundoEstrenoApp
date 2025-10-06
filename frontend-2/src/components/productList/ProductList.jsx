@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaHeart, FaShoppingCart, FaEye, FaSearch, FaFilter, FaDollarSign, FaTshirt } from "react-icons/fa";
+import { FaShoppingCart, FaEye, FaSearch, FaFilter, FaDollarSign, FaTshirt } from "react-icons/fa";
 import { useCart } from "../../context/CartContext";
 import "./ProductList.css";
 
@@ -170,9 +170,6 @@ const ProductList = () => {
             <div className="btns-hover">
               <button title="Ver detalles">
                 <FaEye />
-              </button>
-              <button title="Agregar a favoritos">
-                <FaHeart />
               </button>
               <button 
                 title="Agregar al carrito"

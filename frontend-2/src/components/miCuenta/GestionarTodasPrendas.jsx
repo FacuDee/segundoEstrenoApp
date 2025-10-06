@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaTshirt, FaTrash, FaUser, FaTag, FaDollarSign, FaSearch, FaFilter } from 'react-icons/fa';
+import { FaTshirt, FaTrash, FaUser, FaTag, FaSearch, FaFilter } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import './GestionarTodasPrendas.css';
 
@@ -181,6 +181,7 @@ const GestionarTodasPrendas = () => {
                   </div>
                   
                   <div className="detail-item">
+                    <FaTshirt className="detail-icon" />
                     <span>Talle: {prenda.talle}</span>
                   </div>
                   

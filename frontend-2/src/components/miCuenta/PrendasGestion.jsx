@@ -161,8 +161,8 @@ const PrendasGestion = ({ userId, user }) => {
       text: `¿Deseas eliminar "${titulo}"? Esta acción no se puede deshacer.`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: 'var(--color-primary)',
-      cancelButtonColor: 'var(--color-dark)',
+      confirmButtonColor: 'var(--color-darker)',
+      cancelButtonColor: 'var(--color-text-light)',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
     });

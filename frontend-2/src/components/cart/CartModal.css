@@ -204,7 +204,7 @@
 .cart-modal-footer {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   margin-top: 1.5rem;
   gap: 1rem;
   padding: 1.5rem;
@@ -257,6 +257,7 @@
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 8px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
@@ -267,6 +268,9 @@
   gap: 0.5rem;
   transition: all var(--transition-normal);
   font-family: var(--font-main);
+  height: 48px;
+  min-height: 48px;
+  box-sizing: border-box;
 }
 
 .btn-clear {
@@ -275,7 +279,7 @@
 }
 
 .btn-clear:hover {
-  background: var(--text-color);
+  background: var(--color-primary);
 }
 
 .btn-checkout {
