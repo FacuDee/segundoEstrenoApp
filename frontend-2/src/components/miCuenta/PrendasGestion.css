@@ -235,11 +235,6 @@
   background-color: var(--color-darker);
 }
 
-/* Estilo especial para el botón de eliminar */
-.btns-hover button:last-child:hover {
-  background-color: #dc3545;
-}
-
 .empty-state {
   text-align: center;
   padding: 60px 20px;

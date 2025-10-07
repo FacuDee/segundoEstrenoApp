@@ -59,12 +59,18 @@ main {
 }
 
 .nosotros-info span {
+  background: linear-gradient(0deg, var(--color-primary-dark), var(--color-primary));
+  color: var(--color-lighter);
+  border-radius: 10px;
+  padding: 8px;
   font-weight: bold;
 }
 
-.nosotros-info i {
-  padding-right: 1rem;
+.nosotros-info .check-icon {
+  margin-right: 1rem;
   color: var(--color-primary-dark);
+  font-size: 1rem;
+  flex-shrink: 0;
 }
 
 .nosotros-info p {
@@ -73,6 +79,11 @@ main {
   text-align: justify;
   line-height: 2;
   margin: 2rem auto;
+}
+
+.nosotros-info p span {
+  flex: 1;
+  font-weight: bolder;
 }
 
 .whatsapp-float {
@@ -168,6 +179,7 @@ main {
   }
   
   .nosotros-info p {
+    margin: 1rem auto;
     padding: 1rem;
     font-size: 1rem;
     line-height: 1.5;
