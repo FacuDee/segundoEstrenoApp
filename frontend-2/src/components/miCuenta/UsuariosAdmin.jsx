@@ -10,6 +10,8 @@ const UsuariosAdmin = () => {
   const [filterRole, setFilterRole] = useState('');
   const [selectedUser, setSelectedUser] = useState(null);
   const [showUserDetail, setShowUserDetail] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
 
   useEffect(() => {
     fetchUsuarios();
@@ -161,6 +163,21 @@ const UsuariosAdmin = () => {
     return matchesSearch && matchesRole;
   });
 
+  // Lógica de paginación
+  const totalPages = Math.ceil(filteredUsuarios.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedUsuarios = filteredUsuarios.slice(startIndex, startIndex + itemsPerPage);
+
+  // Función para cambiar de página
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  // Resetear página cuando cambian los filtros
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, filterRole]);
+
   if (loading) return <div className="loading">Cargando usuarios...</div>;
 
   if (usuarios.length === 0) {
@@ -235,12 +252,12 @@ const UsuariosAdmin = () => {
               <th>Nombre</th>
               <th>Email</th>
               <th>Rol</th>
-              <th>Fecha Registro</th>
+              <th>Fecha Alta</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {filteredUsuarios.map(usuario => (
+            {paginatedUsuarios.map(usuario => (
               <tr key={usuario.id}>
                 <td>{usuario.username || usuario.nombre}</td>
                 <td>{usuario.email}</td>
@@ -283,6 +300,68 @@ const UsuariosAdmin = () => {
       {filteredUsuarios.length === 0 && (
         <div className="empty-state">
           <p>No se encontraron usuarios que coincidan con los filtros.</p>
+        </div>
+      )}
+
+      {/* Información de paginación y controles */}
+      {filteredUsuarios.length > 0 && (
+        <div className="pagination-info">
+          <p>
+            Mostrando {startIndex + 1}-{Math.min(startIndex + itemsPerPage, filteredUsuarios.length)} de {filteredUsuarios.length} usuarios
+          </p>
+        </div>
+      )}
+
+      {/* Controles de paginación */}
+      {totalPages > 1 && (
+        <div className="pagination-controls">
+          <button 
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="pagination-btn"
+          >
+            Anterior
+          </button>
+          
+          <div className="pagination-numbers">
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .filter(page => {
+                // Mostrar páginas relevantes (primera, última, actual y adyacentes)
+                return page === 1 || 
+                       page === totalPages || 
+                       Math.abs(page - currentPage) <= 2;
+              })
+              .map((page, index, array) => {
+                // Agregar puntos suspensivos si hay saltos
+                const elements = [];
+                if (index > 0 && array[index - 1] < page - 1) {
+                  elements.push(
+                    <span key={`ellipsis-${page}`} className="pagination-ellipsis">
+                      ...
+                    </span>
+                  );
+                }
+                elements.push(
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`pagination-btn ${currentPage === page ? 'active' : ''}`}
+                  >
+                    {page}
+                  </button>
+                );
+                return elements;
+              })
+              .flat()}
+          </div>
+          
+          <button 
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="pagination-btn"
+          >
+            Siguiente
+          </button>
         </div>
       )}
 

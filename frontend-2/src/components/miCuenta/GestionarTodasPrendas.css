@@ -319,3 +319,124 @@
     font-size: 1.5rem;
   }
 }
+
+/* ===== Estilos para paginación de prendas ===== */
+.gestionar-todas-prendas .pagination-info {
+  text-align: center;
+  margin: 2rem 0 1rem 0;
+  color: var(--color-text-light);
+  font-size: 1rem;
+}
+
+.gestionar-todas-prendas .pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.gestionar-todas-prendas .pagination-numbers {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.gestionar-todas-prendas .pagination-btn {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  background: var(--color-lighter);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  min-width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gestionar-todas-prendas .pagination-btn:hover:not(:disabled) {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.gestionar-todas-prendas .pagination-btn.active {
+  background: var(--color-darker);
+  border-color: var(--color-darker);
+  color: var(--color-lighter);
+  font-weight: 700;
+}
+
+.gestionar-todas-prendas .pagination-btn:disabled {
+  background: #f5f5f5;
+  border-color: #e0e0e0;
+  color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.gestionar-todas-prendas .pagination-ellipsis {
+  color: var(--color-text-light);
+  font-weight: 500;
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  height: 44px;
+}
+
+/* Responsive para paginación de prendas */
+@media (max-width: 768px) {
+  .gestionar-todas-prendas .pagination-controls {
+    gap: 0.25rem;
+  }
+  
+  .gestionar-todas-prendas .pagination-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    min-width: 40px;
+    height: 40px;
+  }
+  
+  .gestionar-todas-prendas .pagination-ellipsis {
+    height: 40px;
+    padding: 0 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gestionar-todas-prendas .pagination-info {
+    font-size: 0.9rem;
+    margin: 1.5rem 0 1rem 0;
+  }
+  
+  .gestionar-todas-prendas .pagination-controls {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .gestionar-todas-prendas .pagination-numbers {
+    gap: 0.125rem;
+  }
+  
+  .gestionar-todas-prendas .pagination-btn {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+    min-width: 36px;
+    height: 36px;
+  }
+  
+  .gestionar-todas-prendas .pagination-ellipsis {
+    height: 36px;
+    font-size: 0.85rem;
+  }
+}

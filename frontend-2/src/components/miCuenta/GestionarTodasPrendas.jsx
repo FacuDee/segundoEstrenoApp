@@ -9,6 +9,8 @@ const GestionarTodasPrendas = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
   const [categorias, setCategorias] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(12);
 
   useEffect(() => {
     fetchAllPrendas();
@@ -108,6 +110,22 @@ const GestionarTodasPrendas = () => {
     return matchesSearch && matchesCategory;
   });
 
+  // Lógica de paginación
+  const totalPages = Math.ceil(filteredPrendas.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedPrendas = filteredPrendas.slice(startIndex, startIndex + itemsPerPage);
+
+  // Función para cambiar de página
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Resetear página cuando cambian los filtros
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, filterCategory]);
+
   if (loading) return <div className="loading">Cargando todas las prendas...</div>;
 
   return (
@@ -152,63 +170,127 @@ const GestionarTodasPrendas = () => {
           <p>No se encontraron prendas</p>
         </div>
       ) : (
-        <div className="prendas-grid">
-          {filteredPrendas.map(prenda => (
-            <div key={prenda.id} className="prenda-card">
-              <div className="prenda-image">
-                {prenda.imagen_url ? (
-                  <img src={prenda.imagen_url} alt={prenda.titulo} />
-                ) : (
-                  <div className="no-image">
-                    <FaTshirt />
+        <>
+          <div className="prendas-grid">
+            {paginatedPrendas.map(prenda => (
+              <div key={prenda.id} className="prenda-card">
+                <div className="prenda-image">
+                  {prenda.imagen_url ? (
+                    <img src={prenda.imagen_url} alt={prenda.titulo} />
+                  ) : (
+                    <div className="no-image">
+                      <FaTshirt />
+                    </div>
+                  )}
+                </div>
+                
+                <div className="prenda-info">
+                  <h3 className="prenda-titulo">{prenda.titulo}</h3>
+                  <p className="prenda-descripcion">{prenda.descripcion}</p>
+                  
+                  <div className="prenda-details">
+                    <div className="detail-item">
+                      <FaUser className="detail-icon" />
+                      <span>Vendedor: {prenda.vendedor?.username || 'Sin vendedor'}</span>
+                    </div>
+                    
+                    <div className="detail-item">
+                      <FaTag className="detail-icon" />
+                      <span>Categoría: {prenda.categoria?.nombre || 'Sin categoría'}</span>
+                    </div>
+                    
+                    <div className="detail-item">
+                      <FaTshirt className="detail-icon" />
+                      <span>Talle: {prenda.talle}</span>
+                    </div>
+                    
+                    <div className="detail-item price">
+                      <span className="precio">${prenda.precio}</span>
+                    </div>
                   </div>
-                )}
+
+                  <div className="prenda-status">
+                    <span className={`status ${prenda.disponible ? 'disponible' : 'no-disponible'}`}>
+                      {prenda.disponible ? 'Disponible' : 'No disponible'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="prenda-actions">
+                  <button 
+                    className="btn-delete"
+                    onClick={() => handleDeletePrenda(prenda.id, prenda.titulo)}
+                    title="Eliminar prenda"
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Información de paginación y controles */}
+          {filteredPrendas.length > 0 && (
+            <div className="pagination-info">
+              <p>
+                Mostrando {startIndex + 1}-{Math.min(startIndex + itemsPerPage, filteredPrendas.length)} de {filteredPrendas.length} prendas
+              </p>
+            </div>
+          )}
+
+          {/* Controles de paginación */}
+          {totalPages > 1 && (
+            <div className="pagination-controls">
+              <button 
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="pagination-btn"
+              >
+                Anterior
+              </button>
+              
+              <div className="pagination-numbers">
+                {Array.from({ length: totalPages }, (_, i) => i + 1)
+                  .filter(page => {
+                    // Mostrar páginas relevantes (primera, última, actual y adyacentes)
+                    return page === 1 || 
+                           page === totalPages || 
+                           Math.abs(page - currentPage) <= 2;
+                  })
+                  .map((page, index, array) => {
+                    // Agregar puntos suspensivos si hay saltos
+                    const elements = [];
+                    if (index > 0 && array[index - 1] < page - 1) {
+                      elements.push(
+                        <span key={`ellipsis-${page}`} className="pagination-ellipsis">
+                          ...
+                        </span>
+                      );
+                    }
+                    elements.push(
+                      <button
+                        key={page}
+                        onClick={() => handlePageChange(page)}
+                        className={`pagination-btn ${currentPage === page ? 'active' : ''}`}
+                      >
+                        {page}
+                      </button>
+                    );
+                    return elements;
+                  })
+                  .flat()}
               </div>
               
-              <div className="prenda-info">
-                <h3 className="prenda-titulo">{prenda.titulo}</h3>
-                <p className="prenda-descripcion">{prenda.descripcion}</p>
-                
-                <div className="prenda-details">
-                  <div className="detail-item">
-                    <FaUser className="detail-icon" />
-                    <span>Vendedor: {prenda.vendedor?.username || 'Sin vendedor'}</span>
-                  </div>
-                  
-                  <div className="detail-item">
-                    <FaTag className="detail-icon" />
-                    <span>Categoría: {prenda.categoria?.nombre || 'Sin categoría'}</span>
-                  </div>
-                  
-                  <div className="detail-item">
-                    <FaTshirt className="detail-icon" />
-                    <span>Talle: {prenda.talle}</span>
-                  </div>
-                  
-                  <div className="detail-item price">
-                    <span className="precio">${prenda.precio}</span>
-                  </div>
-                </div>
-
-                <div className="prenda-status">
-                  <span className={`status ${prenda.disponible ? 'disponible' : 'no-disponible'}`}>
-                    {prenda.disponible ? 'Disponible' : 'No disponible'}
-                  </span>
-                </div>
-              </div>
-
-              <div className="prenda-actions">
-                <button 
-                  className="btn-delete"
-                  onClick={() => handleDeletePrenda(prenda.id, prenda.titulo)}
-                  title="Eliminar prenda"
-                >
-                  <FaTrash />
-                </button>
-              </div>
+              <button 
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="pagination-btn"
+              >
+                Siguiente
+              </button>
             </div>
-          ))}
-        </div>
+          )}
+        </>
       )}
     </div>
   );

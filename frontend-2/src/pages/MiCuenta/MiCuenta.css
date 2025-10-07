@@ -1092,3 +1092,124 @@
     align-self: flex-end;
   }
 }
+
+/* ===== Estilos para paginación de usuarios ===== */
+.usuarios-admin .pagination-info {
+  text-align: center;
+  margin: 1.5rem 0 1rem 0;
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+}
+
+.usuarios-admin .pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.usuarios-admin .pagination-numbers {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.usuarios-admin .pagination-btn {
+  padding: 0.6rem 1rem;
+  border: 2px solid #e0e0e0;
+  background: var(--color-lighter);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.usuarios-admin .pagination-btn:hover:not(:disabled) {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.usuarios-admin .pagination-btn.active {
+  background: var(--color-darker);
+  border-color: var(--color-darker);
+  color: var(--color-lighter);
+  font-weight: 700;
+}
+
+.usuarios-admin .pagination-btn:disabled {
+  background: #f5f5f5;
+  border-color: #e0e0e0;
+  color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.usuarios-admin .pagination-ellipsis {
+  color: var(--color-text-light);
+  font-weight: 500;
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+/* Responsive para paginación de usuarios */
+@media (max-width: 768px) {
+  .usuarios-admin .pagination-controls {
+    gap: 0.25rem;
+  }
+  
+  .usuarios-admin .pagination-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    min-width: 36px;
+    height: 36px;
+  }
+  
+  .usuarios-admin .pagination-ellipsis {
+    height: 36px;
+    padding: 0 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .usuarios-admin .pagination-info {
+    font-size: 0.85rem;
+    margin: 1rem 0 0.75rem 0;
+  }
+  
+  .usuarios-admin .pagination-controls {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .usuarios-admin .pagination-numbers {
+    gap: 0.125rem;
+  }
+  
+  .usuarios-admin .pagination-btn {
+    padding: 0.4rem;
+    font-size: 0.75rem;
+    min-width: 32px;
+    height: 32px;
+  }
+  
+  .usuarios-admin .pagination-ellipsis {
+    height: 32px;
+    font-size: 0.75rem;
+  }
+}
