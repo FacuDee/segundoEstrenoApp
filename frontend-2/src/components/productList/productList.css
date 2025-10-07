@@ -369,3 +369,123 @@ main {
     max-width: 100%;
   }
 }
+
+/* ===== Estilos para paginación ===== */
+.pagination-info {
+  text-align: center;
+  margin: 2rem 0 1rem 0;
+  color: var(--color-text-light);
+  font-size: 1rem;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.pagination-numbers {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.pagination-btn {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  background: var(--color-lighter);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  min-width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-lighter);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.pagination-btn.active {
+  background: var(--color-darker);
+  border-color: var(--color-darker);
+  color: var(--color-lighter);
+  font-weight: 700;
+}
+
+.pagination-btn:disabled {
+  background: #f5f5f5;
+  border-color: #e0e0e0;
+  color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.pagination-ellipsis {
+  color: var(--color-text-light);
+  font-weight: 500;
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  height: 44px;
+}
+
+/* Responsive para paginación */
+@media (max-width: 768px) {
+  .pagination-controls {
+    gap: 0.25rem;
+  }
+  
+  .pagination-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    min-width: 40px;
+    height: 40px;
+  }
+  
+  .pagination-ellipsis {
+    height: 40px;
+    padding: 0 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination-info {
+    font-size: 0.9rem;
+    margin: 1.5rem 0 1rem 0;
+  }
+  
+  .pagination-controls {
+    gap: 1rem;
+  }
+  
+  .pagination-numbers {
+    gap: 0.125rem;
+  }
+  
+  .pagination-btn {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+    min-width: 36px;
+    height: 36px;
+  }
+  
+  .pagination-ellipsis {
+    height: 36px;
+    font-size: 0.85rem;
+  }
+}
