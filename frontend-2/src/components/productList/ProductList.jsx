@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaEye, FaSearch, FaFilter, FaDollarSign, FaTshirt } from "react-icons/fa";
 import { useCart } from "../../context/CartContext";
 import "./ProductList.css";
 
 const ProductList = () => {
+  const navigate = useNavigate();
   const [prendas, setPrendas] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,6 +45,10 @@ const ProductList = () => {
 
   const handleAddToCart = (prenda) => {
     addToCart(prenda);
+  };
+
+  const handleVerDetalles = (prenda) => {
+    navigate(`/producto/${prenda.id}`);
   };
 
   // Función de filtrado
@@ -164,16 +170,30 @@ const ProductList = () => {
 
       <div className="product-list">
         {filteredPrendas.map((prenda, idx) => (
-        <div key={prenda.id_prenda ?? idx} className="product-item card-producto">
+        <div 
+          key={prenda.id_prenda ?? idx} 
+          className="product-item card-producto"
+          onClick={() => handleVerDetalles(prenda)}
+          style={{ cursor: 'pointer' }}
+        >
           <div className="imagen-contenedor">
             <img src={prenda.imagen_url} alt={prenda.titulo} />
             <div className="btns-hover">
-              <button title="Ver detalles">
+              <button 
+                title="Ver detalles"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleVerDetalles(prenda);
+                }}
+              >
                 <FaEye />
               </button>
               <button 
                 title="Agregar al carrito"
-                onClick={() => handleAddToCart(prenda)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAddToCart(prenda);
+                }}
               >
                 <FaShoppingCart />
               </button>

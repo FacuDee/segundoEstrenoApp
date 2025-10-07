@@ -1,5 +1,6 @@
 import React from 'react';
 import './Nosotros.css';
+import { FaCheck } from 'react-icons/fa';
 import nosotrosImg from '../../assets/nosotros/nosotros-img.jpg'; // Importa la imagen correctamente
 
 const Nosotros = () => {
@@ -36,36 +37,36 @@ const Nosotros = () => {
             <h2>Nuestro compromiso</h2>
 
             <p>
-              Cada prenda que encontrás en Segundo Estreno es cuidadosamente
+              Cada prenda que encontrás en <span>Segundo Estreno</span> es cuidadosamente
               seleccionada o creada bajo principios de moda ética y sostenible.
               Esto significa que:
             </p>
 
             <p>
-              <i className="fas fa-check"></i>
-              {' '}Priorizamos materiales eco-amigables: Usamos algodón orgánico,
+              <FaCheck className="check-icon" />
+              Priorizamos materiales eco-amigables: Usamos algodón orgánico,
               lino, tencel, lyocell, y materiales reciclados o upcycled,
               minimizando el impacto ambiental.
             </p>
 
             <p>
-              <i className="fas fa-check"></i>
-              {' '}Apoyamos la producción justa: Trabajamos con proveedores que
+              <FaCheck className="check-icon" />
+              Apoyamos la producción justa: Trabajamos con proveedores que
               garantizan condiciones laborales dignas y salarios justos para sus
               empleados. Creemos en el valor del trabajo y en el respeto a cada
               persona involucrada en la cadena de producción.
             </p>
 
             <p>
-              <i className="fas fa-check"></i>
-              {' '}Promovemos la durabilidad: Diseñamos prendas atemporales y de alta
+              <FaCheck className="check-icon" />
+              Promovemos la durabilidad: Diseñamos prendas atemporales y de alta
               calidad, pensadas para durar, resistiendo el paso del tiempo y las
               tendencias pasajeras. Decimos no a la moda descartable.
             </p>
 
             <p>
-              <i className="fas fa-check"></i>
-              {' '}Reducimos nuestra huella: Desde el empaque hasta la logística,
+              <FaCheck className="check-icon" />
+              Reducimos nuestra huella: Desde el empaque hasta la logística,
               buscamos constantemente formas de minimizar nuestro impacto
               ambiental, eligiendo opciones biodegradables, reciclables o
               compostables.

@@ -68,7 +68,7 @@
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--secondary-text-color);
+  color: var(--color-text-light);
   font-size: 1.1rem;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .filter-icon {
-  color: var(--secondary-text-color);
+  color: var(--color-text-light);
   font-size: 1.1rem;
 }
 
@@ -140,7 +140,7 @@
 }
 
 .no-image {
-  color: var(--secondary-text-color);
+  color: var(--color-text-light);
   font-size: 3rem;
 }
 
@@ -157,8 +157,7 @@
 }
 
 .prenda-descripcion {
-  color: var(--secondary-text-color);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   margin-bottom: 15px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -180,7 +179,7 @@
   align-items: center;
   gap: 8px;
   font-size: 0.9rem;
-  color: var(--secondary-text-color);
+  color: var(--color-text-light);
 }
 
 .detail-item.price {
@@ -233,9 +232,9 @@
 }
 
 .btn-delete {
-  background: #dc3545;
-  color: white;
-  border: none;
+  background: var(--color-light);
+  color: var(--color-darker);
+  border: 2px solid var(--color-light);
   padding: 10px;
   border-radius: 50%;
   cursor: pointer;
@@ -246,20 +245,20 @@
   width: 40px;
   height: 40px;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-delete:hover {
-  background: #c82333;
+  background: var(--color-lighter) !important;
   transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+  box-shadow: var(--shadow-md);
 }
 
 /* Estado vacío */
 .no-prendas {
   text-align: center;
   padding: 60px 20px;
-  color: var(--secondary-text-color);
+  color: var(--color-text-light);
 }
 
 .empty-icon {
@@ -278,7 +277,7 @@
   text-align: center;
   padding: 60px 20px;
   font-size: 1.2rem;
-  color: var(--secondary-text-color);
+  color: var(--color-text-light);
 }
 
 @media (max-width: 994px) {
