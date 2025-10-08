@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaShoppingCart, FaTshirt } from 'react-icons/fa';
 import { useCart } from '../../context/CartContext';
@@ -11,6 +11,10 @@ const ProductDetail = () => {
   const [prenda, setPrenda] = useState(null);
   const [loading, setLoading] = useState(true);
   const [productosRelacionados, setProductosRelacionados] = useState([]);
+  const [isZooming, setIsZooming] = useState(false);
+  const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
+  const imgRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     fetchPrendaDetail();
@@ -66,6 +70,25 @@ const ProductDetail = () => {
     navigate('/prendas');
   };
 
+  // Funciones para el efecto zoom
+  const handleMouseEnter = () => {
+    setIsZooming(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsZooming(false);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!containerRef.current) return;
+    
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    setZoomPosition({ x, y });
+  };
+
   if (loading) {
     return (
       <main>
@@ -92,10 +115,32 @@ const ProductDetail = () => {
   return (
     <main>
       <div className="detalle-container">
-        <div className="detalle-img">
-          <img src={prenda.imagen_url} alt={prenda.titulo} />
-          <div className="detalle-descripcion-hover">
-            {prenda.descripcion || "Sin descripción"}
+        <div className="detalle-left">
+          <div 
+            className="detalle-img"
+            ref={containerRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onMouseMove={handleMouseMove}
+          >
+            <img 
+              ref={imgRef}
+              src={prenda.imagen_url} 
+              alt={prenda.titulo}
+              className={isZooming ? 'zooming' : ''}
+              style={isZooming ? {
+                transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%`
+              } : {}}
+            />
+            {isZooming && (
+              <div 
+                className="zoom-lens"
+                style={{
+                  left: `${zoomPosition.x}%`,
+                  top: `${zoomPosition.y}%`
+                }}
+              />
+            )}
           </div>
         </div>
         
@@ -118,6 +163,13 @@ const ProductDetail = () => {
             </button>
           </div>
         </div>
+        
+        {prenda.descripcion && (
+          <div className="detalle-descripcion-full">
+            <strong>Descripción:</strong>
+            <p>{prenda.descripcion}</p>
+          </div>
+        )}
       </div>
 
       {/* Banner publicitario */}

@@ -57,7 +57,25 @@ const UsuariosAdmin = () => {
     }
   };
 
-  const handleRoleChange = async (userId, newRole) => {
+  const handleRoleChange = async (userId, newRole, currentRole, userName) => {
+    // Mostrar confirmación antes de cambiar el rol
+    const result = await Swal.fire({
+      title: '¿Cambiar rol de usuario?',
+      html: `¿Estás seguro de cambiar el rol de <strong>${userName}</strong><br/>de <strong>${currentRole}</strong> a <strong>${newRole}</strong>?`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: 'var(--color-darker)',
+      cancelButtonColor: 'var(--color-text-light)',
+      confirmButtonText: 'Sí, cambiar',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (!result.isConfirmed) {
+      // Si cancela, recargar usuarios para resetear el select
+      fetchUsuarios();
+      return;
+    }
+
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`/api/usuario/${userId}`, {
@@ -86,6 +104,8 @@ const UsuariosAdmin = () => {
           text: 'No se pudo actualizar el rol',
           icon: 'error'
         });
+        // Recargar usuarios para resetear el select
+        fetchUsuarios();
       }
     } catch (error) {
       console.error('Error al actualizar rol:', error);
@@ -94,6 +114,8 @@ const UsuariosAdmin = () => {
         text: 'Error de conexión al actualizar el rol',
         icon: 'error'
       });
+      // Recargar usuarios para resetear el select
+      fetchUsuarios();
     }
   };
 
@@ -264,7 +286,12 @@ const UsuariosAdmin = () => {
                 <td>
                   <select
                     value={usuario.rol}
-                    onChange={(e) => handleRoleChange(usuario.id, e.target.value)}
+                    onChange={(e) => handleRoleChange(
+                      usuario.id, 
+                      e.target.value, 
+                      usuario.rol, 
+                      usuario.username || usuario.nombre
+                    )}
                     className={`rol-select rol-${usuario.rol}`}
                   >
                     <option value="comprador">Comprador</option>

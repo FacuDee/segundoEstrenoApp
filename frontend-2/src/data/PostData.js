@@ -15,8 +15,8 @@ export const blogPosts = [
   {
     id: 2,
     type: 'video',
-    title: 'Economía Circular en la Moda',
-    description: 'Dale una segunda vida a tu ropa. Descubrí cómo la economía circular transforma la industria textil. Es darle una nueva vida a lo que ya tenés.',
+    title: 'En la Moda',
+    description: 'Una segunda vida a tu ropa. Descubrí cómo la moda circular transforma la industria textil. Una nueva chance a lo que ya tenés.',
     videoSrc: 'https://www.youtube.com/embed/mvGgdmUkIsQ?start=21',
     videoTitle: 'Economía Circular en la Moda',
     tag: 'Video'
@@ -51,8 +51,8 @@ export const blogPosts = [
   {
     id: 6,
     type: 'noticia',
-    title: 'Moda Circular en los Medios',
-    description: 'La moda circular se posiciona como una tendencia clave en el consumo consciente. Esta nota de Ámbito Financiero explica cómo el reciclaje de prendas y el intercambio responsable están transformando la industria textil.',
+    title: 'En los Medios',
+    description: 'Esta nota de Ámbito Financiero explica cómo el reciclaje de prendas y el intercambio responsable están transformando la industria textil.',
     image: 'https://d1whqwkn09gz4t.cloudfront.net/images/prensa/ambito-2024-03.webp',
     imageAlt: 'Moda circular: la tendencia que cambió el paradigma en el consumo de indumentaria.',
     link: 'https://www.ambito.com/negocios/la-moda-circular-cambio-el-paradigma-el-consumo-indumentaria-n5969584',
