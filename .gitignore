@@ -7,7 +7,7 @@ node_modules/
 # Entornos de desarrollo
 # =======================
 .env
-
+backend/src/app.module.ts
 # =======================
 # Logs
 # =======================
