@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaEye, FaSearch, FaFilter, FaDollarSign, FaTshirt } from "react-icons/fa";
 import { useCart } from "../../context/CartContext";
 import "./ProductList.css";
 
 const ProductList = () => {
+  const navigate = useNavigate();
   const [prendas, setPrendas] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,6 +13,8 @@ const ProductList = () => {
   const [filterCategory, setFilterCategory] = useState('');
   const [priceFilter, setPriceFilter] = useState('');
   const [sizeFilter, setSizeFilter] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(24);
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -43,6 +47,10 @@ const ProductList = () => {
 
   const handleAddToCart = (prenda) => {
     addToCart(prenda);
+  };
+
+  const handleVerDetalles = (prenda) => {
+    navigate(`/producto/${prenda.id}`);
   };
 
   // Función de filtrado
@@ -85,6 +93,22 @@ const ProductList = () => {
     
     return matchesSearch && matchesCategory && matchesPrice && matchesSize;
   });
+
+  // Lógica de paginación
+  const totalPages = Math.ceil(filteredPrendas.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedPrendas = filteredPrendas.slice(startIndex, startIndex + itemsPerPage);
+
+  // Función para cambiar de página
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Resetear página cuando cambian los filtros
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, filterCategory, priceFilter, sizeFilter]);
 
   if (loading) return <div className="loading">Cargando prendas...</div>;
 
@@ -163,17 +187,31 @@ const ProductList = () => {
       </div>
 
       <div className="product-list">
-        {filteredPrendas.map((prenda, idx) => (
-        <div key={prenda.id_prenda ?? idx} className="product-item card-producto">
+        {paginatedPrendas.map((prenda, idx) => (
+        <div 
+          key={prenda.id_prenda ?? idx} 
+          className="product-item card-producto"
+          onClick={() => handleVerDetalles(prenda)}
+          style={{ cursor: 'pointer' }}
+        >
           <div className="imagen-contenedor">
             <img src={prenda.imagen_url} alt={prenda.titulo} />
             <div className="btns-hover">
-              <button title="Ver detalles">
+              <button 
+                title="Ver detalles"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleVerDetalles(prenda);
+                }}
+              >
                 <FaEye />
               </button>
               <button 
                 title="Agregar al carrito"
-                onClick={() => handleAddToCart(prenda)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAddToCart(prenda);
+                }}
               >
                 <FaShoppingCart />
               </button>
@@ -192,7 +230,69 @@ const ProductList = () => {
           <p>No se encontraron prendas que coincidan con los filtros seleccionados.</p>
         </div>
       )}
-    </div>
+      </div>
+      
+      {/* Información de paginación y controles - FUERA del grid */}
+      {filteredPrendas.length > 0 && (
+        <div className="pagination-info">
+          <p>
+            Mostrando {startIndex + 1}-{Math.min(startIndex + itemsPerPage, filteredPrendas.length)} de {filteredPrendas.length} productos
+          </p>
+        </div>
+      )}
+      
+      {/* Controles de paginación - FUERA del grid */}
+      {totalPages > 1 && (
+        <div className="pagination-controls">
+          <button 
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="pagination-btn"
+          >
+            Anterior
+          </button>
+          
+          <div className="pagination-numbers">
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .filter(page => {
+                // Mostrar páginas relevantes (primera, última, actual y adyacentes)
+                return page === 1 || 
+                       page === totalPages || 
+                       Math.abs(page - currentPage) <= 2;
+              })
+              .map((page, index, array) => {
+                // Agregar puntos suspensivos si hay saltos
+                const elements = [];
+                if (index > 0 && array[index - 1] < page - 1) {
+                  elements.push(
+                    <span key={`ellipsis-${page}`} className="pagination-ellipsis">
+                      ...
+                    </span>
+                  );
+                }
+                elements.push(
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`pagination-btn ${currentPage === page ? 'active' : ''}`}
+                  >
+                    {page}
+                  </button>
+                );
+                return elements;
+              })
+              .flat()}
+          </div>
+          
+          <button 
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="pagination-btn"
+          >
+            Siguiente
+          </button>
+        </div>
+      )}
     </div>
   );
 };

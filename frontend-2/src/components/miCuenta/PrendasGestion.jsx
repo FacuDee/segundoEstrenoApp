@@ -9,6 +9,8 @@ const PrendasGestion = ({ userId, user }) => {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingPrenda, setEditingPrenda] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(6);
   const [formData, setFormData] = useState({
     titulo: '',
     descripcion: '',
@@ -221,6 +223,24 @@ const PrendasGestion = ({ userId, user }) => {
     setShowForm(false);
   };
 
+  // Lógica de paginación
+  const totalPages = Math.ceil(prendas.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedPrendas = prendas.slice(startIndex, startIndex + itemsPerPage);
+
+  // Función para cambiar de página
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Resetear página cuando cambien las prendas
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(totalPages);
+    }
+  }, [prendas.length, currentPage, totalPages]);
+
   if (loading) return <div className="loading">Cargando prendas...</div>;
 
   return (
@@ -302,7 +322,7 @@ const PrendasGestion = ({ userId, user }) => {
       )}
 
       <div className="prendas-grid">
-        {prendas.map(prenda => (
+        {paginatedPrendas.map(prenda => (
           <div key={prenda.id} className="prenda-card card-producto">
             <div className="imagen-contenedor">
               <img src={prenda.imagen_url} alt={prenda.titulo} />
@@ -327,6 +347,68 @@ const PrendasGestion = ({ userId, user }) => {
       {prendas.length === 0 && (
         <div className="empty-state">
           <p>No tienes prendas registradas. ¡Agrega tu primera prenda!</p>
+        </div>
+      )}
+
+      {/* Información de paginación y controles */}
+      {prendas.length > 0 && (
+        <div className="pagination-info">
+          <p>
+            Mostrando {startIndex + 1}-{Math.min(startIndex + itemsPerPage, prendas.length)} de {prendas.length} prendas
+          </p>
+        </div>
+      )}
+
+      {/* Controles de paginación */}
+      {totalPages > 1 && (
+        <div className="pagination-controls">
+          <button 
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="pagination-btn"
+          >
+            Anterior
+          </button>
+          
+          <div className="pagination-numbers">
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .filter(page => {
+                // Mostrar páginas relevantes (primera, última, actual y adyacentes)
+                return page === 1 || 
+                       page === totalPages || 
+                       Math.abs(page - currentPage) <= 2;
+              })
+              .map((page, index, array) => {
+                // Agregar puntos suspensivos si hay saltos
+                const elements = [];
+                if (index > 0 && array[index - 1] < page - 1) {
+                  elements.push(
+                    <span key={`ellipsis-${page}`} className="pagination-ellipsis">
+                      ...
+                    </span>
+                  );
+                }
+                elements.push(
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`pagination-btn ${currentPage === page ? 'active' : ''}`}
+                  >
+                    {page}
+                  </button>
+                );
+                return elements;
+              })
+              .flat()}
+          </div>
+          
+          <button 
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="pagination-btn"
+          >
+            Siguiente
+          </button>
         </div>
       )}
     </div>

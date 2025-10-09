@@ -12,7 +12,7 @@ import './MiCuenta.css';
 const MiCuenta = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [activeTab, setActiveTab] = useState('perfil');
+  const [activeTab, setActiveTab] = useState(null); // Se establecerá después de cargar el usuario
 
   // Función para actualizar el usuario después de cambios en el perfil
   const handleUserUpdate = (updatedUserData) => {
@@ -28,6 +28,10 @@ const MiCuenta = () => {
       try {
         const decoded = jwtDecode(token);
         setUser(decoded);
+        
+        // Establecer la pestaña por defecto basada en el rol
+        const isVendedorOrAdmin = decoded.rol === 'vendedor' || decoded.rol === 'admin';
+        setActiveTab(isVendedorOrAdmin ? 'prendas' : 'perfil');
       } catch (error) {
         console.error('Error decodificando token:', error);
         // Redirigir al login si el token es inválido
@@ -40,16 +44,12 @@ const MiCuenta = () => {
     }
   }, []);
 
-  if (!user) {
+  if (!user || !activeTab) {
     return <div className="loading">Cargando...</div>;
   }
 
   const isVendedor = user.rol === 'vendedor' || user.rol === 'admin';
   const isAdmin = user.rol === 'admin';
-
-
-
-
 
   const renderTabContent = () => {
     switch (activeTab) {

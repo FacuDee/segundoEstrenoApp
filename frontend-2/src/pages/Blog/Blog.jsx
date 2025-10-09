@@ -59,10 +59,11 @@ const Blog = () => {
             <section className="water-saving-container">
               <FaGlobeAmericas className="planet-icon" />
               <div>
-                <h2 style={{margin: '0 0 0.3rem 0'}}>Ahorro de agua reciclada</h2>
+                <h2 style={{margin: '0 0 0.3rem 0'}}>Cada prenda cuenta</h2>
                 <p style={{margin: 0, fontSize: '1.1rem'}}>
-                  En este planeta se ahorran{' '}
-                  <span id="waterSaved">{waterSaved.toLocaleString()}</span> litros de agua, segundo a segundo.
+                  Con la moda circular ya hemos evitado el consumo de{' '}
+                  <span id="waterSaved">{waterSaved.toLocaleString()}</span> litros de agua.
+                  Eso equivale a <strong>{Math.floor(waterSaved / 2700)} remeras</strong> o <strong>{Math.floor(waterSaved / 10000)} jeans</strong> que no tuvieron que fabricarse. El cambio empieza con vos.
                 </p>
               </div>
             </section>
