@@ -1,34 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './OpinionsCarousel.css';
-
-const usuarios = [
-  {
-    name: "Sofía Rivas",
-    rating: 4.9,
-    image: "https://randomuser.me/api/portraits/women/63.jpg",
-    reviews: [
-      "Excelente calidad y muy amable, todo llegó en perfecto estado. Amo la página. ¡La ropa es hermosa!",
-    ],
-  },
-  {
-    name: "Mauro Schmidt",
-    rating: 4.9,
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-    reviews: ["Me encantó la experiencia. Envío rápido y prendas impecables."],
-  },
-  {
-    name: "Luis Ortega",
-    rating: 4.2,
-    image: "https://randomuser.me/api/portraits/men/20.jpg",
-    reviews: ["Excelente calidad, parecía ropa nueva. Muy recomendable."],
-  },
-  {
-    name: "Camila Soto",
-    rating: 4.4,
-    image: "https://randomuser.me/api/portraits/women/79.jpg",
-    reviews: ["Buena atención, variedad de estilos y precios accesibles."],
-  },
-];
+import { usuarios } from '../../data/OpinionsData';
 
 const obtenerEstrellas = (puntaje) => {
   const llenas = "★".repeat(Math.floor(puntaje));
@@ -61,7 +33,7 @@ const OpinionsCarousel = () => {
 
   return (
     <section className="opiniones">
-      <h2>LO QUE DICEN NUESTROS COMPRADORES</h2>
+      <h2 className='titulo-opiniones'>LO QUE DICEN NUESTROS COMPRADORES</h2>
       <div className="carousel-container-opiniones">
         <button className="opiniones-btn nav-left" onClick={() => moverCarrusel(-1)}>❮</button>
         <div className="carousel-opiniones-wrapper">

@@ -1,10 +1,15 @@
-
 /* Carousel de opiniones */
-
 .opiniones {
   text-align: center;
-  padding: 2rem;
+  padding: 1rem;
 }
+
+.titulo-opiniones {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
 .carousel-container-opiniones {
   overflow: hidden;
   width: 100%;
@@ -28,7 +33,7 @@
   max-width: 100%;
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   background: linear-gradient(135deg, #f7e7fa 70%, #e6f4ea 100%);
   flex-shrink: 0;
   text-align: center;
@@ -69,7 +74,7 @@
 .user-card .opinion-text {
   color: var(--color-text-light);
   font-size: 1rem;
-  margin-bottom: 0.5rem;
+  margin: 0.5rem;
   font-style: italic;
 }
 
@@ -87,11 +92,12 @@
   z-index: 10;
   transition: background 0.2s, box-shadow 0.2s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  opacity: 0.8;
+  opacity: 0.4;
 }
 
 .opiniones-btn:hover {
   background: var(--color-darker);
+  opacity: 0.6;
 }
 
 .nav-left {

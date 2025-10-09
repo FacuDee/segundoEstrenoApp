@@ -58,6 +58,7 @@ body {
 /* Forzar fuentes en elementos principales */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-logo);
+  color: var(--color-darker);
   font-weight: 600;
 }
 
