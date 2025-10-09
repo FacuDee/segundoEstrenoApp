@@ -1,0 +1,103 @@
+
+/* Carousel de opiniones */
+
+.opiniones {
+  text-align: center;
+  padding: 2rem;
+}
+.carousel-container-opiniones {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  max-width: 960px;
+  margin: 3rem auto;
+  background: var(--color-lighter);
+  border-radius: 15px;
+  box-shadow: var(--shadow-md);
+}
+
+.carousel-opiniones {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.77, 0, 0.18, 1);
+  width: 100%;
+}
+
+.user-card {
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f7e7fa 70%, #e6f4ea 100%);
+  flex-shrink: 0;
+  text-align: center;
+  box-shadow: 0 4px 18px rgba(136, 90, 137, 0.1);
+  border: 3px solid var(--color-primary);
+  border-radius: 15px;
+  transition: all 0.3s;
+}
+
+.user-card:hover {
+  box-shadow: 0 8px 25px rgba(136, 90, 137, 0.13);
+  border-color: var(--color-dark);
+}
+
+.user-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  border: 5px solid var(--color-accent);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.user-card .user-name {
+  font-weight: 600;
+  color: var(--color-dark);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.user-card .stars {
+  color: var(--color-primary-dark);
+  font-size: 1.2em;
+  margin-bottom: 0.5rem;
+}
+
+.user-card .opinion-text {
+  color: var(--color-text-light);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.opiniones-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--color-dark);
+  color: var(--color-lighter);
+  border: none;
+  padding: 0.6em 1em;
+  cursor: pointer;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  z-index: 10;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0.8;
+}
+
+.opiniones-btn:hover {
+  background: var(--color-darker);
+}
+
+.nav-left {
+  left: 2rem;
+}
+
+.nav-right {
+  right: 2rem;
+}

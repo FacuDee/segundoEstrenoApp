@@ -1,10 +1,10 @@
 import './PaymentMethods.css';
-import img1 from '../../assets/mediosDePago/1.png';
-import img2 from '../../assets/mediosDePago/2.png';
-import img3 from '../../assets/mediosDePago/3.png';
-import img4 from '../../assets/mediosDePago/4.png';
-import img5 from '../../assets/mediosDePago/5.png';
-import img6 from '../../assets/mediosDePago/6.png';
+import img1 from '../../assets/paymentMethods/1.png';
+import img2 from '../../assets/paymentMethods/2.png';
+import img3 from '../../assets/paymentMethods/3.png';
+import img4 from '../../assets/paymentMethods/4.png';
+import img5 from '../../assets/paymentMethods/5.png';
+import img6 from '../../assets/paymentMethods/6.png';
 
 const paymentMethods = [
   { id: 'mercadopago', src: img1, alt: 'Mercado Pago' },
