@@ -1131,6 +1131,46 @@
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
   }
+
+  /* Optimizaciones para nombres largos en pantallas muy pequeñas */
+  .usuario-card-info h4 {
+    font-size: 0.95rem;
+    line-height: 1.2;
+    word-break: break-word;
+    hyphens: auto;
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+  
+  .usuario-card-info p {
+    font-size: 0.85rem;
+  }
+  
+  .usuario-card {
+    padding: 1rem;
+  }
+  
+  .rol-select {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  /* Optimización adicional para tabla si se muestra */
+  .usuarios-table th,
+  .usuarios-table td {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.75rem;
+    word-break: break-word;
+    hyphens: auto;
+  }
+  
+  .usuarios-table th:first-child,
+  .usuarios-table td:first-child {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 @media (max-width: 768px) {
