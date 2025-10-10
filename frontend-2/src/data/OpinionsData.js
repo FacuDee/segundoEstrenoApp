@@ -16,6 +16,12 @@ export const usuarios = [
     reviews: ["Me encantó la experiencia. Envío rápido y prendas impecables."],
   },
   {
+    name: "Valentina Gómez",
+    rating: 4.7,
+    image: "https://randomuser.me/api/portraits/women/45.jpg",
+    reviews: ["Ropa hermosa y en excelente estado. ¡Volveré a comprar seguro!"],
+  },
+  {
     name: "Luis Ortega",
     rating: 4.2,
     image: "https://randomuser.me/api/portraits/men/20.jpg",

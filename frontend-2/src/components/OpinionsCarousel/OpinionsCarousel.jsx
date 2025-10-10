@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './OpinionsCarousel.css';
 import { usuarios } from '../../data/OpinionsData';
 
@@ -12,7 +12,9 @@ const obtenerEstrellas = (puntaje) => {
 const OpinionsCarousel = () => {
   const [indiceActual, setIndiceActual] = useState(1); // Empezamos en 1 para permitir clonar
   const [transicionActiva, setTransicionActiva] = useState(true);
+  const [esVisible, setEsVisible] = useState(true);
   const carruselRef = useRef(null);
+  const intervalRef = useRef(null);
   const total = usuarios.length;
 
   // Crear array con elementos clonados para carrusel infinito
@@ -28,20 +30,65 @@ const OpinionsCarousel = () => {
     setIndiceActual(prev => prev + direccion);
   };
 
-  const moverCarruselAutomatico = () => {
-    if (transicionActiva) {
+  const moverCarruselAutomatico = useCallback(() => {
+    if (transicionActiva && esVisible) {
       setIndiceActual(prev => prev + 1);
     }
-  };
+  }, [transicionActiva, esVisible]);
 
+  // Manejar visibilidad de página
   useEffect(() => {
-    const intervalo = setInterval(moverCarruselAutomatico, 4000);
-    return () => clearInterval(intervalo);
-  }, [transicionActiva]);
+    const handleVisibilityChange = () => {
+      setEsVisible(!document.hidden);
+    };
+
+    const handleFocus = () => setEsVisible(true);
+    const handleBlur = () => setEsVisible(false);
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', handleFocus);
+    window.addEventListener('blur', handleBlur);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('blur', handleBlur);
+    };
+  }, []);
+
+  // Manejar intervalo automático
+  useEffect(() => {
+    if (esVisible && transicionActiva) {
+      intervalRef.current = setInterval(moverCarruselAutomatico, 4000);
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [moverCarruselAutomatico, esVisible, transicionActiva]);
+
+  // Aplicar transform de manera más robusta
+  const actualizarPosicion = useCallback(() => {
+    if (!carruselRef.current) return;
+    
+    const elemento = carruselRef.current;
+    elemento.style.transition = transicionActiva ? 'transform 0.5s ease-in-out' : 'none';
+    elemento.style.transform = `translateX(-${indiceActual * 100}%)`;
+  }, [indiceActual, transicionActiva]);
 
   useEffect(() => {
     if (!carruselRef.current) return;
 
+    const elemento = carruselRef.current;
+    
     const handleTransitionEnd = () => {
       setTransicionActiva(false);
       
@@ -56,23 +103,32 @@ const OpinionsCarousel = () => {
       setTimeout(() => setTransicionActiva(true), 50);
     };
 
-    // Aplicar transform
-    carruselRef.current.style.transition = transicionActiva ? 'transform 0.5s ease-in-out' : 'none';
-    carruselRef.current.style.transform = `translateX(-${indiceActual * 100}%)`;
+    // Aplicar posición
+    actualizarPosicion();
 
     // Escuchar fin de transición
-    carruselRef.current.addEventListener('transitionend', handleTransitionEnd);
+    elemento.addEventListener('transitionend', handleTransitionEnd);
     
     return () => {
-      if (carruselRef.current) {
-        carruselRef.current.removeEventListener('transitionend', handleTransitionEnd);
+      if (elemento) {
+        elemento.removeEventListener('transitionend', handleTransitionEnd);
       }
     };
-  }, [indiceActual, total, transicionActiva]);
+  }, [indiceActual, total, transicionActiva, actualizarPosicion]);
+
+  // Revalidar posición cuando el componente se vuelve visible
+  useEffect(() => {
+    if (esVisible) {
+      // Pequeño delay para asegurar que el DOM esté listo
+      setTimeout(() => {
+        actualizarPosicion();
+      }, 100);
+    }
+  }, [esVisible, actualizarPosicion]);
 
   return (
     <section className="opiniones">
-      <h2 className='titulo-opiniones'>LO QUE DICE NUESTRA COMUNIDAD</h2>
+      <h2 className='titulo-opiniones'>LA OPINIÓN DE NUESTRA COMUNIDAD</h2>
       <div className="carousel-container-opiniones">
         <button className="opiniones-btn nav-left" onClick={() => moverCarrusel(-1)}>❮</button>
         <div className="carousel-opiniones-wrapper">
