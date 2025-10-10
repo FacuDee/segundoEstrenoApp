@@ -38,14 +38,13 @@
   flex-shrink: 0;
   text-align: center;
   box-shadow: 0 4px 18px rgba(136, 90, 137, 0.1);
-  border: 3px solid var(--color-primary);
+  border: 3px solid var(--color-darker);
   border-radius: 15px;
   transition: all 0.3s;
 }
 
 .user-card:hover {
-  box-shadow: 0 8px 25px rgba(136, 90, 137, 0.13);
-  border-color: var(--color-dark);
+  box-shadow: 0 8px 25px rgba(136, 90, 137, 0.9);
 }
 
 .user-card img {

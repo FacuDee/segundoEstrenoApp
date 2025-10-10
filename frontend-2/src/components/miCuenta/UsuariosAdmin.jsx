@@ -274,7 +274,7 @@ const UsuariosAdmin = () => {
               <th>Nombre</th>
               <th>Email</th>
               <th>Rol</th>
-              <th>Fecha Alta</th>
+              <th>Alta</th>
               <th>Acciones</th>
             </tr>
           </thead>
