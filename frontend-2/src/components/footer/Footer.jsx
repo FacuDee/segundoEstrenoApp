@@ -1,5 +1,5 @@
 import "./Footer.css";
-import { FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
+import { FaInstagram, FaTiktok, FaYoutube, FaEnvelope, FaMobileAlt } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -21,16 +21,16 @@ const Footer = () => {
             </div>
           </div>
           <div className="footer-col contacto">
-            <h4>Contacto</h4>
+            <h4>Correo electrónico</h4>
             <p>
-              <i className="fas fa-envelope"></i> segundoestreno@gmail.com
+              <FaEnvelope /> segundoestreno@gmail.com
             </p>
           </div>
-          <div className="footer-col legal">
-            <h4>
-              <a href="terminos.html">Términos y condiciones</a>
-            </h4>
-            <p>Todos los derechos reservados</p>
+          <div className="footer-col phone">
+            <h4>Celular de contacto:</h4>
+            <p>
+              <FaMobileAlt /> 2284-729799
+            </p>
           </div>
         </div>
         <div className="footer-bottom">
