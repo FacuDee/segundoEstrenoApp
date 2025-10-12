@@ -1,0 +1,128 @@
+/* Compromisos - Adaptado del proyecto original */
+.compromisos-section {
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.compromisos-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.compromisos-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--color-darker);
+  font-family: var(--font-logo);
+}
+
+.compromisos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.compromiso-item {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: var(--color-lighter);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal);
+  border-bottom: 5px solid var(--color-accent);
+  text-align: center;
+}
+
+.compromiso-item:hover {
+  transform: translateY(-5px);
+}
+
+.compromiso-icon {
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.compromiso-item h3 {
+  font-size: 1.2rem;
+  font-family: var(--font-logo);
+  color: var(--color-darker);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.compromiso-item p {
+  font-size: 1rem;
+  color: var(--color-text-light);
+  line-height: 1.6;
+  margin: 1rem 0 0 0;
+  font-family: var(--font-main);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .compromisos-section {
+    padding: 3rem 1rem;
+  }
+  
+  .compromisos-grid {
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+  
+  .compromiso-item {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .compromisos-section {
+    padding: 2.5rem 0;
+  }
+  
+  .compromisos-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .compromiso-item {
+    padding: 2rem 1.5rem;
+    margin: 0 auto;
+    max-width: 400px;
+  }
+  
+  .compromiso-item i {
+    font-size: 2.5rem;
+  }
+  
+  .compromiso-item h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .compromisos-container {
+    padding: 0 1rem;
+  }
+  
+  .compromiso-item {
+    padding: 1.5rem 1rem;
+  }
+  
+  .compromiso-item i {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .compromiso-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .compromiso-item p {
+    font-size: 0.95rem;
+  }
+}

@@ -243,8 +243,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 2.5rem 0 2rem 0;
-  padding: 0 1rem;
+  margin: 3rem 0;
 }
 
 .banner-link {
@@ -269,7 +268,9 @@
 }
 
 .relacionados-titulo {
-  margin: 2.5rem 0 1.5rem 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 3rem 0;
   text-align: center;
   color: var(--color-darker);
   font-family: var(--font-logo);
@@ -395,7 +396,7 @@
 
 @media (max-width: 768px) {
   .detalle-container {
-    margin: 1rem;
+    margin: 2rem;
     border-radius: 12px;
     flex-direction: column;
     align-items: center;
@@ -419,7 +420,7 @@
   .detalle-precio {
     width: auto;
     font-size: 1.3rem;
-    margin: 1rem 0;
+    margin: 1rem auto;
   }
 
   .detalle-left {
@@ -462,20 +463,13 @@
   .relacionado-card {
     flex: none;
     width: 100%;
-    max-width: 350px;
     min-width: unset;
-  }
-
-  .relacionados-titulo {
-    font-family: var(--font-main);
-    font-size: 1.6rem;
-    margin: 2rem 0 1rem 0;
   }
 }
 
 @media (max-width: 480px) {
   .detalle-container {
-    margin: 0.5rem;
+    margin: 0;
     padding: 2rem;
   }
 
