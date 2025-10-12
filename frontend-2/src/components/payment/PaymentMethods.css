@@ -1,0 +1,93 @@
+/* PaymentMethods.css - Basado en el estilo de FAQ */
+.payment-methods {
+  background-color: transparent;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.payment-methods-title {
+  font-family: var(--font-logo);
+  color: var(--color-darker);
+  margin: 2rem 0;
+  font-size: 1.3rem;
+}
+
+.payment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.payment-item {
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all var(--transition-normal);
+  border: 2px solid transparent;
+}
+
+.payment-item img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(100%) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+  transition: transform var(--transition-normal);
+  width: 60px;
+  height: 40px;
+}
+
+.payment-item:hover img {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+.payment-item.selected {
+  border-color: var(--color-primary);
+  background: rgba(147, 206, 140, 0.1);
+  box-shadow: 0 0 0 1px var(--color-primary);
+}
+
+.payment-item.selected img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .payment-methods {
+    width: 100%;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .payment-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .payment-item img {
+    width: 50px;
+    height: 35px;
+  }
+
+  .payment-methods-title {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .payment-item img {
+    width: 45px;
+    height: 30px;
+  }
+}

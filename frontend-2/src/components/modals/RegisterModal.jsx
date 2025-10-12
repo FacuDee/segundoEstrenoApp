@@ -1,8 +1,9 @@
 
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import "./Modal.css";
 
-const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }) => {
+const RegisterModal = ({ isOpen, onClose, onSwitchToLogin, onRegisterSuccess }) => {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }) => {
       return;
     }
     try {
-      const res = await fetch("/auth/register", {
+      const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),
@@ -31,9 +32,35 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }) => {
         return;
       }
       const data = await res.json();
-      localStorage.setItem("token", data.access_token);
+      
+      // No hacer login automático, mostrar mensaje de éxito
       onClose();
-      // Aquí podrías actualizar el estado global de usuario si lo tienes
+      
+      // Mostrar Sweet Alert de registro exitoso
+      Swal.fire({
+        title: '¡Registro exitoso!',
+        text: `Cuenta creada correctamente para ${email}. Ahora puedes iniciar sesión.`,
+        icon: 'success',
+        timer: 3000,
+        showConfirmButton: true,
+        confirmButtonText: 'Iniciar Sesión',
+        timerProgressBar: true,
+        allowOutsideClick: false
+      }).then((result) => {
+        // Redirigir al login con datos prellenados
+        if (onRegisterSuccess) {
+          onRegisterSuccess(email, password);
+        }
+        onSwitchToLogin();
+      });
+      
+      // Si el usuario no hace clic, redirigir automáticamente
+      setTimeout(() => {
+        if (onRegisterSuccess) {
+          onRegisterSuccess(email, password);
+        }
+        onSwitchToLogin();
+      }, 3100);
     } catch (err) {
       setError("Error de conexión");
     }

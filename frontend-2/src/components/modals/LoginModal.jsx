@@ -1,11 +1,24 @@
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import Swal from "sweetalert2";
 import "./Modal.css";
 
-const LoginModal = ({ isOpen, onClose, onSwitchToRegister }) => {
+const LoginModal = ({ isOpen, onClose, onSwitchToRegister, onLoginSuccess, prefilledData }) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  
+  // Actualizar campos cuando se reciben datos prellenados
+  React.useEffect(() => {
+    if (prefilledData && isOpen) {
+      setEmail(prefilledData.email || "");
+      setPassword(prefilledData.password || "");
+      setError(""); // Limpiar errores previos
+    }
+  }, [prefilledData, isOpen]);
 
   if (!isOpen) return null;
 
@@ -13,7 +26,7 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }) => {
     e.preventDefault();
     setError("");
     try {
-      const res = await fetch("/auth/login", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -25,8 +38,36 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }) => {
       }
       const data = await res.json();
       localStorage.setItem("token", data.access_token);
+      
+      // Decodificar token para obtener info del usuario
+      const decoded = jwtDecode(data.access_token);
+      const userName = decoded.nombre || decoded.username || decoded.email;
+      
       onClose();
-      // Acá se podrías actualizar el estado global de usuario
+      
+      // Actualizar estado del header
+      if (onLoginSuccess) {
+        onLoginSuccess();
+      }
+      
+      // Mostrar mensaje de bienvenida con Sweet Alert
+      Swal.fire({
+        title: '¡Bienvenido/a!',
+        text: `Hola ${userName}, gracias por ser parte de Segundo Estreno.`,
+        icon: 'success',
+        timer: 2000,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        allowOutsideClick: false
+      }).then(() => {
+        // Redirigir a Mi Cuenta después del alert
+        navigate('/micuenta');
+      });
+      
+      // Si el usuario cierra el alert manualmente, también redirigir  
+      setTimeout(() => {
+        navigate('/micuenta');
+      }, 2100);
     } catch (err) {
       setError("Error de conexión");
     }

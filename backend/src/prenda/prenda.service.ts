@@ -15,13 +15,37 @@ export class PrendaService {
   ) {}
 
   async findAll(): Promise<Prenda[]> {
-  return this.prendaRepository.find({ relations: ['categoria'] });
+    return this.prendaRepository.find({ 
+      relations: ['categoria'],
+      order: { createdAt: 'DESC' } // Más recientes primero
+    });
+  }
+
+  // Método para admin: obtener todas las prendas con información del vendedor
+  async findAllWithVendedor(): Promise<Prenda[]> {
+    return this.prendaRepository.find({ 
+      relations: ['categoria', 'vendedor'],
+      order: { createdAt: 'DESC' }
+    });
   }
   async findOne(id: number): Promise<Prenda | null> {
-    return this.prendaRepository.findOneBy({ id });
+    return this.prendaRepository.findOne({ 
+      where: { id }, 
+      relations: ['categoria', 'vendedor'] 
+    });
   }
-  async create(createPrendaDto: CreatePrendaDto) {
-    // Asume que categoria y vendedor vienen como ID en el DTO
+
+  async findByUser(userId: number): Promise<Prenda[]> {
+    const prendas = await this.prendaRepository.find({ 
+      where: { vendedor: { id: userId } }, 
+      relations: ['categoria', 'vendedor'],
+      order: { createdAt: 'DESC' } // Más recientes primero
+    });
+    
+    return prendas;
+  }
+  async create(createPrendaDto: any) {
+    // Crear la prenda con los datos del DTO y el vendedor_id
     const prenda = this.prendaRepository.create({
       titulo: createPrendaDto.titulo,
       descripcion: createPrendaDto.descripcion,
@@ -30,34 +54,70 @@ export class PrendaService {
       imagen_url: createPrendaDto.imagen_url,
       disponible: createPrendaDto.disponible ?? true,
       categoria: { id: createPrendaDto.categoria },
-      vendedor: { id: createPrendaDto.vendedor },
+      vendedor: { id: createPrendaDto.vendedor_id },
     });
-    return await this.prendaRepository.save(prenda);
+    
+    const savedPrenda = await this.prendaRepository.save(prenda);
+    return savedPrenda;
   }
 
   // Método para actualizar una prenda
   async update(id: string, updatePrendaDto: CreatePrendaDto) {
     const prendaId = Number(id);
-    const prenda = await this.prendaRepository.findOne({ where: { id: prendaId } });
+    const prenda = await this.prendaRepository.findOne({ 
+      where: { id: prendaId }, 
+      relations: ['vendedor', 'categoria'] 
+    });
     if (!prenda) {
       throw new Error(`Prenda con ID ${id} no encontrada.`);
     }
-    prenda.titulo = updatePrendaDto.titulo;
-    prenda.descripcion = updatePrendaDto.descripcion;
-    prenda.talle = updatePrendaDto.talle;
-    prenda.precio = updatePrendaDto.precio;
-    prenda.disponible = updatePrendaDto.disponible ?? true;
-
-      if (updatePrendaDto.categoria) {
-    prenda.categoria = { id: updatePrendaDto.categoria } as Categoria;
+    
+    // Preparar datos de actualización preservando el vendedor original
+    const updateData = {
+      titulo: updatePrendaDto.titulo,
+      descripcion: updatePrendaDto.descripcion,
+      talle: updatePrendaDto.talle,
+      precio: updatePrendaDto.precio,
+      imagen_url: updatePrendaDto.imagen_url,
+      disponible: updatePrendaDto.disponible ?? true,
+      categoria: { id: updatePrendaDto.categoria },
+      ...(updatePrendaDto.vendedor && { vendedor: { id: updatePrendaDto.vendedor } })
+    };
+    
+    await this.prendaRepository.update(prendaId, updateData);
+    return await this.prendaRepository.findOne({ where: { id: prendaId }, relations: ['categoria', 'vendedor'] });
   }
-  if (updatePrendaDto.vendedor) {
-    prenda.vendedor = { id: updatePrendaDto.vendedor } as Usuario;
-  }
 
-  // Guardar usando save() en lugar de update()
-  return await this.prendaRepository.save(prenda);
-}
+  // Método para admin actualizar cualquier prenda preservando el vendedor original
+  async adminUpdate(id: string, updatePrendaDto: CreatePrendaDto) {
+    const prendaId = Number(id);
+    const prenda = await this.prendaRepository.findOne({ 
+      where: { id: prendaId }, 
+      relations: ['vendedor', 'categoria'] 
+    });
+    
+    if (!prenda) {
+      throw new Error(`Prenda con ID ${id} no encontrada.`);
+    }
+
+    // Preservar el vendedor original
+    await this.prendaRepository.update(prendaId, {
+      titulo: updatePrendaDto.titulo,
+      descripcion: updatePrendaDto.descripcion,
+      talle: updatePrendaDto.talle,
+      precio: updatePrendaDto.precio,
+      imagen_url: updatePrendaDto.imagen_url,
+      disponible: updatePrendaDto.disponible ?? true,
+      categoria: { id: updatePrendaDto.categoria },
+      // Mantener el vendedor original, no actualizarlo
+      vendedor: { id: prenda.vendedor.id },
+    });
+    
+    return await this.prendaRepository.findOne({ 
+      where: { id: prendaId }, 
+      relations: ['categoria', 'vendedor'] 
+    });
+  }
 
   // Método para eliminar una prenda
   async remove(id: string) {

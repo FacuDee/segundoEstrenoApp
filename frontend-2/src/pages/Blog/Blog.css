@@ -1,9 +1,8 @@
-/* src/pages/Blog/Blog.css */
+/* ===== BLOG CSS - ORGANIZADO ===== */
 
-/* --- BLOG INTRO --- */
+/* --- BLOG INTRO SECTION --- */
 .blog-intro {
-  max-width: 800px;
-  margin: 2rem auto;
+  margin: 2rem 0;
   padding: 2rem;
   color: var(--color-text);
   background: var(--color-lighter);
@@ -13,37 +12,88 @@
 
 .blog-intro h2 {
   text-align: center;
-  color: var(--color-darker);
+  background: linear-gradient(180deg, var(--color-dark), var(--color-darker));
+  color: var(--color-lighter);
   font-family: var(--font-logo);
+  font-size: 1.5rem;
   margin-bottom: 1rem;
+  border-radius: 1.5rem 0 1.5rem 0;
+  padding: 0.5rem 1rem;
   text-transform: uppercase;
 }
 
 .blog-intro p {
+  text-align: justify;
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 1rem;
 }
 
-/* --- BLOG CONTAINER (GRID) --- */
-.blog-container {
-  max-width: 800px;
+/* --- CONTENEDOR AHORRO DE AGUA --- */
+.water-saving-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, var(--color-accent-light), var(--color-lighter));
+  border: 2px solid var(--color-accent);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  margin: 1rem 0 3rem 0;
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-main);
+}
+
+.planet-icon {
+  font-size: 5rem;
+  color: var(--color-primary-dark);
+  flex-shrink: 0;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.water-saving-container h2 {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-darker);
+  font-family: var(--font-logo);
+}
+
+.water-saving-container p {
+  margin: 0.3rem 0 0;
+  font-size: 1.1rem;
+  color: var(--color-text-light);
+  line-height: 1.4;
+}
+
+#waterSaved {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--color-primary-dark);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* --- BLOG LAYOUT PRINCIPAL --- */
+.blog-main-layout {
+  max-width: 1200px;
   margin: 2rem auto;
   padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+/* --- BLOG CONTENT WRAPPER --- */
+.blog-content-card {
+  padding: 1.5rem;
+}
+
+/* --- BLOG CONTAINER (GRID) --- */
+.blog-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
 }
 
-@media (max-width: 700px) {
-  .blog-container {
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-    padding: 0 0.2rem;
-  }
-}
-
-/* --- BLOG CARD --- */
+/* --- BLOG CARDS --- */
 .blog-card {
   background: var(--color-lighter);
   border-radius: 16px;
@@ -51,99 +101,55 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s var(--transition-normal),
-    box-shadow 0.3s var(--transition-normal);
+  transition: transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+  border: 1px solid rgba(147, 206, 140, 0.2);
+  position: relative;
+}
+
+.blog-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.blog-card:hover::before {
+  opacity: 1;
 }
 
 .blog-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(106, 69, 112, 0.15);
 }
 
-.blog-card img,
-.blog-video {
+/* --- BLOG CARD IMAGES AND VIDEOS --- */
+.blog-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
   border-radius: 16px 16px 0 0;
-  background: #e6f4ea;
+  background: linear-gradient(135deg, var(--color-accent-light), var(--color-primary));
+  transition: filter var(--transition-normal);
 }
 
-@media (max-width: 600px) {
-  .blog-card img,
-  .blog-video {
-    height: 150px;
-    border-radius: 12px 12px 0 0;
-  }
-}
 .blog-card:hover img {
-  filter: brightness(0.85);
+  filter: brightness(0.9) saturate(1.1);
 }
 
-.blog-content {
-  padding: 1rem 1.5rem 1.5rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.blog-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 0.7rem;
-  color: var(--color-darker);
-  font-family: var(--font-logo);
-}
-
-.blog-description {
-  font-size: 1rem;
-  color: var(--color-text-light);
-  margin-bottom: 1rem;
-  line-height: 1.5;
-  flex-grow: 1;
-}
-
-.blog-tag {
-  background-color: #e0f2f1;
-  color: #00695c;
-  font-size: 0.85rem;
-  padding: 0.3rem 0.7rem;
-  border-radius: 12px;
-  display: inline-block;
-  font-weight: 600;
-  margin-top: 1rem;
-  align-self: flex-start;
-}
-
-.blog-button {
-  display: inline-block;
-  padding: 0.6rem 1.4rem;
-  background-color: #00796b;
-  color: white;
-  border-radius: 24px;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-  margin-bottom: 0.5rem;
-  align-self: flex-start;
-  box-shadow: 0 4px 8px rgba(0, 121, 107, 0.4);
-}
-
-.blog-button:hover {
-  background-color: #004d40;
-  box-shadow: 0 6px 12px rgba(0, 77, 64, 0.6);
-}
-
-/* --- VIDEO RESPONSIVE --- */
 .blog-video {
   position: relative;
-  padding-bottom: 56.25%; /* Aspect ratio 16:9 */
-  height: 0;
+  width: 100%;
+  height: 200px;
+  padding-bottom: 56.25%; /* Aspect ratio 16:9 - solo para videos embebidos */
   overflow: hidden;
   border-radius: 16px 16px 0 0;
-  background: #e6f4ea;
+  background: linear-gradient(135deg, var(--color-accent-light), var(--color-primary));
 }
 
 .blog-video iframe {
@@ -153,59 +159,114 @@
   width: 100%;
   height: 100%;
   border: 0;
+  border-radius: 16px 16px 0 0;
 }
 
-/* --- CONTENEDOR AHORRO DE AGUA --- */
-.water-saving-container {
+/* --- BLOG CARD CONTENT --- */
+.blog-content {
+  flex: 1;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.blog-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: var(--color-darker);
+  font-family: var(--font-logo);
+  line-height: 1.3;
+  transition: color var(--transition-normal);
+}
+
+.blog-card:hover .blog-title {
+  color: var(--color-primary-dark);
+}
+
+.blog-description {
+  font-size: 1rem;
+  color: var(--color-text-light);
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+  flex-grow: 1;
+  font-weight: 400;
+}
+
+/* --- BLOG CARD FOOTER (TAG Y BOTÓN) --- */
+.blog-footer {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  background-color: #e0f7fa;
+  margin-top: auto;
+  flex-wrap: wrap;
+  min-height: 44px; /* Altura mínima consistente */
+}
+
+.blog-tag {
+  background-color: var(--color-accent-light);
+  color: var(--color-darker);
+  font-size: 0.8rem;
+  padding: 0.6rem 1rem;
   border-radius: 12px;
-  padding: 1rem 1.5rem;
-  max-width: 800px;
-  margin: 1rem auto 3rem;
-  box-shadow: 0 4px 10px rgba(0, 150, 136, 0.2);
-  font-family: var(--font-main);
-}
-
-.planet-icon {
-  font-size: 5rem;
-  color: #004d40;
-  flex-shrink: 0;
-}
-
-.water-saving-container h2 {
-  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 600;
-  color: #004d40;
+  margin: 0;
+  flex-shrink: 0;
+  min-height: 44px;
+  box-sizing: border-box;
 }
 
-.water-saving-container p {
-  margin: 0.3rem 0 0;
-  font-size: 1.1rem;
-  color: #00695c;
+.blog-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--color-lighter);
+  color: var(--color-dark);
+  border: 2px solid var(--color-dark);
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.8rem;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-md);
+  margin: 0;
+  flex-shrink: 0;
+  min-height: 44px;
+  box-sizing: border-box;
 }
 
-#waterSaved {
-  font-weight: 700;
-  font-size: 1.3rem;
-  color: #004d40;
+.blog-button:hover {
+  background-color: var(--color-darker);
+  color: var(--color-lighter);
+  border-color: var(--color-darker);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(106, 69, 112, 0.3);
 }
 
-/* --- BANNER RECICLAJE (POSICIONAMIENTO FIJO) --- */
+/* .blog-tag:hover {
+  background-color: var(--color-accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+} */
+
+/* --- BANNER RECICLAJE (STICKY SIDEBAR) --- */
 .recycling-banner {
-  position: fixed;
-  top: 150px;
-  left: 50px;
-  width: 340px;
-  background-color: #e0f7fa;
-  color: #004d40;
-  padding: 1.5rem;
-  border-radius: 15px;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: calc(var(--header-height) + 2rem);
+  height: fit-content;
+  margin: 2rem auto;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-lighter));
+  color: var(--color-darker);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
   font-family: var(--font-main);
-  z-index: 999;
+  z-index: 50;
 }
 
 .video-reciclaje {
@@ -214,14 +275,18 @@
   height: auto; 
   margin-left: 1rem;
   margin-bottom: 1rem;
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid var(--color-lighter);
 }
 
 .recycling-banner h3 {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
   font-weight: 700;
   color: var(--color-darker);
+  font-family: var(--font-logo);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .recycling-banner ul {
@@ -233,51 +298,96 @@
 .recycling-banner li {
   display: flex;
   align-items: center;
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.8rem;
   font-size: 1rem;
-  line-height: 1.3;
+  line-height: 1.4;
+  color: var(--color-text);
+  font-weight: 500;
 }
 
 .recycling-banner li .recycling-icon {
   margin-right: 1rem;
-  color: var(--color-primary-dark);
-  font-size: 1.2rem;
+  color: var(--color-darker);
+  font-size: 1.3rem;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.1));
 }
 
+/* ===== MEDIA QUERIES ===== */
 
-/* --- RESPONSIVE GENERAL --- */
-@media (max-width: 1425px) {
-  .recycling-banner {
-    position: static; /* Cambia a estático para que fluya con el contenido */
-    width: auto;
-    max-width: 800px;
-    border-radius: 12px;
-    box-shadow: var(--shadow-sm);
-    left: unset;
-    right: unset;
-    margin: 0.5rem auto;
-  }
-
-  .recycling-banner ul {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    padding-left: 0;
-  }
-}
-
+/* Tablet grande */
 @media (max-width: 1100px) {
-  main {
-    padding: 0 0.5rem;
+  .blog-intro h2 {
+    font-size: 1.3rem;
   }
 }
 
+/* Tablet */
+@media (max-width: 968px) {
+  .blog-main-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .recycling-banner {
+    position: static;
+    order: -1; /* Aparece arriba en móvil */
+  }
+}
+
+/* Tablet pequeño */
+@media (max-width: 700px) {
+  .blog-container {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    padding: 0 0.2rem;
+  }
+  
+  .blog-main-layout {
+    padding: 0 0.2rem;
+  }
+
+  .blog-intro {
+    padding: 1rem;
+    margin: 1rem;
+  }
+}
+
+/* Móvil grande */
 @media (max-width: 600px) {
+  .blog-card {
+    margin: 1rem;
+  }
+
+  .blog-card img,
+  .blog-video {
+    height: 150px;
+    border-radius: 12px 12px 0 0;
+  }
+  
   .water-saving-container {
     flex-direction: column;
     align-items: center;
-    padding: 1rem 0.7rem;
-    max-width: 98vw;
-    font-size: 0.98rem;
+    text-align: justify;
+    padding: 1.5rem;
+    margin: 3rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+/* Móvil pequeño */
+@media (max-width: 480px) {
+  .blog-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+  
+  .blog-tag {
+    align-self: flex-start;
+  }
+  
+  .blog-button {
+    align-self: stretch;
+    text-align: center;
   }
 }

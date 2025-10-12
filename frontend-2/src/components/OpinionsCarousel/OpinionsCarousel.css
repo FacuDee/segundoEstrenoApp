@@ -1,0 +1,162 @@
+/* Carousel de opiniones */
+.opiniones {
+  text-align: center;
+  padding: 2rem 0;
+  margin: 2rem auto;
+}
+
+.titulo-opiniones {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.carousel-container-opiniones {
+  overflow: hidden;
+  position: relative;
+  max-width: 800px;
+  margin: 3rem auto;
+  background: var(--color-lighter);
+  border-radius: 15px;
+  box-shadow: var(--shadow-md);
+}
+
+.carousel-opiniones-wrapper {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-opiniones {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.77, 0, 0.18, 1);
+  width: 100%;
+}
+
+.user-card {
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 3rem;
+  background: linear-gradient(135deg, #f7e7fa 70%, #e6f4ea 100%);
+  flex-shrink: 0;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  border-radius: 15px;
+  transition: all 0.3s;
+}
+
+.user-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  border: 5px solid var(--color-accent);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.user-card .user-name {
+  font-weight: 600;
+  color: var(--color-dark);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.user-card .stars {
+  color: var(--color-primary-dark);
+  font-size: 1.5em;
+  margin-bottom: 0.5rem;
+}
+
+.user-card .opinion-text {
+  color: var(--color-text-light);
+  font-size: 1.1rem;
+  margin: 1rem;
+  font-style: italic;
+}
+
+.opiniones-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--color-primary);
+  color: var(--color-lighter);
+  border: none;
+  padding: 0.6em 1em;
+  cursor: pointer;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  z-index: 10;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0.8;
+}
+
+.opiniones-btn:hover {
+  background: var(--color-primary-dark);
+  opacity: 0.9;
+}
+
+.nav-left {
+  left: 2rem;
+}
+
+.nav-right {
+  right: 2rem;
+}
+
+/* Indicadores de posición */
+.opiniones-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0 2rem 0;
+  opacity: 0.8;
+} 
+
+.opiniones-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--color-dark);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.opiniones-dot.active {
+  background: var(--color-dark);
+  transform: scale(1.2);
+}
+
+.opiniones-dot:hover {
+  background: var(--color-dark);
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .opiniones {
+    padding: 1rem;
+  }
+
+ .opiniones-btn {
+  padding: 0.4em 0.8em;
+  font-size: 1.2rem;
+ }
+
+ .user-card {
+  padding: 1rem;
+ }
+  
+ .nav-left {
+  left: 1rem;
+ }
+
+ .nav-right {
+  right: 1rem;
+ }
+}

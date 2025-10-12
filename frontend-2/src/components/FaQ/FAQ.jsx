@@ -1,23 +1,28 @@
 
 import FAQList from './FAQList';
 import "./FAQ.css";
-import { faqsComprar, faqsVender } from './faqData';
-import PaymentInfo from './PaymentInfo';
+import { faqsComprar, faqsVender } from '../../data/faqData';
+import { FaShoppingBag, FaStore } from 'react-icons/fa';
 
 const FAQ = () => {
   return (
-    <section className="main-container">
-      <div className="seller-info">
-        <h2>¿Querés comprar?</h2>
-        <FAQList faqs={faqsComprar} />
-      </div>
-
-       <PaymentInfo /> {/* ← Sección de métodos de pago */}
-
-  
-      <div className="seller-info">
-        <h2>¿Querés vender?</h2>
-        <FAQList faqs={faqsVender} />
+    <section className="faq-container">
+      <div className="faq-content-wrapper">
+        <div className="seller-info">
+          <h2>
+            <FaShoppingBag className="faq-icon" />
+            ¿Querés comprar?
+          </h2>
+          <FAQList faqs={faqsComprar} />
+        </div>
+        
+        <div className="seller-info">
+          <h2>
+            <FaStore className="faq-icon" />
+            ¿Querés vender?
+          </h2>
+          <FAQList faqs={faqsVender} />
+        </div>
       </div>
     </section>
   );

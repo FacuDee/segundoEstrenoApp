@@ -1,3 +1,6 @@
+/* ===== Importación de fuentes (backup) ===== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
 /* ===== Variables y Configuraciones Globales ===== */
 :root {
   /* Colores */
@@ -11,10 +14,14 @@
   --color-lighter: #ffffff;
   --color-text: #333;
   --color-text-light: #555;
+  
+  /* Alias adicionales para compatibilidad */
+  --text-color: var(--color-text);
+  --background-color: var(--color-lighter);
 
   /* Tipografía */
-  --font-main: "Montserrat", sans-serif;
-  --font-logo: "Poppins", sans-serif;
+  --font-main: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-logo: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 
   /* Sombras */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -23,6 +30,9 @@
   /* Transiciones */
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
+
+  /* Layout */
+  --header-height: 110px;
 }
 
 /* ===== Reset y Base ===== */
@@ -42,6 +52,23 @@ body {
   background-color: var(--color-light);
   line-height: 1.6;
   overflow-x: hidden;
+  font-display: swap;
+}
+
+/* Forzar fuentes en elementos principales */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-logo);
+  color: var(--color-darker);
+  font-weight: 600;
+}
+
+p, span, div, a, button, input, textarea {
+  font-family: var(--font-main);
+}
+
+/* Asegurar que las fuentes se carguen */
+.font-test {
+  font-family: "Montserrat", Arial, sans-serif !important;
 }
 
 .container {
@@ -51,5 +78,5 @@ body {
 }
 
 section {
-  padding: 3rem;
+  padding: 1rem;
 }
