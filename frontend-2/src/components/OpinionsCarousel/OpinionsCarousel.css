@@ -1,7 +1,8 @@
 /* Carousel de opiniones */
 .opiniones {
   text-align: center;
-  padding: 1rem;
+  padding: 2rem 0;
+  margin: 2rem auto;
 }
 
 .titulo-opiniones {
@@ -13,7 +14,7 @@
 .carousel-container-opiniones {
   overflow: hidden;
   position: relative;
-  max-width: 1080px;
+  max-width: 800px;
   margin: 3rem auto;
   background: var(--color-lighter);
   border-radius: 15px;
@@ -38,7 +39,7 @@
   max-width: 100%;
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 3rem;
   background: linear-gradient(135deg, #f7e7fa 70%, #e6f4ea 100%);
   flex-shrink: 0;
   text-align: center;
@@ -48,8 +49,8 @@
 }
 
 .user-card img {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   border-radius: 50%;
   margin-bottom: 12px;
@@ -60,20 +61,20 @@
 .user-card .user-name {
   font-weight: 600;
   color: var(--color-dark);
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
 .user-card .stars {
   color: var(--color-primary-dark);
-  font-size: 1.2em;
+  font-size: 1.5em;
   margin-bottom: 0.5rem;
 }
 
 .user-card .opinion-text {
   color: var(--color-text-light);
-  font-size: 1rem;
-  margin: 0.5rem;
+  font-size: 1.1rem;
+  margin: 1rem;
   font-style: italic;
 }
 
@@ -138,16 +139,24 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .opiniones {
+    padding: 1rem;
+  }
+
  .opiniones-btn {
   padding: 0.4em 0.8em;
   font-size: 1.2rem;
  }
-  
-.nav-left {
-  left: 1rem;
-}
 
-.nav-right {
+ .user-card {
+  padding: 1rem;
+ }
+  
+ .nav-left {
+  left: 1rem;
+ }
+
+ .nav-right {
   right: 1rem;
-}
+ }
 }

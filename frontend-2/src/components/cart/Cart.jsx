@@ -176,7 +176,7 @@ const Cart = () => {
         <a href="/prendas" className="banner-link">
           <div className="banner-content">
             <h3>¿Necesitas más prendas?</h3>
-            <p>Descubre nuestra colección completa</p>
+            <p>Mirá toda nuestra colección</p>
             <span className="btn-banner">Seguir Comprando</span>
           </div>
         </a>

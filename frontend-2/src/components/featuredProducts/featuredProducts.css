@@ -1,3 +1,4 @@
+/* Estilos generales para los productos destacados */
 .destacados {
   text-align: center;
   margin: 2rem 0;
@@ -25,14 +26,14 @@
   align-items: center;
   text-align: center;
   overflow: hidden;
-  height: 580px; /* Altura fija para todas las cards */
+  height: 580px;
   background: linear-gradient(
     180deg,
     var(--color-lighter),
     var(--color-accent-light)
   );
   padding: 25px;
-  width: 340px;
+  width: 330px;
   border-radius: 15px;
   box-shadow: var(--shadow-md);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -77,7 +78,7 @@
   flex-grow: 1; /* Ocupa el espacio disponible */
   display: -webkit-box;
   -webkit-line-clamp: 3; /* Máximo 3 líneas */
-  line-clamp: 3; /* Estándar para compatibilidad */
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -96,7 +97,7 @@
   font-weight: 600;
   transition: background-color 0.3s ease, transform 0.2s ease;
   margin-top: 0.5rem;
-  min-height: 48px; /* Altura mínima consistente */
+  min-height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,13 +133,37 @@
   border-left: 4px solid var(--color-primary);
   box-shadow: var(--shadow-sm);
   flex-shrink: 0; /* No se encoge */
-  min-height: 50px; /* Altura mínima consistente */
+  min-height: 50px; 
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Responsive Design */
+/* Responsive */
+@media (max-width: 1100px) {
+  .doble {
+    gap: 20px;
+  }
+  
+  .card {
+    width: 300px;
+    height: 550px;
+  }
+  
+  .imgCard {
+    height: 220px;
+  }
+  
+  .precio-destacado {
+    font-size: 1.3rem;
+    min-height: 48px;
+  }
+  
+  .btn-ver-mas {
+    min-height: 46px;
+  }
+}
+
 @media (max-width: 768px) {
   .doble {
     flex-direction: column;
@@ -148,12 +173,12 @@
   
   .card {
     width: 100%;
-    max-width: 400px;
-    height: 520px; /* Altura ajustada para móvil */
+    max-width: 500px;
+    height: auto;
   }
   
   .imgCard {
-    height: 200px; /* Imagen más pequeña en móvil */
+    height: 220px;
   }
   
   .precio-destacado {
