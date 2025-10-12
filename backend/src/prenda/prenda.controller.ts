@@ -13,7 +13,7 @@ import { PrendaService } from './prenda.service';
 import { Prenda } from './prenda.entity';
 import { CreatePrendaDto } from './dto/create-prenda.dto';
 
-@Controller('prenda')
+@Controller('prendas')
 export class PrendaController {
   constructor(private readonly prendaService: PrendaService) {}
   @Get()

@@ -16,8 +16,8 @@ async function bootstrap() {
       if (
         req.url.startsWith('/api') ||
         req.url.startsWith('/auth') ||
-        req.url === '/prenda' ||
-        req.url.startsWith('/prenda/') ||
+        req.url === '/prendas' ||
+        req.url.startsWith('/prendas/') ||
         req.url === '/carrito' ||
         req.url.startsWith('/carrito/')
       ) {

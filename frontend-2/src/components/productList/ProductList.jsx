@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaHeart, FaShoppingCart, FaEye } from "react-icons/fa";
 import "./ProductList.css";
+import Filter from "./Filter";
 
 const ProductList = () => {
   const [prendas, setPrendas] = useState([]);
@@ -18,8 +19,9 @@ const ProductList = () => {
 
   if (loading) return <div className="loading">Cargando prendas...</div>;
 
-  return (
-    <div className="product-list">
+  return (   
+     <> <Filter/>
+    <div className="product-list"> 
       {prendas.map((prenda, idx) => (
         <div key={prenda.id_prenda ?? idx} className="product-item card-producto">
           <div className="imagen-contenedor">
@@ -44,6 +46,7 @@ const ProductList = () => {
         </div>
       ))}
     </div>
+    </>
   );
 };
 
