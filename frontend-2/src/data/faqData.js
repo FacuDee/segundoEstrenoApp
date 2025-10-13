@@ -2,7 +2,7 @@
 export const faqsComprar = [
   {
     pregunta: "¿Cuánto tiempo tarda la entrega?",
-    respuesta: "El tiempo de entrega depende del método de envío y tu ubicación. Consulta los detalles en la sección de envíos."
+    respuesta: "El tiempo de entrega depende del método de envío y tu ubicación. Consulta los detalles."
   },
   {
     pregunta: "¿Cómo puedo rastrear mi pedido?",
@@ -25,12 +25,12 @@ export const faqsComprar = [
 // Preguntas para "¿Querés vender?"
 export const faqsVender = [
   {
-    pregunta: "¿Cómo publico un producto en la plataforma?",
-    respuesta: "Para publicar un producto, ve a tu cuenta y sigue los pasos para subir imágenes, descripción y precio."
+    pregunta: "¿Cómo publico una prenda en la plataforma?",
+    respuesta: "Para publicar una prenda, ve a Mi Cuenta - Gestionar Prendas y sigue los pasos para subirla con toda la información necesaria."
   },
   {
     pregunta: "¿Cuáles son los costos y comisiones por vender?",
-    respuesta: "Las comisiones varían según la categoría del producto y el método de pago elegido."
+    respuesta: "Las comisiones varían según el precio de la prenda y el método de pago elegido."
   },
   {
     pregunta: "¿Cómo recibiré el pago por mis ventas?",
@@ -38,10 +38,10 @@ export const faqsVender = [
   },
   {
     pregunta: "¿Qué pasa si un comprador solicita una devolución?",
-    respuesta: "Si un comprador solicita una devolución, debes seguir el proceso de devolución y reembolso indicado en la plataforma."
+    respuesta: "Si un comprador solicita una devolución, debes seguir el proceso de devolución y reembolso."
   },
   {
-    pregunta: "¿Qué tipo de productos admite la plataforma?",
-    respuesta: "La plataforma permite la venta de una amplia variedad de productos, pero hay restricciones para artículos prohibidos. Revisa las políticas de publicación."
+    pregunta: "¿Qué tipo de prendas admite la plataforma?",
+    respuesta: "La plataforma permite la venta de una amplia variedad de prendas, pero hay restricciones. Revisa las políticas de publicación."
   }
 ];

@@ -110,12 +110,12 @@
 }
 
 .btn-primary {
-  background: var(--color-darker);
+  background: var(--color-dark);
   color: var(--color-lighter);
 }
 
 .btn-primary:hover {
-    background: var(--color-dark);
+  background: var(--color-darker);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
@@ -205,17 +205,18 @@
 }
 
 .btn-banner {
-  background: white;
+  background: var(--color-lighter);
   color: var(--color-darker);
   padding: 0.75rem 1.5rem;
   border-radius: 25px;
   font-weight: 600;
   display: inline-block;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 .btn-banner:hover {
-  background: #f8f9fa;
+  background: var(--color-darker);
+  color: var(--color-lighter);
   transform: scale(1.05);
 }
 
@@ -261,11 +262,12 @@
   }
   
   .carrito-summary {
-    padding: 1.5rem;
+    padding: 1rem;
   }
   
   .carrito-actions {
     flex-direction: column;
+    margin-bottom: 1rem;
   }
   
   .carrito-total {

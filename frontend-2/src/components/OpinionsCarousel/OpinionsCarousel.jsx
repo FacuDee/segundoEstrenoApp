@@ -1,34 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './OpinionsCarousel.css';
-
-const usuarios = [
-  {
-    name: "Sofía Rivas",
-    rating: 4.9,
-    image: "https://randomuser.me/api/portraits/women/63.jpg",
-    reviews: [
-      "Excelente calidad y muy amable, todo llegó en perfecto estado. Amo la página. ¡La ropa es hermosa!",
-    ],
-  },
-  {
-    name: "Mauro Schmidt",
-    rating: 4.9,
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-    reviews: ["Me encantó la experiencia. Envío rápido y prendas impecables."],
-  },
-  {
-    name: "Luis Ortega",
-    rating: 4.2,
-    image: "https://randomuser.me/api/portraits/men/20.jpg",
-    reviews: ["Excelente calidad, parecía ropa nueva. Muy recomendable."],
-  },
-  {
-    name: "Camila Soto",
-    rating: 4.4,
-    image: "https://randomuser.me/api/portraits/women/79.jpg",
-    reviews: ["Buena atención, variedad de estilos y precios accesibles."],
-  },
-];
+import { usuarios } from '../../data/OpinionsData';
 
 const obtenerEstrellas = (puntaje) => {
   const llenas = "★".repeat(Math.floor(puntaje));
@@ -38,36 +10,131 @@ const obtenerEstrellas = (puntaje) => {
 };
 
 const OpinionsCarousel = () => {
-  const [indiceActual, setIndiceActual] = useState(0);
+  const [indiceActual, setIndiceActual] = useState(1); // Empezamos en 1 para permitir clonar
+  const [transicionActiva, setTransicionActiva] = useState(true);
+  const [esVisible, setEsVisible] = useState(true);
   const carruselRef = useRef(null);
+  const intervalRef = useRef(null);
+  const total = usuarios.length;
+
+  // Crear array con elementos clonados para carrusel infinito
+  const usuariosExtendidos = [
+    usuarios[total - 1], // Último elemento al inicio
+    ...usuarios,
+    usuarios[0] // Primer elemento al final
+  ];
 
   const moverCarrusel = (direccion) => {
-    const total = usuarios.length;
-    setIndiceActual((prev) => (prev + direccion + total) % total);
+    if (!transicionActiva) return;
+    
+    setIndiceActual(prev => prev + direccion);
   };
 
+  const moverCarruselAutomatico = useCallback(() => {
+    if (transicionActiva && esVisible) {
+      setIndiceActual(prev => prev + 1);
+    }
+  }, [transicionActiva, esVisible]);
+
+  // Manejar visibilidad de página
   useEffect(() => {
-    const intervalo = setInterval(() => {
-      moverCarrusel(1);
-    }, 8000);
-    return () => clearInterval(intervalo);
+    const handleVisibilityChange = () => {
+      setEsVisible(!document.hidden);
+    };
+
+    const handleFocus = () => setEsVisible(true);
+    const handleBlur = () => setEsVisible(false);
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', handleFocus);
+    window.addEventListener('blur', handleBlur);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('blur', handleBlur);
+    };
   }, []);
 
+  // Manejar intervalo automático
   useEffect(() => {
-    if (carruselRef.current) {
-      carruselRef.current.style.transform = `translateX(-${indiceActual * 100}%)`;
+    if (esVisible && transicionActiva) {
+      intervalRef.current = setInterval(moverCarruselAutomatico, 4000);
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
     }
-  }, [indiceActual]);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [moverCarruselAutomatico, esVisible, transicionActiva]);
+
+  // Aplicar transform de manera más robusta
+  const actualizarPosicion = useCallback(() => {
+    if (!carruselRef.current) return;
+    
+    const elemento = carruselRef.current;
+    elemento.style.transition = transicionActiva ? 'transform 0.5s ease-in-out' : 'none';
+    elemento.style.transform = `translateX(-${indiceActual * 100}%)`;
+  }, [indiceActual, transicionActiva]);
+
+  useEffect(() => {
+    if (!carruselRef.current) return;
+
+    const elemento = carruselRef.current;
+    
+    const handleTransitionEnd = () => {
+      setTransicionActiva(false);
+      
+      if (indiceActual === 0) {
+        // Si estamos en el clon del último, saltar al último real
+        setIndiceActual(total);
+      } else if (indiceActual === total + 1) {
+        // Si estamos en el clon del primero, saltar al primero real
+        setIndiceActual(1);
+      }
+      
+      setTimeout(() => setTransicionActiva(true), 50);
+    };
+
+    // Aplicar posición
+    actualizarPosicion();
+
+    // Escuchar fin de transición
+    elemento.addEventListener('transitionend', handleTransitionEnd);
+    
+    return () => {
+      if (elemento) {
+        elemento.removeEventListener('transitionend', handleTransitionEnd);
+      }
+    };
+  }, [indiceActual, total, transicionActiva, actualizarPosicion]);
+
+  // Revalidar posición cuando el componente se vuelve visible
+  useEffect(() => {
+    if (esVisible) {
+      // Pequeño delay para asegurar que el DOM esté listo
+      setTimeout(() => {
+        actualizarPosicion();
+      }, 100);
+    }
+  }, [esVisible, actualizarPosicion]);
 
   return (
     <section className="opiniones">
-      <h2>LO QUE DICEN NUESTROS COMPRADORES</h2>
+      <h2 className='titulo-opiniones'>LA OPINIÓN DE NUESTRA COMUNIDAD</h2>
       <div className="carousel-container-opiniones">
         <button className="opiniones-btn nav-left" onClick={() => moverCarrusel(-1)}>❮</button>
         <div className="carousel-opiniones-wrapper">
           <div className="carousel-opiniones" ref={carruselRef}>
-            {usuarios.map((usuario, idx) => (
-              <div className="user-card" key={idx}>
+            {usuariosExtendidos.map((usuario, idx) => (
+              <div className="user-card" key={`${idx}-${usuario.name}`}>
                 <img src={usuario.image} alt={`Foto de ${usuario.name}`} />
                 <div className="user-name">{usuario.name}</div>
                 <div>
@@ -84,13 +151,20 @@ const OpinionsCarousel = () => {
         <button className="opiniones-btn nav-right" onClick={() => moverCarrusel(1)}>❯</button>
       </div>
       <div className="opiniones-dots">
-        {usuarios.map((_, idx) => (
-          <button
-            key={idx}
-            className={`opiniones-dot${idx === indiceActual ? " active" : ""}`}
-            onClick={() => setIndiceActual(idx)}
-          />
-        ))}
+        {usuarios.map((_, idx) => {
+          // Calcular el índice real considerando los clones
+          const indiceReal = indiceActual === 0 ? total - 1 : 
+                           indiceActual === total + 1 ? 0 : 
+                           indiceActual - 1;
+          
+          return (
+            <button
+              key={idx}
+              className={`opiniones-dot${idx === indiceReal ? " active" : ""}`}
+              onClick={() => setIndiceActual(idx + 1)}
+            />
+          );
+        })}
       </div>
     </section>
   );

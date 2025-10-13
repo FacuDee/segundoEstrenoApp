@@ -1,0 +1,52 @@
+/* Banner Horizontal */
+.banner-section {
+  width: 100%;
+  margin: 2rem 0;
+  padding: 0;
+}
+
+.banner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  position: relative;
+}
+
+.banner-container:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.banner-container:active {
+  transform: translateY(0);
+}
+
+.banner-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.banner-image:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .banner-section {
+    margin: 1.5rem 0;
+    padding: 0 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-section {
+    margin: 1rem 0;
+    padding: 0;
+  }
+}
