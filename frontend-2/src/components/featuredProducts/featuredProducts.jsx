@@ -8,22 +8,19 @@ const productosDestacados = [
     id: 1,
     nombre: 'Básica',
     descripcion: 'Remera básica color blanca 100% algodón',
-    imagen: imgBasica,
-  link: '/prendas'
+    imagen: imgBasica
   },
   {
     id: 2,
     nombre: 'Chomba',
     descripcion: 'Chomba básica estilo formal color gris de algodón',
-    imagen: imgChomba,
-    link: '/prendas' 
+    imagen: imgChomba
   },
   {
     id: 3,
     nombre: 'Campera de jean',
     descripcion: 'Abrigo clásico de jean oversize unisex',
     imagen: imgJean,
-    link: '/prendas' 
   },
 ];
 
@@ -37,7 +34,7 @@ const FeaturedProducts = () => {
             <img
               className="imgCard"
               src={producto.imagen}
-              alt={producto.nombre}
+              alt={producto.alt}
             />
             <div className="card-info">
               <h3>{producto.nombre}</h3>
