@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import './HeroCarousel.css';
 
 // Importar las imágenes
-import imagen1 from '../../assets/carousel/imagen_1.webp';
-import imagen2 from '../../assets/carousel/imagen_2.png';
-import imagen3 from '../../assets/carousel/imagen_3.png';
+import imagen1 from '../../assets/carousel/imagen_3.webp';
+import imagen2 from '../../assets/carousel/fondoCelu.jpg';
+import imagen3 from '../../assets/carousel/imagen_1.webp';
 
 const HeroCarousel = () => {
     const [currentSlide, setCurrentSlide] = useState(0);

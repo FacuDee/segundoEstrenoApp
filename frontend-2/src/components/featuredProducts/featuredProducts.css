@@ -7,16 +7,19 @@
 .titulo-destacados {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 
 .doble {
+  background: linear-gradient(180deg, var(--color-primary), var(--color-light));
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px;
+  gap: 25px;
   max-width: 1200px;
   margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 15px;
 }
 
 .card {
@@ -146,12 +149,15 @@
   }
   
   .card {
-    width: 300px;
-    height: 550px;
+    width: 290px;
   }
   
   .imgCard {
     height: 220px;
+  }
+
+  .card-info h3 {
+    font-size: 1.2rem;
   }
   
   .precio-destacado {
@@ -179,6 +185,12 @@
   
   .imgCard {
     height: 220px;
+  }
+
+  .card-info .text {
+    font-size: 0.9rem;
+    -webkit-line-clamp: 3; /* Máximo 3 líneas en móvil */
+    line-clamp: 3;
   }
   
   .precio-destacado {

@@ -107,6 +107,7 @@
 .nav-links {
   list-style: none;
   display: flex;
+  align-items: center;
   gap: 3rem;
   padding: 0.8rem 0;
 }
@@ -297,17 +298,14 @@
     );
     padding: 3rem;
     display: flex;
+    justify-content: center;
+    height: 65vh;
     gap: 3rem;
   } 
 
   .nav-links a {
-    padding: 0.5rem 1rem;
     width: 100%;
     text-align: center;
-  }
-
-  .cart-icon {
-    margin-top: 1rem;
   }
 }
 

@@ -32,9 +32,9 @@
 
 .carousel-item img {
   width: 100%;
-  height: 600px;
+  height: 680px;
   object-fit: cover;
-  object-position: center;
+  object-position: top;
   display: block;
 }
 
@@ -53,16 +53,17 @@
 
 .carousel-caption h3 {
   margin: 0 0 5px;
-  font-size: 2em;
+  font-size: 2.2rem;
   font-family: "Poppins", sans-serif;
   color: #ffffff;
 }
 
 .carousel-caption p {
   margin: 0;
-  font-size: 1.2em;
+  font-size: 1.3rem;
+  font-weight: 600;
   font-family: "Montserrat", sans-serif;
-  color: #93ce8c;
+  color: var(--color-primary);
 }
 
 .carousel-control {
@@ -74,7 +75,7 @@
   border: none;
   padding: 8px 16px;
   cursor: pointer;
-  font-size: 2em;
+  font-size: 2rem;
   line-height: 1;
   border-radius: 50%;
   z-index: 10;
@@ -121,45 +122,45 @@
 /* ===== Media Queries ===== */
 @media (max-width: 992px) {
   .carousel-item img {
-    height: 500px;
+    height: 600px;
   }
 }
 
 @media (max-width: 768px) {
   .carousel-item img {
-    height: 400px;
+    height: 500px;
   }
 
   .carousel-caption h3 {
-    font-size: 1.5em;
+    font-size: 1.8rem;
   }
 
   .carousel-caption p {
-    font-size: 1em;
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 480px) {
   .carousel-item img {
-    height: 300px;
+    height: 400px;
   }
 
   .carousel-caption {
     bottom: 30px;
     padding: 10px;
-    font-size: 0.9em;
+    font-size: 0.9rem;
   }
 
   .carousel-caption h3 {
-    font-size: 1.2em;
+    font-size: 1.4rem;
   }
 
   .carousel-caption p {
-    font-size: 0.8em;
+    font-size: 1rem;
   }
 
   .carousel-control {
     padding: 5px 10px;
-    font-size: 1.5em;
+    font-size: 1.5rem;
   }
 }
