@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import { FaRegAddressCard } from "react-icons/fa";
+import { FaUserEdit } from "react-icons/fa";
 import PerfilUsuario from '../../components/miCuenta/PerfilUsuario.jsx';
 import ComprasUsuario from '../../components/miCuenta/ComprasUsuario.jsx';
 import VentasUsuario from '../../components/miCuenta/VentasUsuario.jsx';
@@ -11,7 +10,6 @@ import GestionarTodasPrendas from '../../components/miCuenta/GestionarTodasPrend
 import './MiCuenta.css';
 
 const MiCuenta = () => {
-  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState(null); // Se establecerá después de cargar el usuario
 
@@ -75,10 +73,10 @@ const MiCuenta = () => {
     <div className="micuenta-container">
       <div className="micuenta-header">
         <h1>
-          <FaRegAddressCard className="micuenta-user-icon" />
+          <FaUserEdit className="micuenta-user-icon" />
           Mi Cuenta
         </h1>
-        <p>Bienvenido/a, {user.username || user.nombre}</p>
+        <p>Panel del Usuario: <strong>{user.username || user.nombre}</strong></p>
       </div>
 
       <div className="micuenta-content">
