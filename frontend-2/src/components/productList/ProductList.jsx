@@ -26,8 +26,9 @@ const ProductList = () => {
   const fetchPrendas = async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/prenda");
+      const response = await fetch("http://localhost:3000/prendas");
       const data = await response.json();
+      console.log(data);
       setPrendas(data);
     } catch (error) {
       console.error('Error al cargar prendas:', error);
@@ -38,7 +39,7 @@ const ProductList = () => {
 
   const fetchCategorias = async () => {
     try {
-      const response = await fetch('/api/categoria');
+      const response = await fetch('http://localhost:3000/categoria');
       const data = await response.json();
       setCategorias(data);
     } catch (error) {
@@ -113,13 +114,6 @@ const ProductList = () => {
 
   if (loading) return <div className="loading">Cargando prendas...</div>;
 
-<<<<<<< HEAD
-  return (   
-     <> <Filter/>
-    <div className="product-list"> 
-      {prendas.map((prenda, idx) => (
-        <div key={prenda.id_prenda ?? idx} className="product-item card-producto">
-=======
   return (
     <div className="product-list-container">
       {/* Filtros y búsqueda */}
@@ -202,7 +196,6 @@ const ProductList = () => {
           onClick={() => handleVerDetalles(prenda)}
           style={{ cursor: 'pointer' }}
         >
->>>>>>> developer
           <div className="imagen-contenedor">
             <img src={prenda.imagen_url} alt={prenda.titulo} />
             <div className="btns-hover">
@@ -303,7 +296,7 @@ const ProductList = () => {
         </div>
       )}
     </div>
-    </>
+    
   );
 };
 
