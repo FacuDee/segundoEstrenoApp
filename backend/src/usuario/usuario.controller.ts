@@ -54,7 +54,6 @@ export class UsuarioController {
     return await this.usuarioService.update(id, allowedFields);
   }
 
-  
   @Delete(':id')
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Roles('admin')
