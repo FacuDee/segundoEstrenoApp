@@ -29,7 +29,7 @@
   align-items: center;
   text-align: center;
   overflow: hidden;
-  height: 580px;
+  height: 500px;
   background: linear-gradient(
     180deg,
     var(--color-lighter),
@@ -61,7 +61,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
 }
 
@@ -109,6 +109,30 @@
 
 .btn-ver-mas:hover {
   background-color: var(--color-darker);
+  transform: translateY(-2px);
+}
+
+.btn-ver-todos {
+  margin: 2rem auto;
+  font-family: var(--font-main);
+  background-color: var(--color-lighter);
+  color: var(--color-primary-dark);
+  padding: 15px 30px;
+  border: 2px solid var(--color-primary-dark);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-ver-todos:hover {
+  background-color: var(--color-primary-dark);
+  color: var(--color-lighter);
   transform: translateY(-2px);
 }
 

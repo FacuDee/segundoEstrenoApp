@@ -49,11 +49,14 @@ const HeroCarousel = () => {
     return (
         <section className="carousel-container">
             <div className="carousel">
-                <div className="carousel-inner">
+                <div
+                    className="carousel-inner"
+                    style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                >
                     {slides.map((slide, index) => (
                         <div
                             key={index}
-                            className={`carousel-item ${index === currentSlide ? 'active' : ''}`}
+                            className="carousel-item"
                         >
                             <img src={slide.image} alt={slide.title} />
                             <div className="carousel-caption">

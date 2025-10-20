@@ -14,20 +14,19 @@
   overflow: hidden;
 }
 
+
 .carousel-inner {
   display: flex;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
 }
 
 .carousel-item {
   min-width: 100%;
   position: relative;
   overflow: hidden;
-  display: none;
-}
-
-.carousel-item.active {
-  display: block;
+  flex-shrink: 0;
+  /* No display:none, todas visibles para el slide */
 }
 
 .carousel-item img {
@@ -141,8 +140,18 @@
 }
 
 @media (max-width: 480px) {
+
+  .carousel-inner {
+    width: 100vw;
+  }
+  .carousel-item {
+    min-width: 100vw;
+    width: 100vw;
+  }
   .carousel-item img {
+    width: 100vw;
     height: 400px;
+    max-width: 100vw;
   }
 
   .carousel-caption {
