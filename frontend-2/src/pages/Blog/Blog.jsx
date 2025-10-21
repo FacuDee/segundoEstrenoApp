@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import './Blog.css';
 import { FaLeaf, FaWater, FaTshirt, FaHandsHelping, FaRecycle, FaGlobeAmericas, FaArrowUp } from 'react-icons/fa';
 import PostCard from '../../components/blog/PostCard';
+import EncuestaBlog from '../../components/blog/EncuestaBlog';
 import { blogPosts } from '../../data/PostData';
 
 
@@ -76,27 +77,30 @@ const Blog = () => {
             </section>
           </div>
 
-          {/* Banner de reciclaje lateral */}
-          <div className="recycling-banner">
-            <video 
-              className="video-reciclaje" 
-              src="https://d1whqwkn09gz4t.cloudfront.net/videos/impacto/ando.mp4" 
-              autoPlay 
-              loop 
-              muted 
-              playsInline
-              preload="auto">
-            </video>
-            <div className="recycling-content"> 
-              <h3>Beneficios de reciclar ropa</h3>
-              <ul>
-                <li><FaLeaf className="recycling-icon" /> Reduce el impacto ambiental</li>
-                <li><FaWater className="recycling-icon" /> Ahorra agua y energía</li>
-                <li><FaTshirt className="recycling-icon" /> Disminuye residuos textiles</li>
-                <li><FaHandsHelping className="recycling-icon" /> Promueve el consumo responsable</li>
-                <li><FaRecycle className="recycling-icon" /> Da nueva vida a las prendas</li>
-              </ul>
+          {/* Banner de reciclaje lateral + Encuesta sticky juntos */}
+          <div className="blog-sidebar-sticky">
+            <div className="recycling-banner">
+              <video 
+                className="video-reciclaje" 
+                src="https://d1whqwkn09gz4t.cloudfront.net/videos/impacto/ando.mp4" 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                preload="auto">
+              </video>
+              <div className="recycling-content"> 
+                <h3>Beneficios de reciclar ropa</h3>
+                <ul>
+                  <li><FaLeaf className="recycling-icon" /> Reduce el impacto ambiental</li>
+                  <li><FaWater className="recycling-icon" /> Ahorra agua y energía</li>
+                  <li><FaTshirt className="recycling-icon" /> Disminuye residuos textiles</li>
+                  <li><FaHandsHelping className="recycling-icon" /> Promueve el consumo responsable</li>
+                  <li><FaRecycle className="recycling-icon" /> Da nueva vida a las prendas</li>
+                </ul>
+              </div>
             </div>
+            <EncuestaBlog />
           </div>
         </div>
       </main>
