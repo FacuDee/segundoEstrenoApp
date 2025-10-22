@@ -54,7 +54,7 @@ Para build de producción:
 npm run build
 ```
 
-## ℹNotas
+## Notas
 
 - El frontend está preparado para consumir los endpoints del backend NestJS.
 - El diseño es completamente responsive y pensado para usabilidad mobile y desktop.
