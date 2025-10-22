@@ -1,6 +1,6 @@
 # 🛒 Segundo Estreno - App Moda Circular
 
-![capturaReadme](https://github.com/user-attachments/assets/414087dc-b610-4f1f-a2a0-566523c8f5d3)
+![capturaReadme](frontend-2/src/assets/carousel/fondoCelu.jpg)
 
 > Plataforma web para comprar y vender ropa usada, promoviendo la reutilización de prendas en un entorno digital accesible.
 
