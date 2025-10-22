@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './EncuestaBlog.css';
 
+// Constantes de la encuesta
 const PREGUNTA = '¿Qué hacés con la ropa que ya no usás?';
 const OPCIONES = [
   'La dono',
@@ -10,7 +11,10 @@ const OPCIONES = [
 const STORAGE_KEY = 'encuestaBlogVotos';
 const STORAGE_VOTED = 'encuestaBlogYaVoto';
 
-const votosIniciales = [38, 90, 62]; // La vendo es la más votada, total 190
+// Votos iniciales
+const votosIniciales = [38, 90, 62]; // Simulación. "La vendo" es la más votada, total 190
+
+// Componente EncuestaBlog
 const EncuestaBlog = (props) => {
   const [votos, setVotos] = useState(() => {
     const guardados = JSON.parse(localStorage.getItem(STORAGE_KEY));
@@ -52,6 +56,7 @@ const EncuestaBlog = (props) => {
 
   const totalVotos = votos.reduce((a, b) => a + b, 0);
 
+  // Calcular el porcentaje de votos para cada opción
   return (
     <div className={`encuesta-blog${props.className ? ' ' + props.className : ''}`}>
       <h4 className="encuesta-pregunta">{PREGUNTA}</h4>
@@ -82,7 +87,7 @@ const EncuestaBlog = (props) => {
         })}
       </div>
       {yaVoto && (
-        <div className="encuesta-total">Total de votos: {totalVotos}</div>
+        <div className="encuesta-total">Votos totales: {totalVotos}</div>
       )}
     </div>
   );

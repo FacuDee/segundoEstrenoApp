@@ -7,7 +7,7 @@ import PostCard from '../../components/blog/PostCard';
 import EncuestaBlog from '../../components/blog/EncuestaBlog';
 import { blogPosts } from '../../data/PostData';
 
-
+// Componente principal del Blog
 const Blog = () => {
   const [waterSaved, setWaterSaved] = useState(1250000);
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -104,8 +104,6 @@ const Blog = () => {
           </div>
         </div>
       </main>
-
-  {/* Usa tu Footer existente */}
 
       {/* Botón flotante de scroll */}
       {showScrollButton && (
