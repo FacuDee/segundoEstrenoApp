@@ -58,7 +58,7 @@ backend/
   npm run test:e2e
   ```
 
-## ℹNotas
+## Notas
 
 - El backend está preparado para integrarse con el frontend React (`frontend-2`).
 - Las variables de entorno permiten cambiar fácilmente la configuración de la base de datos.
