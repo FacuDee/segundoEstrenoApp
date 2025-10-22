@@ -4,6 +4,7 @@ import { FaArrowLeft, FaShoppingCart, FaTshirt } from 'react-icons/fa';
 import { useCart } from '../../context/CartContext';
 import './ProductDetail.css';
 
+// Componente principal de detalle de producto
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -16,10 +17,12 @@ const ProductDetail = () => {
   const imgRef = useRef(null);
   const containerRef = useRef(null);
 
+  // Cargar detalle de prenda
   useEffect(() => {
     fetchPrendaDetail();
   }, [id]);
 
+  // Función para obtener detalle de prenda
   const fetchPrendaDetail = async () => {
     try {
       setLoading(true);
@@ -40,9 +43,11 @@ const ProductDetail = () => {
     }
   };
 
+  // Función para obtener productos relacionados
   const fetchProductosRelacionados = async (categoriaId) => {
     if (!categoriaId) return;
     
+    // Obtener todas las prendas
     try {
       const response = await fetch('/api/prenda');
       const data = await response.json();
@@ -58,14 +63,17 @@ const ProductDetail = () => {
     }
   };
 
+  // Manejar agregar al carrito
   const handleAddToCart = () => {
     addToCart(prenda);
   };
 
+  // Navegar a producto relacionado
   const handleProductoRelacionado = (producto) => {
     navigate(`/producto/${producto.id}`);
   };
 
+  // Volver a la lista de productos
   const handleVolver = () => {
     navigate('/prendas');
   };
@@ -89,6 +97,7 @@ const ProductDetail = () => {
     setZoomPosition({ x, y });
   };
 
+  // Renderizado condicional
   if (loading) {
     return (
       <main>
@@ -112,6 +121,7 @@ const ProductDetail = () => {
     );
   }
 
+  // Renderizar detalle de prenda
   return (
     <main>
       <div className="detalle-container">

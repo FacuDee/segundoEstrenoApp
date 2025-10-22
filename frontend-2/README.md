@@ -1,69 +1,61 @@
-# React + TypeScript + Vite
+# Frontend-2 - React + TypeScript
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este directorio contiene el frontend principal de Segundo Estreno, desarrollado con React, TypeScript y Vite.
 
-Currently, two official plugins are available:
+## Estructura principal
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+frontend-2/
+  src/
+    components/   # Componentes reutilizables (carouseles, banners, encuestas, header, footer, etc)
+    pages/         # Páginas principales (Home, Blog, MiCuenta, Nosotros, ProductDetail)
+    context/       # Contextos globales (ej: carrito)
+    assets/        # Imágenes y recursos estáticos
+    App.tsx        # Ruteo principal
+    main.tsx       # Entry point
+  public/          # Archivos estáticos
+  package.json     # Dependencias y scripts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Principales features implementadas
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **HeroCarousel:** Carrusel animado en Home con imágenes y mensajes.
+- **Encuesta interactiva:** Encuesta en Blog con resultados visuales y persistencia local.
+- **Carrito de compras:** Context global, modal, y página de carrito.
+- **Navegación SPA:** React Router para navegación fluida entre páginas.
+- **Componentes reutilizables:** Banner, FeaturedProducts, Footer, Header, etc.
+- **Diseño responsive:** Adaptado a mobile y desktop.
+- **Animaciones y feedback visual:** SweetAlert2, transiciones CSS, iconografía.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Tecnologías y librerías clave
+
+- React 19 + TypeScript
+- Vite
+- React Router DOM
+- React Icons
+- SweetAlert2
+- Context API
+
+## Cómo ejecutar el frontend
+
+1. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+2. Iniciar en modo desarrollo:
+   ```bash
+   npm run dev
+   ```
+3. Acceder a `http://localhost:5173` (o el puerto que indique Vite)
+
+Para build de producción:
+
+```bash
+npm run build
 ```
+
+## ℹNotas
+
+- El frontend está preparado para consumir los endpoints del backend NestJS.
+- El diseño es completamente responsive y pensado para usabilidad mobile y desktop.
+- Consultar el README principal para visión general y estructura del proyecto.
