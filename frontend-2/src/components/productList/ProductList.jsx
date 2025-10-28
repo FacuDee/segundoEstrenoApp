@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FaShoppingCart, FaEye, FaSearch, FaFilter, FaDollarSign, FaTshirt } from "react-icons/fa";
 import { useCart } from "../../context/CartContext";
 import "./ProductList.css";
-import Filter from "./Filter";
+
 
 const ProductList = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [prendas, setPrendas] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
+  // Leer parámetro 'search' de la URL
+  const params = new URLSearchParams(location.search);
+  const initialSearch = params.get('search') || '';
+  const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [filterCategory, setFilterCategory] = useState('');
   const [priceFilter, setPriceFilter] = useState('');
   const [sizeFilter, setSizeFilter] = useState('');
@@ -26,7 +30,7 @@ const ProductList = () => {
   const fetchPrendas = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/prendas");
+      const response = await fetch("http://localhost:3000/prenda");
       const data = await response.json();
       console.log(data);
       setPrendas(data);
@@ -108,9 +112,11 @@ const ProductList = () => {
   };
 
   // Resetear página cuando cambian los filtros
+  // Actualizar searchTerm si cambia el parámetro 'search' en la URL
   useEffect(() => {
+    setSearchTerm(initialSearch);
     setCurrentPage(1);
-  }, [searchTerm, filterCategory, priceFilter, sizeFilter]);
+  }, [initialSearch, filterCategory, priceFilter, sizeFilter]);
 
   if (loading) return <div className="loading">Cargando prendas...</div>;
 

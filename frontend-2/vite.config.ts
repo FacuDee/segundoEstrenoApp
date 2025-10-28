@@ -19,13 +19,18 @@ export default defineConfig({
         secure: false,
         rewrite: (path) => path.replace(/^\/api\/usuario/, '')
       },
-      '/api': {
-        target: 'http://localhost:3000',
+      '/api/prenda': {
+        target: 'http://localhost:3000/prenda',
         changeOrigin: true,
         secure: false,
-      
+        rewrite: (path) => path.replace(/^\/api\/prenda/, '')
       },
- 
+      '/api/categoria': {
+        target: 'http://localhost:3000/categoria',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api\/categoria/, '')
+      },
       '/api/carrito': {
         target: 'http://localhost:3000/carrito',
         changeOrigin: true,

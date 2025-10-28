@@ -18,7 +18,7 @@ import { CreatePrendaDto } from './dto/create-prenda.dto';
 import { Roles } from '../auth/roles.decorator';
 import { RolesGuard } from '../auth/roles.guard';
 
-@Controller('prendas')
+@Controller('prenda')
 export class PrendaController {
   constructor(private readonly prendaService: PrendaService) {}
   @Get()

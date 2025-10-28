@@ -8,19 +8,19 @@ import { CategoriaModule } from './categoria/categoria.module';
 import { CarritoModule } from './carrito/carrito.module';
 import { TransaccionModule } from './transaccion/transaccion.module';
 import { AuthModule } from './auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
-import 'dotenv/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { SolicitudVendedorModule } from './solicitud-vendedor/solicitud-vendedor.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: process.env.DB_USERNAME ,
-      password: process.env.DB_PASSWORD ,
-      database: process.env.DB_DATABASE ,
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT || '3306'),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
       autoLoadEntities: true,
       synchronize: false,
       charset: 'utf8mb4_unicode_ci',
@@ -32,6 +32,7 @@ import 'dotenv/config';
     CarritoModule,
     TransaccionModule,
     AuthModule,
+    SolicitudVendedorModule,
   ],
   controllers: [AppController],
   providers: [AppService],
