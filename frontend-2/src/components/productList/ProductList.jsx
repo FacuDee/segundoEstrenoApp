@@ -4,6 +4,7 @@ import { FaShoppingCart, FaEye, FaSearch, FaFilter, FaDollarSign, FaTshirt } fro
 import { useCart } from "../../context/CartContext";
 import "./ProductList.css";
 
+
 const ProductList = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,8 +30,9 @@ const ProductList = () => {
   const fetchPrendas = async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/prenda");
+      const response = await fetch("http://localhost:3000/prenda");
       const data = await response.json();
+      console.log(data);
       setPrendas(data);
     } catch (error) {
       console.error('Error al cargar prendas:', error);
@@ -41,7 +43,7 @@ const ProductList = () => {
 
   const fetchCategorias = async () => {
     try {
-      const response = await fetch('/api/categoria');
+      const response = await fetch('http://localhost:3000/categoria');
       const data = await response.json();
       setCategorias(data);
     } catch (error) {
@@ -300,6 +302,7 @@ const ProductList = () => {
         </div>
       )}
     </div>
+    
   );
 };
 
