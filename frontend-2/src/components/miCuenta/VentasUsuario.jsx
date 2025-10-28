@@ -70,7 +70,7 @@ const VentasUsuario = ({ userId }) => {
                     <FaDollarSign /> ${venta.total}
                   </span>
                   <span className="comprador">
-                    Comprador: {venta.comprador?.nombre || 'N/A'}
+                    Comprador: {venta.comprador}
                   </span>
                 </div>
               </div>
