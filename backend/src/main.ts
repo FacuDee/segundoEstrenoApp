@@ -20,25 +20,25 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', '..', 'frontend-2', 'public'));
 
   // Fallback: para cualquier ruta que no sea API, servir index.html
-    app.use((req, res, next) => {
-      if (
-        req.url.startsWith('/api') ||
-        req.url.startsWith('/auth') ||
-        req.url === '/prenda' ||
-        req.url.startsWith('/prenda/') ||
-        req.url === '/carrito' ||
-        req.url.startsWith('/carrito/') ||
-        req.url === '/usuario' ||
-        req.url.startsWith('/usuario/') ||
-        req.url === '/categoria' ||
-        req.url.startsWith('/categoria/') ||
-        req.url === '/transaccion' ||
-        req.url.startsWith('/transaccion/')
-      ) {
-        return next();
-      }
-      res.sendFile(join(__dirname, '..', '..', 'frontend-2', 'public', 'index.html'));
-    });
+    // app.use((req, res, next) => {
+    //   if (
+    //     req.url.startsWith('/api') ||
+    //     req.url.startsWith('/auth') ||
+    //     req.url === '/prendas' ||
+    //     req.url.startsWith('/prendas/') ||
+    //     req.url === '/carrito' ||
+    //     req.url.startsWith('/carrito/') ||
+    //     req.url === '/usuario' ||
+    //     req.url.startsWith('/usuario/') ||
+    //     req.url === '/categoria' ||
+    //     req.url.startsWith('/categoria/') ||
+    //     req.url === '/transaccion' ||
+    //     req.url.startsWith('/transaccion/')
+    //   ) {
+    //     return next();
+    //   }
+    //   res.sendFile(join(__dirname, '..', '..', 'frontend-2', 'public', 'index.html'));
+    // });
 
   await app.listen(process.env.PORT ?? 3000);
 }
