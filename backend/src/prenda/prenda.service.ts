@@ -4,8 +4,6 @@ import { CreatePrendaDto } from './dto/create-prenda.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Prenda } from './prenda.entity';
-import { Usuario } from 'src/usuario/usuario.entity';
-import { Categoria } from 'src/categoria/categoria.entity';
 
 @Injectable()
 export class PrendaService {
