@@ -10,20 +10,32 @@ const ProductList = () => {
   const [prendas, setPrendas] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [loading, setLoading] = useState(true);
-  // Leer parámetro 'search' de la URL
-  const params = new URLSearchParams(location.search);
-  const initialSearch = params.get('search') || '';
-  const [searchTerm, setSearchTerm] = useState(initialSearch);
-  const [filterCategory, setFilterCategory] = useState('');
-  const [priceFilter, setPriceFilter] = useState('');
-  const [sizeFilter, setSizeFilter] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(24);
   const { addToCart } = useCart();
+
+  // Parsear parámetros iniciales desde la URL
+  const parseSearchParams = () => {
+    const params = new URLSearchParams(location.search);
+    return {
+      search: params.get("search") || "",
+      category: params.get("category") || "",
+      price: params.get("price") || "",
+      size: params.get("size") || "",
+      page: parseInt(params.get("page")) || 1,
+    };
+  };
+
+  const initialParams = parseSearchParams();
+  const [searchTerm, setSearchTerm] = useState(initialParams.search);
+  const [filterCategory, setFilterCategory] = useState(initialParams.category);
+  const [priceFilter, setPriceFilter] = useState(initialParams.price);
+  const [sizeFilter, setSizeFilter] = useState(initialParams.size);
+  const [currentPage, setCurrentPage] = useState(initialParams.page);
+  const [itemsPerPage] = useState(24);
 
   useEffect(() => {
     fetchPrendas();
     fetchCategorias();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchPrendas = async () => {
@@ -33,7 +45,7 @@ const ProductList = () => {
       const data = await response.json();
       setPrendas(data);
     } catch (error) {
-      console.error('Error al cargar prendas:', error);
+      console.error("Error al cargar prendas:", error);
     } finally {
       setLoading(false);
     }
@@ -41,11 +53,11 @@ const ProductList = () => {
 
   const fetchCategorias = async () => {
     try {
-      const response = await fetch('/api/categoria');
+      const response = await fetch("/api/categoria");
       const data = await response.json();
       setCategorias(data);
     } catch (error) {
-      console.error('Error al cargar categorías:', error);
+      console.error("Error al cargar categorías:", error);
     }
   };
 
@@ -54,67 +66,108 @@ const ProductList = () => {
   };
 
   const handleVerDetalles = (prenda) => {
-    navigate(`/producto/${prenda.id}`);
+    const id = prenda.id_prenda ?? prenda.id;
+    // navegar al detalle (no tocamos la query de la lista). El historial conservará la entrada previa
+    //  con sus filtros.
+    // Pasamos la query actual en el state para fallback si el usuario abrió el detalle desde fuera
+    navigate(`/producto/${id}`, { state: { from: location.search } });
   };
 
-  // Función de filtrado
-  const filteredPrendas = prendas.filter(prenda => {
-    // Filtro por búsqueda (título o descripción)
-    const matchesSearch = searchTerm === '' || 
-      (prenda.titulo || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (prenda.descripcion || '').toLowerCase().includes(searchTerm.toLowerCase());
-    
-    // Filtro por categoría
-    const matchesCategory = filterCategory === '' || prenda.categoria?.id.toString() === filterCategory;
-    
-    // Filtro por precio
+  // Filtrado
+  const filteredPrendas = prendas.filter((prenda) => {
+    const matchesSearch =
+      searchTerm === "" ||
+      (prenda.titulo || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (prenda.descripcion || "").toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesCategory = filterCategory === "" || prenda.categoria?.id?.toString() === filterCategory;
+
     let matchesPrice = true;
-    if (priceFilter !== '') {
+    if (priceFilter !== "") {
       const precio = parseFloat(prenda.precio);
       switch (priceFilter) {
-        case 'muy-bajo':
+        case "muy-bajo":
           matchesPrice = precio <= 25000;
           break;
-        case 'bajo':
+        case "bajo":
           matchesPrice = precio > 25000 && precio <= 50000;
           break;
-        case 'medio':
+        case "medio":
           matchesPrice = precio > 50000 && precio <= 80000;
           break;
-        case 'alto':
+        case "alto":
           matchesPrice = precio > 80000 && precio <= 100000;
           break;
-        case 'muy-alto':
+        case "muy-alto":
           matchesPrice = precio > 100000;
           break;
         default:
           matchesPrice = true;
       }
     }
-    
-    // Filtro por talle
-    const matchesSize = sizeFilter === '' || (prenda.talle && prenda.talle.toLowerCase() === sizeFilter.toLowerCase());
-    
+
+    const matchesSize =
+      sizeFilter === "" || (prenda.talle && prenda.talle.toString().toLowerCase() === sizeFilter.toString().toLowerCase());
+
     return matchesSearch && matchesCategory && matchesPrice && matchesSize;
   });
 
-  // Lógica de paginación
+  // Paginación
   const totalPages = Math.ceil(filteredPrendas.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedPrendas = filteredPrendas.slice(startIndex, startIndex + itemsPerPage);
 
-  // Función para cambiar de página
   const handlePageChange = (page) => {
+    if (page < 1 || page > totalPages) return;
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Resetear página cuando cambian los filtros
-  // Actualizar searchTerm si cambia el parámetro 'search' en la URL
+  // Sincronizar estado -> URL (para que al usar "atrás" se restauren los filtros)
   useEffect(() => {
-    setSearchTerm(initialSearch);
+    const params = new URLSearchParams();
+    if (searchTerm) params.set("search", searchTerm);
+    if (filterCategory) params.set("category", filterCategory);
+    if (priceFilter) params.set("price", priceFilter);
+    if (sizeFilter) params.set("size", sizeFilter);
+    if (currentPage && currentPage > 1) params.set("page", String(currentPage));
+
+    const newSearch = params.toString();
+    const currentSearch = location.search.replace(/^\?/, "");
+    if (newSearch !== currentSearch) {
+      // push en historial para poder retroceder a estados anteriores de filtros
+      navigate(`?${newSearch}`, { replace: false });
+    }
+  }, [searchTerm, filterCategory, priceFilter, sizeFilter, currentPage, navigate, location.search]);
+
+  // Aplicar URL -> estado (cuando el usuario usa atrás/adelante o llega con query)
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    setSearchTerm(params.get("search") || "");
+    setFilterCategory(params.get("category") || "");
+    setPriceFilter(params.get("price") || "");
+    setSizeFilter(params.get("size") || "");
+    setCurrentPage(parseInt(params.get("page")) || 1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search]);
+
+  // Resetear página a 1 al cambiar filtros desde UI
+  const onChangeSearch = (value) => {
+    setSearchTerm(value);
     setCurrentPage(1);
-  }, [initialSearch, filterCategory, priceFilter, sizeFilter]);
+  };
+  const onChangeCategory = (value) => {
+    setFilterCategory(value);
+    setCurrentPage(1);
+  };
+  const onChangePrice = (value) => {
+    setPriceFilter(value);
+    setCurrentPage(1);
+  };
+  const onChangeSize = (value) => {
+    setSizeFilter(value);
+    setCurrentPage(1);
+  };
 
   if (loading) return <div className="loading">Cargando prendas...</div>;
 
@@ -128,32 +181,26 @@ const ProductList = () => {
             type="text"
             placeholder="Buscar por título o descripción..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => onChangeSearch(e.target.value)}
           />
         </div>
-        
+
         <div className="filters-row">
           <div className="category-filter">
             <FaFilter className="filter-icon" />
-            <select
-              value={filterCategory}
-              onChange={(e) => setFilterCategory(e.target.value)}
-            >
+            <select value={filterCategory} onChange={(e) => onChangeCategory(e.target.value)}>
               <option value="">Todas las categorías</option>
-              {categorias.map(categoria => (
+              {categorias.map((categoria) => (
                 <option key={categoria.id} value={categoria.id.toString()}>
                   {categoria.nombre}
                 </option>
               ))}
             </select>
           </div>
-          
+
           <div className="size-filter">
             <FaTshirt className="filter-icon" />
-            <select
-              value={sizeFilter}
-              onChange={(e) => setSizeFilter(e.target.value)}
-            >
+            <select value={sizeFilter} onChange={(e) => onChangeSize(e.target.value)}>
               <option value="">Todos los talles</option>
               <option value="XS">XS</option>
               <option value="S">S</option>
@@ -177,10 +224,7 @@ const ProductList = () => {
 
           <div className="price-filter">
             <FaDollarSign className="filter-icon" />
-            <select
-              value={priceFilter}
-              onChange={(e) => setPriceFilter(e.target.value)}
-            >
+            <select value={priceFilter} onChange={(e) => onChangePrice(e.target.value)}>
               <option value="">Todos los precios</option>
               <option value="muy-bajo">Hasta $25.000</option>
               <option value="bajo">$25.000 - $50.000</option>
@@ -194,50 +238,50 @@ const ProductList = () => {
 
       <div className="product-list">
         {paginatedPrendas.map((prenda, idx) => (
-        <div 
-          key={prenda.id_prenda ?? idx} 
-          className="product-item card-producto"
-          onClick={() => handleVerDetalles(prenda)}
-          style={{ cursor: 'pointer' }}
-        >
-          <div className="imagen-contenedor">
-            <img src={prenda.imagen_url} alt={prenda.titulo} />
-            <div className="btns-hover">
-              <button 
-                title="Ver detalles"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleVerDetalles(prenda);
-                }}
-              >
-                <FaEye />
-              </button>
-              <button 
-                title="Agregar al carrito"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleAddToCart(prenda);
-                }}
-              >
-                <FaShoppingCart />
-              </button>
+          <div
+            key={prenda.id_prenda ?? prenda.id ?? idx}
+            className="product-item card-producto"
+            onClick={() => handleVerDetalles(prenda)}
+            style={{ cursor: "pointer" }}
+          >
+            <div className="imagen-contenedor">
+              <img src={prenda.imagen_url} alt={prenda.titulo} />
+              <div className="btns-hover">
+                <button
+                  title="Ver detalles"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleVerDetalles(prenda);
+                  }}
+                >
+                  <FaEye />
+                </button>
+                <button
+                  title="Agregar al carrito"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleAddToCart(prenda);
+                  }}
+                >
+                  <FaShoppingCart />
+                </button>
+              </div>
+            </div>
+            <div className="contenido">
+              <h3>{prenda.titulo}</h3>
+              <p>{prenda.descripcion}</p>
+              <span>${prenda.precio}</span>
             </div>
           </div>
-          <div className="contenido">
-            <h3>{prenda.titulo}</h3>
-            <p>{prenda.descripcion}</p>
-            <span>${prenda.precio}</span>
+        ))}
+
+        {filteredPrendas.length === 0 && (
+          <div className="no-results">
+            <p>No se encontraron prendas que coincidan con los filtros seleccionados.</p>
           </div>
-        </div>
-      ))}
-      
-      {filteredPrendas.length === 0 && (
-        <div className="no-results">
-          <p>No se encontraron prendas que coincidan con los filtros seleccionados.</p>
-        </div>
-      )}
+        )}
       </div>
-      
+
       {/* Información de paginación y controles - FUERA del grid */}
       {filteredPrendas.length > 0 && (
         <div className="pagination-info">
@@ -246,28 +290,20 @@ const ProductList = () => {
           </p>
         </div>
       )}
-      
+
       {/* Controles de paginación - FUERA del grid */}
       {totalPages > 1 && (
         <div className="pagination-controls">
-          <button 
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="pagination-btn"
-          >
+          <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="pagination-btn">
             Anterior
           </button>
-          
+
           <div className="pagination-numbers">
             {Array.from({ length: totalPages }, (_, i) => i + 1)
-              .filter(page => {
-                // Mostrar páginas relevantes (primera, última, actual y adyacentes)
-                return page === 1 || 
-                       page === totalPages || 
-                       Math.abs(page - currentPage) <= 2;
+              .filter((page) => {
+                return page === 1 || page === totalPages || Math.abs(page - currentPage) <= 2;
               })
               .map((page, index, array) => {
-                // Agregar puntos suspensivos si hay saltos
                 const elements = [];
                 if (index > 0 && array[index - 1] < page - 1) {
                   elements.push(
@@ -277,11 +313,7 @@ const ProductList = () => {
                   );
                 }
                 elements.push(
-                  <button
-                    key={page}
-                    onClick={() => handlePageChange(page)}
-                    className={`pagination-btn ${currentPage === page ? 'active' : ''}`}
-                  >
+                  <button key={page} onClick={() => handlePageChange(page)} className={`pagination-btn ${currentPage === page ? "active" : ""}`}>
                     {page}
                   </button>
                 );
@@ -289,12 +321,8 @@ const ProductList = () => {
               })
               .flat()}
           </div>
-          
-          <button 
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="pagination-btn"
-          >
+
+          <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="pagination-btn">
             Siguiente
           </button>
         </div>
