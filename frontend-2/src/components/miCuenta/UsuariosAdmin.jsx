@@ -244,6 +244,103 @@ const UsuariosAdmin = () => {
         <h2>Gestionar Usuarios</h2>
       </div>
 
+      {/* Panel de solicitudes pendientes para admin */}
+      {solicitudes && solicitudes.length > 0 && (
+        <div className="solicitudes-panel">
+          <h3>Solicitudes de Vendedor</h3>
+          {solicitudes.filter(s => s.status === 'pendiente').length === 0 ? (
+            <p>No hay solicitudes pendientes</p>
+          ) : (
+            <ul className="solicitudes-list">
+              {solicitudes.filter(s => s.status === 'pendiente').map(solicitud => (
+                <li key={solicitud.id_solicitud || solicitud.id} className="solicitud-item">
+                  <div className="solicitud-info">
+                    <strong>{solicitud.username}</strong>
+                    <span className="fecha">{new Date(solicitud.created_at || solicitud.createdAt).toLocaleString()}</span>
+                  </div>
+                  <div className="solicitud-actions">
+                    <button
+                      className="btn-accept"
+                      onClick={async () => {
+                        const confirm = await Swal.fire({
+                          title: 'Aceptar solicitud',
+                          text: `¿Aceptar a ${solicitud.username} como vendedor?`,
+                          icon: 'question',
+                          showCancelButton: true,
+                          confirmButtonText: 'Aceptar',
+                          confirmButtonColor: 'var(--color-dark)',
+                          cancelButtonText: 'Cancelar'
+                        });
+                        if (!confirm.isConfirmed) return;
+                        try {
+                          const token = localStorage.getItem('token');
+                          const res = await fetch(`/api/solicitud-vendedor/${solicitud.id_solicitud || solicitud.id}/status`, {
+                            method: 'PUT',
+                            headers: {
+                              'Content-Type': 'application/json',
+                              'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify({ status: 'aceptada' })
+                          });
+                          if (res.ok) {
+                            Swal.fire({ title: 'Aceptada', text: 'Solicitud aceptada', icon: 'success', timer: 1500, showConfirmButton: false });
+                            fetchSolicitudes();
+                            fetchUsuarios();
+                          } else {
+                            const err = await res.json().catch(() => null);
+                            Swal.fire({ title: 'Error', text: err?.message || 'No se pudo aceptar', icon: 'error' });
+                          }
+                        } catch (err) {
+                          console.error(err);
+                          Swal.fire({ title: 'Error', text: 'Error al procesar la solicitud', icon: 'error' });
+                        }
+                      }}
+                    >Aceptar</button>
+
+                    <button
+                      className="btn-reject"
+                      onClick={async () => {
+                        const confirm = await Swal.fire({
+                          title: 'Rechazar solicitud',
+                          text: `¿Rechazar la solicitud de ${solicitud.username}?`,
+                          icon: 'warning',
+                          showCancelButton: true,
+                          confirmButtonText: 'Rechazar',
+                          confirmButtonColor: 'var(--color-dark)',
+                          cancelButtonText: 'Cancelar'
+                        });
+                        if (!confirm.isConfirmed) return;
+                        try {
+                          const token = localStorage.getItem('token');
+                          const res = await fetch(`/api/solicitud-vendedor/${solicitud.id_solicitud || solicitud.id}/status`, {
+                            method: 'PUT',
+                            headers: {
+                              'Content-Type': 'application/json',
+                              'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify({ status: 'rechazada' })
+                          });
+                          if (res.ok) {
+                            Swal.fire({ title: 'Rechazada', text: 'Solicitud rechazada', icon: 'success', timer: 1500, showConfirmButton: false });
+                            fetchSolicitudes();
+                          } else {
+                            const err = await res.json().catch(() => null);
+                            Swal.fire({ title: 'Error', text: err?.message || 'No se pudo rechazar', icon: 'error' });
+                          }
+                        } catch (err) {
+                          console.error(err);
+                          Swal.fire({ title: 'Error', text: 'Error al procesar la solicitud', icon: 'error' });
+                        }
+                      }}
+                    >Rechazar</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+
       <div className="usuarios-filters">
         <div className="search-box">
           <FaSearch className="search-icon" />
@@ -284,101 +381,6 @@ const UsuariosAdmin = () => {
           <p className="stat-number">{usuarios.filter(u => u.rol === 'admin').length}</p>
         </div>
       </div>
-
-      {/* Panel de solicitudes pendientes para admin */}
-      {solicitudes && solicitudes.length > 0 && (
-        <div className="solicitudes-panel">
-          <h3>Solicitudes de Vendedor</h3>
-          {solicitudes.filter(s => s.status === 'pendiente').length === 0 ? (
-            <p>No hay solicitudes pendientes</p>
-          ) : (
-            <ul className="solicitudes-list">
-              {solicitudes.filter(s => s.status === 'pendiente').map(solicitud => (
-                <li key={solicitud.id_solicitud || solicitud.id} className="solicitud-item">
-                  <div className="solicitud-info">
-                    <strong>{solicitud.username}</strong>
-                    <span className="fecha">{new Date(solicitud.created_at || solicitud.createdAt).toLocaleString()}</span>
-                  </div>
-                  <div className="solicitud-actions">
-                    <button
-                      className="btn-accept"
-                      onClick={async () => {
-                        const confirm = await Swal.fire({
-                          title: 'Aceptar solicitud',
-                          text: `¿Aceptar a ${solicitud.username} como vendedor?`,
-                          icon: 'question',
-                          showCancelButton: true,
-                          confirmButtonText: 'Aceptar',
-                          cancelButtonText: 'Cancelar'
-                        });
-                        if (!confirm.isConfirmed) return;
-                        try {
-                          const token = localStorage.getItem('token');
-                          const res = await fetch(`/api/solicitud-vendedor/${solicitud.id_solicitud || solicitud.id}/status`, {
-                            method: 'PUT',
-                            headers: {
-                              'Content-Type': 'application/json',
-                              'Authorization': `Bearer ${token}`
-                            },
-                            body: JSON.stringify({ status: 'aceptada' })
-                          });
-                          if (res.ok) {
-                            Swal.fire({ title: 'Aceptada', text: 'Solicitud aceptada', icon: 'success', timer: 1500, showConfirmButton: false });
-                            fetchSolicitudes();
-                            fetchUsuarios();
-                          } else {
-                            const err = await res.json().catch(() => null);
-                            Swal.fire({ title: 'Error', text: err?.message || 'No se pudo aceptar', icon: 'error' });
-                          }
-                        } catch (err) {
-                          console.error(err);
-                          Swal.fire({ title: 'Error', text: 'Error al procesar la solicitud', icon: 'error' });
-                        }
-                      }}
-                    >Aceptar</button>
-
-                    <button
-                      className="btn-reject"
-                      onClick={async () => {
-                        const confirm = await Swal.fire({
-                          title: 'Rechazar solicitud',
-                          text: `¿Rechazar la solicitud de ${solicitud.username}?`,
-                          icon: 'warning',
-                          showCancelButton: true,
-                          confirmButtonText: 'Rechazar',
-                          cancelButtonText: 'Cancelar'
-                        });
-                        if (!confirm.isConfirmed) return;
-                        try {
-                          const token = localStorage.getItem('token');
-                          const res = await fetch(`/api/solicitud-vendedor/${solicitud.id_solicitud || solicitud.id}/status`, {
-                            method: 'PUT',
-                            headers: {
-                              'Content-Type': 'application/json',
-                              'Authorization': `Bearer ${token}`
-                            },
-                            body: JSON.stringify({ status: 'rechazada' })
-                          });
-                          if (res.ok) {
-                            Swal.fire({ title: 'Rechazada', text: 'Solicitud rechazada', icon: 'success', timer: 1500, showConfirmButton: false });
-                            fetchSolicitudes();
-                          } else {
-                            const err = await res.json().catch(() => null);
-                            Swal.fire({ title: 'Error', text: err?.message || 'No se pudo rechazar', icon: 'error' });
-                          }
-                        } catch (err) {
-                          console.error(err);
-                          Swal.fire({ title: 'Error', text: 'Error al procesar la solicitud', icon: 'error' });
-                        }
-                      }}
-                    >Rechazar</button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      )}
 
       <div className="usuarios-table">
         <table>
@@ -451,6 +453,7 @@ const UsuariosAdmin = () => {
           </p>
         </div>
       )}
+
 
       {/* Controles de paginación */}
       {totalPages > 1 && (

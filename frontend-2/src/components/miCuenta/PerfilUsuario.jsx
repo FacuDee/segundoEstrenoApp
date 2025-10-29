@@ -81,10 +81,6 @@ const PerfilUsuario = ({ user, onUserUpdate }) => {
         direccion: formData.direccion
       };
       
-      // Debug: mostrar qué datos se están enviando
-      console.log('Datos a enviar:', dbData);
-      console.log('Usuario ID:', userId);
-      
       // Actualizar en la BD usando el endpoint de perfil
       const response = await fetch(`/api/usuario/${userId}/perfil`, {
         method: 'PUT',
@@ -274,9 +270,9 @@ const PerfilUsuario = ({ user, onUserUpdate }) => {
                         setSolicitudStatus('enviada');
                         Swal.fire({
                           title: 'Solicitud enviada',
-                          text: 'Tu solicitud para ser vendedor fue enviada al administrador.',
+                          text: 'Tu solicitud para ser vendedor fue enviada al administrador. Pronto recibirás una respuesta.',
                           icon: 'success',
-                          timer: 2000,
+                          timer: 4000,
                           showConfirmButton: false
                         });
                       } else if (res.status === 401) {

@@ -60,7 +60,6 @@ export const CartProvider = ({ children }) => {
       const token = localStorage.getItem('token');
       if (!token && cartItems.length > 0) {
         // Si no hay token pero hay items en el carrito, limpiarlo
-        console.log('Sesión cerrada, limpiando carrito...');
         setCartItems([]);
         localStorage.removeItem('carrito');
       }
@@ -73,7 +72,6 @@ export const CartProvider = ({ children }) => {
     const handleAuthChange = (e) => {
       if (e.key === 'token' && !e.newValue) {
         // Token eliminado (logout)
-        console.log('Token eliminado, limpiando carrito...');
         setCartItems([]);
         localStorage.removeItem('carrito');
       }

@@ -13,7 +13,6 @@ export class SolicitudVendedorService {
   ) {}
 
   create(data: { userId: number; username: string }) {
-  console.log('SolicitudVendedorService.create llamado con:', data);
   const solicitud = this.repo.create({ ...data });
   return this.repo.save(solicitud);
   }

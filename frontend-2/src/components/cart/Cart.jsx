@@ -25,8 +25,8 @@ const Cart = () => {
     if (!selectedPaymentMethod) {
       Swal.fire({
         icon: 'warning',
-        title: 'Selecciona un método de pago',
-        text: 'Debes elegir una forma de pago para continuar',
+        title: 'Elige un método de pago',
+        text: 'Debes seleccionar una forma de pago para poder realizar la compra',
         confirmButtonColor: 'var(--color-primary)',
       });
       return;

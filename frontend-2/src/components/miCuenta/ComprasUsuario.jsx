@@ -47,13 +47,13 @@ const ComprasUsuario = ({ userId }) => {
           {compras.map(compra => (
             <div key={compra.id} className="compra-item">
               <div className="compra-info">
-                <h3>Compra #{compra.id}</h3>
+                <h3>Compra # {compra.id}</h3>
                 <div className="compra-details">
                   <span className="fecha">
                     <FaCalendarAlt /> {new Date(compra.fecha).toLocaleDateString()}
                   </span>
                   <span className="total">
-                    <FaDollarSign /> ${compra.total}
+                    <FaDollarSign /> {compra.total}
                   </span>
                 </div>
               </div>
