@@ -17,6 +17,9 @@ const PerfilUsuario = ({ user, onUserUpdate }) => {
   // Obtener el ID correcto del usuario
   const userId = user.sub || user.id;
 
+  // Estado para gestionar la solicitud de vendedor
+  const [solicitudStatus, setSolicitudStatus] = useState(null); // null | 'enviando' | 'enviada' | 'error'
+
   // Cargar datos locales del localStorage
   useEffect(() => {
     const localData = localStorage.getItem(`userProfile_${userId}`);
@@ -242,11 +245,63 @@ const PerfilUsuario = ({ user, onUserUpdate }) => {
 
         <div className="info-group">
           <label>Rol</label>
-          <p className={`rol-badge rol-${user.rol}`}>
-            {user.rol === 'admin' ? 'Administrador' : 
-             user.rol === 'vendedor' ? 'Vendedor' : 'Comprador'}
-          </p>
+          <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+            <p className={`rol-badge rol-${user.rol}`}>
+              {user.rol === 'admin' ? 'Administrador' : 
+               user.rol === 'vendedor' ? 'Vendedor' : 'Comprador'}
+            </p>
+
+            {user.rol === 'comprador' && (
+              <>
+                <button
+                  className="btn-solicitar-vendedor"
+                  onClick={async () => {
+                    if (solicitudStatus === 'enviando' || solicitudStatus === 'enviada') return;
+                    setSolicitudStatus('enviando');
+                    try {
+                      const token = localStorage.getItem('token');
+                      const body = { userId: userId, username: user.username || user.nombre };
+                      const res = await fetch(`/api/solicitud-vendedor`, {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json',
+                          'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(body)
+                      });
+
+                      if (res.ok) {
+                        setSolicitudStatus('enviada');
+                        Swal.fire({
+                          title: 'Solicitud enviada',
+                          text: 'Tu solicitud para ser vendedor fue enviada al administrador.',
+                          icon: 'success',
+                          timer: 2000,
+                          showConfirmButton: false
+                        });
+                      } else if (res.status === 401) {
+                        setSolicitudStatus('error');
+                        Swal.fire({ title: 'No autorizado', text: 'Inicia sesión e intenta de nuevo.', icon: 'warning' });
+                      } else {
+                        const err = await res.json().catch(() => null);
+                        setSolicitudStatus('error');
+                        Swal.fire({ title: 'Error', text: err?.message || 'No se pudo enviar la solicitud', icon: 'error' });
+                      }
+                    } catch (err) {
+                      console.error(err);
+                      setSolicitudStatus('error');
+                      Swal.fire({ title: 'Error', text: 'Error al enviar la solicitud', icon: 'error' });
+                    }
+                  }}
+                  disabled={solicitudStatus === 'enviando' || solicitudStatus === 'enviada'}
+                >
+                  {solicitudStatus === 'enviando' ? 'Enviando...' : solicitudStatus === 'enviada' ? 'Solicitud enviada' : 'Quiero ser vendedor'}
+                </button>
+              </>
+            )}
+          </div>
         </div>
+
 
         {editing && (
           <div className="perfil-actions">

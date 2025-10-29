@@ -19,26 +19,34 @@ async function bootstrap() {
   // Servir archivos estáticos del frontend build (ajustar la ruta si es necesario)
   app.useStaticAssets(join(__dirname, '..', '..', 'frontend-2', 'public'));
 
-  // Fallback: para cualquier ruta que no sea API, servir index.html
-    app.use((req, res, next) => {
-      if (
-        req.url.startsWith('/api') ||
-        req.url.startsWith('/auth') ||
-        req.url === '/prenda' ||
-        req.url.startsWith('/prenda/') ||
-        req.url === '/carrito' ||
-        req.url.startsWith('/carrito/') ||
-        req.url === '/usuario' ||
-        req.url.startsWith('/usuario/') ||
-        req.url === '/categoria' ||
-        req.url.startsWith('/categoria/') ||
-        req.url === '/transaccion' ||
-        req.url.startsWith('/transaccion/')
-      ) {
-        return next();
-      }
-      res.sendFile(join(__dirname, '..', '..', 'frontend-2', 'public', 'index.html'));
-    });
+  // Fallback: para cualquier ruta que NO sea API, servir index.html
+  app.use((req, res, next) => {
+    // Si la ruta parece de API, pasar al backend
+    if (
+      req.url.startsWith('/api') ||
+      req.url.startsWith('/auth') ||
+      req.url.startsWith('/prenda') ||
+      req.url.startsWith('/carrito') ||
+      req.url.startsWith('/usuario') ||
+      req.url.startsWith('/categoria') ||
+      req.url.startsWith('/transaccion') ||
+      req.url.startsWith('/solicitud-vendedor')
+    ) {
+      return next();
+    }
+    // Si no es API, servir el frontend
+    res.sendFile(join(__dirname, '..', '..', 'frontend-2', 'public', 'index.html'));
+  });
+      // Permitir rutas de solicitud-vendedor pasar al backend
+      app.use((req, res, next) => {
+        if (
+          req.url === '/solicitud-vendedor' ||
+          req.url.startsWith('/solicitud-vendedor/')
+        ) {
+          return next();
+        }
+        next();
+      });
 
   await app.listen(process.env.PORT ?? 3000);
 }
