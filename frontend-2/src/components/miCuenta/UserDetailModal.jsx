@@ -5,7 +5,6 @@ import './UserDetailModal.css';
 const UserDetailModal = ({ user, isOpen, onClose }) => {
   const [userPrendas, setUserPrendas] = useState([]);
   const [loading, setLoading] = useState(false);
-  // const [solicitudStatus, setSolicitudStatus] = useState(null); 
 
   useEffect(() => {
     if (isOpen && user) {
@@ -49,7 +48,7 @@ const UserDetailModal = ({ user, isOpen, onClose }) => {
       setLoading(false);
     }
   };
- 
+
   if (!isOpen || !user) return null;
 
   return (
@@ -73,27 +72,9 @@ const UserDetailModal = ({ user, isOpen, onClose }) => {
             </div>
             <div className="info-item">
               <label>Rol:</label>
-              <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
               <span className={`rol-badge rol-${user.rol}`}>
                 {user.rol}
               </span>
-               {/* Mostrar botón solo para compradores */}
-                {user.rol === 'comprador' && (
-                  <>
-                    <button
-                      className="btn-solicitar-vendedor" 
-                      onClick={handleSolicitarVendedor}
-                      disabled={solicitudStatus === 'enviando' || solicitudStatus === 'enviada'}
-                      title="Quiero ser vendedor"
-                    >
-                      {solicitudStatus === 'enviando' ? 'Enviando...' : solicitudStatus === 'enviada' ? 'Solicitud enviada' : 'Quiero ser vendedor'}
-                    </button>
-                    {solicitudStatus === 'error' && (
-                      <span className="solicitud-error" style={{color: 'red', marginLeft: 8}}>Error al enviar</span>
-                    )}
-                  </>
-                )}
-              </div>
             </div>
             <div className="info-item">
               <label>Fecha de Registro:</label>

@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { FaUser, FaEdit, FaSave, FaTimes } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 
-// Base URL del backend (usa Vite env si está definida)
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-
 const PerfilUsuario = ({ user, onUserUpdate }) => {
   
   const [editing, setEditing] = useState(false);
@@ -264,7 +261,7 @@ const PerfilUsuario = ({ user, onUserUpdate }) => {
                     try {
                       const token = localStorage.getItem('token');
                       const body = { userId: userId, username: user.username || user.nombre };
-                      const res = await fetch(`${API_BASE}/solicitud-vendedor`, {
+                      const res = await fetch(`/api/solicitud-vendedor`, {
                         method: 'POST',
                         headers: {
                           'Content-Type': 'application/json',

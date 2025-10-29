@@ -17,7 +17,7 @@
 
 ## Frontend-2 (React)
 
-## El frontend principal de Segundo Estreno está desarrollado en React + TypeScript usando Vite.
+El frontend principal de Segundo Estreno está desarrollado en React + TypeScript usando Vite.
 
 ## Backend (NestJS)
 

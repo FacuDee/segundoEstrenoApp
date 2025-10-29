@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { FaUsers, FaEdit, FaTrash, FaSearch, FaEye } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import UserDetailModal from './UserDetailModal.jsx';
-
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-
 const UsuariosAdmin = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,7 +21,7 @@ const UsuariosAdmin = () => {
   const fetchSolicitudes = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`${API_BASE}/solicitud-vendedor`, {
+  const res = await fetch('/api/solicitud-vendedor', {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.ok) {
@@ -317,7 +314,7 @@ const UsuariosAdmin = () => {
                         if (!confirm.isConfirmed) return;
                         try {
                           const token = localStorage.getItem('token');
-                          const res = await fetch(`${API_BASE}/solicitud-vendedor/${solicitud.id_solicitud || solicitud.id}/status`, {
+                          const res = await fetch(`/api/solicitud-vendedor/${solicitud.id_solicitud || solicitud.id}/status`, {
                             method: 'PUT',
                             headers: {
                               'Content-Type': 'application/json',
@@ -354,7 +351,7 @@ const UsuariosAdmin = () => {
                         if (!confirm.isConfirmed) return;
                         try {
                           const token = localStorage.getItem('token');
-                          const res = await fetch(`${API_BASE}/solicitud-vendedor/${solicitud.id_solicitud || solicitud.id}/status`, {
+                          const res = await fetch(`/api/solicitud-vendedor/${solicitud.id_solicitud || solicitud.id}/status`, {
                             method: 'PUT',
                             headers: {
                               'Content-Type': 'application/json',
