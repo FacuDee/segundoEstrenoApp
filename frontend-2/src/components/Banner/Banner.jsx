@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Banner.css';
 import bannerImage from '../../assets/banners/bannerHorizontal.png';
 
+// Componente Banner que redirige a la página de prendas al hacer clic
 const Banner = () => {
   const navigate = useNavigate();
 

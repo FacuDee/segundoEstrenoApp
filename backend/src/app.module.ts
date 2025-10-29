@@ -8,7 +8,8 @@ import { CategoriaModule } from './categoria/categoria.module';
 import { CarritoModule } from './carrito/carrito.module';
 import { TransaccionModule } from './transaccion/transaccion.module';
 import { AuthModule } from './auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { SolicitudVendedorModule } from './solicitud-vendedor/solicitud-vendedor.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ConfigModule } from '@nestjs/config';
     CarritoModule,
     TransaccionModule,
     AuthModule,
+    SolicitudVendedorModule,
   ],
   controllers: [AppController],
   providers: [AppService],

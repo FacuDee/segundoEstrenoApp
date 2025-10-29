@@ -1,11 +1,13 @@
 import { FaTimes, FaTshirt } from 'react-icons/fa';
 import './CartItem.css';
 
+// Componente que representa un ítem en el carrito de compras
 const CartItem = ({ item, onRemove }) => {
   const handleRemove = () => {
     onRemove(item.id);
   };
 
+  // Renderizar la información del ítem
   return (
     <div className="carrito-item">
       <div className="carrito-item-info">
