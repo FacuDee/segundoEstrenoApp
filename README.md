@@ -19,54 +19,6 @@
 
 El frontend principal de Segundo Estreno está desarrollado en React + TypeScript usando Vite.
 
-## Backend (NestJS)
-
-El backend de Segundo Estreno está desarrollado con NestJS y TypeORM, preparado para integrarse con el frontend React.
-
-### Estructura principal
-
-```
-backend/
-  src/
-    auth/         # Autenticación y autorización (JWT, roles)
-    carrito/      # Lógica y entidades del carrito de compras
-    categoria/    # Gestión de categorías de productos
-    prenda/       # Gestión de prendas (productos)
-    transaccion/  # Lógica de transacciones
-    usuario/      # Gestión de usuarios
-    app.module.ts # Módulo raíz
-    main.ts       # Entry point
-  test/           # Pruebas e2e
-  .env            # Variables de entorno (no versionar)
-  package.json    # Dependencias y scripts
-  tsconfig*.json  # Configuración TypeScript
-```
-
-### Principales features backend
-
-- Autenticación y autorización con JWT
-- Gestión de usuarios, productos, carrito, categorías y transacciones
-- Endpoints RESTful listos para consumir desde el frontend
-- Variables de entorno para configuración flexible
-
-### Cómo ejecutar el backend
-
-1. Instalar dependencias:
-   ```bash
-   cd backend
-   npm install
-   ```
-2. Configurar variables de entorno:
-   - Copiar `.env.example` a `.env` y completar los datos de conexión a la base de datos.
-3. Ejecutar en modo desarrollo:
-   ```bash
-   npm run start:dev
-   ```
-
-Más detalles y endpoints en [`backend/README.md`](./backend/README.md)
-
----
-
 ### Estructura principal
 
 ```
@@ -120,6 +72,54 @@ Para build de producción:
 cd frontend-2
 npm run build
 ```
+
+---
+
+## Backend (NestJS)
+
+El backend de Segundo Estreno está desarrollado con NestJS y TypeORM, preparado para integrarse con el frontend React.
+
+### Estructura principal
+
+```
+backend/
+  src/
+    auth/         # Autenticación y autorización (JWT, roles)
+    carrito/      # Lógica y entidades del carrito de compras
+    categoria/    # Gestión de categorías de productos
+    prenda/       # Gestión de prendas (productos)
+    transaccion/  # Lógica de transacciones
+    usuario/      # Gestión de usuarios
+    app.module.ts # Módulo raíz
+    main.ts       # Entry point
+  test/           # Pruebas e2e
+  .env            # Variables de entorno (no versionar)
+  package.json    # Dependencias y scripts
+  tsconfig*.json  # Configuración TypeScript
+```
+
+### Principales features backend
+
+- Autenticación y autorización con JWT
+- Gestión de usuarios, productos, carrito, categorías y transacciones
+- Endpoints RESTful listos para consumir desde el frontend
+- Variables de entorno para configuración flexible
+
+### Cómo ejecutar el backend
+
+1. Instalar dependencias:
+   ```bash
+   cd backend
+   npm install
+   ```
+2. Configurar variables de entorno:
+   - Copiar `.env.example` a `.env` y completar los datos de conexión a la base de datos.
+3. Ejecutar en modo desarrollo:
+   ```bash
+   npm run start:dev
+   ```
+
+Más detalles y endpoints en [`backend/README.md`](./backend/README.md)
 
 ---
 
