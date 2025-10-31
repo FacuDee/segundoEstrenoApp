@@ -58,8 +58,8 @@ const VentasUsuario = ({ userId }) => {
         </div>
       ) : (
         <div className="ventas-list">
-          {ventas.map(venta => (
-            <div key={venta.id} className="venta-item">
+          {ventas.map((venta, idx) => (
+            <div key={`${venta.id}-${venta.fecha}-${idx}`} className="venta-item">
               <div className="venta-info">
                 <h3>Venta # {venta.id}</h3>
                 <div className="venta-details">
@@ -70,13 +70,13 @@ const VentasUsuario = ({ userId }) => {
                     <FaDollarSign /> {venta.total}
                   </span>
                   <span className="comprador">
-                    <FaUser /> Comprador: {venta.comprador}
+                    <FaUser /> Comprador: <strong>{venta.comprador}</strong>
                   </span>
                 </div>
               </div>
               <div className="venta-prendas">
-                {venta.prendas && venta.prendas.map(prenda => (
-                  <div key={prenda.id} className="prenda-vendida">
+                {venta.prendas && venta.prendas.map((prenda, pidx) => (
+                  <div key={`${prenda.id}-${venta.id}-${pidx}`} className="prenda-vendida">
                     <img src={prenda.imagen_url} alt={prenda.titulo} />
                     <div className="prenda-info">
                       <h4>{prenda.titulo}</h4>
