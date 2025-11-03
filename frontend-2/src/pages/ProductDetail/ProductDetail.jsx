@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { FaArrowLeft, FaShoppingCart, FaTshirt } from 'react-icons/fa';
 import { useCart } from '../../context/CartContext';
 import './ProductDetail.css';
@@ -8,6 +8,7 @@ import './ProductDetail.css';
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { addToCart } = useCart();
   const [prenda, setPrenda] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -70,12 +71,32 @@ const ProductDetail = () => {
 
   // Navegar a producto relacionado
   const handleProductoRelacionado = (producto) => {
-    navigate(`/producto/${producto.id}`);
+    // Pasar el `from` original si existe para mantener la referencia a la lista y sus filtros
+    const fromQuery = location && location.state && location.state.from ? location.state.from : location.search || '';
+    navigate(`/producto/${producto.id}`, { state: { from: fromQuery } });
   };
 
   // Volver a la lista de productos
   const handleVolver = () => {
-    navigate('/prendas');
+    // Si hay historial (venimos desde la lista), usar back para restaurar query y scroll
+    try {
+      // React Router no expone length del history, pero window.history.state?.idx (Vite/React Router) o window.history.length pueden ayudar.
+      // Intentamos navegar atrás primero para preservar exactamente la entrada anterior (incl. query string).
+      if (window.history && window.history.length > 1) {
+        navigate(-1);
+        return;
+      }
+    } catch (err) {
+      // ignore
+    }
+
+  // Fallback: si el ProductList nos pasó la query en state, úsala para reconstruir la URL
+  const fromQuery = location && location.state && location.state.from ? location.state.from : '';
+    if (fromQuery) {
+      navigate(`/prendas?${fromQuery.replace(/^\?/, '')}`);
+    } else {
+      navigate('/prendas');
+    }
   };
 
   // Funciones para el efecto zoom
