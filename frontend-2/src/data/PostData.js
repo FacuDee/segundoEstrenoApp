@@ -39,15 +39,35 @@ export const blogPosts = [
     videoTitle: 'Larga vida a la ropa: reciclaje textil',
     tag: 'Video'
   },
-  {
-    id: 5,
-    type: 'feria',
-    title: 'Feria de Intercambio',
-    description: 'Acá te dejamos info de las ferias semanales y mensuales. Traé tus prendas para vender o intercambiar. ¡Moda sin residuos!',
-    image: 'https://elresaltador.com.ar/wp-content/uploads/2022/09/feria-de-moda-circular.jpg',
-    imageAlt: 'Feria de moda circular',
-    tag: 'Feria'
-  },
+{
+  id: 5,
+  type: 'feria',
+  title: 'Feria de Intercambio',
+  description: 'Acá te dejamos info de las ferias semanales y mensuales. Traé tus prendas para vender o intercambiar. ¡Moda sin residuos!',
+  image: 'https://elresaltador.com.ar/wp-content/uploads/2022/09/feria-de-moda-circular.jpg',
+  imageAlt: 'Feria de moda circular',
+  tag: 'Feria',
+  ferias: [
+    {
+      nombre: 'Feria Semanal del Parque',
+      frecuencia: 'Todos los martes del mes',
+      horario: '14:00 - 20:00',
+      ubicacion: 'Parque Helios Eseverri',
+      descripcion: 'Intercambio y venta de prendas',
+      mapaUrl: 'https://www.google.com/maps/search/Parque+Eseverri+Olavarría',
+      flyerUrl: 'imagen-feria.jpg'
+    },
+    {
+      nombre: 'Gran Feria Mensual',
+      frecuencia: 'Primer sábado de cada mes',
+      horario: '10:00 - 18:00',
+      ubicacion: 'Plaza Central',
+      descripcion: 'Feria grande con talleres y actividades',
+      mapaUrl: 'https://www.google.com/maps/search/Plaza+Central+Olavarría',
+      flyerUrl: 'URL_DE_TU_FLYER_2.jpg'
+    }
+  ]
+},
   {
     id: 6,
     type: 'noticia',
