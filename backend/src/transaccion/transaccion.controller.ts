@@ -5,13 +5,17 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Controller('transaccion')
 export class TransaccionController {
+
+
 	constructor(private readonly transaccionService: TransaccionService) {}
 
 	@UseGuards(AuthGuard('jwt'))
 	@Post()
-	async create(@Body() dto: CreateTransaccionDto, @Req() req) {
+	async create(@Body() dto: CreateTransaccionDto, @Req() req: any) {
+		const userId = req.user?.sub ?? req.user?.id;
 		// req.user.id es el id del usuario autenticado
-		return this.transaccionService.createTransaccion(dto, req.user.id);
+		console.log('userId from token:', userId, 'body:', dto);
+		return this.transaccionService.createTransaccion(dto, Number(userId));
 	}
 
 	// Compras del usuario

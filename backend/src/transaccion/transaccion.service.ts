@@ -1,6 +1,6 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
 import { Transaccion } from './transaccion.entity';
 import { TransaccionPrenda } from './transaccion-prenda.entity';
 import { Prenda } from '../prenda/prenda.entity';
@@ -21,17 +21,25 @@ export class TransaccionService {
 	) {}
 
 	async createTransaccion(dto: CreateTransaccionDto, usuarioId: number) {
+		console.log('createTransaccion DTO:', dto, 'usuarioId:', usuarioId);
 		// Verificar usuario
 		const usuario = await this.usuarioRepo.findOne({ where: { id: usuarioId } });
 		if (!usuario) throw new BadRequestException('Usuario no encontrado');
 
-		// Verificar prendas y stock
-		const prendas = await this.prendaRepo.findByIds(dto.prendas);
+		// Verificar prendas y stock (carga relacionando prenda con vendedor)
+		const prendas = await this.prendaRepo.find({ where: { id: In(dto.prendas) }, relations: ['vendedor'] });
 		if (prendas.length !== dto.prendas.length) throw new BadRequestException('Alguna prenda no existe');
 		for (const prenda of prendas) {
 			if (!prenda.disponible) throw new BadRequestException(`Prenda ${prenda.id} no disponible`);
-			if (prenda.vendedor && prenda.vendedor.id === usuarioId) throw new BadRequestException('No puedes comprar tu propia prenda');
+			// comprobación robusta del id del vendedor
+			const vendedorId = prenda.vendedor?.id ?? (prenda as any).vendedorId ?? null;
+			console.log(`prenda ${prenda.id} vendedorId:`, vendedorId, 'usuarioId:', usuarioId);
+
+			if (vendedorId !== null && Number(vendedorId) === Number(usuarioId)) {
+				throw new BadRequestException('No puedes comprar tu propia prenda');
+			}
 		}
+
 
 		// Crear transacción
 		const transaccion = this.transaccionRepo.create({
