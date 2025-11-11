@@ -71,6 +71,9 @@ const ProductDetail = () => {
 
   // Navegar a producto relacionado
   const handleProductoRelacionado = (producto) => {
+    // No permitir navegación si no está disponible
+    if (!producto.disponible) return;
+    
     // Pasar el `from` original si existe para mantener la referencia a la lista y sus filtros
     const fromQuery = location && location.state && location.state.from ? location.state.from : location.search || '';
     navigate(`/producto/${producto.id}`, { state: { from: fromQuery } });
@@ -222,17 +225,22 @@ const ProductDetail = () => {
             {productosRelacionados.map((producto) => (
               <div 
                 key={producto.id} 
-                className="relacionado-card"
+                className={`relacionado-card ${!producto.disponible ? 'no-disponible' : ''}`}
                 onClick={() => handleProductoRelacionado(producto)}
               >
                 <div className="relacionado-img">
                   <img src={producto.imagen_url} alt={producto.titulo} />
+                  {!producto.disponible && (
+                    <div className="no-disponible-overlay">
+                      <span>No disponible</span>
+                    </div>
+                  )}
                 </div>
                 <div className="relacionado-info">
                   <h4>{producto.titulo}</h4>
                   <p className="relacionado-precio">${producto.precio}</p>
-                  <button className="relacionado-ver-btn">
-                    <FaTshirt /> Ver producto
+                  <button className="relacionado-ver-btn" disabled={!producto.disponible}>
+                    <FaTshirt /> {producto.disponible ? 'Ver producto' : 'No disponible'}
                   </button>
                 </div>
               </div>

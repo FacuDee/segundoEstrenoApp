@@ -76,6 +76,30 @@ main {
   display: block;
 }
 
+.no-disponible-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.no-disponible-overlay span {
+  background: var(--color-dark);
+  color: var(--color-lighter);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .product-item {
   position: relative;
   overflow: hidden;
@@ -84,7 +108,24 @@ main {
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.product-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para productos no disponibles */
+.product-item.no-disponible {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(60%);
+}
+
+.product-item.no-disponible:hover {
+  transform: none;
   box-shadow: var(--shadow-md);
 }
 
@@ -172,6 +213,17 @@ main {
 .btns-hover button:hover {
   opacity: 1;
   background-color: var(--color-lighter) !important;
+}
+
+.btns-hover button:disabled {
+  background-color: var(--color-text-light);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btns-hover button:disabled:hover {
+  background-color: var(--color-text-light) !important;
+  opacity: 0.5;
 }
 
 .anim-fav {

@@ -62,10 +62,15 @@ const ProductList = () => {
   };
 
   const handleAddToCart = (prenda) => {
+    // No permitir agregar al carrito si no está disponible
+    if (!prenda.disponible) return;
     addToCart(prenda);
   };
 
   const handleVerDetalles = (prenda) => {
+    // No permitir navegación si no está disponible
+    if (!prenda.disponible) return;
+    
     const id = prenda.id_prenda ?? prenda.id;
     // navegar al detalle (no tocamos la query de la lista). El historial conservará la entrada previa
     //  con sus filtros.
@@ -83,7 +88,8 @@ const ProductList = () => {
     const matchesCategory = filterCategory === "" || prenda.categoria?.id?.toString() === filterCategory;
 
     let matchesPrice = true;
-    if (priceFilter !== "") {
+    // Solo aplicar filtro de rango si no es una opción de ordenamiento
+    if (priceFilter !== "" && priceFilter !== "asc" && priceFilter !== "desc") {
       const precio = parseFloat(prenda.precio);
       switch (priceFilter) {
         case "muy-bajo":
@@ -112,10 +118,20 @@ const ProductList = () => {
     return matchesSearch && matchesCategory && matchesPrice && matchesSize;
   });
 
+  // Ordenar por precio si está seleccionado
+  const sortedPrendas = [...filteredPrendas].sort((a, b) => {
+    if (priceFilter === "asc") {
+      return parseFloat(a.precio) - parseFloat(b.precio);
+    } else if (priceFilter === "desc") {
+      return parseFloat(b.precio) - parseFloat(a.precio);
+    }
+    return 0; // Sin ordenar
+  });
+
   // Paginación
-  const totalPages = Math.ceil(filteredPrendas.length / itemsPerPage);
+  const totalPages = Math.ceil(sortedPrendas.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedPrendas = filteredPrendas.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedPrendas = sortedPrendas.slice(startIndex, startIndex + itemsPerPage);
 
   const handlePageChange = (page) => {
     if (page < 1 || page > totalPages) return;
@@ -136,9 +152,10 @@ const ProductList = () => {
     const currentSearch = location.search.replace(/^\?/, "");
     if (newSearch !== currentSearch) {
       // push en historial para poder retroceder a estados anteriores de filtros
-      navigate(`?${newSearch}`, { replace: false });
+      navigate(`${location.pathname}?${newSearch}`, { replace: true });
     }
-  }, [searchTerm, filterCategory, priceFilter, sizeFilter, currentPage, navigate, location.search]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm, filterCategory, priceFilter, sizeFilter, currentPage]);
 
   // Aplicar URL -> estado (cuando el usuario usa atrás/adelante o llega con query)
   useEffect(() => {
@@ -231,6 +248,9 @@ const ProductList = () => {
               <option value="medio">$50.000 - $80.000</option>
               <option value="alto">$80.000 - $100.000</option>
               <option value="muy-alto">Más de $100.000</option>
+              <option value="" disabled>──────────</option>
+              <option value="asc">Menor a mayor</option>
+              <option value="desc">Mayor a menor</option>
             </select>
           </div>
         </div>
@@ -240,28 +260,35 @@ const ProductList = () => {
         {paginatedPrendas.map((prenda, idx) => (
           <div
             key={prenda.id_prenda ?? prenda.id ?? idx}
-            className="product-item card-producto"
+            className={`product-item card-producto ${!prenda.disponible ? 'no-disponible' : ''}`}
             onClick={() => handleVerDetalles(prenda)}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: prenda.disponible ? "pointer" : "not-allowed" }}
           >
             <div className="imagen-contenedor">
               <img src={prenda.imagen_url} alt={prenda.titulo} />
+              {!prenda.disponible && (
+                <div className="no-disponible-overlay">
+                  <span>No disponible</span>
+                </div>
+              )}
               <div className="btns-hover">
                 <button
-                  title="Ver detalles"
+                  title={prenda.disponible ? "Ver detalles" : "No disponible"}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleVerDetalles(prenda);
                   }}
+                  disabled={!prenda.disponible}
                 >
                   <FaEye />
                 </button>
                 <button
-                  title="Agregar al carrito"
+                  title={prenda.disponible ? "Agregar al carrito" : "No disponible"}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleAddToCart(prenda);
                   }}
+                  disabled={!prenda.disponible}
                 >
                   <FaShoppingCart />
                 </button>
