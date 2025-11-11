@@ -10,6 +10,7 @@ const Cart = () => {
   const { cartItems, removeFromCart, clearCart, getCartTotal } = useCart();
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
 
+  // Manejar la finalización de la compra
   const handleFinalizePurchase = async () => {
     if (cartItems.length === 0) {
       Swal.fire({
@@ -24,8 +25,8 @@ const Cart = () => {
     if (!selectedPaymentMethod) {
       Swal.fire({
         icon: 'warning',
-        title: 'Selecciona un método de pago',
-        text: 'Debes elegir una forma de pago para continuar.',
+        title: 'Elige un método de pago',
+        text: 'Debes seleccionar una forma de pago para poder realizar la compra',
         confirmButtonColor: 'var(--color-primary)',
       });
       return;
@@ -81,6 +82,7 @@ const Cart = () => {
     }
   };
 
+  // Manejar el vaciado del carrito
   const handleClearCart = async () => {
     const result = await Swal.fire({
       title: '¿Vaciar carrito?',
@@ -105,6 +107,7 @@ const Cart = () => {
     }
   };
 
+  // Si no hay prendas, se muestra el carrito vacío
   if (cartItems.length === 0) {
     return (
       <div className="carrito-vacio">
@@ -120,6 +123,7 @@ const Cart = () => {
     );
   }
 
+  // Return principal del carrito con productos
   return (
     <div className="carrito-container">
       <div className="carrito-section">

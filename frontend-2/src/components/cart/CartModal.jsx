@@ -4,11 +4,15 @@ import CartItem from './CartItem';
 import Swal from 'sweetalert2';
 import './CartModal.css';
 
+// Componente que representa el modal del carrito de compras
 const CartModal = () => {
+  // Obtener datos y funciones del contexto del carrito
   const { cartItems, isCartOpen, closeCart, clearCart, removeFromCart, getCartTotal } = useCart();
 
+  // Si el carrito no está abierto, no renderizar nada
   if (!isCartOpen) return null;
 
+  // Manejar el vaciado del carrito con confirmación
   const handleClearCart = async () => {
     const result = await Swal.fire({
       title: '¿Estás seguro?',
@@ -33,6 +37,7 @@ const CartModal = () => {
     }
   };
 
+  // Renderizar el modal del carrito
   return (
     <div className="cart-modal-overlay" onClick={closeCart}>
       <div className="cart-modal" onClick={(e) => e.stopPropagation()}>

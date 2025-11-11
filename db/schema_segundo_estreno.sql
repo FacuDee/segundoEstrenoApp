@@ -82,4 +82,16 @@ CREATE TABLE `transaccion_prenda` (
   FOREIGN KEY (`id_prenda`) REFERENCES `prendas`(`id_prenda`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Nueva tabla: solicitudes de convertirse en vendedor
+CREATE TABLE `solicitudes_vendedor` (
+  `id_solicitud` INT AUTO_INCREMENT PRIMARY KEY,
+  `usuario_id` INT NOT NULL,
+  `username` VARCHAR(255) NOT NULL,
+  `status` ENUM('pendiente','aceptada','rechazada') NOT NULL DEFAULT 'pendiente',
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  INDEX (`usuario_id`),
+  INDEX (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 SET FOREIGN_KEY_CHECKS=@OLD_FK_CHECKS;

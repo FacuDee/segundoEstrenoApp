@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import { FaUserEdit } from "react-icons/fa";
 import PerfilUsuario from '../../components/miCuenta/PerfilUsuario.jsx';
 import ComprasUsuario from '../../components/miCuenta/ComprasUsuario.jsx';
 import VentasUsuario from '../../components/miCuenta/VentasUsuario.jsx';
@@ -9,8 +9,8 @@ import UsuariosAdmin from '../../components/miCuenta/UsuariosAdmin.jsx';
 import GestionarTodasPrendas from '../../components/miCuenta/GestionarTodasPrendas.jsx';
 import './MiCuenta.css';
 
+// Componente principal de Mi Cuenta
 const MiCuenta = () => {
-  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState(null); // Se establecerá después de cargar el usuario
 
@@ -22,6 +22,7 @@ const MiCuenta = () => {
     }));
   };
 
+  // Cargar y decodificar el token JWT al montar el componente
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -44,13 +45,16 @@ const MiCuenta = () => {
     }
   }, []);
 
+  // Mostrar un mensaje de carga mientras se obtiene el usuario
   if (!user || !activeTab) {
     return <div className="loading">Cargando...</div>;
   }
 
+  // Determinar permisos basados en el rol
   const isVendedor = user.rol === 'vendedor' || user.rol === 'admin';
   const isAdmin = user.rol === 'admin';
 
+  // Renderizar el contenido de la pestaña activa
   const renderTabContent = () => {
     switch (activeTab) {
       case 'perfil':
@@ -70,11 +74,15 @@ const MiCuenta = () => {
     }
   };
 
+  // Renderizar el componente principal de Mi Cuenta
   return (
     <div className="micuenta-container">
       <div className="micuenta-header">
-        <h1>Mi Cuenta</h1>
-        <p>Bienvenido/a, {user.username || user.nombre}</p>
+        <h1>
+          <FaUserEdit className="micuenta-user-icon" />
+          Mi Cuenta
+        </h1>
+        <p>Panel del Usuario: <strong>{user.username || user.nombre}</strong></p>
       </div>
 
       <div className="micuenta-content">

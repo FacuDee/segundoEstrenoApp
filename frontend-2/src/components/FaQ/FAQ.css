@@ -23,7 +23,6 @@
   margin: 2rem 0;
   padding: 2rem;
   border-radius: 10px;
-  border: 2px solid var(--color-primary-dark);
   width: 45%;
   text-align: center;
   box-shadow: var(--shadow-md);
@@ -116,7 +115,7 @@
   .seller-info {
     width: 100%;
     margin: 1rem 0;
-    padding: 1rem;
+    padding: 2rem;
     box-sizing: border-box;
   }
   

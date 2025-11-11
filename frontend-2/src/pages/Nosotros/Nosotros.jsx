@@ -1,7 +1,7 @@
 import React from 'react';
 import './Nosotros.css';
 import { FaCheck } from 'react-icons/fa';
-import nosotrosImg from '../../assets/nosotros/nosotros-img.jpg'; // Importa la imagen correctamente
+import nosotrosImg from '../../assets/nosotros/nosotros-img.jpg';
 
 const Nosotros = () => {
   return (
@@ -13,7 +13,7 @@ const Nosotros = () => {
 
         <div className="nosotros-img">
           <img
-            src={nosotrosImg} // Usa la variable importada
+            src={nosotrosImg}
             className="imgNosotros"
             alt="Nosotros"
           />

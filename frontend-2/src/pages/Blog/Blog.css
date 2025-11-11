@@ -1,3 +1,11 @@
+.blog-sidebar-sticky {
+  position: sticky;
+  top: calc(var(--header-height) + 2rem);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 /* ===== BLOG CSS - ORGANIZADO ===== */
 
 /* --- BLOG INTRO SECTION --- */
@@ -385,9 +393,16 @@
 } */
 
 /* --- BANNER RECICLAJE (STICKY SIDEBAR) --- */
-.recycling-banner {
+.blog-sidebar-sticky {
   position: sticky;
   top: calc(var(--header-height) + 2rem);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.recycling-banner {
   height: fit-content;
   margin: 2rem auto;
   background: linear-gradient(135deg, var(--color-primary), var(--color-lighter));
@@ -396,7 +411,6 @@
   border-radius: 20px;
   box-shadow: var(--shadow-md);
   font-family: var(--font-main);
-  z-index: 50;
 }
 
 .video-reciclaje {
@@ -457,7 +471,10 @@
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+  .blog-sidebar-sticky {
+    position: static;
+    top: unset;
+  }
   .recycling-banner {
     position: static;
     order: -1; /* Aparece arriba en móvil */

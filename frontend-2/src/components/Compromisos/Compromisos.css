@@ -22,7 +22,7 @@
 .compromisos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
+  gap: 1.5rem;
   margin-top: 4rem;
 }
 
@@ -69,8 +69,8 @@
   }
   
   .compromisos-grid {
-    gap: 1.5rem;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    margin-top: 2rem;
   }
   
   .compromiso-item {
@@ -84,12 +84,10 @@
   }
   
   .compromisos-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    padding: 10px;
   }
   
   .compromiso-item {
-    padding: 2rem 1.5rem;
     margin: 0 auto;
     max-width: 400px;
   }
@@ -104,10 +102,10 @@
 }
 
 @media (max-width: 480px) {
-  .compromisos-container {
+  /* .compromisos-container {
     padding: 0 1rem;
   }
-  
+   */
   .compromiso-item {
     padding: 1.5rem 1rem;
   }

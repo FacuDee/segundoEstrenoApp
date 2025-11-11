@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// IMPORTANTE: Debes crear este componente en un archivo llamado FlyerModal.jsx
 import FlyerModal from '../FlyerModals/flyerModals';
 
 const PostCard = ({ post }) => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaStore, FaCalendarAlt, FaDollarSign, FaEye } from 'react-icons/fa';
+import { FaStore, FaCalendarAlt, FaDollarSign, FaUser } from 'react-icons/fa';
 
 const VentasUsuario = ({ userId }) => {
   const [ventas, setVentas] = useState([]);
@@ -58,25 +58,25 @@ const VentasUsuario = ({ userId }) => {
         </div>
       ) : (
         <div className="ventas-list">
-          {ventas.map(venta => (
-            <div key={venta.id} className="venta-item">
+          {ventas.map((venta, idx) => (
+            <div key={`${venta.id}-${venta.fecha}-${idx}`} className="venta-item">
               <div className="venta-info">
-                <h3>Venta #{venta.id}</h3>
+                <h3>Venta # {venta.id}</h3>
                 <div className="venta-details">
                   <span className="fecha">
                     <FaCalendarAlt /> {new Date(venta.fecha).toLocaleDateString()}
                   </span>
                   <span className="total">
-                    <FaDollarSign /> ${venta.total}
+                    <FaDollarSign /> {venta.total}
                   </span>
                   <span className="comprador">
-                    Comprador: {venta.comprador?.nombre || 'N/A'}
+                    <FaUser /> Comprador: <strong>{venta.comprador}</strong>
                   </span>
                 </div>
               </div>
               <div className="venta-prendas">
-                {venta.prendas && venta.prendas.map(prenda => (
-                  <div key={prenda.id} className="prenda-vendida">
+                {venta.prendas && venta.prendas.map((prenda, pidx) => (
+                  <div key={`${prenda.id}-${venta.id}-${pidx}`} className="prenda-vendida">
                     <img src={prenda.imagen_url} alt={prenda.titulo} />
                     <div className="prenda-info">
                       <h4>{prenda.titulo}</h4>

@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import './HeroCarousel.css';
 
 // Importar las imágenes
-import imagen1 from '../../assets/carousel/imagen_1.webp';
-import imagen2 from '../../assets/carousel/imagen_2.png';
-import imagen3 from '../../assets/carousel/imagen_3.png';
+import imagen1 from '../../assets/carousel/imagen_3.webp';
+import imagen2 from '../../assets/carousel/fondoCelu.jpg';
+import imagen3 from '../../assets/carousel/imagen_1.webp';
 
 const HeroCarousel = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -30,7 +30,7 @@ const HeroCarousel = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 5000);
+        }, 3000);
         return () => clearInterval(interval);
     }, [slides.length]);
 
@@ -49,11 +49,14 @@ const HeroCarousel = () => {
     return (
         <section className="carousel-container">
             <div className="carousel">
-                <div className="carousel-inner">
+                <div
+                    className="carousel-inner"
+                    style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                >
                     {slides.map((slide, index) => (
                         <div
                             key={index}
-                            className={`carousel-item ${index === currentSlide ? 'active' : ''}`}
+                            className="carousel-item"
                         >
                             <img src={slide.image} alt={slide.title} />
                             <div className="carousel-caption">
