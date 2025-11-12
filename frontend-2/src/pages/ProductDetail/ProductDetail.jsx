@@ -210,7 +210,7 @@ const ProductDetail = () => {
       <div id="banner-publicidad">
         <a href="https://yazuka.com.ar/" target="_blank" className="banner-link">
           <img 
-            src="https://facudee.github.io/segundoEstrenoApp/frontend/images/banners/banner-detalle.webp" 
+            src="/src/assets/banners/banner-detalle.webp" 
             alt="Publicidad" 
             className="banner-img"
           />
