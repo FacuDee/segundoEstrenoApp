@@ -327,7 +327,7 @@ main {
 .size-filter select,
 .price-filter select {
   width: fit-content;
-  padding: 1rem 1rem 1rem 3rem;
+  padding: 1rem 1rem 1rem 2.5rem;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
   font-size: 1rem;
@@ -352,6 +352,39 @@ main {
   top: 50%;
   transform: translateY(-50%);
   color: var(--color-text-light);
+}
+
+.clear-filters-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: var(--color-darker);
+  color: var(--color-lighter);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: var(--font-main);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  height: 56px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.clear-filters-btn:hover {
+  background: var(--color-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.clear-filters-btn:active {
+  transform: translateY(0);
+}
+
+.clear-icon {
+  font-size: 1.1rem;
 }
 
 .no-results {
@@ -395,6 +428,11 @@ main {
   .price-filter {
     min-width: unset;
     width: 100%;
+  }
+
+  .clear-filters-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
