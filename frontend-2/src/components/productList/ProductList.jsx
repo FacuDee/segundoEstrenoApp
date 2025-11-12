@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { FaShoppingCart, FaEye, FaSearch, FaFilter, FaDollarSign, FaTshirt } from "react-icons/fa";
+import { FaShoppingCart, FaEye, FaSearch, FaFilter, FaDollarSign, FaTshirt, FaTimes } from "react-icons/fa";
 import { useCart } from "../../context/CartContext";
 import "./ProductList.css";
 
@@ -185,6 +185,14 @@ const ProductList = () => {
     setSizeFilter(value);
     setCurrentPage(1);
   };
+  // Limpiar todos los filtros
+  const clearFilters = () => {
+    setSearchTerm("");
+    setFilterCategory("");
+    setPriceFilter("");
+    setSizeFilter("");
+    setCurrentPage(1);
+  };
 
   if (loading) return <div className="loading">Cargando prendas...</div>;
 
@@ -253,6 +261,11 @@ const ProductList = () => {
               <option value="desc">Mayor a menor</option>
             </select>
           </div>
+
+          <button className="clear-filters-btn" onClick={clearFilters}>
+            <FaTimes className="clear-icon" />
+            Limpiar filtros
+          </button>
         </div>
       </div>
 
