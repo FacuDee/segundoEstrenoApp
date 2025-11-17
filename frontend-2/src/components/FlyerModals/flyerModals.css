@@ -1,0 +1,23 @@
+.modal-close-button {
+  background: var(--color-primary);     
+  border: none;
+  color: #fff;                         
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;                 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  transition: background var(--transition-normal), color var(--transition-normal);
+}
+.modal-close-button:hover {
+
+  background: var(--color-primary-dark); 
+}
