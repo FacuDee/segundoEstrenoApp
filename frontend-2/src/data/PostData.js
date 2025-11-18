@@ -8,7 +8,7 @@ export const blogPosts = [
     type: 'taller',
     title: 'Taller de Costura Circular',
     description: 'Aprendé a transformar prendas usadas en piezas únicas. Taller gratuito con inscripción previa.',
-    image: 'https://cordoba.gob.ar/wp-content/uploads/2024/06/DSC09058-scaled.jpg',
+    image: 'https://pqs.pe/wp-content/uploads/2015/08/pqs-taller-confecciones.jpg',
     imageAlt: 'Taller de costura',
     link: 'https://docs.google.com/forms/d/e/1FAIpQLScP6sYGI0Dvpm8cHZyiJ7lK_2Ch_V6_CmB0hDAUOhBLGzN0Hw/viewform?usp=dialog',
     linkText: 'Inscribite al Taller',

@@ -150,8 +150,10 @@
 }
 
 .info-group {
-  border: 1px dashed var(--color-dark);
-  border-radius: 8px;
+  background-color: var(--color-light);
+  box-shadow: var(--shadow-md);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 12px;
   padding: 1rem;
   margin-bottom: 2rem;
 }
@@ -167,7 +169,7 @@
 .info-group textarea {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid var(--color-accent);
+  border: 1px solid var(--color-dark);
   border-radius: 8px;
   font-family: var(--font-main);
 }

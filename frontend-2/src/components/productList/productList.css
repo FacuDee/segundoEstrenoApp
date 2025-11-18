@@ -76,6 +76,30 @@ main {
   display: block;
 }
 
+.no-disponible-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.no-disponible-overlay span {
+  background: var(--color-dark);
+  color: var(--color-lighter);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .product-item {
   position: relative;
   overflow: hidden;
@@ -84,7 +108,24 @@ main {
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.product-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para productos no disponibles */
+.product-item.no-disponible {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(60%);
+}
+
+.product-item.no-disponible:hover {
+  transform: none;
   box-shadow: var(--shadow-md);
 }
 
@@ -172,6 +213,17 @@ main {
 .btns-hover button:hover {
   opacity: 1;
   background-color: var(--color-lighter) !important;
+}
+
+.btns-hover button:disabled {
+  background-color: var(--color-text-light);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btns-hover button:disabled:hover {
+  background-color: var(--color-text-light) !important;
+  opacity: 0.5;
 }
 
 .anim-fav {
@@ -275,7 +327,7 @@ main {
 .size-filter select,
 .price-filter select {
   width: fit-content;
-  padding: 1rem 1rem 1rem 3rem;
+  padding: 1rem 1rem 1rem 2.5rem;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
   font-size: 1rem;
@@ -300,6 +352,39 @@ main {
   top: 50%;
   transform: translateY(-50%);
   color: var(--color-text-light);
+}
+
+.clear-filters-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: var(--color-darker);
+  color: var(--color-lighter);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: var(--font-main);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  height: 56px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.clear-filters-btn:hover {
+  background: var(--color-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.clear-filters-btn:active {
+  transform: translateY(0);
+}
+
+.clear-icon {
+  font-size: 1.1rem;
 }
 
 .no-results {
@@ -343,6 +428,11 @@ main {
   .price-filter {
     min-width: unset;
     width: 100%;
+  }
+
+  .clear-filters-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 

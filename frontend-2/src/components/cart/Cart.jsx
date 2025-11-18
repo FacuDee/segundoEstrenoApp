@@ -43,6 +43,7 @@ const Cart = () => {
       });
       return;
     }
+    
 
     try {
       const response = await fetch('/api/transaccion', {
@@ -69,7 +70,21 @@ const Cart = () => {
         clearCart();
         setSelectedPaymentMethod('');
       } else {
-        throw new Error('Error al procesar la compra');
+        // Leer cuerpo de error devuelto por el backend y mostrar mensaje amigable
+        let errMsg = 'La prenda que intentas comprar fue publicada desde tu cuenta.';
+        try {
+          const errBody = await response.json();
+          if (errBody && errBody.message) errMsg = errBody.message;
+        } catch (e) {
+          // ignore parse errors
+        }
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al procesar la compra',
+          text: errMsg,
+          confirmButtonColor: 'var(--color-primary)',
+        });
+        return;
       }
     } catch (error) {
       console.error('Error:', error);
