@@ -1,6 +1,6 @@
 import React from 'react';
 import './Nosotros.css';
-import { FaCheck } from 'react-icons/fa';
+import { FaCheck , FaBullhorn} from 'react-icons/fa';
 import nosotrosImg from '../../assets/nosotros/nosotros-img.jpg';
 
 const Nosotros = () => {
@@ -82,7 +82,7 @@ const Nosotros = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i className="fa fa-bullhorn" aria-hidden="true"></i>
+            <FaBullhorn className="fa-bullhorn" aria-hidden="true" />
             <p>
               SI QUERÉS PUBLICITAR TU MARCA HACÉ CLICK AQUÍ Y COMPLETÁ EL
               FORMULARIO

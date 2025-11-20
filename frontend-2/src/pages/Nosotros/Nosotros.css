@@ -144,7 +144,7 @@ main {
   text-decoration: none !important;
 }
 
-.slide i {
+.fa-bullhorn {
   color: var(--color-primary-dark);
   font-size: 1.5rem;
 }
