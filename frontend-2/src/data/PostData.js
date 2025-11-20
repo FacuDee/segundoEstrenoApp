@@ -1,4 +1,6 @@
 // src/data/PostData.js
+import imagenFeria from '../assets/flyer/imagen_feria.jpg';
+import imagenFeria2 from '../assets/flyer/Feria-centro.png';
 
 export const blogPosts = [
   {
@@ -48,23 +50,23 @@ export const blogPosts = [
   imageAlt: 'Feria de moda circular',
   tag: 'Feria',
   ferias: [
+ {
+    nombre: 'Feria Semanal del Parque',
+    frecuencia: 'Todos los martes del mes',
+    horario: '14:00 - 20:00',
+    ubicacion: 'Parque Helios Eseverri',
+    descripcion: 'Intercambio y venta de prendas',
+    mapaUrl: 'https://www.google.com/maps/search/Parque+Eseverri+Olavarría',
+    flyerUrl: imagenFeria // 
+  },
     {
-      nombre: 'Feria Semanal del Parque',
-      frecuencia: 'Todos los martes del mes',
-      horario: '14:00 - 20:00',
-      ubicacion: 'Parque Helios Eseverri',
-      descripcion: 'Intercambio y venta de prendas',
-      mapaUrl: 'https://www.google.com/maps/search/Parque+Eseverri+Olavarría',
-      flyerUrl: 'imagen-feria.jpg'
-    },
-    {
-      nombre: 'Gran Feria Mensual',
+      nombre: 'Gran Feria Mensual De Centro',
       frecuencia: 'Primer sábado de cada mes',
       horario: '10:00 - 18:00',
       ubicacion: 'Plaza Central',
       descripcion: 'Feria grande con talleres y actividades',
       mapaUrl: 'https://www.google.com/maps/search/Plaza+Central+Olavarría',
-      flyerUrl: 'URL_DE_TU_FLYER_2.jpg'
+      flyerUrl: imagenFeria2
     }
   ]
 },

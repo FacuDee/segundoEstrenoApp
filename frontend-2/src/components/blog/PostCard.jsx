@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import FlyerModal from '../FlyerModals/flyerModals';
+import { FaRegCalendarAlt } from 'react-icons/fa';
 
 const PostCard = ({ post }) => {
-  // 1. ESTADO para el modal: Almacena la URL del flyer a mostrar (o null si está cerrado)
+  // Estado para el modal
   const [modalFlyerUrl, setModalFlyerUrl] = useState(null);
 
   // Funciones para manejar el modal
@@ -39,24 +40,24 @@ const PostCard = ({ post }) => {
     }
   };
 
-  // NUEVA FUNCIÓN: Renderiza el calendario de ferias
+  // Renderiza el calendario de ferias
   const renderCalendario = () => {
     if (post.type === 'feria' && post.ferias) {
       return (
         <div className="ferias-calendario">
           {post.ferias.map((feria, index) => (
             <div key={index} className="feria-item">
-              <h3>{feria.nombre}</h3>
-              <p><strong>📅 {feria.frecuencia}</strong></p>
-              {/* <p>🕐 {feria.horario}</p>
-              <p>📍 {feria.ubicacion}</p>*/}
+              <h3>
+                <FaRegCalendarAlt style={{ marginRight: '0.5rem', color: 'var(--color-primary)' }} />
+                {feria.nombre}
+              </h3>
+              <p><strong> {feria.frecuencia}</strong></p>
               <div className="feria-buttons">
                 {feria.mapaUrl && (
                   <a href={feria.mapaUrl} target="_blank" rel="noopener noreferrer" className="feria-btn-mapa">
                     Ver Ubicación
                   </a>
                 )}
-                {/* MODIFICACIÓN CLAVE: Llama a openFlyerModal en lugar de navegar */}
                 {feria.flyerUrl && (
                   <button 
                     onClick={() => openFlyerModal(feria.flyerUrl)} 
@@ -74,7 +75,7 @@ const PostCard = ({ post }) => {
     return null;
   };
 
-  // Función que muestra el botón (si hay un enlace)
+  // Función que muestra el botón si hay link
   const renderActionButton = () => {
     if (post.link) {
       return <a href={post.link} target="_blank" rel="noopener noreferrer" className="blog-button">{post.linkText}</a>;
@@ -83,28 +84,30 @@ const PostCard = ({ post }) => {
   };
 
   return (
-    <div className="blog-card">
-      {/* 2. Renderizado Condicional del Modal */}
+    <>
+      {/* CLAVE: Modal FUERA del blog-card */}
       {modalFlyerUrl && (
         <FlyerModal 
           flyerUrl={modalFlyerUrl} 
           onClose={closeFlyerModal} 
         />
       )}
-      
-      {renderMedia()}
-      <div className="blog-content blog-content-card">
-        <h2 className="blog-title">{post.title}</h2>
-        <p className="blog-description">{post.description}</p>
-        
-        {renderCalendario()}
-        
-        <div className="blog-footer">
-          <span className="blog-tag">{post.tag}</span>
-          {renderActionButton()}
+
+      <div className="blog-card">
+        {renderMedia()}
+        <div className="blog-content blog-content-card">
+          <h2 className="blog-title">{post.title}</h2>
+          <p className="blog-description">{post.description}</p>
+          
+          {renderCalendario()}
+          
+          <div className="blog-footer">
+            <span className="blog-tag">{post.tag}</span>
+            {renderActionButton()}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
